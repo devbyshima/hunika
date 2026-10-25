@@ -1,0 +1,618 @@
+{
+  "net_gain_rwf_per_tonne": null,
+  "net_blocked_reason": "Net gain per tonne is not calculated. Monthly loss rates, bag costs and the interest rate are still blank in config/assumptions.yaml.",
+  "coverage": [
+    {
+      "crop": "beans",
+      "district": "Bugesera",
+      "horizon": 1,
+      "n": 30,
+      "inside": 20,
+      "share": 0.6667
+    },
+    {
+      "crop": "beans",
+      "district": "Bugesera",
+      "horizon": 2,
+      "n": 31,
+      "inside": 18,
+      "share": 0.5806
+    },
+    {
+      "crop": "beans",
+      "district": "Bugesera",
+      "horizon": 3,
+      "n": 31,
+      "inside": 21,
+      "share": 0.6774
+    },
+    {
+      "crop": "beans",
+      "district": "Bugesera",
+      "horizon": 4,
+      "n": 30,
+      "inside": 16,
+      "share": 0.5333
+    },
+    {
+      "crop": "beans",
+      "district": "Gatsibo",
+      "horizon": 1,
+      "n": 30,
+      "inside": 22,
+      "share": 0.7333
+    },
+    {
+      "crop": "beans",
+      "district": "Gatsibo",
+      "horizon": 2,
+      "n": 31,
+      "inside": 15,
+      "share": 0.4839
+    },
+    {
+      "crop": "beans",
+      "district": "Gatsibo",
+      "horizon": 3,
+      "n": 31,
+      "inside": 14,
+      "share": 0.4516
+    },
+    {
+      "crop": "beans",
+      "district": "Gatsibo",
+      "horizon": 4,
+      "n": 30,
+      "inside": 20,
+      "share": 0.6667
+    },
+    {
+      "crop": "beans",
+      "district": "Kayonza",
+      "horizon": 1,
+      "n": 30,
+      "inside": 16,
+      "share": 0.5333
+    },
+    {
+      "crop": "beans",
+      "district": "Kayonza",
+      "horizon": 2,
+      "n": 31,
+      "inside": 19,
+      "share": 0.6129
+    },
+    {
+      "crop": "beans",
+      "district": "Kayonza",
+      "horizon": 3,
+      "n": 31,
+      "inside": 17,
+      "share": 0.5484
+    },
+    {
+      "crop": "beans",
+      "district": "Kayonza",
+      "horizon": 4,
+      "n": 30,
+      "inside": 17,
+      "share": 0.5667
+    },
+    {
+      "crop": "beans",
+      "district": "Kirehe",
+      "horizon": 1,
+      "n": 29,
+      "inside": 20,
+      "share": 0.6897
+    },
+    {
+      "crop": "beans",
+      "district": "Kirehe",
+      "horizon": 2,
+      "n": 31,
+      "inside": 17,
+      "share": 0.5484
+    },
+    {
+      "crop": "beans",
+      "district": "Kirehe",
+      "horizon": 3,
+      "n": 30,
+      "inside": 19,
+      "share": 0.6333
+    },
+    {
+      "crop": "beans",
+      "district": "Kirehe",
+      "horizon": 4,
+      "n": 30,
+      "inside": 20,
+      "share": 0.6667
+    },
+    {
+      "crop": "beans",
+      "district": "Ngoma",
+      "horizon": 1,
+      "n": 30,
+      "inside": 13,
+      "share": 0.4333
+    },
+    {
+      "crop": "beans",
+      "district": "Ngoma",
+      "horizon": 2,
+      "n": 31,
+      "inside": 11,
+      "share": 0.3548
+    },
+    {
+      "crop": "beans",
+      "district": "Ngoma",
+      "horizon": 3,
+      "n": 31,
+      "inside": 16,
+      "share": 0.5161
+    },
+    {
+      "crop": "beans",
+      "district": "Ngoma",
+      "horizon": 4,
+      "n": 29,
+      "inside": 12,
+      "share": 0.4138
+    },
+    {
+      "crop": "beans",
+      "district": "Nyagatare",
+      "horizon": 1,
+      "n": 30,
+      "inside": 17,
+      "share": 0.5667
+    },
+    {
+      "crop": "beans",
+      "district": "Nyagatare",
+      "horizon": 2,
+      "n": 31,
+      "inside": 14,
+      "share": 0.4516
+    },
+    {
+      "crop": "beans",
+      "district": "Nyagatare",
+      "horizon": 3,
+      "n": 31,
+      "inside": 23,
+      "share": 0.7419
+    },
+    {
+      "crop": "beans",
+      "district": "Nyagatare",
+      "horizon": 4,
+      "n": 30,
+      "inside": 14,
+      "share": 0.4667
+    },
+    {
+      "crop": "beans",
+      "district": "Rwamagana",
+      "horizon": 1,
+      "n": 30,
+      "inside": 18,
+      "share": 0.6
+    },
+    {
+      "crop": "beans",
+      "district": "Rwamagana",
+      "horizon": 2,
+      "n": 31,
+      "inside": 14,
+      "share": 0.4516
+    },
+    {
+      "crop": "beans",
+      "district": "Rwamagana",
+      "horizon": 3,
+      "n": 31,
+      "inside": 16,
+      "share": 0.5161
+    },
+    {
+      "crop": "beans",
+      "district": "Rwamagana",
+      "horizon": 4,
+      "n": 30,
+      "inside": 16,
+      "share": 0.5333
+    },
+    {
+      "crop": "maize",
+      "district": "Bugesera",
+      "horizon": 1,
+      "n": 32,
+      "inside": 22,
+      "share": 0.6875
+    },
+    {
+      "crop": "maize",
+      "district": "Bugesera",
+      "horizon": 2,
+      "n": 32,
+      "inside": 22,
+      "share": 0.6875
+    },
+    {
+      "crop": "maize",
+      "district": "Bugesera",
+      "horizon": 3,
+      "n": 32,
+      "inside": 22,
+      "share": 0.6875
+    },
+    {
+      "crop": "maize",
+      "district": "Bugesera",
+      "horizon": 4,
+      "n": 32,
+      "inside": 23,
+      "share": 0.7188
+    },
+    {
+      "crop": "maize",
+      "district": "Gatsibo",
+      "horizon": 1,
+      "n": 31,
+      "inside": 17,
+      "share": 0.5484
+    },
+    {
+      "crop": "maize",
+      "district": "Gatsibo",
+      "horizon": 2,
+      "n": 31,
+      "inside": 19,
+      "share": 0.6129
+    },
+    {
+      "crop": "maize",
+      "district": "Gatsibo",
+      "horizon": 3,
+      "n": 30,
+      "inside": 20,
+      "share": 0.6667
+    },
+    {
+      "crop": "maize",
+      "district": "Gatsibo",
+      "horizon": 4,
+      "n": 30,
+      "inside": 21,
+      "share": 0.7
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
+      "horizon": 1,
+      "n": 32,
+      "inside": 22,
+      "share": 0.6875
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
+      "horizon": 2,
+      "n": 32,
+      "inside": 20,
+      "share": 0.625
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
+      "horizon": 3,
+      "n": 32,
+      "inside": 20,
+      "share": 0.625
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
+      "horizon": 4,
+      "n": 32,
+      "inside": 17,
+      "share": 0.5312
+    },
+    {
+      "crop": "maize",
+      "district": "Kirehe",
+      "horizon": 1,
+      "n": 31,
+      "inside": 21,
+      "share": 0.6774
+    },
+    {
+      "crop": "maize",
+      "district": "Kirehe",
+      "horizon": 2,
+      "n": 32,
+      "inside": 22,
+      "share": 0.6875
+    },
+    {
+      "crop": "maize",
+      "district": "Kirehe",
+      "horizon": 3,
+      "n": 32,
+      "inside": 21,
+      "share": 0.6562
+    },
+    {
+      "crop": "maize",
+      "district": "Kirehe",
+      "horizon": 4,
+      "n": 32,
+      "inside": 18,
+      "share": 0.5625
+    },
+    {
+      "crop": "maize",
+      "district": "Ngoma",
+      "horizon": 1,
+      "n": 32,
+      "inside": 24,
+      "share": 0.75
+    },
+    {
+      "crop": "maize",
+      "district": "Ngoma",
+      "horizon": 2,
+      "n": 32,
+      "inside": 25,
+      "share": 0.7812
+    },
+    {
+      "crop": "maize",
+      "district": "Ngoma",
+      "horizon": 3,
+      "n": 32,
+      "inside": 26,
+      "share": 0.8125
+    },
+    {
+      "crop": "maize",
+      "district": "Ngoma",
+      "horizon": 4,
+      "n": 32,
+      "inside": 23,
+      "share": 0.7188
+    },
+    {
+      "crop": "maize",
+      "district": "Nyagatare",
+      "horizon": 1,
+      "n": 32,
+      "inside": 21,
+      "share": 0.6562
+    },
+    {
+      "crop": "maize",
+      "district": "Nyagatare",
+      "horizon": 2,
+      "n": 32,
+      "inside": 23,
+      "share": 0.7188
+    },
+    {
+      "crop": "maize",
+      "district": "Nyagatare",
+      "horizon": 3,
+      "n": 32,
+      "inside": 23,
+      "share": 0.7188
+    },
+    {
+      "crop": "maize",
+      "district": "Nyagatare",
+      "horizon": 4,
+      "n": 32,
+      "inside": 23,
+      "share": 0.7188
+    },
+    {
+      "crop": "maize",
+      "district": "Rwamagana",
+      "horizon": 1,
+      "n": 32,
+      "inside": 24,
+      "share": 0.75
+    },
+    {
+      "crop": "maize",
+      "district": "Rwamagana",
+      "horizon": 2,
+      "n": 32,
+      "inside": 22,
+      "share": 0.6875
+    },
+    {
+      "crop": "maize",
+      "district": "Rwamagana",
+      "horizon": 3,
+      "n": 32,
+      "inside": 22,
+      "share": 0.6875
+    },
+    {
+      "crop": "maize",
+      "district": "Rwamagana",
+      "horizon": 4,
+      "n": 32,
+      "inside": 25,
+      "share": 0.7812
+    }
+  ],
+  "pinball": [
+    {
+      "crop": "beans",
+      "horizon": 1,
+      "n": 209,
+      "p10": 27.7144,
+      "p50": 57.2023,
+      "p90": 32.4265
+    },
+    {
+      "crop": "beans",
+      "horizon": 2,
+      "n": 217,
+      "p10": 37.9819,
+      "p50": 79.7438,
+      "p90": 49.4892
+    },
+    {
+      "crop": "beans",
+      "horizon": 3,
+      "n": 216,
+      "p10": 43.0293,
+      "p50": 83.811,
+      "p90": 46.6777
+    },
+    {
+      "crop": "beans",
+      "horizon": 4,
+      "n": 209,
+      "p10": 59.6025,
+      "p50": 107.0714,
+      "p90": 53.4693
+    },
+    {
+      "crop": "maize",
+      "horizon": 1,
+      "n": 222,
+      "p10": 16.2785,
+      "p50": 32.2818,
+      "p90": 16.7157
+    },
+    {
+      "crop": "maize",
+      "horizon": 2,
+      "n": 223,
+      "p10": 16.956,
+      "p50": 42.3429,
+      "p90": 24.0897
+    },
+    {
+      "crop": "maize",
+      "horizon": 3,
+      "n": 222,
+      "p10": 22.6973,
+      "p50": 53.0416,
+      "p90": 31.5046
+    },
+    {
+      "crop": "maize",
+      "horizon": 4,
+      "n": 222,
+      "p10": 21.5817,
+      "p50": 48.4836,
+      "p90": 27.6245
+    }
+  ],
+  "price_only_before_storage_costs": {
+    "label": "Price change only, before storage losses, fees and interest. Not the Hunika net gain. The nominal mean includes inflation.",
+    "n_decisions": 441,
+    "mean_nominal_follow_rwf_per_tonne": 47551.1224,
+    "mean_real_follow_rwf_per_tonne": 78167.9084,
+    "mean_always_store_4_nominal_rwf_per_tonne": 49151.4501,
+    "mean_always_sell_rwf_per_tonne": 0,
+    "share_real_follow_not_below_sell": 0.7256,
+    "worst_real_follow_rwf_per_tonne": -370355.2199,
+    "losing_count": 121,
+    "nominal_band_share": 0.5713,
+    "losing_seasons": [
+      {
+        "crop": "beans",
+        "district": "Kayonza",
+        "season": "A",
+        "year": 2021,
+        "real_follow_rwf_per_tonne": -370355.2
+      },
+      {
+        "crop": "beans",
+        "district": "Rwamagana",
+        "season": "A",
+        "year": 2021,
+        "real_follow_rwf_per_tonne": -370355.2
+      },
+      {
+        "crop": "beans",
+        "district": "Gatsibo",
+        "season": "B",
+        "year": 2023,
+        "real_follow_rwf_per_tonne": -334569.8
+      },
+      {
+        "crop": "beans",
+        "district": "Rwamagana",
+        "season": "A",
+        "year": 2011,
+        "real_follow_rwf_per_tonne": -292357.8
+      },
+      {
+        "crop": "beans",
+        "district": "Nyagatare",
+        "season": "B",
+        "year": 2015,
+        "real_follow_rwf_per_tonne": -275786.4
+      },
+      {
+        "crop": "beans",
+        "district": "Gatsibo",
+        "season": "A",
+        "year": 2021,
+        "real_follow_rwf_per_tonne": -270607.6
+      },
+      {
+        "crop": "beans",
+        "district": "Nyagatare",
+        "season": "B",
+        "year": 2012,
+        "real_follow_rwf_per_tonne": -231950.6
+      },
+      {
+        "crop": "maize",
+        "district": "Rwamagana",
+        "season": "A",
+        "year": 2010,
+        "real_follow_rwf_per_tonne": -223958.8
+      },
+      {
+        "crop": "beans",
+        "district": "Kirehe",
+        "season": "A",
+        "year": 2021,
+        "real_follow_rwf_per_tonne": -220561.4
+      },
+      {
+        "crop": "beans",
+        "district": "Ngoma",
+        "season": "A",
+        "year": 2021,
+        "real_follow_rwf_per_tonne": -198468.4
+      },
+      {
+        "crop": "beans",
+        "district": "Nyagatare",
+        "season": "A",
+        "year": 2021,
+        "real_follow_rwf_per_tonne": -198468.4
+      },
+      {
+        "crop": "beans",
+        "district": "Bugesera",
+        "season": "A",
+        "year": 2021,
+        "real_follow_rwf_per_tonne": -198468.4
+      }
+    ]
+  }
+}

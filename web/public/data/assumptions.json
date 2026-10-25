@@ -1,0 +1,191 @@
+{
+  "items": [
+    {
+      "id": "loss_home_bags",
+      "label": "Monthly loss, home bags",
+      "option": "home_bags",
+      "field": "loss_monthly",
+      "value": null,
+      "unit": "fraction_per_month",
+      "status": "ASSUMPTION",
+      "source": "Team to source. Check the Agricultural Household Survey 2024 first. Hinga Weze reports that poor handling loses 15\u201330% of output overall. That is not a monthly storage rate, so it is not used here.",
+      "url": "https://agrilinks.org/post/improved-post-harvest-handling-techniques-increase-income-rwandas-smallholder-farmers-0"
+    },
+    {
+      "id": "loss_hermetic_bags",
+      "label": "Monthly loss, hermetic bags",
+      "option": "hermetic_bags",
+      "field": "loss_monthly",
+      "value": null,
+      "unit": "fraction_per_month",
+      "status": "ASSUMPTION",
+      "source": "Team to source. Check the Agricultural Household Survey 2024 first, then a published trial.",
+      "url": null
+    },
+    {
+      "id": "loss_warehouse",
+      "label": "Monthly loss, certified warehouse",
+      "option": "warehouse",
+      "field": "loss_monthly",
+      "value": null,
+      "unit": "fraction_per_month",
+      "status": "ASSUMPTION",
+      "source": "Team to source. Ask EAX.",
+      "url": "https://ea-africaexchange.com/news/collateral-financing/ecobank-extends-loans-to-rwandan-farmers-through-eax-electronic-warehouse-receipt-2"
+    },
+    {
+      "id": "fee_home_bags",
+      "label": "Fee, home bags",
+      "option": "home_bags",
+      "field": "fee",
+      "value": 0,
+      "unit": "share_of_value",
+      "status": "sourced",
+      "source": "Home storage has no warehouse fee.",
+      "url": null
+    },
+    {
+      "id": "fee_hermetic_bags",
+      "label": "Fee, hermetic bags",
+      "option": "hermetic_bags",
+      "field": "fee",
+      "value": 0,
+      "unit": "share_of_value",
+      "status": "sourced",
+      "source": "Hermetic bags have no warehouse fee. The bag cost is a separate line.",
+      "url": null
+    },
+    {
+      "id": "fee_warehouse",
+      "label": "Warehouse fee",
+      "option": "warehouse",
+      "field": "fee",
+      "value": 0.025,
+      "unit": "share_of_value",
+      "status": "sourced",
+      "source": "Older EAX figure of 2.5% of value, reported by The New Times. The team should confirm the current rate.",
+      "url": "https://www.newtimes.co.rw/article/152743/News/commodities-exchange-sees-rwandan-farmers-earn-more"
+    },
+    {
+      "id": "cost_home_bags",
+      "label": "Home bag cost",
+      "option": "home_bags",
+      "field": "cost_per_kg",
+      "value": null,
+      "unit": "rwf_per_kg",
+      "status": "ASSUMPTION",
+      "source": "Team to source a local bag and handling cost.",
+      "url": null
+    },
+    {
+      "id": "cost_hermetic_bags",
+      "label": "Hermetic bag cost",
+      "option": "hermetic_bags",
+      "field": "cost_per_kg",
+      "value": null,
+      "unit": "rwf_per_kg",
+      "status": "ASSUMPTION",
+      "source": "Team to source a local supplier price, per kg stored.",
+      "url": null
+    },
+    {
+      "id": "cost_warehouse",
+      "label": "Warehouse handling cost",
+      "option": "warehouse",
+      "field": "cost_per_kg",
+      "value": null,
+      "unit": "rwf_per_kg",
+      "status": "ASSUMPTION",
+      "source": "Left blank. The 2.5% fee is already a share of value. A separate handling cost is not published in the sources used here.",
+      "url": null
+    },
+    {
+      "id": "borrow_home_bags",
+      "label": "Share of value borrowed, home bags",
+      "option": "home_bags",
+      "field": "borrow_share",
+      "value": 0,
+      "unit": "share_of_value",
+      "status": "sourced",
+      "source": "Home bags do not pay a loan up front.",
+      "url": null
+    },
+    {
+      "id": "borrow_hermetic_bags",
+      "label": "Share of value borrowed, hermetic bags",
+      "option": "hermetic_bags",
+      "field": "borrow_share",
+      "value": 0,
+      "unit": "share_of_value",
+      "status": "sourced",
+      "source": "Hermetic bags do not pay a loan up front.",
+      "url": null
+    },
+    {
+      "id": "borrow_warehouse",
+      "label": "Share of value borrowed, warehouse receipt",
+      "option": "warehouse",
+      "field": "borrow_share",
+      "value": 0.7,
+      "unit": "share_of_value",
+      "status": "sourced",
+      "source": "EAX warehouse-receipt loans of up to 70% of the value of stored grain, through Ecobank.",
+      "url": "https://ea-africaexchange.com/news/collateral-financing/ecobank-extends-loans-to-rwandan-farmers-through-eax-electronic-warehouse-receipt-2"
+    },
+    {
+      "id": "interest_warehouse",
+      "label": "Annual interest rate",
+      "option": "warehouse",
+      "field": "interest_annual",
+      "value": null,
+      "unit": "fraction_per_year",
+      "status": "ASSUMPTION",
+      "source": "Team to source from a SACCO or partner bank. Required before the warehouse option can be priced, because the borrowed share is 70%.",
+      "url": null
+    },
+    {
+      "id": "g_min",
+      "label": "Minimum likely gain",
+      "option": null,
+      "field": "g_min",
+      "value": 0.08,
+      "unit": "share_of_sell_now_value",
+      "status": "ASSUMPTION",
+      "source": "Starting threshold from the Hunika build guide. Tune on training years only, before looking at the latest season.",
+      "url": null
+    },
+    {
+      "id": "d_max",
+      "label": "Maximum low-case loss",
+      "option": null,
+      "field": "d_max",
+      "value": 0.05,
+      "unit": "share_of_sell_now_value",
+      "status": "ASSUMPTION",
+      "source": "Starting threshold from the Hunika build guide. The low case may not be worse than this share of the sell-now value.",
+      "url": null
+    },
+    {
+      "id": "stale_days",
+      "label": "Stale price warning",
+      "option": null,
+      "field": "stale_days",
+      "value": 60,
+      "unit": "days",
+      "status": "sourced",
+      "source": "Product rule in the Hunika build guide.",
+      "url": null
+    },
+    {
+      "id": "min_years",
+      "label": "Years before a market stands alone",
+      "option": null,
+      "field": "min_years",
+      "value": 5,
+      "unit": "years",
+      "status": "sourced",
+      "source": "Model v1 rule in the Hunika build guide. Fewer years and the market is blended with its province.",
+      "url": null
+    }
+  ]
+}

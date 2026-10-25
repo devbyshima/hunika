@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  background: #e7e0d2;
+  color: #1c1915;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.ledger {
+  font-family: Georgia, "Iowan Old Style", Palatino, serif;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+.leaflet-container {
+  background: #e7e0d2;
+  font: inherit;
+}
+
+@media print {
+  body {
+    background: white;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .phone {
+    box-shadow: none !important;
+    max-width: none !important;
+  }
+}

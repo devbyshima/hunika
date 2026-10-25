@@ -1,0 +1,19 @@
+{
+  "name": "Hunika",
+  "model": "v1_seasonal_ratios",
+  "crops": [
+    "maize",
+    "beans"
+  ],
+  "districts": [
+    "Bugesera",
+    "Gatsibo",
+    "Kayonza",
+    "Kirehe",
+    "Ngoma",
+    "Nyagatare",
+    "Rwamagana"
+  ],
+  "price_source": "WFP Rwanda food prices, retail, RWF per kg",
+  "cpi_source": "NISR CPI, rural food and non-alcoholic beverages"
+}

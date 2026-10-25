@@ -1,0 +1,78 @@
+{
+  "published_on": "2025-12-31",
+  "source_url": "https://statistics.gov.rw/sites/default/files/documents/2025-12/SAS%202025_Annual%20Tables.xlsx",
+  "anomaly": null,
+  "anomaly_reason": "The supply anomaly needs the three previous seasons of the same letter. Only SAS 2025 is loaded.",
+  "districts": {
+    "Rwamagana": {
+      "A": {
+        "maize_tonnes": 17831.6,
+        "beans_tonnes": 8606.1
+      },
+      "B": {
+        "maize_tonnes": 3488.3,
+        "beans_tonnes": 6869.9
+      }
+    },
+    "Nyagatare": {
+      "A": {
+        "maize_tonnes": 85406.6,
+        "beans_tonnes": 10753.8
+      },
+      "B": {
+        "maize_tonnes": 39346.6,
+        "beans_tonnes": 22202.6
+      }
+    },
+    "Gatsibo": {
+      "A": {
+        "maize_tonnes": 41037.1,
+        "beans_tonnes": 13983.0
+      },
+      "B": {
+        "maize_tonnes": 11353.2,
+        "beans_tonnes": 12417.6
+      }
+    },
+    "Kayonza": {
+      "A": {
+        "maize_tonnes": 34260.5,
+        "beans_tonnes": 9934.3
+      },
+      "B": {
+        "maize_tonnes": 7072.1,
+        "beans_tonnes": 12053.3
+      }
+    },
+    "Kirehe": {
+      "A": {
+        "maize_tonnes": 60970.1,
+        "beans_tonnes": 12972.4
+      },
+      "B": {
+        "maize_tonnes": 5443.1,
+        "beans_tonnes": 15483.5
+      }
+    },
+    "Ngoma": {
+      "A": {
+        "maize_tonnes": 30530.7,
+        "beans_tonnes": 10828.6
+      },
+      "B": {
+        "maize_tonnes": 1473.0,
+        "beans_tonnes": 14594.4
+      }
+    },
+    "Bugesera": {
+      "A": {
+        "maize_tonnes": 15513.0,
+        "beans_tonnes": 6984.2
+      },
+      "B": {
+        "maize_tonnes": 6482.9,
+        "beans_tonnes": 13145.0
+      }
+    }
+  }
+}
