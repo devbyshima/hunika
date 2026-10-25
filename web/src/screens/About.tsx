@@ -35,8 +35,7 @@ export default function About({
           </li>
         ))}
       </ul>
-      <p className="mt-6 text-sm leading-snug">{t("about.ai")}</p>
-      <p className="mt-3 text-sm leading-snug text-[#5c564c]">{t("about.notice")}</p>
+      <p className="mt-6 text-sm leading-snug text-[#5c564c]">{t("about.notice")}</p>
     </div>
   )
 }
