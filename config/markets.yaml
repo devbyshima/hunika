@@ -1,0 +1,2566 @@
+source: WFP Rwanda market list, HDX
+source_url: https://data.humdata.org/dataset/wfp-food-prices-for-rwanda
+downloaded: '2026-10-25'
+note: Coordinates come from the WFP file. Camps are flagged and left out of cooperative
+  advice.
+markets:
+- id: 1045
+  name: Birambo
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.92
+  longitude: 29.45
+  eastern: false
+  camp: false
+- id: 1046
+  name: Base
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.65
+  longitude: 29.87
+  eastern: false
+  camp: false
+- id: 1047
+  name: Bugarama
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.33
+  longitude: 29.21
+  eastern: false
+  camp: false
+- id: 1048
+  name: Bumbogo
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.71
+  longitude: 29.85
+  eastern: false
+  camp: false
+- id: 1049
+  name: Bushenge
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.43
+  longitude: 29.0
+  eastern: false
+  camp: false
+- id: 1050
+  name: Butare
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.6
+  longitude: 29.74
+  eastern: false
+  camp: false
+- id: 1051
+  name: Byangabo
+  admin1: Northern Province
+  admin2: Musanze
+  latitude: -1.56
+  longitude: 29.55
+  eastern: false
+  camp: false
+- id: 1052
+  name: Byumba
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.58
+  longitude: 30.06
+  eastern: false
+  camp: false
+- id: 1053
+  name: Congo - Nil
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.96
+  longitude: 29.38
+  eastern: false
+  camp: false
+- id: 1054
+  name: Gahanga
+  admin1: Kigali City
+  admin2: Kicukiro
+  latitude: -1.98
+  longitude: 30.11
+  eastern: false
+  camp: false
+- id: 1055
+  name: Gakeli
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.95
+  longitude: 29.48
+  eastern: false
+  camp: false
+- id: 1056
+  name: Gakenke
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.65
+  longitude: 29.8
+  eastern: false
+  camp: false
+- id: 1057
+  name: Gasarenda
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.51
+  longitude: 29.48
+  eastern: false
+  camp: false
+- id: 1058
+  name: Gaseke
+  admin1: Northern Province
+  admin2: Rulindo
+  latitude: -1.62
+  longitude: 29.92
+  eastern: false
+  camp: false
+- id: 1059
+  name: Gashyushya
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -2.04
+  longitude: 29.84
+  eastern: false
+  camp: false
+- id: 1060
+  name: Gatore
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.28
+  longitude: 30.59
+  eastern: true
+  camp: false
+- id: 1061
+  name: Gikondo
+  admin1: Kigali City
+  admin2: Kicukiro
+  latitude: -1.98
+  longitude: 30.07
+  eastern: false
+  camp: false
+- id: 1062
+  name: Gikongoro
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.46
+  longitude: 29.57
+  eastern: false
+  camp: false
+- id: 1063
+  name: Gisenyi
+  admin1: Western Province
+  admin2: null
+  latitude: -1.7
+  longitude: 29.26
+  eastern: false
+  camp: false
+- id: 1064
+  name: Gitarama
+  admin1: Southern Province
+  admin2: Muhanga
+  latitude: -2.07
+  longitude: 29.76
+  eastern: false
+  camp: false
+- id: 1065
+  name: Kabacuzi
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.47
+  longitude: 29.58
+  eastern: false
+  camp: false
+- id: 1066
+  name: Kabarondo
+  admin1: Eastern Province
+  admin2: Kayonza
+  latitude: -2.02
+  longitude: 30.55
+  eastern: true
+  camp: false
+- id: 1067
+  name: Kabaya
+  admin1: Western Province
+  admin2: Ngororero
+  latitude: -1.75
+  longitude: 29.54
+  eastern: false
+  camp: false
+- id: 1068
+  name: Kabuga
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.69
+  longitude: 29.85
+  eastern: false
+  camp: false
+- id: 1069
+  name: Kaduha
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.4
+  longitude: 29.52
+  eastern: false
+  camp: false
+- id: 1070
+  name: Kamembe
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.48
+  longitude: 28.9
+  eastern: false
+  camp: false
+- id: 1071
+  name: Karangazi
+  admin1: Eastern Province
+  admin2: Nyagatare
+  latitude: -1.3
+  longitude: 30.32
+  eastern: true
+  camp: false
+- id: 1072
+  name: Kayenzi
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.9
+  longitude: 29.85
+  eastern: false
+  camp: false
+- id: 1073
+  name: Kibirizi
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.65
+  longitude: 29.78
+  eastern: false
+  camp: false
+- id: 1074
+  name: Kibungo
+  admin1: Eastern Province
+  admin2: Ngoma
+  latitude: -2.16
+  longitude: 30.54
+  eastern: true
+  camp: false
+- id: 1075
+  name: Kicukiro
+  admin1: Kigali City
+  admin2: Kicukiro
+  latitude: -1.98
+  longitude: 30.11
+  eastern: false
+  camp: false
+- id: 1076
+  name: Kigali
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.95
+  longitude: 30.06
+  eastern: false
+  camp: false
+- id: 1077
+  name: Kimisagara
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.95
+  longitude: 30.06
+  eastern: false
+  camp: false
+- id: 1078
+  name: Kirambo
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.32
+  longitude: 29.14
+  eastern: false
+  camp: false
+- id: 1079
+  name: Kiramuruzi
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.8
+  longitude: 30.4
+  eastern: true
+  camp: false
+- id: 1080
+  name: Kora
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.6
+  longitude: 29.38
+  eastern: false
+  camp: false
+- id: 1081
+  name: Mahoko
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.7
+  longitude: 29.33
+  eastern: false
+  camp: false
+- id: 1083
+  name: Mimuli
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.54
+  longitude: 30.24
+  eastern: true
+  camp: false
+- id: 1084
+  name: Mukamira
+  admin1: Western Province
+  admin2: Nyabihu
+  latitude: -1.61
+  longitude: 29.51
+  eastern: false
+  camp: false
+- id: 1085
+  name: Mukarange
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.53
+  longitude: 30.08
+  eastern: false
+  camp: false
+- id: 1086
+  name: Mulindi
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.95
+  longitude: 30.06
+  eastern: false
+  camp: false
+- id: 1087
+  name: Musanze
+  admin1: Northern Province
+  admin2: Musanze
+  latitude: -1.5
+  longitude: 29.61
+  eastern: false
+  camp: false
+- id: 1088
+  name: Musha
+  admin1: Eastern Province
+  admin2: Rwamagana
+  latitude: -1.92
+  longitude: 30.34
+  eastern: true
+  camp: false
+- id: 1089
+  name: Ndago
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.42
+  longitude: 29.88
+  eastern: false
+  camp: false
+- id: 1090
+  name: Ngoma
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.6
+  longitude: 29.73
+  eastern: false
+  camp: false
+- id: 1091
+  name: Nyabugogo
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.95
+  longitude: 30.06
+  eastern: false
+  camp: false
+- id: 1092
+  name: Nyagahanika
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.8
+  longitude: 29.33
+  eastern: false
+  camp: false
+- id: 1093
+  name: Nyagatare
+  admin1: Eastern Province
+  admin2: Nyagatare
+  latitude: -1.3
+  longitude: 30.32
+  eastern: true
+  camp: false
+- id: 1094
+  name: Nyakaliba
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.06
+  longitude: 29.35
+  eastern: false
+  camp: false
+- id: 1095
+  name: Nyakarambi
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.27
+  longitude: 30.68
+  eastern: true
+  camp: false
+- id: 1096
+  name: Nyamata
+  admin1: Eastern Province
+  admin2: Bugesera
+  latitude: -2.21
+  longitude: 30.24
+  eastern: true
+  camp: false
+- id: 1097
+  name: Nyamirambo
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.94
+  longitude: 30.07
+  eastern: false
+  camp: false
+- id: 1098
+  name: Nyanza
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.58
+  longitude: 29.72
+  eastern: false
+  camp: false
+- id: 1099
+  name: Nyaruteja
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.79
+  longitude: 29.73
+  eastern: false
+  camp: false
+- id: 1100
+  name: Rambura
+  admin1: Western Province
+  admin2: Nyabihu
+  latitude: -1.68
+  longitude: 29.52
+  eastern: false
+  camp: false
+- id: 1101
+  name: Rubavu
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.68
+  longitude: 29.3
+  eastern: false
+  camp: false
+- id: 1102
+  name: Rugarama
+  admin1: Northern Province
+  admin2: Rulindo
+  latitude: -1.63
+  longitude: 29.93
+  eastern: false
+  camp: false
+- id: 1103
+  name: Rugogwe
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.49
+  longitude: 29.73
+  eastern: false
+  camp: false
+- id: 1104
+  name: Ruhengeri
+  admin1: Northern Province
+  admin2: Musanze
+  latitude: -1.5
+  longitude: 29.64
+  eastern: false
+  camp: false
+- id: 1105
+  name: Ruhuha
+  admin1: Eastern Province
+  admin2: Bugesera
+  latitude: -2.15
+  longitude: 30.09
+  eastern: true
+  camp: false
+- id: 1106
+  name: Rukomo
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.63
+  longitude: 30.1
+  eastern: false
+  camp: false
+- id: 1107
+  name: Rushashi
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.74
+  longitude: 29.87
+  eastern: false
+  camp: false
+- id: 1108
+  name: Ruyenzi
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.43
+  longitude: 29.83
+  eastern: false
+  camp: false
+- id: 1109
+  name: Rwagitima
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.8
+  longitude: 30.42
+  eastern: true
+  camp: false
+- id: 1110
+  name: Rwamagana
+  admin1: Eastern Province
+  admin2: Rwamagana
+  latitude: -1.95
+  longitude: 30.43
+  eastern: true
+  camp: false
+- id: 1111
+  name: Remera
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.95
+  longitude: 30.12
+  eastern: false
+  camp: false
+- id: 1383
+  name: Batiment
+  admin1: Eastern Province
+  admin2: Bugesera
+  latitude: -2.15
+  longitude: 30.09
+  eastern: true
+  camp: false
+- id: 1400
+  name: Buhanda
+  admin1: Southern Province
+  admin2: Ruhango
+  latitude: -2.23
+  longitude: 29.66
+  eastern: false
+  camp: false
+- id: 1401
+  name: Huye
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.58
+  longitude: 29.72
+  eastern: false
+  camp: false
+- id: 1402
+  name: Karenge
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.64
+  longitude: 29.82
+  eastern: false
+  camp: false
+- id: 1403
+  name: Kimironko
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.75
+  longitude: 30.34
+  eastern: true
+  camp: false
+- id: 1404
+  name: Kinazi
+  admin1: Eastern Province
+  admin2: Bugesera
+  latitude: -2.14
+  longitude: 30.09
+  eastern: true
+  camp: false
+- id: 1405
+  name: Mugina
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -2.1
+  longitude: 29.95
+  eastern: false
+  camp: false
+- id: 1406
+  name: Muhanga
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.43
+  longitude: 29.68
+  eastern: false
+  camp: false
+- id: 1407
+  name: Ngororero
+  admin1: Western Province
+  admin2: Nyabihu
+  latitude: -1.65
+  longitude: 29.62
+  eastern: false
+  camp: false
+- id: 1408
+  name: Nkoto
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.56
+  longitude: 29.66
+  eastern: false
+  camp: false
+- id: 1409
+  name: Ruhango
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.65
+  longitude: 29.72
+  eastern: false
+  camp: false
+- id: 1410
+  name: Rusumo
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.27
+  longitude: 30.71
+  eastern: true
+  camp: false
+- id: 1411
+  name: Vunga
+  admin1: Western Province
+  admin2: Nyabihu
+  latitude: -1.69
+  longitude: 29.63
+  eastern: false
+  camp: false
+- id: 1484
+  name: Karambi
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.51
+  longitude: 29.61
+  eastern: false
+  camp: false
+- id: 1485
+  name: Kizi
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.53
+  longitude: 29.65
+  eastern: false
+  camp: false
+- id: 1486
+  name: Miko
+  admin1: Southern Province
+  admin2: Nyaruguru
+  latitude: -2.67
+  longitude: 29.61
+  eastern: false
+  camp: false
+- id: 1487
+  name: Kibuye (Karongi)
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.06
+  longitude: 29.35
+  eastern: false
+  camp: false
+- id: 1488
+  name: Nkora
+  admin1: Northern Province
+  admin2: Musanze
+  latitude: -1.52
+  longitude: 29.67
+  eastern: false
+  camp: false
+- id: 1489
+  name: Muhondo
+  admin1: Northern Province
+  admin2: Burera
+  latitude: -1.6
+  longitude: 29.88
+  eastern: false
+  camp: false
+- id: 1490
+  name: Ntunga
+  admin1: Eastern Province
+  admin2: Rwamagana
+  latitude: -1.96
+  longitude: 30.35
+  eastern: true
+  camp: false
+- id: 1491
+  name: Gacurabwenge
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.58
+  longitude: 30.07
+  eastern: false
+  camp: false
+- id: 1560
+  name: Bumazi
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.45
+  longitude: 29.0
+  eastern: false
+  camp: false
+- id: 1561
+  name: Matimba
+  admin1: Eastern Province
+  admin2: Nyagatare
+  latitude: -1.11
+  longitude: 30.43
+  eastern: true
+  camp: false
+- id: 1562
+  name: Rusine
+  admin1: Northern Province
+  admin2: Rulindo
+  latitude: -1.81
+  longitude: 30.13
+  eastern: false
+  camp: false
+- id: 1885
+  name: Nyarugenge
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.96
+  longitude: 30.06
+  eastern: false
+  camp: false
+- id: 1898
+  name: Kabarore
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.62
+  longitude: 30.39
+  eastern: true
+  camp: false
+- id: 1899
+  name: Kirinda
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.18
+  longitude: 29.58
+  eastern: false
+  camp: false
+- id: 2355
+  name: Gihembe (Camp)
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.6
+  longitude: 30.08
+  eastern: false
+  camp: true
+- id: 2356
+  name: Gicumbi
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.58
+  longitude: 30.07
+  eastern: false
+  camp: false
+- id: 2357
+  name: Kageyo
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.6
+  longitude: 30.08
+  eastern: false
+  camp: false
+- id: 2358
+  name: Ruyaga
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.59
+  longitude: 30.08
+  eastern: false
+  camp: false
+- id: 2359
+  name: Kigeme
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.49
+  longitude: 29.52
+  eastern: false
+  camp: false
+- id: 2360
+  name: Nyamugari
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.28
+  longitude: 30.77
+  eastern: true
+  camp: false
+- id: 2361
+  name: Kiyanzi
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.35
+  longitude: 30.76
+  eastern: true
+  camp: false
+- id: 2362
+  name: Nganda
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.32
+  longitude: 30.59
+  eastern: true
+  camp: false
+- id: 2363
+  name: Kabeza
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.31
+  longitude: 30.83
+  eastern: true
+  camp: false
+- id: 2364
+  name: Kigufi
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.24
+  longitude: 30.8
+  eastern: true
+  camp: false
+- id: 2365
+  name: Munini
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.31
+  longitude: 30.82
+  eastern: true
+  camp: false
+- id: 2366
+  name: Rushonga
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.19
+  longitude: 30.83
+  eastern: true
+  camp: false
+- id: 2367
+  name: Mugombwa (Camp)
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.67
+  longitude: 29.85
+  eastern: false
+  camp: true
+- id: 2368
+  name: Mahama (Camp)
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.31
+  longitude: 30.84
+  eastern: true
+  camp: true
+- id: 2371
+  name: Kigeme (Camp)
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.48
+  longitude: 29.52
+  eastern: false
+  camp: true
+- id: 2372
+  name: Nyabiheke (Camp)
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.6
+  longitude: 30.26
+  eastern: true
+  camp: true
+- id: 2373
+  name: Bubare
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.6
+  longitude: 30.25
+  eastern: true
+  camp: false
+- id: 2374
+  name: Mugera
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.6
+  longitude: 30.28
+  eastern: true
+  camp: false
+- id: 2375
+  name: Ntungaruze
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.6
+  longitude: 30.27
+  eastern: true
+  camp: false
+- id: 2376
+  name: Kiziba (Camp)
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.13
+  longitude: 29.36
+  eastern: false
+  camp: true
+- id: 2377
+  name: Karongi
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.07
+  longitude: 29.35
+  eastern: false
+  camp: false
+- id: 2378
+  name: Mubuga
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.14
+  longitude: 29.31
+  eastern: false
+  camp: false
+- id: 2379
+  name: Kivuruga
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.16
+  longitude: 29.39
+  eastern: false
+  camp: false
+- id: 2380
+  name: Gatunda
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.74
+  longitude: 29.85
+  eastern: false
+  camp: false
+- id: 2381
+  name: Mugombwa
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.68
+  longitude: 29.85
+  eastern: false
+  camp: false
+- id: 7233
+  name: Kamonyi
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -2.0
+  longitude: 29.91
+  eastern: false
+  camp: false
+- id: 7234
+  name: Manyana
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.98
+  longitude: 29.83
+  eastern: false
+  camp: false
+- id: 7235
+  name: Murara
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.97
+  longitude: 29.8
+  eastern: false
+  camp: false
+- id: 7236
+  name: Karambo
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.95
+  longitude: 29.8
+  eastern: false
+  camp: false
+- id: 7237
+  name: Kizirabonde
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.9
+  longitude: 29.9
+  eastern: false
+  camp: false
+- id: 7238
+  name: Ruyumba
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -2.07
+  longitude: 29.9
+  eastern: false
+  camp: false
+- id: 7239
+  name: Kumukunguri
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -2.08
+  longitude: 29.88
+  eastern: false
+  camp: false
+- id: 7240
+  name: Musumba
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -2.1
+  longitude: 29.84
+  eastern: false
+  camp: false
+- id: 7241
+  name: Rugarika
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -2.04
+  longitude: 29.96
+  eastern: false
+  camp: false
+- id: 7242
+  name: Kamuhanda
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.99
+  longitude: 29.93
+  eastern: false
+  camp: false
+- id: 7243
+  name: Rwina
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.92
+  longitude: 29.92
+  eastern: false
+  camp: false
+- id: 7244
+  name: Gihara
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.94
+  longitude: 29.96
+  eastern: false
+  camp: false
+- id: 7245
+  name: Runda
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.97
+  longitude: 29.99
+  eastern: false
+  camp: false
+- id: 7246
+  name: Gataka (Gahigiro)
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.11
+  longitude: 29.42
+  eastern: false
+  camp: false
+- id: 7247
+  name: Gataka (Kagabiro)
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.12
+  longitude: 29.32
+  eastern: false
+  camp: false
+- id: 7248
+  name: Gitikinini
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.05
+  longitude: 29.41
+  eastern: false
+  camp: false
+- id: 7249
+  name: Muyira
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.94
+  longitude: 29.38
+  eastern: false
+  camp: false
+- id: 7250
+  name: Mungoti
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.89
+  longitude: 29.44
+  eastern: false
+  camp: false
+- id: 7251
+  name: Mburamazi
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.91
+  longitude: 29.38
+  eastern: false
+  camp: false
+- id: 7252
+  name: Gisiza (Rutsiro)
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.92
+  longitude: 29.37
+  eastern: false
+  camp: false
+- id: 7253
+  name: Mashanyarazi
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.88
+  longitude: 29.32
+  eastern: false
+  camp: false
+- id: 7254
+  name: Nkomero
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.89
+  longitude: 29.34
+  eastern: false
+  camp: false
+- id: 7255
+  name: Jebeka
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -2.01
+  longitude: 29.4
+  eastern: false
+  camp: false
+- id: 7256
+  name: Bugabo
+  admin1: Western Province
+  admin2: Rutsiro
+  latitude: -1.89
+  longitude: 29.35
+  eastern: false
+  camp: false
+- id: 7257
+  name: Cyanzarwe
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.65
+  longitude: 29.33
+  eastern: false
+  camp: false
+- id: 7258
+  name: Ryabizige
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.62
+  longitude: 29.32
+  eastern: false
+  camp: false
+- id: 7259
+  name: Majengo
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.69
+  longitude: 29.25
+  eastern: false
+  camp: false
+- id: 7260
+  name: Mbugangari
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.68
+  longitude: 29.25
+  eastern: false
+  camp: false
+- id: 7261
+  name: Cyapa
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.75
+  longitude: 29.3
+  eastern: false
+  camp: false
+- id: 7262
+  name: Gakoni (Rubavu)
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.73
+  longitude: 29.28
+  eastern: false
+  camp: false
+- id: 7263
+  name: Buhuru
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.66
+  longitude: 29.26
+  eastern: false
+  camp: false
+- id: 7264
+  name: Rugerero
+  admin1: Western Province
+  admin2: Rubavu
+  latitude: -1.69
+  longitude: 29.31
+  eastern: false
+  camp: false
+- id: 7265
+  name: Rurembo
+  admin1: Western Province
+  admin2: Nyabihu
+  latitude: -1.66
+  longitude: 29.57
+  eastern: false
+  camp: false
+- id: 7266
+  name: Jomba
+  admin1: Western Province
+  admin2: Nyabihu
+  latitude: -1.71
+  longitude: 29.59
+  eastern: false
+  camp: false
+- id: 7267
+  name: Kiyebe
+  admin1: Western Province
+  admin2: Ngororero
+  latitude: -1.93
+  longitude: 29.59
+  eastern: false
+  camp: false
+- id: 7268
+  name: Gashubi
+  admin1: Western Province
+  admin2: Ngororero
+  latitude: -1.98
+  longitude: 29.55
+  eastern: false
+  camp: false
+- id: 7269
+  name: Cyome
+  admin1: Western Province
+  admin2: Ngororero
+  latitude: -1.94
+  longitude: 29.66
+  eastern: false
+  camp: false
+- id: 7270
+  name: Gatega
+  admin1: Western Province
+  admin2: Ngororero
+  latitude: -1.78
+  longitude: 29.61
+  eastern: false
+  camp: false
+- id: 7271
+  name: Mutake
+  admin1: Western Province
+  admin2: Ngororero
+  latitude: -1.88
+  longitude: 29.5
+  eastern: false
+  camp: false
+- id: 7272
+  name: Kazabe
+  admin1: Western Province
+  admin2: Ngororero
+  latitude: -1.88
+  longitude: 29.63
+  eastern: false
+  camp: false
+- id: 7273
+  name: Gahenerezo
+  admin1: Western Province
+  admin2: Ngororero
+  latitude: -1.86
+  longitude: 29.63
+  eastern: false
+  camp: false
+- id: 7274
+  name: Mibilizi
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.57
+  longitude: 28.95
+  eastern: false
+  camp: false
+- id: 7275
+  name: Giheke
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.47
+  longitude: 28.97
+  eastern: false
+  camp: false
+- id: 7276
+  name: Burunga
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.48
+  longitude: 28.92
+  eastern: false
+  camp: false
+- id: 7277
+  name: Kacarama
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.54
+  longitude: 28.89
+  eastern: false
+  camp: false
+- id: 7278
+  name: Rusizi I
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.51
+  longitude: 28.88
+  eastern: false
+  camp: false
+- id: 7279
+  name: Rusizi II
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.52
+  longitude: 28.87
+  eastern: false
+  camp: false
+- id: 7280
+  name: Tara
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.52
+  longitude: 28.87
+  eastern: false
+  camp: false
+- id: 7281
+  name: Murambi
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.41
+  longitude: 28.94
+  eastern: false
+  camp: false
+- id: 7282
+  name: Gatsiro
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.42
+  longitude: 28.93
+  eastern: false
+  camp: false
+- id: 7283
+  name: Rweya
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.41
+  longitude: 28.93
+  eastern: false
+  camp: false
+- id: 7284
+  name: Sekanka
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.41
+  longitude: 28.91
+  eastern: false
+  camp: false
+- id: 7285
+  name: Hepfu
+  admin1: Western Province
+  admin2: null
+  latitude: -2.39
+  longitude: 28.93
+  eastern: false
+  camp: false
+- id: 7286
+  name: Nyarushishi
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.51
+  longitude: 28.98
+  eastern: false
+  camp: false
+- id: 7287
+  name: Bambiro
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.56
+  longitude: 28.94
+  eastern: false
+  camp: false
+- id: 7288
+  name: Buhinga
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.42
+  longitude: 29.07
+  eastern: false
+  camp: false
+- id: 7289
+  name: Kinini (Nyamasheke)
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.38
+  longitude: 29.08
+  eastern: false
+  camp: false
+- id: 7290
+  name: Mwezi
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.52
+  longitude: 29.03
+  eastern: false
+  camp: false
+- id: 7291
+  name: Mariba
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.36
+  longitude: 29.01
+  eastern: false
+  camp: false
+- id: 7292
+  name: Gahuhezi
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.33
+  longitude: 29.02
+  eastern: false
+  camp: false
+- id: 7293
+  name: Ntendezi
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.45
+  longitude: 29.04
+  eastern: false
+  camp: false
+- id: 7294
+  name: Mwaga
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.43
+  longitude: 29.06
+  eastern: false
+  camp: false
+- id: 7295
+  name: Cyanika
+  admin1: Northern Province
+  admin2: Burera
+  latitude: -1.34
+  longitude: 29.74
+  eastern: false
+  camp: false
+- id: 7296
+  name: Gahunga
+  admin1: Northern Province
+  admin2: Burera
+  latitude: -1.45
+  longitude: 29.69
+  eastern: false
+  camp: false
+- id: 7297
+  name: Mugu
+  admin1: Northern Province
+  admin2: Burera
+  latitude: -1.38
+  longitude: 29.78
+  eastern: false
+  camp: false
+- id: 7298
+  name: Kidaho
+  admin1: Northern Province
+  admin2: Burera
+  latitude: -1.38
+  longitude: 29.75
+  eastern: false
+  camp: false
+- id: 7299
+  name: Gitare
+  admin1: Northern Province
+  admin2: Burera
+  latitude: -1.39
+  longitude: 29.76
+  eastern: false
+  camp: false
+- id: 7300
+  name: Kinyababa
+  admin1: Northern Province
+  admin2: Burera
+  latitude: -1.38
+  longitude: 29.81
+  eastern: false
+  camp: false
+- id: 7301
+  name: Gitanga
+  admin1: Northern Province
+  admin2: Burera
+  latitude: -1.57
+  longitude: 29.89
+  eastern: false
+  camp: false
+- id: 7302
+  name: Karagari
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.82
+  longitude: 30.22
+  eastern: false
+  camp: false
+- id: 7303
+  name: Nyagasambu Center
+  admin1: Eastern Province
+  admin2: Rwamagana
+  latitude: -1.89
+  longitude: 30.28
+  eastern: true
+  camp: false
+- id: 7304
+  name: Cyiri
+  admin1: Eastern Province
+  admin2: Rwamagana
+  latitude: -1.95
+  longitude: 30.39
+  eastern: true
+  camp: false
+- id: 7305
+  name: Kabare
+  admin1: Eastern Province
+  admin2: Rwamagana
+  latitude: -1.9
+  longitude: 30.44
+  eastern: true
+  camp: false
+- id: 7306
+  name: Umurehe
+  admin1: Eastern Province
+  admin2: Rwamagana
+  latitude: -2.04
+  longitude: 30.4
+  eastern: true
+  camp: false
+- id: 7307
+  name: Katabagemu
+  admin1: Eastern Province
+  admin2: Nyagatare
+  latitude: -1.44
+  longitude: 30.32
+  eastern: true
+  camp: false
+- id: 7308
+  name: Karumba
+  admin1: Eastern Province
+  admin2: Nyagatare
+  latitude: -1.44
+  longitude: 30.13
+  eastern: true
+  camp: false
+- id: 7309
+  name: Rugari
+  admin1: Eastern Province
+  admin2: Nyagatare
+  latitude: -1.45
+  longitude: 30.25
+  eastern: true
+  camp: false
+- id: 7310
+  name: Gihengeli
+  admin1: Eastern Province
+  admin2: Nyagatare
+  latitude: -1.52
+  longitude: 30.18
+  eastern: true
+  camp: false
+- id: 7311
+  name: Nyabitekeri
+  admin1: Eastern Province
+  admin2: Nyagatare
+  latitude: -1.29
+  longitude: 30.25
+  eastern: true
+  camp: false
+- id: 7312
+  name: Ngarama
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.54
+  longitude: 30.24
+  eastern: true
+  camp: false
+- id: 7313
+  name: Cyarubare
+  admin1: Eastern Province
+  admin2: Kayonza
+  latitude: -2.02
+  longitude: 30.64
+  eastern: true
+  camp: false
+- id: 7314
+  name: Kabukumbya
+  admin1: Eastern Province
+  admin2: Kayonza
+  latitude: -2.0
+  longitude: 30.61
+  eastern: true
+  camp: false
+- id: 7315
+  name: Nyankora
+  admin1: Eastern Province
+  admin2: Kayonza
+  latitude: -1.94
+  longitude: 30.67
+  eastern: true
+  camp: false
+- id: 7316
+  name: Kampala
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.21
+  longitude: 30.65
+  eastern: true
+  camp: false
+- id: 7317
+  name: Kabimba
+  admin1: Eastern Province
+  admin2: Ngoma
+  latitude: -2.17
+  longitude: 30.47
+  eastern: true
+  camp: false
+- id: 7318
+  name: Jarama
+  admin1: Eastern Province
+  admin2: Ngoma
+  latitude: -2.27
+  longitude: 30.37
+  eastern: true
+  camp: false
+- id: 7319
+  name: Karembo
+  admin1: Eastern Province
+  admin2: Ngoma
+  latitude: -2.14
+  longitude: 30.45
+  eastern: true
+  camp: false
+- id: 7320
+  name: Mutenderi
+  admin1: Eastern Province
+  admin2: Ngoma
+  latitude: -2.27
+  longitude: 30.49
+  eastern: true
+  camp: false
+- id: 7321
+  name: Rurama
+  admin1: Eastern Province
+  admin2: Ngoma
+  latitude: -2.2
+  longitude: 30.59
+  eastern: true
+  camp: false
+- id: 7322
+  name: Gafunzo
+  admin1: Eastern Province
+  admin2: Ngoma
+  latitude: -2.23
+  longitude: 30.39
+  eastern: true
+  camp: false
+- id: 7323
+  name: Kagenge
+  admin1: Eastern Province
+  admin2: Bugesera
+  latitude: -2.2
+  longitude: 30.12
+  eastern: true
+  camp: false
+- id: 7324
+  name: Kabashya
+  admin1: Eastern Province
+  admin2: Bugesera
+  latitude: -2.08
+  longitude: 30.14
+  eastern: true
+  camp: false
+- id: 7325
+  name: Karambo (Gicumbi)
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.84
+  longitude: 30.24
+  eastern: false
+  camp: false
+- id: 7326
+  name: Kamuhoza
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.96
+  longitude: 30.05
+  eastern: false
+  camp: false
+- id: 7327
+  name: Karushya
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.82
+  longitude: 30.23
+  eastern: false
+  camp: false
+- id: 7328
+  name: Kankuba
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -2.03
+  longitude: 30.02
+  eastern: false
+  camp: false
+- id: 7329
+  name: Nyarurenzi
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -2.04
+  longitude: 30.07
+  eastern: false
+  camp: false
+- id: 7330
+  name: Rwarutabura
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.99
+  longitude: 30.05
+  eastern: false
+  camp: false
+- id: 7331
+  name: Biryogo
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.97
+  longitude: 30.06
+  eastern: false
+  camp: false
+- id: 7332
+  name: Cyumba
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.5
+  longitude: 30.0
+  eastern: false
+  camp: false
+- id: 7333
+  name: Nyarugenge (Kiyovu)
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.95
+  longitude: 30.06
+  eastern: false
+  camp: false
+- id: 7334
+  name: Gatuna
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.43
+  longitude: 30.01
+  eastern: false
+  camp: false
+- id: 7335
+  name: Rwezamenyo
+  admin1: Kigali City
+  admin2: Nyarugenge
+  latitude: -1.98
+  longitude: 30.05
+  eastern: false
+  camp: false
+- id: 7336
+  name: Gatsata
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.94
+  longitude: 30.04
+  eastern: false
+  camp: false
+- id: 7337
+  name: Gikomero
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.89
+  longitude: 30.22
+  eastern: false
+  camp: false
+- id: 7338
+  name: Banda (Gicumbi)
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.77
+  longitude: 30.23
+  eastern: false
+  camp: false
+- id: 7339
+  name: Murindi
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.48
+  longitude: 30.04
+  eastern: false
+  camp: false
+- id: 7340
+  name: Gakinjiro
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.92
+  longitude: 30.07
+  eastern: false
+  camp: false
+- id: 7341
+  name: Miyove
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.61
+  longitude: 29.98
+  eastern: false
+  camp: false
+- id: 7342
+  name: Rubaya
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.46
+  longitude: 30.0
+  eastern: false
+  camp: false
+- id: 7343
+  name: Bweramvura
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.87
+  longitude: 30.05
+  eastern: false
+  camp: false
+- id: 7344
+  name: Rushaki
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.45
+  longitude: 30.09
+  eastern: false
+  camp: false
+- id: 7345
+  name: Kabuye
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.89
+  longitude: 30.07
+  eastern: false
+  camp: false
+- id: 7346
+  name: Rutare
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.73
+  longitude: 30.17
+  eastern: false
+  camp: false
+- id: 7347
+  name: Bitsibo
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.78
+  longitude: 30.22
+  eastern: false
+  camp: false
+- id: 7348
+  name: Jari
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.9
+  longitude: 30.04
+  eastern: false
+  camp: false
+- id: 7349
+  name: Kigaga
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.8
+  longitude: 30.17
+  eastern: false
+  camp: false
+- id: 7350
+  name: Kimirama
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.25
+  longitude: 29.93
+  eastern: false
+  camp: false
+- id: 7351
+  name: Kinamba
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.93
+  longitude: 30.06
+  eastern: false
+  camp: false
+- id: 7352
+  name: Busoro (Nyanza)
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.29
+  longitude: 29.93
+  eastern: false
+  camp: false
+- id: 7353
+  name: Nyabinyenga
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.31
+  longitude: 29.68
+  eastern: false
+  camp: false
+- id: 7354
+  name: Kabagari
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.94
+  longitude: 30.08
+  eastern: false
+  camp: false
+- id: 7355
+  name: Gacuriro
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.93
+  longitude: 30.1
+  eastern: false
+  camp: false
+- id: 7356
+  name: Murama
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.91
+  longitude: 30.11
+  eastern: false
+  camp: false
+- id: 7357
+  name: Batsinda
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.9
+  longitude: 30.08
+  eastern: false
+  camp: false
+- id: 7358
+  name: Ndera
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.95
+  longitude: 30.17
+  eastern: false
+  camp: false
+- id: 7359
+  name: Nyabisindu
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.94
+  longitude: 30.11
+  eastern: false
+  camp: false
+- id: 7360
+  name: Kisiment
+  admin1: Kigali City
+  admin2: Gasabo
+  latitude: -1.96
+  longitude: 30.11
+  eastern: false
+  camp: false
+- id: 7361
+  name: Magerwa
+  admin1: Kigali City
+  admin2: Kicukiro
+  latitude: -1.97
+  longitude: 30.09
+  eastern: false
+  camp: false
+- id: 7362
+  name: Ziniya
+  admin1: Kigali City
+  admin2: Kicukiro
+  latitude: -1.97
+  longitude: 30.1
+  eastern: false
+  camp: false
+- id: 7363
+  name: Kigarama
+  admin1: Kigali City
+  admin2: Kicukiro
+  latitude: -1.97
+  longitude: 30.07
+  eastern: false
+  camp: false
+- id: 7364
+  name: Rwiri
+  admin1: Northern Province
+  admin2: Rulindo
+  latitude: -1.63
+  longitude: 29.93
+  eastern: false
+  camp: false
+- id: 7365
+  name: Rukozo
+  admin1: Northern Province
+  admin2: Rulindo
+  latitude: -1.63
+  longitude: 29.95
+  eastern: false
+  camp: false
+- id: 7366
+  name: Rusura
+  admin1: Northern Province
+  admin2: Rulindo
+  latitude: -1.7
+  longitude: 29.95
+  eastern: false
+  camp: false
+- id: 7367
+  name: Mukinga
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.56
+  longitude: 29.7
+  eastern: false
+  camp: false
+- id: 7368
+  name: Rukura
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.69
+  longitude: 29.82
+  eastern: false
+  camp: false
+- id: 7369
+  name: Biziba
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.66
+  longitude: 29.67
+  eastern: false
+  camp: false
+- id: 7370
+  name: Murambo
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.67
+  longitude: 29.75
+  eastern: false
+  camp: false
+- id: 7371
+  name: Mataba
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.72
+  longitude: 29.74
+  eastern: false
+  camp: false
+- id: 7372
+  name: Gisiza (Gakenke)
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.72
+  longitude: 29.88
+  eastern: false
+  camp: false
+- id: 7373
+  name: Rutabo
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.74
+  longitude: 29.83
+  eastern: false
+  camp: false
+- id: 7374
+  name: Gatagara
+  admin1: Northern Province
+  admin2: Musanze
+  latitude: -1.52
+  longitude: 29.58
+  eastern: false
+  camp: false
+- id: 7375
+  name: Kimonyi
+  admin1: Northern Province
+  admin2: Musanze
+  latitude: -1.51
+  longitude: 29.61
+  eastern: false
+  camp: false
+- id: 7376
+  name: Gasyata
+  admin1: Northern Province
+  admin2: Musanze
+  latitude: -1.57
+  longitude: 29.67
+  eastern: false
+  camp: false
+- id: 7377
+  name: Nyagihina
+  admin1: Northern Province
+  admin2: Musanze
+  latitude: -1.5
+  longitude: 29.55
+  eastern: false
+  camp: false
+- id: 7378
+  name: Kinkware
+  admin1: Northern Province
+  admin2: Gicumbi
+  latitude: -1.6
+  longitude: 29.96
+  eastern: false
+  camp: false
+- id: 7379
+  name: Butansinda
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.28
+  longitude: 29.78
+  eastern: false
+  camp: false
+- id: 7380
+  name: Mukingo
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.27
+  longitude: 29.74
+  eastern: false
+  camp: false
+- id: 7381
+  name: Migina
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.35
+  longitude: 29.84
+  eastern: false
+  camp: false
+- id: 7382
+  name: Rurangazi
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.35
+  longitude: 29.66
+  eastern: false
+  camp: false
+- id: 7383
+  name: Nyagahuru_II
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.59
+  longitude: 29.9
+  eastern: false
+  camp: false
+- id: 7384
+  name: Ikivuko
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.7
+  longitude: 29.76
+  eastern: false
+  camp: false
+- id: 7385
+  name: Cyahafi
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.59
+  longitude: 29.77
+  eastern: false
+  camp: false
+- id: 7386
+  name: Ziniya (Gisagara)
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.62
+  longitude: 29.8
+  eastern: false
+  camp: false
+- id: 7387
+  name: Agahabwa
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.73
+  longitude: 29.73
+  eastern: false
+  camp: false
+- id: 7388
+  name: Kibangu
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.62
+  longitude: 29.9
+  eastern: false
+  camp: false
+- id: 7389
+  name: Gisagara
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.6
+  longitude: 29.84
+  eastern: false
+  camp: false
+- id: 7390
+  name: Rwanza
+  admin1: Southern Province
+  admin2: Gisagara
+  latitude: -2.57
+  longitude: 29.77
+  eastern: false
+  camp: false
+- id: 7391
+  name: Kamirabagenzi
+  admin1: Southern Province
+  admin2: Nyaruguru
+  latitude: -2.69
+  longitude: 29.5
+  eastern: false
+  camp: false
+- id: 7392
+  name: Ngarurira
+  admin1: Southern Province
+  admin2: Nyaruguru
+  latitude: -2.71
+  longitude: 29.54
+  eastern: false
+  camp: false
+- id: 7393
+  name: Rumenero
+  admin1: Southern Province
+  admin2: Nyaruguru
+  latitude: -2.69
+  longitude: 29.44
+  eastern: false
+  camp: false
+- id: 7394
+  name: Ruramba
+  admin1: Southern Province
+  admin2: Nyaruguru
+  latitude: -2.56
+  longitude: 29.53
+  eastern: false
+  camp: false
+- id: 7395
+  name: Rugarika (Nyaguru)
+  admin1: Southern Province
+  admin2: Nyaruguru
+  latitude: -2.66
+  longitude: 29.61
+  eastern: false
+  camp: false
+- id: 7396
+  name: Busoro (Huye)
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.67
+  longitude: 29.7
+  eastern: false
+  camp: false
+- id: 7397
+  name: Gako
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.55
+  longitude: 29.7
+  eastern: false
+  camp: false
+- id: 7398
+  name: Gakoni (Huye)
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.39
+  longitude: 29.79
+  eastern: false
+  camp: false
+- id: 7399
+  name: Rango (Huye)
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.64
+  longitude: 29.75
+  eastern: false
+  camp: false
+- id: 7400
+  name: Tumba
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.63
+  longitude: 29.74
+  eastern: false
+  camp: false
+- id: 7401
+  name: Nkenke
+  admin1: Southern Province
+  admin2: Huye
+  latitude: -2.47
+  longitude: 29.64
+  eastern: false
+  camp: false
+- id: 7402
+  name: Nyarusiza
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.53
+  longitude: 29.58
+  eastern: false
+  camp: false
+- id: 7403
+  name: Gataba
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.44
+  longitude: 29.56
+  eastern: false
+  camp: false
+- id: 7404
+  name: Rubuye
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.55
+  longitude: 29.48
+  eastern: false
+  camp: false
+- id: 7405
+  name: Ryarubondo
+  admin1: Southern Province
+  admin2: Nyamagabe
+  latitude: -2.53
+  longitude: 29.52
+  eastern: false
+  camp: false
+- id: 7406
+  name: Kirengeri
+  admin1: Southern Province
+  admin2: Ruhango
+  latitude: -2.15
+  longitude: 29.75
+  eastern: false
+  camp: false
+- id: 7407
+  name: Byimana
+  admin1: Southern Province
+  admin2: Ruhango
+  latitude: -2.14
+  longitude: 29.74
+  eastern: false
+  camp: false
+- id: 7408
+  name: Nyarurama
+  admin1: Southern Province
+  admin2: Ruhango
+  latitude: -2.24
+  longitude: 29.87
+  eastern: false
+  camp: false
+- id: 7409
+  name: Musasa
+  admin1: Southern Province
+  admin2: Muhanga
+  latitude: -1.97
+  longitude: 29.72
+  eastern: false
+  camp: false
+- id: 7410
+  name: Nkondo
+  admin1: Southern Province
+  admin2: Muhanga
+  latitude: -1.84
+  longitude: 29.68
+  eastern: false
+  camp: false
+- id: 7411
+  name: Meru
+  admin1: Southern Province
+  admin2: Muhanga
+  latitude: -2.07
+  longitude: 29.73
+  eastern: false
+  camp: false
+- id: 7412
+  name: Kabadaha
+  admin1: Southern Province
+  admin2: Muhanga
+  latitude: -2.0
+  longitude: 29.7
+  eastern: false
+  camp: false
+- id: 7413
+  name: Nyabinoni
+  admin1: Southern Province
+  admin2: Muhanga
+  latitude: -1.77
+  longitude: 29.68
+  eastern: false
+  camp: false
+- id: 7414
+  name: Bereshi
+  admin1: Southern Province
+  admin2: Muhanga
+  latitude: -2.0
+  longitude: 29.68
+  eastern: false
+  camp: false
+- id: 7415
+  name: Kinini (Muhanga)
+  admin1: Southern Province
+  admin2: Muhanga
+  latitude: -2.12
+  longitude: 29.77
+  eastern: false
+  camp: false
+- id: 7416
+  name: Misizi
+  admin1: Southern Province
+  admin2: Muhanga
+  latitude: -2.09
+  longitude: 29.78
+  eastern: false
+  camp: false
+- id: 7423
+  name: Karama (Kamonyi)
+  admin1: Southern Province
+  admin2: Kamonyi
+  latitude: -1.95
+  longitude: 29.86
+  eastern: false
+  camp: false
+- id: 7424
+  name: Cyanika (Bugesera)
+  admin1: Eastern Province
+  admin2: Bugesera
+  latitude: -2.19
+  longitude: 30.01
+  eastern: true
+  camp: false
+- id: 7425
+  name: Masha (Gakenke)
+  admin1: Northern Province
+  admin2: Gakenke
+  latitude: -1.59
+  longitude: 29.68
+  eastern: false
+  camp: false
+- id: 7426
+  name: Kinigi
+  admin1: Northern Province
+  admin2: Musanze
+  latitude: -1.45
+  longitude: 29.59
+  eastern: false
+  camp: false
+- id: 7538
+  name: Rwimiyaga
+  admin1: Eastern Province
+  admin2: Nyagatare
+  latitude: -1.22
+  longitude: 30.41
+  eastern: true
+  camp: false
+- id: 7539
+  name: Nyagashanga
+  admin1: Western Province
+  admin2: Nyamasheke
+  latitude: -2.36
+  longitude: 29.09
+  eastern: false
+  camp: false
+- id: 7540
+  name: Muganza
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.64
+  longitude: 29.01
+  eastern: false
+  camp: false
+- id: 7541
+  name: Gishoma
+  admin1: Western Province
+  admin2: Rusizi
+  latitude: -2.63
+  longitude: 28.95
+  eastern: false
+  camp: false
+- id: 7542
+  name: Shyorongi
+  admin1: Northern Province
+  admin2: Rulindo
+  latitude: -1.85
+  longitude: 29.97
+  eastern: false
+  camp: false
+- id: 7543
+  name: Kayanza Nyanza
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.32
+  longitude: 29.82
+  eastern: false
+  camp: false
+- id: 7544
+  name: Cyabakamyi
+  admin1: Southern Province
+  admin2: Nyanza
+  latitude: -2.3
+  longitude: 29.65
+  eastern: false
+  camp: false
+- id: 7545
+  name: Ruheru
+  admin1: Southern Province
+  admin2: Nyaruguru
+  latitude: -2.74
+  longitude: 29.45
+  eastern: false
+  camp: false
+- id: 7546
+  name: Nyagahinga
+  admin1: Northern Province
+  admin2: Burera
+  latitude: -1.37
+  longitude: 29.72
+  eastern: false
+  camp: false
+- id: 8023
+  name: Kayenzi (Karongi)
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.13
+  longitude: 29.36
+  eastern: false
+  camp: false
+- id: 8118
+  name: Rubengera
+  admin1: Western Province
+  admin2: Karongi
+  latitude: -2.06
+  longitude: 29.41
+  eastern: false
+  camp: false
+- id: 8119
+  name: Nyagahanga
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.61
+  longitude: 30.22
+  eastern: true
+  camp: false
+- id: 10541
+  name: Kagasa
+  admin1: Eastern Province
+  admin2: Kirehe
+  latitude: -2.33
+  longitude: 30.79
+  eastern: true
+  camp: false
+- id: 10542
+  name: Marimba
+  admin1: Eastern Province
+  admin2: Gatsibo
+  latitude: -1.58
+  longitude: 30.3
+  eastern: true
+  camp: false

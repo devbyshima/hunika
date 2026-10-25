@@ -1,0 +1,74 @@
+confirmed: false
+method: Eastern Province median real retail price, camps excluded, short fills excluded.
+  Season A window is Dec-Mar. Season B window is Apr-Jul. The decision month is the
+  most common bottom. Ties use the later month in the window.
+crops:
+  maize:
+    A:
+      decision_month: 3
+      year_shift: 0
+      window_months:
+      - 12
+      - 1
+      - 2
+      - 3
+      years_compared: 15
+      year_min: 2010
+      year_max: 2026
+      bottom_counts:
+        '2': 5
+        '3': 8
+        '12': 2
+      confirmed: false
+    B:
+      decision_month: 4
+      year_shift: 0
+      window_months:
+      - 4
+      - 5
+      - 6
+      - 7
+      years_compared: 17
+      year_min: 2009
+      year_max: 2026
+      bottom_counts:
+        '4': 8
+        '5': 4
+        '6': 2
+        '7': 3
+      confirmed: false
+  beans:
+    A:
+      decision_month: 1
+      year_shift: 0
+      window_months:
+      - 12
+      - 1
+      - 2
+      - 3
+      years_compared: 15
+      year_min: 2010
+      year_max: 2026
+      bottom_counts:
+        '1': 9
+        '2': 2
+        '3': 3
+        '12': 1
+      confirmed: false
+    B:
+      decision_month: 5
+      year_shift: 0
+      window_months:
+      - 4
+      - 5
+      - 6
+      - 7
+      years_compared: 17
+      year_min: 2009
+      year_max: 2026
+      bottom_counts:
+        '4': 2
+        '5': 7
+        '6': 4
+        '7': 4
+      confirmed: false

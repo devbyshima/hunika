@@ -1,0 +1,15 @@
+district,crop,markets,months,years,first,last,markets_with_5_years,markets_priced_since_2024
+Bugesera,beans,4,95,8,2008-01,2015-12,2,0
+Gatsibo,beans,8,214,19,2008-01,2026-08,5,5
+Kayonza,beans,1,76,7,2008-01,2015-12,1,0
+Kirehe,beans,10,193,17,2008-01,2026-08,8,9
+Ngoma,beans,1,94,8,2008-01,2015-12,1,0
+Nyagatare,beans,2,96,8,2008-01,2015-12,1,0
+Rwamagana,beans,3,96,8,2008-01,2015-12,2,0
+Bugesera,maize,3,94,8,2008-01,2015-12,2,0
+Gatsibo,maize,8,198,19,2008-01,2026-08,5,5
+Kayonza,maize,1,73,7,2008-01,2015-11,1,0
+Kirehe,maize,10,190,17,2008-01,2026-08,7,8
+Ngoma,maize,1,91,8,2008-01,2015-12,1,0
+Nyagatare,maize,2,96,8,2008-01,2015-12,1,0
+Rwamagana,maize,3,94,8,2008-01,2015-12,2,0

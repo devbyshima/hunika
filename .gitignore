@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+web/node_modules/
+web/dist/
+web/dev-dist/
+web/tsconfig.tsbuildinfo
+data/interim/
+data/raw/nisr/*.xlsx
+data/raw/nisr/*.pdf
+data/raw/nisr/*.xls

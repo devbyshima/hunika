@@ -1,0 +1,321 @@
+market_id,market,countryiso3,admin1,admin2,latitude,longitude
+1045,Birambo,RWA,Western Province,Rutsiro,-1.92,29.45
+1046,Base,RWA,Northern Province,Gakenke,-1.65,29.87
+1047,Bugarama,RWA,Western Province,Nyamasheke,-2.33,29.21
+1048,Bumbogo,RWA,Northern Province,Gakenke,-1.71,29.85
+1049,Bushenge,RWA,Western Province,Nyamasheke,-2.43,29
+1050,Butare,RWA,Southern Province,Huye,-2.6,29.74
+1051,Byangabo,RWA,Northern Province,Musanze,-1.56,29.55
+1052,Byumba,RWA,Northern Province,Gicumbi,-1.58,30.06
+1053,Congo - Nil,RWA,Western Province,Rutsiro,-1.96,29.38
+1054,Gahanga,RWA,Kigali City,Kicukiro,-1.98,30.11
+1055,Gakeli,RWA,Western Province,Rutsiro,-1.95,29.48
+1056,Gakenke,RWA,Northern Province,Gakenke,-1.65,29.8
+1057,Gasarenda,RWA,Southern Province,Nyamagabe,-2.51,29.48
+1058,Gaseke,RWA,Northern Province,Rulindo,-1.62,29.92
+1059,Gashyushya,RWA,Southern Province,Kamonyi,-2.04,29.84
+1060,Gatore,RWA,Eastern Province,Kirehe,-2.28,30.59
+1061,Gikondo,RWA,Kigali City,Kicukiro,-1.98,30.07
+1062,Gikongoro,RWA,Southern Province,Nyamagabe,-2.46,29.57
+1063,Gisenyi,RWA,Western Province,Administrative unit not available,-1.7,29.26
+1064,Gitarama,RWA,Southern Province,Muhanga,-2.07,29.76
+1065,Kabacuzi,RWA,Southern Province,Nyamagabe,-2.47,29.58
+1066,Kabarondo,RWA,Eastern Province,Kayonza,-2.02,30.55
+1067,Kabaya,RWA,Western Province,Ngororero,-1.75,29.54
+1068,Kabuga,RWA,Southern Province,Gisagara,-2.69,29.85
+1069,Kaduha,RWA,Southern Province,Nyamagabe,-2.4,29.52
+1070,Kamembe,RWA,Western Province,Rusizi,-2.48,28.9
+1071,Karangazi,RWA,Eastern Province,Nyagatare,-1.3,30.32
+1072,Kayenzi,RWA,Southern Province,Kamonyi,-1.9,29.85
+1073,Kibirizi,RWA,Southern Province,Gisagara,-2.65,29.78
+1074,Kibungo,RWA,Eastern Province,Ngoma,-2.16,30.54
+1075,Kicukiro,RWA,Kigali City,Kicukiro,-1.98,30.11
+1076,Kigali,RWA,Kigali City,Nyarugenge,-1.95,30.06
+1077,Kimisagara,RWA,Kigali City,Nyarugenge,-1.95,30.06
+1078,Kirambo,RWA,Western Province,Nyamasheke,-2.32,29.14
+1079,Kiramuruzi,RWA,Eastern Province,Gatsibo,-1.8,30.4
+1080,Kora,RWA,Western Province,Rubavu,-1.6,29.38
+1081,Mahoko,RWA,Western Province,Rubavu,-1.7,29.33
+1083,Mimuli,RWA,Eastern Province,Gatsibo,-1.54,30.24
+1084,Mukamira,RWA,Western Province,Nyabihu,-1.61,29.51
+1085,Mukarange,RWA,Northern Province,Gicumbi,-1.53,30.08
+1086,Mulindi,RWA,Kigali City,Nyarugenge,-1.95,30.06
+1087,Musanze,RWA,Northern Province,Musanze,-1.5,29.61
+1088,Musha,RWA,Eastern Province,Rwamagana,-1.92,30.34
+1089,Ndago,RWA,Southern Province,Nyanza,-2.42,29.88
+1090,Ngoma,RWA,Southern Province,Huye,-2.6,29.73
+1091,Nyabugogo,RWA,Kigali City,Nyarugenge,-1.95,30.06
+1092,Nyagahanika,RWA,Western Province,Rutsiro,-1.8,29.33
+1093,Nyagatare,RWA,Eastern Province,Nyagatare,-1.3,30.32
+1094,Nyakaliba,RWA,Western Province,Karongi,-2.06,29.35
+1095,Nyakarambi,RWA,Eastern Province,Kirehe,-2.27,30.68
+1096,Nyamata,RWA,Eastern Province,Bugesera,-2.21,30.24
+1097,Nyamirambo,RWA,Kigali City,Nyarugenge,-1.94,30.07
+1098,Nyanza,RWA,Southern Province,Huye,-2.58,29.72
+1099,Nyaruteja,RWA,Southern Province,Gisagara,-2.79,29.73
+1100,Rambura,RWA,Western Province,Nyabihu,-1.68,29.52
+1101,Rubavu,RWA,Western Province,Rubavu,-1.68,29.3
+1102,Rugarama,RWA,Northern Province,Rulindo,-1.63,29.93
+1103,Rugogwe,RWA,Southern Province,Huye,-2.49,29.73
+1104,Ruhengeri,RWA,Northern Province,Musanze,-1.5,29.64
+1105,Ruhuha,RWA,Eastern Province,Bugesera,-2.15,30.09
+1106,Rukomo,RWA,Northern Province,Gicumbi,-1.63,30.1
+1107,Rushashi,RWA,Northern Province,Gakenke,-1.74,29.87
+1108,Ruyenzi,RWA,Southern Province,Nyanza,-2.43,29.83
+1109,Rwagitima,RWA,Eastern Province,Gatsibo,-1.8,30.42
+1110,Rwamagana,RWA,Eastern Province,Rwamagana,-1.95,30.43
+1111,Remera,RWA,Kigali City,Gasabo,-1.95,30.12
+1383,Batiment,RWA,Eastern Province,Bugesera,-2.15,30.09
+1400,Buhanda,RWA,Southern Province,Ruhango,-2.23,29.66
+1401,Huye,RWA,Southern Province,Huye,-2.58,29.72
+1402,Karenge,RWA,Northern Province,Gakenke,-1.64,29.82
+1403,Kimironko,RWA,Eastern Province,Gatsibo,-1.75,30.34
+1404,Kinazi,RWA,Eastern Province,Bugesera,-2.14,30.09
+1405,Mugina,RWA,Southern Province,Kamonyi,-2.1,29.95
+1406,Muhanga,RWA,Southern Province,Huye,-2.43,29.68
+1407,Ngororero,RWA,Western Province,Nyabihu,-1.65,29.62
+1408,Nkoto,RWA,Southern Province,Huye,-2.56,29.66
+1409,Ruhango,RWA,Northern Province,Gakenke,-1.65,29.72
+1410,Rusumo,RWA,Eastern Province,Kirehe,-2.27,30.71
+1411,Vunga,RWA,Western Province,Nyabihu,-1.69,29.63
+1484,Karambi,RWA,Southern Province,Huye,-2.51,29.61
+1485,Kizi,RWA,Southern Province,Huye,-2.53,29.65
+1486,Miko,RWA,Southern Province,Nyaruguru,-2.67,29.61
+1487,Kibuye (Karongi),RWA,Western Province,Karongi,-2.06,29.35
+1488,Nkora,RWA,Northern Province,Musanze,-1.52,29.67
+1489,Muhondo,RWA,Northern Province,Burera,-1.6,29.88
+1490,Ntunga,RWA,Eastern Province,Rwamagana,-1.96,30.35
+1491,Gacurabwenge,RWA,Northern Province,Gicumbi,-1.58,30.07
+1560,Bumazi,RWA,Western Province,Nyamasheke,-2.45,29
+1561,Matimba,RWA,Eastern Province,Nyagatare,-1.11,30.43
+1562,Rusine,RWA,Northern Province,Rulindo,-1.81,30.13
+1885,Nyarugenge,RWA,Kigali City,Nyarugenge,-1.96,30.06
+1898,Kabarore,RWA,Eastern Province,Gatsibo,-1.62,30.39
+1899,Kirinda,RWA,Western Province,Karongi,-2.18,29.58
+2355,Gihembe (Camp),RWA,Northern Province,Gicumbi,-1.6,30.08
+2356,Gicumbi,RWA,Northern Province,Gicumbi,-1.58,30.07
+2357,Kageyo,RWA,Northern Province,Gicumbi,-1.6,30.08
+2358,Ruyaga,RWA,Northern Province,Gicumbi,-1.59,30.08
+2359,Kigeme,RWA,Southern Province,Nyamagabe,-2.49,29.52
+2360,Nyamugari,RWA,Eastern Province,Kirehe,-2.28,30.77
+2361,Kiyanzi,RWA,Eastern Province,Kirehe,-2.35,30.76
+2362,Nganda,RWA,Eastern Province,Kirehe,-2.32,30.59
+2363,Kabeza,RWA,Eastern Province,Kirehe,-2.31,30.83
+2364,Kigufi,RWA,Eastern Province,Kirehe,-2.24,30.8
+2365,Munini,RWA,Eastern Province,Kirehe,-2.31,30.82
+2366,Rushonga,RWA,Eastern Province,Kirehe,-2.19,30.83
+2367,Mugombwa (Camp),RWA,Southern Province,Gisagara,-2.67,29.85
+2368,Mahama (Camp),RWA,Eastern Province,Kirehe,-2.31,30.84
+2371,Kigeme (Camp),RWA,Southern Province,Nyamagabe,-2.48,29.52
+2372,Nyabiheke (Camp),RWA,Eastern Province,Gatsibo,-1.6,30.26
+2373,Bubare,RWA,Eastern Province,Gatsibo,-1.6,30.25
+2374,Mugera,RWA,Eastern Province,Gatsibo,-1.6,30.28
+2375,Ntungaruze,RWA,Eastern Province,Gatsibo,-1.6,30.27
+2376,Kiziba (Camp),RWA,Western Province,Karongi,-2.13,29.36
+2377,Karongi,RWA,Western Province,Karongi,-2.07,29.35
+2378,Mubuga,RWA,Western Province,Karongi,-2.14,29.31
+2379,Kivuruga,RWA,Western Province,Karongi,-2.16,29.39
+2380,Gatunda,RWA,Southern Province,Gisagara,-2.74,29.85
+2381,Mugombwa,RWA,Southern Province,Gisagara,-2.68,29.85
+7233,Kamonyi,RWA,Southern Province,Kamonyi,-2,29.91
+7234,Manyana,RWA,Southern Province,Kamonyi,-1.98,29.83
+7235,Murara,RWA,Southern Province,Kamonyi,-1.97,29.8
+7236,Karambo,RWA,Southern Province,Kamonyi,-1.95,29.8
+7237,Kizirabonde,RWA,Southern Province,Kamonyi,-1.9,29.9
+7238,Ruyumba,RWA,Southern Province,Kamonyi,-2.07,29.9
+7239,Kumukunguri,RWA,Southern Province,Kamonyi,-2.08,29.88
+7240,Musumba,RWA,Southern Province,Kamonyi,-2.1,29.84
+7241,Rugarika,RWA,Southern Province,Kamonyi,-2.04,29.96
+7242,Kamuhanda,RWA,Southern Province,Kamonyi,-1.99,29.93
+7243,Rwina,RWA,Southern Province,Kamonyi,-1.92,29.92
+7244,Gihara,RWA,Southern Province,Kamonyi,-1.94,29.96
+7245,Runda,RWA,Southern Province,Kamonyi,-1.97,29.99
+7246,Gataka (Gahigiro),RWA,Western Province,Karongi,-2.11,29.42
+7247,Gataka (Kagabiro),RWA,Western Province,Karongi,-2.12,29.32
+7248,Gitikinini,RWA,Western Province,Karongi,-2.05,29.41
+7249,Muyira,RWA,Western Province,Rutsiro,-1.94,29.38
+7250,Mungoti,RWA,Western Province,Rutsiro,-1.89,29.44
+7251,Mburamazi,RWA,Western Province,Rutsiro,-1.91,29.38
+7252,Gisiza (Rutsiro),RWA,Western Province,Rutsiro,-1.92,29.37
+7253,Mashanyarazi,RWA,Western Province,Rutsiro,-1.88,29.32
+7254,Nkomero,RWA,Western Province,Rutsiro,-1.89,29.34
+7255,Jebeka,RWA,Western Province,Rutsiro,-2.01,29.4
+7256,Bugabo,RWA,Western Province,Rutsiro,-1.89,29.35
+7257,Cyanzarwe,RWA,Western Province,Rubavu,-1.65,29.33
+7258,Ryabizige,RWA,Western Province,Rubavu,-1.62,29.32
+7259,Majengo,RWA,Western Province,Rubavu,-1.69,29.25
+7260,Mbugangari,RWA,Western Province,Rubavu,-1.68,29.25
+7261,Cyapa,RWA,Western Province,Rubavu,-1.75,29.3
+7262,Gakoni (Rubavu),RWA,Western Province,Rubavu,-1.73,29.28
+7263,Buhuru,RWA,Western Province,Rubavu,-1.66,29.26
+7264,Rugerero,RWA,Western Province,Rubavu,-1.69,29.31
+7265,Rurembo,RWA,Western Province,Nyabihu,-1.66,29.57
+7266,Jomba,RWA,Western Province,Nyabihu,-1.71,29.59
+7267,Kiyebe,RWA,Western Province,Ngororero,-1.93,29.59
+7268,Gashubi,RWA,Western Province,Ngororero,-1.98,29.55
+7269,Cyome,RWA,Western Province,Ngororero,-1.94,29.66
+7270,Gatega,RWA,Western Province,Ngororero,-1.78,29.61
+7271,Mutake,RWA,Western Province,Ngororero,-1.88,29.5
+7272,Kazabe,RWA,Western Province,Ngororero,-1.88,29.63
+7273,Gahenerezo,RWA,Western Province,Ngororero,-1.86,29.63
+7274,Mibilizi,RWA,Western Province,Rusizi,-2.57,28.95
+7275,Giheke,RWA,Western Province,Rusizi,-2.47,28.97
+7276,Burunga,RWA,Western Province,Rusizi,-2.48,28.92
+7277,Kacarama,RWA,Western Province,Rusizi,-2.54,28.89
+7278,Rusizi I,RWA,Western Province,Rusizi,-2.51,28.88
+7279,Rusizi II,RWA,Western Province,Rusizi,-2.52,28.87
+7280,Tara,RWA,Western Province,Rusizi,-2.52,28.87
+7281,Murambi,RWA,Western Province,Rusizi,-2.41,28.94
+7282,Gatsiro,RWA,Western Province,Rusizi,-2.42,28.93
+7283,Rweya,RWA,Western Province,Rusizi,-2.41,28.93
+7284,Sekanka,RWA,Western Province,Rusizi,-2.41,28.91
+7285,Hepfu,RWA,Western Province,Administrative unit not available,-2.39,28.93
+7286,Nyarushishi,RWA,Western Province,Rusizi,-2.51,28.98
+7287,Bambiro,RWA,Western Province,Rusizi,-2.56,28.94
+7288,Buhinga,RWA,Western Province,Nyamasheke,-2.42,29.07
+7289,Kinini (Nyamasheke),RWA,Western Province,Nyamasheke,-2.38,29.08
+7290,Mwezi,RWA,Western Province,Nyamasheke,-2.52,29.03
+7291,Mariba,RWA,Western Province,Nyamasheke,-2.36,29.01
+7292,Gahuhezi,RWA,Western Province,Nyamasheke,-2.33,29.02
+7293,Ntendezi,RWA,Western Province,Nyamasheke,-2.45,29.04
+7294,Mwaga,RWA,Western Province,Nyamasheke,-2.43,29.06
+7295,Cyanika,RWA,Northern Province,Burera,-1.34,29.74
+7296,Gahunga,RWA,Northern Province,Burera,-1.45,29.69
+7297,Mugu,RWA,Northern Province,Burera,-1.38,29.78
+7298,Kidaho,RWA,Northern Province,Burera,-1.38,29.75
+7299,Gitare,RWA,Northern Province,Burera,-1.39,29.76
+7300,Kinyababa,RWA,Northern Province,Burera,-1.38,29.81
+7301,Gitanga,RWA,Northern Province,Burera,-1.57,29.89
+7302,Karagari,RWA,Northern Province,Gicumbi,-1.82,30.22
+7303,Nyagasambu Center,RWA,Eastern Province,Rwamagana,-1.89,30.28
+7304,Cyiri,RWA,Eastern Province,Rwamagana,-1.95,30.39
+7305,Kabare,RWA,Eastern Province,Rwamagana,-1.9,30.44
+7306,Umurehe,RWA,Eastern Province,Rwamagana,-2.04,30.4
+7307,Katabagemu,RWA,Eastern Province,Nyagatare,-1.44,30.32
+7308,Karumba,RWA,Eastern Province,Nyagatare,-1.44,30.13
+7309,Rugari,RWA,Eastern Province,Nyagatare,-1.45,30.25
+7310,Gihengeli,RWA,Eastern Province,Nyagatare,-1.52,30.18
+7311,Nyabitekeri,RWA,Eastern Province,Nyagatare,-1.29,30.25
+7312,Ngarama,RWA,Eastern Province,Gatsibo,-1.54,30.24
+7313,Cyarubare,RWA,Eastern Province,Kayonza,-2.02,30.64
+7314,Kabukumbya,RWA,Eastern Province,Kayonza,-2,30.61
+7315,Nyankora,RWA,Eastern Province,Kayonza,-1.94,30.67
+7316,Kampala,RWA,Eastern Province,Kirehe,-2.21,30.65
+7317,Kabimba,RWA,Eastern Province,Ngoma,-2.17,30.47
+7318,Jarama,RWA,Eastern Province,Ngoma,-2.27,30.37
+7319,Karembo,RWA,Eastern Province,Ngoma,-2.14,30.45
+7320,Mutenderi,RWA,Eastern Province,Ngoma,-2.27,30.49
+7321,Rurama,RWA,Eastern Province,Ngoma,-2.2,30.59
+7322,Gafunzo,RWA,Eastern Province,Ngoma,-2.23,30.39
+7323,Kagenge,RWA,Eastern Province,Bugesera,-2.2,30.12
+7324,Kabashya,RWA,Eastern Province,Bugesera,-2.08,30.14
+7325,Karambo (Gicumbi),RWA,Northern Province,Gicumbi,-1.84,30.24
+7326,Kamuhoza,RWA,Kigali City,Nyarugenge,-1.96,30.05
+7327,Karushya,RWA,Northern Province,Gicumbi,-1.82,30.23
+7328,Kankuba,RWA,Kigali City,Nyarugenge,-2.03,30.02
+7329,Nyarurenzi,RWA,Kigali City,Nyarugenge,-2.04,30.07
+7330,Rwarutabura,RWA,Kigali City,Nyarugenge,-1.99,30.05
+7331,Biryogo,RWA,Kigali City,Nyarugenge,-1.97,30.06
+7332,Cyumba,RWA,Northern Province,Gicumbi,-1.5,30
+7333,Nyarugenge (Kiyovu),RWA,Kigali City,Nyarugenge,-1.95,30.06
+7334,Gatuna,RWA,Northern Province,Gicumbi,-1.43,30.01
+7335,Rwezamenyo,RWA,Kigali City,Nyarugenge,-1.98,30.05
+7336,Gatsata,RWA,Kigali City,Gasabo,-1.94,30.04
+7337,Gikomero,RWA,Kigali City,Gasabo,-1.89,30.22
+7338,Banda (Gicumbi),RWA,Northern Province,Gicumbi,-1.77,30.23
+7339,Murindi,RWA,Northern Province,Gicumbi,-1.48,30.04
+7340,Gakinjiro,RWA,Kigali City,Gasabo,-1.92,30.07
+7341,Miyove,RWA,Northern Province,Gicumbi,-1.61,29.98
+7342,Rubaya,RWA,Northern Province,Gicumbi,-1.46,30
+7343,Bweramvura,RWA,Kigali City,Gasabo,-1.87,30.05
+7344,Rushaki,RWA,Northern Province,Gicumbi,-1.45,30.09
+7345,Kabuye,RWA,Kigali City,Gasabo,-1.89,30.07
+7346,Rutare,RWA,Northern Province,Gicumbi,-1.73,30.17
+7347,Bitsibo,RWA,Northern Province,Gicumbi,-1.78,30.22
+7348,Jari,RWA,Kigali City,Gasabo,-1.9,30.04
+7349,Kigaga,RWA,Northern Province,Gicumbi,-1.8,30.17
+7350,Kimirama,RWA,Southern Province,Nyanza,-2.25,29.93
+7351,Kinamba,RWA,Kigali City,Gasabo,-1.93,30.06
+7352,Busoro (Nyanza),RWA,Southern Province,Nyanza,-2.29,29.93
+7353,Nyabinyenga,RWA,Southern Province,Nyanza,-2.31,29.68
+7354,Kabagari,RWA,Kigali City,Gasabo,-1.94,30.08
+7355,Gacuriro,RWA,Kigali City,Gasabo,-1.93,30.1
+7356,Murama,RWA,Kigali City,Gasabo,-1.91,30.11
+7357,Batsinda,RWA,Kigali City,Gasabo,-1.9,30.08
+7358,Ndera,RWA,Kigali City,Gasabo,-1.95,30.17
+7359,Nyabisindu,RWA,Kigali City,Gasabo,-1.94,30.11
+7360,Kisiment,RWA,Kigali City,Gasabo,-1.96,30.11
+7361,Magerwa,RWA,Kigali City,Kicukiro,-1.97,30.09
+7362,Ziniya,RWA,Kigali City,Kicukiro,-1.97,30.1
+7363,Kigarama,RWA,Kigali City,Kicukiro,-1.97,30.07
+7364,Rwiri,RWA,Northern Province,Rulindo,-1.63,29.93
+7365,Rukozo,RWA,Northern Province,Rulindo,-1.63,29.95
+7366,Rusura,RWA,Northern Province,Rulindo,-1.7,29.95
+7367,Mukinga,RWA,Northern Province,Gakenke,-1.56,29.7
+7368,Rukura,RWA,Northern Province,Gakenke,-1.69,29.82
+7369,Biziba,RWA,Northern Province,Gakenke,-1.66,29.67
+7370,Murambo,RWA,Northern Province,Gakenke,-1.67,29.75
+7371,Mataba,RWA,Northern Province,Gakenke,-1.72,29.74
+7372,Gisiza (Gakenke),RWA,Northern Province,Gakenke,-1.72,29.88
+7373,Rutabo,RWA,Northern Province,Gakenke,-1.74,29.83
+7374,Gatagara,RWA,Northern Province,Musanze,-1.52,29.58
+7375,Kimonyi,RWA,Northern Province,Musanze,-1.51,29.61
+7376,Gasyata,RWA,Northern Province,Musanze,-1.57,29.67
+7377,Nyagihina,RWA,Northern Province,Musanze,-1.5,29.55
+7378,Kinkware,RWA,Northern Province,Gicumbi,-1.6,29.96
+7379,Butansinda,RWA,Southern Province,Nyanza,-2.28,29.78
+7380,Mukingo,RWA,Southern Province,Nyanza,-2.27,29.74
+7381,Migina,RWA,Southern Province,Nyanza,-2.35,29.84
+7382,Rurangazi,RWA,Southern Province,Nyanza,-2.35,29.66
+7383,Nyagahuru_II,RWA,Southern Province,Gisagara,-2.59,29.9
+7384,Ikivuko,RWA,Southern Province,Gisagara,-2.7,29.76
+7385,Cyahafi,RWA,Southern Province,Gisagara,-2.59,29.77
+7386,Ziniya (Gisagara),RWA,Southern Province,Gisagara,-2.62,29.8
+7387,Agahabwa,RWA,Southern Province,Gisagara,-2.73,29.73
+7388,Kibangu,RWA,Southern Province,Gisagara,-2.62,29.9
+7389,Gisagara,RWA,Southern Province,Gisagara,-2.6,29.84
+7390,Rwanza,RWA,Southern Province,Gisagara,-2.57,29.77
+7391,Kamirabagenzi,RWA,Southern Province,Nyaruguru,-2.69,29.5
+7392,Ngarurira,RWA,Southern Province,Nyaruguru,-2.71,29.54
+7393,Rumenero,RWA,Southern Province,Nyaruguru,-2.69,29.44
+7394,Ruramba,RWA,Southern Province,Nyaruguru,-2.56,29.53
+7395,Rugarika (Nyaguru),RWA,Southern Province,Nyaruguru,-2.66,29.61
+7396,Busoro (Huye),RWA,Southern Province,Huye,-2.67,29.7
+7397,Gako,RWA,Southern Province,Huye,-2.55,29.7
+7398,Gakoni (Huye),RWA,Southern Province,Huye,-2.39,29.79
+7399,Rango (Huye),RWA,Southern Province,Huye,-2.64,29.75
+7400,Tumba,RWA,Southern Province,Huye,-2.63,29.74
+7401,Nkenke,RWA,Southern Province,Huye,-2.47,29.64
+7402,Nyarusiza,RWA,Southern Province,Nyamagabe,-2.53,29.58
+7403,Gataba,RWA,Southern Province,Nyamagabe,-2.44,29.56
+7404,Rubuye,RWA,Southern Province,Nyamagabe,-2.55,29.48
+7405,Ryarubondo,RWA,Southern Province,Nyamagabe,-2.53,29.52
+7406,Kirengeri,RWA,Southern Province,Ruhango,-2.15,29.75
+7407,Byimana,RWA,Southern Province,Ruhango,-2.14,29.74
+7408,Nyarurama,RWA,Southern Province,Ruhango,-2.24,29.87
+7409,Musasa,RWA,Southern Province,Muhanga,-1.97,29.72
+7410,Nkondo,RWA,Southern Province,Muhanga,-1.84,29.68
+7411,Meru,RWA,Southern Province,Muhanga,-2.07,29.73
+7412,Kabadaha,RWA,Southern Province,Muhanga,-2,29.7
+7413,Nyabinoni,RWA,Southern Province,Muhanga,-1.77,29.68
+7414,Bereshi,RWA,Southern Province,Muhanga,-2,29.68
+7415,Kinini (Muhanga),RWA,Southern Province,Muhanga,-2.12,29.77
+7416,Misizi,RWA,Southern Province,Muhanga,-2.09,29.78
+7423,Karama (Kamonyi),RWA,Southern Province,Kamonyi,-1.95,29.86
+7424,Cyanika (Bugesera),RWA,Eastern Province,Bugesera,-2.19,30.01
+7425,Masha (Gakenke),RWA,Northern Province,Gakenke,-1.59,29.68
+7426,Kinigi,RWA,Northern Province,Musanze,-1.45,29.59
+7538,Rwimiyaga,RWA,Eastern Province,Nyagatare,-1.22,30.41
+7539,Nyagashanga,RWA,Western Province,Nyamasheke,-2.36,29.09
+7540,Muganza,RWA,Western Province,Rusizi,-2.64,29.01
+7541,Gishoma,RWA,Western Province,Rusizi,-2.63,28.95
+7542,Shyorongi,RWA,Northern Province,Rulindo,-1.85,29.97
+7543,Kayanza Nyanza,RWA,Southern Province,Nyanza,-2.32,29.82
+7544,Cyabakamyi,RWA,Southern Province,Nyanza,-2.3,29.65
+7545,Ruheru,RWA,Southern Province,Nyaruguru,-2.74,29.45
+7546,Nyagahinga,RWA,Northern Province,Burera,-1.37,29.72
+8023,Kayenzi (Karongi),RWA,Western Province,Karongi,-2.13,29.36
+8118,Rubengera,RWA,Western Province,Karongi,-2.06,29.41
+8119,Nyagahanga,RWA,Eastern Province,Gatsibo,-1.61,30.22
+10541,Kagasa,RWA,Eastern Province,Kirehe,-2.33,30.79
+10542,Marimba,RWA,Eastern Province,Gatsibo,-1.58,30.3

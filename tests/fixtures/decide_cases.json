@@ -1,0 +1,157 @@
+{
+  "cases": [
+    {
+      "name": "store_home_two_months",
+      "input": {
+        "quantity_kg": 1000,
+        "price_now": 400,
+        "needs_cash_now": false,
+        "g_min": 0.08,
+        "d_max": 0.05,
+        "options": [
+          {"id": "home_bags", "loss_monthly": 0.01, "fee": 0, "cost_per_kg": 2, "interest_annual": 0, "borrow_share": 0}
+        ],
+        "forecasts": {
+          "1": {"p10": 420, "p50": 450, "p90": 480},
+          "2": {"p10": 430, "p50": 470, "p90": 510}
+        }
+      },
+      "expected": {
+        "verdict": "store",
+        "option": "home_bags",
+        "horizon_months": 2,
+        "v0": 400000,
+        "likely_value": 458600,
+        "low_value": 419400,
+        "high_value": 497800,
+        "likely_gain": 58600,
+        "low_gain": 19400,
+        "high_gain": 97800,
+        "loss_band": "under_10"
+      }
+    },
+    {
+      "name": "store_with_some_bad_years",
+      "input": {
+        "quantity_kg": 1000,
+        "price_now": 400,
+        "needs_cash_now": false,
+        "g_min": 0.08,
+        "d_max": 0.05,
+        "options": [
+          {"id": "home_bags", "loss_monthly": 0.01, "fee": 0, "cost_per_kg": 2, "interest_annual": 0, "borrow_share": 0}
+        ],
+        "forecasts": {
+          "2": {"p10": 400, "p50": 470, "p90": 510}
+        }
+      },
+      "expected": {
+        "verdict": "store",
+        "option": "home_bags",
+        "horizon_months": 2,
+        "likely_value": 458600,
+        "low_value": 390000,
+        "low_gain": -10000,
+        "loss_band": "between_10_and_50"
+      }
+    },
+    {
+      "name": "best_horizon_fails_guardrail",
+      "input": {
+        "quantity_kg": 1000,
+        "price_now": 400,
+        "needs_cash_now": false,
+        "g_min": 0.08,
+        "d_max": 0.05,
+        "options": [
+          {"id": "home_bags", "loss_monthly": 0.01, "fee": 0, "cost_per_kg": 2, "interest_annual": 0, "borrow_share": 0}
+        ],
+        "forecasts": {
+          "1": {"p10": 390, "p50": 460, "p90": 500},
+          "2": {"p10": 300, "p50": 520, "p90": 600}
+        }
+      },
+      "expected": {"verdict": "sell_now", "option": null, "horizon_months": 0, "likely_gain": 0}
+    },
+    {
+      "name": "gain_too_small",
+      "input": {
+        "quantity_kg": 1000,
+        "price_now": 400,
+        "needs_cash_now": false,
+        "g_min": 0.08,
+        "d_max": 0.05,
+        "options": [
+          {"id": "home_bags", "loss_monthly": 0.05, "fee": 0, "cost_per_kg": 2, "interest_annual": 0, "borrow_share": 0}
+        ],
+        "forecasts": {
+          "1": {"p10": 420, "p50": 450, "p90": 480},
+          "2": {"p10": 430, "p50": 470, "p90": 510}
+        }
+      },
+      "expected": {"verdict": "sell_now", "horizon_months": 0}
+    },
+    {
+      "name": "cash_now_blocks_home_storage",
+      "input": {
+        "quantity_kg": 1000,
+        "price_now": 400,
+        "needs_cash_now": true,
+        "g_min": 0.08,
+        "d_max": 0.05,
+        "options": [
+          {"id": "home_bags", "loss_monthly": 0.01, "fee": 0, "cost_per_kg": 2, "interest_annual": 0, "borrow_share": 0}
+        ],
+        "forecasts": {
+          "2": {"p10": 430, "p50": 470, "p90": 510}
+        }
+      },
+      "expected": {"verdict": "sell_now", "option": null}
+    },
+    {
+      "name": "cash_now_warehouse",
+      "input": {
+        "quantity_kg": 1000,
+        "price_now": 400,
+        "needs_cash_now": true,
+        "g_min": 0.08,
+        "d_max": 0.05,
+        "options": [
+          {"id": "home_bags", "loss_monthly": 0.01, "fee": 0, "cost_per_kg": 2, "interest_annual": 0, "borrow_share": 0},
+          {"id": "warehouse", "loss_monthly": 0.005, "fee": 0.025, "cost_per_kg": 0, "interest_annual": 0.18, "borrow_share": 0.7}
+        ],
+        "forecasts": {
+          "2": {"p10": 450, "p50": 500, "p90": 560}
+        }
+      },
+      "expected": {
+        "verdict": "store",
+        "option": "warehouse",
+        "horizon_months": 2,
+        "likely_value": 474225,
+        "low_value": 425962.5,
+        "high_value": 532140,
+        "likely_gain": 74225,
+        "low_gain": 25962.5,
+        "loss_band": "under_10"
+      }
+    },
+    {
+      "name": "missing_loss_rate",
+      "input": {
+        "quantity_kg": 1000,
+        "price_now": 400,
+        "needs_cash_now": false,
+        "g_min": 0.08,
+        "d_max": 0.05,
+        "options": [
+          {"id": "home_bags", "loss_monthly": null, "fee": 0, "cost_per_kg": 2, "interest_annual": 0, "borrow_share": 0}
+        ],
+        "forecasts": {
+          "2": {"p10": 430, "p50": 470, "p90": 510}
+        }
+      },
+      "expected": {"verdict": "unpriced", "option": null, "horizon_months": 0}
+    }
+  ]
+}
