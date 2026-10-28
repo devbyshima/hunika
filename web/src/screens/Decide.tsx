@@ -73,22 +73,15 @@ function compareFor(input: DecideInput, forecast: CropForecast): Compare {
   return best ?? { horizon: 0, likely: input.quantity_kg * input.price_now, low: input.quantity_kg * input.price_now, high: input.quantity_kg * input.price_now, raw: true }
 }
 
-function defaultText(value: number | null, t: T, percent: boolean) {
-  if (value == null) return t("decide.notPublished")
-  return percent ? `${(value * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%` : `${value.toLocaleString("en-US", { maximumFractionDigits: 1 })} RWF`
-}
-
-/** One optional input: a title, a line saying what to type, and the unit inside the box. */
+/** One optional input: a title that says what to type, and the unit inside the box. */
 function Option({
   title,
-  help,
   unit,
   value,
   placeholder,
   onChange,
 }: {
   title: string
-  help: string
   unit: string
   value: string
   placeholder: string
@@ -97,7 +90,6 @@ function Option({
   return (
     <label className="block">
       <span className="block text-sm font-semibold text-ink">{title}</span>
-      <span className="mt-0.5 block text-xs leading-snug text-faint">{help}</span>
       <span className="field mt-1.5 flex !min-h-11 items-center gap-2">
         <input className="num w-full min-w-0 bg-transparent outline-none placeholder:text-ghost" inputMode="decimal" value={value} placeholder={placeholder} onChange={(event) => onChange(event.target.value)} />
         <span className="shrink-0 text-sm text-faint">{unit}</span>
@@ -222,10 +214,9 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
         <div className="mt-auto pt-3">
         <details className="rounded-[14px] border border-line bg-white/80 px-3.5">
           <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("decide.more")}</summary>
-          <div className="grid gap-4 pt-1 pb-4">
+          <div className="grid gap-3.5 pt-1 pb-4">
             <Option
               title={t("decide.todayPrice")}
-              help={dataForecast?.price_now != null ? t("decide.todayPriceHelp", { price: money(dataForecast.price_now), month: monthLabel(dataForecast.price_month || "") }) : ""}
               unit="RWF/kg"
               value={typed}
               placeholder={dataForecast?.price_now != null ? money(dataForecast.price_now) : ""}
@@ -233,15 +224,13 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
             />
             <Option
               title={t("decide.costLoss")}
-              help={t("decide.costLossHelp", { value: defaultText(defaultFor(bundle.assumptions.items, storage, "loss_monthly"), t, true) })}
-              unit={t("decide.perMonth")}
+              unit="%"
               value={loss}
               placeholder={lossDefault != null ? String(+(lossDefault * 100).toFixed(2)) : ""}
               onChange={setLoss}
             />
             <Option
               title={t("decide.costBags")}
-              help={t("decide.costBagsHelp", { value: defaultText(defaultFor(bundle.assumptions.items, storage, "cost_per_kg"), t, false) })}
               unit="RWF/kg"
               value={cost}
               placeholder={costDefault != null ? String(costDefault) : ""}
@@ -250,7 +239,6 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
             {storage === "warehouse" ? (
               <Option
                 title={t("decide.costInterest")}
-                help={t("decide.costInterestHelp", { value: defaultText(defaultFor(bundle.assumptions.items, storage, "interest_annual"), t, true) })}
                 unit={t("decide.perYear")}
                 value={interest}
                 placeholder={interestDefault != null ? String(+(interestDefault * 100).toFixed(2)) : ""}
@@ -258,10 +246,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
               />
             ) : null}
             <label className="flex min-h-11 cursor-pointer items-center justify-between gap-3">
-              <span>
-                <span className="block text-sm font-semibold text-ink">{t("decide.cash")}</span>
-                <span className="mt-0.5 block text-xs leading-snug text-faint">{t("decide.cashHelp")}</span>
-              </span>
+              <span className="text-sm font-semibold text-ink">{t("decide.cash")}</span>
               <input type="checkbox" className="peer sr-only" checked={cash} onChange={(event) => setCash(event.target.checked)} />
               <span aria-hidden className="relative h-7 w-12 shrink-0 rounded-full bg-[#d4d4d4] transition-colors peer-checked:bg-grass-700 peer-focus-visible:outline-2 peer-focus-visible:outline-grass-500 after:absolute after:top-1 after:left-1 after:size-5 after:rounded-full after:bg-white after:shadow after:transition-transform peer-checked:after:translate-x-5" />
             </label>
