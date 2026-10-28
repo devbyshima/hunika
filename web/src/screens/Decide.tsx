@@ -5,7 +5,7 @@ import { readCosts, withPrice, type CostOverrides } from "../lib/outlook"
 import type { Assumption, Bundle, CropForecast } from "../types"
 import type { Compare, View } from "../App"
 import { Dot } from "../components/Icons"
-import { BeansPic, MaizePic, SackPic, SealedSackPic, WarehousePic } from "../components/Illustrations"
+import { BeansPic, ChevronDownPic, MaizePic, PinPic, SackPic, SealedSackPic, WarehousePic } from "../components/Illustrations"
 import { PastDots, RiskMeter, Spark, ValueBars } from "../components/Charts"
 
 type T = (key: string, vars?: Record<string, string | number>) => string
@@ -185,19 +185,41 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
           ))}
         </div>
 
-        <div className="mt-3 grid grid-cols-[1.4fr_1fr] gap-x-2 gap-y-1.5">
-          <p className="label px-1">{t("decide.district")}</p>
-          <p className="label px-1">{t("decide.quantity")}</p>
-          <select aria-label={t("decide.district")} className="field" value={district} onChange={(event) => setDistrict(event.target.value)}>
-            {DISTRICTS.map((name) => (
-              <option key={name}>{name}</option>
-            ))}
-          </select>
-          <div className="field flex items-center gap-1 !px-1.5">
-            <input aria-label={t("decide.quantity")} className="num w-full min-w-0 bg-transparent px-1.5 outline-none" inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} />
-            <button type="button" className="shrink-0 rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-white" onClick={() => setUnit(unit === "t" ? "kg" : "t")}>
-              {t(unit === "t" ? "decide.tonnes" : "decide.kg")}
-            </button>
+        <div className="mt-3 grid grid-cols-[1.25fr_1fr] gap-2">
+          <label className="block">
+            <span className="label block px-1 pb-1.5">{t("decide.district")}</span>
+            <span className="relative block">
+              <PinPic className="pointer-events-none absolute top-1/2 left-2.5 size-5 -translate-y-1/2 text-grass-700 max-[379px]:hidden" />
+              <select className="picker" value={district} onChange={(event) => setDistrict(event.target.value)}>
+                {DISTRICTS.map((name) => (
+                  <option key={name}>{name}</option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute top-1/2 right-1.5 grid size-7 -translate-y-1/2 place-items-center rounded-full bg-white text-ink shadow-[0_1px_2px_rgba(0,0,0,0.12)]">
+                <ChevronDownPic className="size-4" />
+              </span>
+            </span>
+          </label>
+          <div>
+            <label htmlFor="quantity" className="label block px-1 pb-1.5">
+              {t("decide.quantity")}
+            </label>
+            <div className="typebox">
+              <input id="quantity" className="num w-full min-w-0 bg-transparent pl-1 text-[17px] font-semibold outline-none" inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} />
+              <div className="flex shrink-0 rounded-full bg-paper p-0.5" role="group" aria-label={t("decide.quantity")}>
+                {(["t", "kg"] as const).map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    aria-pressed={unit === item}
+                    className={`min-h-8 min-w-7 rounded-full px-1.5 text-xs font-semibold transition-colors ${unit === item ? "bg-ink text-white" : "text-muted"}`}
+                    onClick={() => setUnit(item)}
+                  >
+                    {item === "t" ? "t" : "kg"}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
