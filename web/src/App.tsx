@@ -135,10 +135,10 @@ export default function App() {
                 key={item}
                 type="button"
                 aria-current={active ? "page" : undefined}
-                className={`flex min-h-14 min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-[20px] px-0 text-[10px] leading-tight font-semibold tracking-[-0.02em] transition-colors min-[400px]:text-[11px] ${active ? "bg-grass-100 text-grass-800" : "text-faint"}`}
+                className={`flex min-h-14 min-w-0 flex-1 flex-col items-center justify-center gap-1 px-0 text-[10px] leading-tight font-semibold tracking-[-0.02em] transition-colors min-[400px]:text-[11px] ${active ? "text-grass-700" : "text-faint"}`}
                 onClick={() => go(item)}
               >
-                <Icon />
+                <Icon className={`size-6 ${active ? "[stroke-width:2.1]" : ""}`} />
                 <span className="whitespace-nowrap">{t(`nav.${item}`)}</span>
               </button>
             )

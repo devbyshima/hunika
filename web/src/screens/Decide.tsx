@@ -198,9 +198,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
                   <option key={name}>{name}</option>
                 ))}
               </select>
-              <span className="pointer-events-none absolute top-1/2 right-1.5 grid size-7 -translate-y-1/2 place-items-center rounded-full bg-white text-ink shadow-[0_1px_2px_rgba(0,0,0,0.12)]">
-                <ChevronDownPic className="size-4" />
-              </span>
+              <ChevronDownPic className="pointer-events-none absolute top-1/2 right-3 size-5 -translate-y-1/2 text-grass-800" />
             </span>
           </label>
           <div>

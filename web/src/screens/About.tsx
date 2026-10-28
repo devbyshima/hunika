@@ -46,10 +46,8 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
 
       <ol className="mt-5 grid gap-2">
         {STEPS.map(([title, note, Pic], index) => (
-          <li key={title} className="card flex items-center gap-4 p-4">
-            <span className="grid size-12 shrink-0 place-items-center rounded-[14px] bg-grass-50 text-grass-700">
-              <Pic className="size-6" />
-            </span>
+          <li key={title} className="card flex items-center gap-3.5 p-4">
+            <Pic className="size-8 shrink-0 text-grass-700" />
             <span>
               <span className="block text-[15px] font-semibold">
                 <span className="mr-1.5 text-faint">{index + 1}</span>

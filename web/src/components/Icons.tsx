@@ -2,9 +2,9 @@
 
 type Props = { className?: string }
 
-function Icon({ className = "", children }: Props & { children: React.ReactNode }) {
+function Icon({ className = "size-5", children }: Props & { children: React.ReactNode }) {
   return (
-    <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className={`size-5 ${className}`}>
+    <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className={className}>
       {children}
     </svg>
   )
