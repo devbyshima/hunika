@@ -73,10 +73,37 @@ function compareFor(input: DecideInput, forecast: CropForecast): Compare {
   return best ?? { horizon: 0, likely: input.quantity_kg * input.price_now, low: input.quantity_kg * input.price_now, high: input.quantity_kg * input.price_now, raw: true }
 }
 
-function placeholder(value: number | null, t: T, percent: boolean) {
-  if (value == null) return t("decide.costUnknown")
-  const text = percent ? `${(value * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%` : `${value.toLocaleString("en-US", { maximumFractionDigits: 1 })} RWF`
-  return t("decide.costDefault", { value: text })
+function defaultText(value: number | null, t: T, percent: boolean) {
+  if (value == null) return t("decide.notPublished")
+  return percent ? `${(value * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%` : `${value.toLocaleString("en-US", { maximumFractionDigits: 1 })} RWF`
+}
+
+/** One optional input: a title, a line saying what to type, and the unit inside the box. */
+function Option({
+  title,
+  help,
+  unit,
+  value,
+  placeholder,
+  onChange,
+}: {
+  title: string
+  help: string
+  unit: string
+  value: string
+  placeholder: string
+  onChange: (value: string) => void
+}) {
+  return (
+    <label className="block">
+      <span className="block text-sm font-semibold text-ink">{title}</span>
+      <span className="mt-0.5 block text-xs leading-snug text-faint">{help}</span>
+      <span className="field mt-1.5 flex !min-h-11 items-center gap-2">
+        <input className="num w-full min-w-0 bg-transparent outline-none placeholder:text-ghost" inputMode="decimal" value={value} placeholder={placeholder} onChange={(event) => onChange(event.target.value)} />
+        <span className="shrink-0 text-sm text-faint">{unit}</span>
+      </span>
+    </label>
+  )
 }
 
 function Pill({ tone, children }: { tone: "good" | "warn" | "neutral"; children: React.ReactNode }) {
@@ -139,6 +166,9 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
     setInterest("")
   }
 
+  const lossDefault = defaultFor(bundle.assumptions.items, storage, "loss_monthly")
+  const costDefault = defaultFor(bundle.assumptions.items, storage, "cost_per_kg")
+  const interestDefault = defaultFor(bundle.assumptions.items, storage, "interest_annual")
   const forecast = view?.forecast
   const compare = view?.compare
   const horizon = forecast?.horizons?.[String(compare?.horizon)]
@@ -192,33 +222,46 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
         <div className="mt-auto pt-3">
         <details className="rounded-[14px] border border-line bg-white/80 px-3.5">
           <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("decide.more")}</summary>
-          <div className="grid gap-2.5 pb-3.5">
-            <label className="block text-[13px] text-muted">
-              {t("decide.todayPrice")}
-              <input
-                className="field num mt-1 !min-h-11"
-                inputMode="decimal"
-                value={typed}
-                placeholder={dataForecast?.price_now != null ? `${money(dataForecast.price_now)} · ${monthLabel(dataForecast.price_month || "")}` : ""}
-                onChange={(event) => setTyped(event.target.value)}
-              />
-            </label>
-            <label className="block text-[13px] text-muted">
-              {t("decide.costLoss")}
-              <input className="field num mt-1 !min-h-11" inputMode="decimal" value={loss} onChange={(event) => setLoss(event.target.value)} placeholder={placeholder(defaultFor(bundle.assumptions.items, storage, "loss_monthly"), t, true)} />
-            </label>
-            <label className="block text-[13px] text-muted">
-              {t("decide.costBags")}
-              <input className="field num mt-1 !min-h-11" inputMode="decimal" value={cost} onChange={(event) => setCost(event.target.value)} placeholder={placeholder(defaultFor(bundle.assumptions.items, storage, "cost_per_kg"), t, false)} />
-            </label>
+          <div className="grid gap-4 pt-1 pb-4">
+            <Option
+              title={t("decide.todayPrice")}
+              help={dataForecast?.price_now != null ? t("decide.todayPriceHelp", { price: money(dataForecast.price_now), month: monthLabel(dataForecast.price_month || "") }) : ""}
+              unit="RWF/kg"
+              value={typed}
+              placeholder={dataForecast?.price_now != null ? money(dataForecast.price_now) : ""}
+              onChange={setTyped}
+            />
+            <Option
+              title={t("decide.costLoss")}
+              help={t("decide.costLossHelp", { value: defaultText(defaultFor(bundle.assumptions.items, storage, "loss_monthly"), t, true) })}
+              unit={t("decide.perMonth")}
+              value={loss}
+              placeholder={lossDefault != null ? String(+(lossDefault * 100).toFixed(2)) : ""}
+              onChange={setLoss}
+            />
+            <Option
+              title={t("decide.costBags")}
+              help={t("decide.costBagsHelp", { value: defaultText(defaultFor(bundle.assumptions.items, storage, "cost_per_kg"), t, false) })}
+              unit="RWF/kg"
+              value={cost}
+              placeholder={costDefault != null ? String(costDefault) : ""}
+              onChange={setCost}
+            />
             {storage === "warehouse" ? (
-              <label className="block text-[13px] text-muted">
-                {t("decide.costInterest")}
-                <input className="field num mt-1 !min-h-11" inputMode="decimal" value={interest} onChange={(event) => setInterest(event.target.value)} placeholder={placeholder(defaultFor(bundle.assumptions.items, storage, "interest_annual"), t, true)} />
-              </label>
+              <Option
+                title={t("decide.costInterest")}
+                help={t("decide.costInterestHelp", { value: defaultText(defaultFor(bundle.assumptions.items, storage, "interest_annual"), t, true) })}
+                unit={t("decide.perYear")}
+                value={interest}
+                placeholder={interestDefault != null ? String(+(interestDefault * 100).toFixed(2)) : ""}
+                onChange={setInterest}
+              />
             ) : null}
-            <label className="flex min-h-11 cursor-pointer items-center justify-between gap-3 text-sm font-medium">
-              {t("decide.cash")}
+            <label className="flex min-h-11 cursor-pointer items-center justify-between gap-3">
+              <span>
+                <span className="block text-sm font-semibold text-ink">{t("decide.cash")}</span>
+                <span className="mt-0.5 block text-xs leading-snug text-faint">{t("decide.cashHelp")}</span>
+              </span>
               <input type="checkbox" className="peer sr-only" checked={cash} onChange={(event) => setCash(event.target.checked)} />
               <span aria-hidden className="relative h-7 w-12 shrink-0 rounded-full bg-[#d4d4d4] transition-colors peer-checked:bg-grass-700 peer-focus-visible:outline-2 peer-focus-visible:outline-grass-500 after:absolute after:top-1 after:left-1 after:size-5 after:rounded-full after:bg-white after:shadow after:transition-transform peer-checked:after:translate-x-5" />
             </label>
