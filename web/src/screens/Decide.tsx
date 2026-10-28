@@ -175,7 +175,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
       <p className="mt-2 px-1 text-[15px] leading-snug text-muted">{t("decide.intro")}</p>
 
       <section className="panel mt-5 flex flex-1 flex-col p-3">
-        <p className="label mb-1.5 px-1">{t("decide.cropLabel")}</p>
+        <h2 className="mb-2 px-1 text-[17px] font-semibold text-ink">{t("decide.cropLabel")}</h2>
         <div className="grid max-h-[150px] min-h-[92px] flex-[3] grid-cols-2 gap-2">
           {CROPS.map(([id, Pic]) => (
             <button key={id} type="button" aria-pressed={crop === id} className="tile h-full" onClick={() => setCrop(id)}>
@@ -201,7 +201,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
           </div>
         </div>
 
-        <p className="label mt-3 mb-1.5 px-1">{t("decide.storage")}</p>
+        <h2 className="mt-4 mb-2 px-1 text-[17px] font-semibold text-ink">{t("decide.storage")}</h2>
         <div className="grid max-h-[124px] min-h-[84px] flex-[2] grid-cols-3 gap-2">
           {OPTIONS.map(([id, key, Pic]) => (
             <button key={id} type="button" aria-pressed={storage === id} className="tile h-full !min-h-[84px] !text-[13px]" onClick={() => pickStorage(id)}>
