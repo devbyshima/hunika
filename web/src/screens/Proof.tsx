@@ -65,7 +65,7 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
   const saved = home?.mean_store_4_when_sell_rwf_per_tonne
 
   return (
-    <div className="px-4 pt-7 pb-4">
+    <div className="px-4 pt-7 pb-3">
       <h1 className="display px-1 text-[30px] leading-[1.05]">{t("proof.title")}</h1>
       <p className="mt-1.5 px-1 text-sm text-muted">{t("proof.lead", { n: head.n_decisions, years: backtest.years ?? "" })}</p>
 

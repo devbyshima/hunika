@@ -74,7 +74,7 @@ export default function Share({
   const store = view.verdict.verdict === "store"
 
   return (
-    <div className="px-4 pt-6">
+    <div className="px-4 pt-6 pb-3">
       <button type="button" className="-ml-1 inline-flex min-h-11 items-center gap-1 pr-3 text-sm font-semibold text-muted" onClick={onDecide}>
         <BackPic className="size-5" />
         {t("nav.decide")}

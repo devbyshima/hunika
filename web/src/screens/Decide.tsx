@@ -148,15 +148,15 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
   const risk: 0 | 1 | 2 = !view || !compare ? 0 : compare.likely < view.verdict.v0 ? 2 : compare.low < view.verdict.v0 ? 1 : 0
 
   return (
-    <div className="px-4 pt-7">
+    <div className="flex flex-1 flex-col px-4 pt-7 pb-3">
       <h1 className="display px-1 text-[30px] leading-[1.05]">{t("decide.heroA")}</h1>
       <p className="mt-2 px-1 text-[15px] leading-snug text-muted">{t("decide.intro")}</p>
 
-      <section className="panel mt-5 p-3">
+      <section className="panel mt-5 flex flex-1 flex-col p-3">
         <p className="label mb-1.5 px-1">{t("decide.cropLabel")}</p>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid max-h-[150px] min-h-[92px] flex-[3] grid-cols-2 gap-2">
           {CROPS.map(([id, Pic]) => (
-            <button key={id} type="button" aria-pressed={crop === id} className="tile" onClick={() => setCrop(id)}>
+            <button key={id} type="button" aria-pressed={crop === id} className="tile h-full" onClick={() => setCrop(id)}>
               <Pic className="size-8" />
               <span>{t(`decide.${id}`)}</span>
             </button>
@@ -180,16 +180,17 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
         </div>
 
         <p className="label mt-3 mb-1.5 px-1">{t("decide.storage")}</p>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid max-h-[124px] min-h-[84px] flex-[2] grid-cols-3 gap-2">
           {OPTIONS.map(([id, key, Pic]) => (
-            <button key={id} type="button" aria-pressed={storage === id} className="tile !min-h-[84px] !text-[13px]" onClick={() => pickStorage(id)}>
+            <button key={id} type="button" aria-pressed={storage === id} className="tile h-full !min-h-[84px] !text-[13px]" onClick={() => pickStorage(id)}>
               <Pic className="size-7" />
               <span className="leading-tight">{t(key)}</span>
             </button>
           ))}
         </div>
 
-        <details className="mt-3 rounded-[14px] border border-line bg-white/80 px-3.5">
+        <div className="mt-auto pt-3">
+        <details className="rounded-[14px] border border-line bg-white/80 px-3.5">
           <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("decide.more")}</summary>
           <div className="grid gap-2.5 pb-3.5">
             <label className="block text-[13px] text-muted">
@@ -227,6 +228,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
         <button type="button" className="key-dark mt-3 min-h-14 w-full text-[17px]" onClick={submit}>
           {t("decide.show")}
         </button>
+        </div>
       </section>
 
       {view && forecast?.status !== "ok" ? <p className="card rise-in mt-5 p-5 text-lg">{t("decide.notEnough")}</p> : null}

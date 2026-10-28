@@ -87,7 +87,7 @@ export default function App() {
   }
 
   return (
-    <div className="phone canvas mx-auto flex min-h-dvh max-w-[480px] flex-col pb-32 shadow-[0_0_0_1px_rgba(23,23,23,0.06),0_30px_80px_-40px_rgba(23,23,23,0.35)]">
+    <div className="phone canvas mx-auto flex min-h-dvh max-w-[480px] flex-col pb-[calc(84px+env(safe-area-inset-bottom))] shadow-[0_0_0_1px_rgba(23,23,23,0.06),0_30px_80px_-40px_rgba(23,23,23,0.35)]">
       <header className="no-print relative z-10 flex items-center justify-between px-5 pt-5">
         <div className="flex items-center gap-2.5">
           <Mark size={30} />
@@ -108,12 +108,12 @@ export default function App() {
         </div>
       </header>
 
-      <main className="relative z-10 flex-1">
+      <main className="relative z-10 flex flex-1 flex-col">
         {!bundle ? (
           error ? <p className="px-5 pt-16 text-lg">{error}</p> : <Loading />
         ) : (
           <>
-            <div hidden={screen !== "decide"}>
+            <div className={screen === "decide" ? "flex flex-1 flex-col" : "hidden"}>
               <Decide bundle={bundle} t={t} onView={setView} onShare={() => go("share")} />
             </div>
             {screen === "share" ? <Share t={t} view={view} onDecide={() => go("decide")} /> : null}

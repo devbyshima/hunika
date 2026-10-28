@@ -41,7 +41,7 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
   const sources = [t("about.wfp"), t("about.cpi"), t("about.sas"), t("about.rain"), ahs ? t("about.ahsUsed", { storage: pct(ahs.cooperative_storage) }) : t("about.ahs")]
 
   return (
-    <div className="px-4 pt-7 pb-6">
+    <div className="px-4 pt-7 pb-3">
       <h1 className="display px-1 text-[30px] leading-[1.05]">{t("about.title")}</h1>
 
       <ol className="mt-5 grid gap-2">

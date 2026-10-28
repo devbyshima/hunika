@@ -119,7 +119,7 @@ export default function Plan({ bundle, t }: { bundle: Bundle; t: T }) {
   )
 
   return (
-    <div className="px-4 pt-7">
+    <div className="px-4 pt-7 pb-3">
       <h1 className="display px-1 text-[30px] leading-[1.05]">{t("plan.title")}</h1>
       <div className="mt-4 grid grid-cols-2 gap-2">
         {([["maize", MaizePic], ["beans", BeansPic]] as const).map(([id, Pic]) => (
