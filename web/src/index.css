@@ -47,6 +47,8 @@
   --color-warn: #8a5a12;
   --color-warn-100: #f6eedc;
 
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
   --radius-card: 16px;
   --radius-panel: 26px;
 }
@@ -251,6 +253,26 @@ input {
   box-shadow: inset 0 1px 2px rgba(23, 23, 23, 0.08), 0 0 0 3px var(--color-grass-100);
 }
 
+/* Bar fills: lighter at the top, as one light falls on every chart. */
+.bar-grass {
+  background: linear-gradient(180deg, #6fc25c 0%, #45a535 100%);
+}
+.bar-grass-soft {
+  background: linear-gradient(180deg, #a3d792 0%, #7fc96b 100%);
+}
+.bar-ink {
+  background: linear-gradient(180deg, #4d4d4d 0%, #171717 100%);
+}
+.bar-ghost {
+  background: linear-gradient(180deg, #b3b3ad 0%, #8f8f8f 100%);
+}
+.bar-loss {
+  background: linear-gradient(180deg, #d2493d 0%, #b42318 100%);
+}
+.bar-warn {
+  background: linear-gradient(180deg, #b98a34 0%, #8a5a12 100%);
+}
+
 .field {
   min-height: 48px;
   width: 100%;
@@ -296,13 +318,50 @@ input {
 
 }
 
+/* Fold-out sections: the chevron turns and the content settles in on open.
+   Closing stays instant. */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+.chevron {
+  transition: transform 200ms var(--ease-out);
+}
+details[open] > summary .chevron {
+  transform: rotate(180deg);
+}
+@keyframes disclose {
+  from { opacity: 0; transform: translateY(-4px); }
+}
+details[open] > :not(summary) {
+  animation: disclose 180ms var(--ease-out) backwards;
+}
+
+/* The 20-square grid on Proof counts in, so the red square lands last. */
+@keyframes cell-in {
+  from { opacity: 0; transform: scale(0.6); }
+}
+.cell-in {
+  animation: cell-in 180ms var(--ease-out) backwards;
+}
+
+/* An answer that no longer matches the form fades back. */
+.answer {
+  transition: opacity 200ms var(--ease-out);
+}
+.answer[data-stale="true"] {
+  opacity: 0.45;
+}
+
 /* Motion only where it adds information: a result arriving. */
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(12px) scale(0.98); }
   to { opacity: 1; transform: none; }
 }
 .rise-in {
-  animation: rise-in 0.4s cubic-bezier(0.22, 0.98, 0.3, 1.2) both;
+  animation: rise-in 0.4s cubic-bezier(0.22, 0.98, 0.3, 1.2) backwards;
 }
 @keyframes pixel-shimmer {
   0%, 100% { opacity: 1; }
@@ -320,10 +379,24 @@ input {
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+@keyframes fade {
+  from { opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise-in,
   .pixel-shimmer rect {
     animation: none;
+  }
+  details[open] > :not(summary) {
+    animation-name: fade;
+  }
+  .chevron {
+    transition: none;
+  }
+  .cell-in {
+    animation: fade 150ms ease-out backwards;
+    animation-delay: 0ms !important;
   }
 }
 

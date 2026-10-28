@@ -1,5 +1,5 @@
 import { SeasonStrip, Waffle } from "../components/Charts"
-import { SealedSackPic } from "../components/Illustrations"
+import { ChevronDownPic, SealedSackPic } from "../components/Illustrations"
 import { money } from "../lib/format"
 import type { Bundle, NetStats } from "../types"
 
@@ -109,11 +109,11 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
             <p className="eyebrow">{t("proof.bySeason")}</p>
             <p className="flex items-center gap-2 text-[11px] text-faint">
               <span className="inline-flex items-center gap-1">
-                <i className="inline-block size-2 rounded-[2px] bg-grass-500" />
+                <i className="inline-block size-2 rounded-[2px] bar-grass" />
                 {t("proof.up")}
               </span>
               <span className="inline-flex items-center gap-1">
-                <i className="inline-block size-2 rounded-[2px] bg-loss" />
+                <i className="inline-block size-2 rounded-[2px] bar-loss" />
                 {t("proof.down")}
               </span>
             </p>
@@ -125,7 +125,10 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
       ) : null}
 
       <details className="card mt-3 px-4">
-        <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("proof.details")}</summary>
+        <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">
+          {t("proof.details")}
+          <ChevronDownPic className="chevron ml-auto size-4 shrink-0 text-faint" />
+        </summary>
         <div className="pb-4 text-sm">
           {beans ? (
             <p className="mt-1 rounded-[12px] bg-grass-50 p-3 text-grass-800">

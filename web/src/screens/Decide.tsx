@@ -121,8 +121,10 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
   const [interest, setInterest] = useState("")
   const [view, setView] = useState<View | null>(null)
   const [round, setRound] = useState(0)
+  const [submittedKey, setSubmittedKey] = useState("")
   const result = useRef<HTMLElement>(null)
 
+  const inputKey = JSON.stringify([crop, district, amount, unit, storage, cash, typed, loss, cost, interest])
   const dataForecast = bundle.forecasts.districts[district]?.[crop]
   const typedPrice = Number(typed.replace(/,/g, ""))
   const ownPrice = typed.trim() !== "" && Number.isFinite(typedPrice) && typedPrice > 0
@@ -149,6 +151,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
     setView(next)
     onView(next)
     setRound((value) => value + 1)
+    setSubmittedKey(inputKey)
   }
 
   function pickStorage(id: string) {
@@ -235,7 +238,10 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
 
         <div className="mt-auto pt-3">
         <details className="rounded-[14px] border border-line bg-white/80 px-3.5">
-          <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("decide.more")}</summary>
+          <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">
+            {t("decide.more")}
+            <ChevronDownPic className="chevron ml-auto size-4 shrink-0 text-faint" />
+          </summary>
           <div className="grid gap-3.5 pt-1 pb-4">
             <Option
               title={t("decide.todayPrice")}
@@ -284,7 +290,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
       {view && forecast?.status !== "ok" ? <p className="card rise-in mt-5 p-5 text-lg">{t("decide.notEnough")}</p> : null}
 
       {view && compare && forecast?.status === "ok" && forecast.price_now != null ? (
-        <section key={round} ref={result} className="card rise-in mt-5 scroll-mt-4 p-5 shadow-[0_8px_8px_-4px_rgba(0,0,0,0.06),0_4px_6px_-4px_rgba(0,0,0,0.1)]">
+        <section key={round} ref={result} data-stale={submittedKey !== inputKey} className="answer card rise-in mt-5 scroll-mt-4 p-5 shadow-[0_8px_8px_-4px_rgba(0,0,0,0.06),0_4px_6px_-4px_rgba(0,0,0,0.1)]">
           <p className="eyebrow">
             {t(`decide.${view.crop}`)} · {view.district} · {quantityLabel(view.quantityKg)}
           </p>
@@ -362,7 +368,10 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
           </div>
 
           <details className="mt-4 border-t border-hair">
-            <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("decide.markets")}</summary>
+            <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">
+              {t("decide.markets")}
+              <ChevronDownPic className="chevron ml-auto size-4 shrink-0 text-faint" />
+            </summary>
             <ul className="num grid gap-1 pb-2 text-[13px]">
               {(forecast.nearest_markets ?? []).map((market) => (
                 <li key={market.name} className="flex justify-between gap-3">

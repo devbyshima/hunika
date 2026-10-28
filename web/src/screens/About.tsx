@@ -1,5 +1,5 @@
 import { Dot } from "../components/Icons"
-import { AnswerPic, CostsPic, PricesPic } from "../components/Illustrations"
+import { AnswerPic, ChevronDownPic, CostsPic, PricesPic } from "../components/Illustrations"
 import type { Assumption, Bundle } from "../types"
 
 type T = (key: string, vars?: Record<string, string | number>) => string
@@ -72,7 +72,10 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
       </ol>
 
       <details className="card mt-3 px-4">
-        <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("about.assumptions")}</summary>
+        <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">
+          {t("about.assumptions")}
+          <ChevronDownPic className="chevron ml-auto size-4 shrink-0 text-faint" />
+        </summary>
         <ul className="pb-2">
           {bundle.assumptions.items.map((item) => (
             <li key={item.id} className="border-t border-hair">
@@ -82,7 +85,10 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
                     <Dot tone={item.value == null ? "neutral" : item.status === "sourced" ? "good" : "warn"} />
                     {item.label}
                   </span>
-                  <span className={`num shrink-0 font-semibold ${item.value == null ? "text-ghost" : "text-grass-700"}`}>{valueText(item, t)}</span>
+                  <span className="flex shrink-0 items-center gap-1.5">
+                    <span className={`num font-semibold ${item.value == null ? "text-ghost" : "text-grass-700"}`}>{valueText(item, t)}</span>
+                    <ChevronDownPic className="chevron size-3.5 text-faint" />
+                  </span>
                 </summary>
                 <p className="pb-3 pl-4 text-xs leading-snug text-muted">
                   {item.source}
