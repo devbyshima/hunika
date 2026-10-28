@@ -70,8 +70,12 @@ Kinyarwanda review: `python scripts/rw_review.py export` writes `docs/review/kin
 | `pipeline/` | Ingest, panel, model v1 and v2, decision rule, backtest, JSON export |
 | `config/` | Markets, season calendar, storage assumptions |
 | `data/processed/` | Panel, SAS extract and anomalies, rainfall extract, backtest rows and decisions |
+| `data/raw/` | WFP prices and markets, district boundaries. The NISR workbooks and the national rainfall file are linked in `docs/DATA.md`, not committed; `scripts/fetch_public_data.sh` downloads them |
+| `scripts/` | Public data download, Kinyarwanda review export and apply |
+| `tests/` | Pipeline tests and the decision cases shared with the phone |
 | `web/` | Vite, React, TypeScript, Tailwind, Leaflet, installable PWA. The fonts are Space Grotesk and Inter (both SIL Open Font License), self-hosted in `web/public/fonts/` with `LICENSES.md` |
 | `docs/` | Problem, methodology, data, declaration, phase 2 |
+| `demo/` | Demo video, three minutes at most |
 
 ## Team
 
