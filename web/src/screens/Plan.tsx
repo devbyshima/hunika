@@ -152,7 +152,7 @@ export default function Plan({ bundle, t }: { bundle: Bundle; t: T }) {
             />
           </MapContainer>
         ) : (
-          <p className="p-4 text-muted">{t("plan.notEnough")}</p>
+          <p className="font-body p-4 text-muted">{t("plan.notEnough")}</p>
         )}
         <div className="flex items-center justify-between px-2.5 pt-2 pb-1 text-[11px] text-faint">
           <span>{t("plan.legend")}</span>
@@ -167,7 +167,7 @@ export default function Plan({ bundle, t }: { bundle: Bundle; t: T }) {
         </div>
       </div>
 
-      <p className="mt-4 px-1 text-[13px] text-muted">{t("plan.tap")}</p>
+      <p className="font-body mt-4 px-1 text-[13px] text-muted">{t("plan.tap")}</p>
       <div className="no-scrollbar -mx-4 mt-2 flex gap-2 overflow-x-auto px-4 pb-1">
         {DISTRICTS.map((name) => (
           <button key={name} type="button" aria-pressed={selected === name} className="chip shrink-0" onClick={() => setSelected(name)}>
@@ -180,12 +180,12 @@ export default function Plan({ bundle, t }: { bundle: Bundle; t: T }) {
         <div className="flex items-baseline justify-between gap-3">
           <p className="text-[17px] font-semibold">{selected}</p>
           {change == null ? (
-            <p className="text-muted">{t("plan.notEnough")}</p>
+            <p className="font-body text-muted">{t("plan.notEnough")}</p>
           ) : (
             <p className={`display num text-[34px] leading-none ${change >= 0 ? "text-grass-700" : "text-ink"}`}>{percent(change)}</p>
           )}
         </div>
-        <p className="mt-1 text-right text-[11px] text-faint">{t("plan.lead")}</p>
+        <p className="font-body mt-1 text-right text-[11px] text-faint">{t("plan.lead")}</p>
 
         {forecast?.status === "ok" && forecast.price_now != null ? (
           <div className="mt-2">

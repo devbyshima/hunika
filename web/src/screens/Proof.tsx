@@ -46,7 +46,7 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
     return (
       <div className="px-4 pt-7">
         <h1 className="display px-1 text-[30px] leading-[1.05]">{t("proof.title")}</h1>
-        <p className="mt-4 px-1 text-muted">{t("proof.netMissing")}</p>
+        <p className="font-body mt-4 px-1 text-muted">{t("proof.netMissing")}</p>
       </div>
     )
   }
@@ -67,7 +67,7 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
   return (
     <div className="px-4 pt-7 pb-3">
       <h1 className="display px-1 text-[30px] leading-[1.05]">{t("proof.title")}</h1>
-      <p className="mt-1.5 px-1 text-sm text-muted">{t("proof.lead", { n: head.n_decisions, years: backtest.years ?? "" })}</p>
+      <p className="font-body mt-1.5 px-1 text-sm text-muted">{t("proof.lead", { n: head.n_decisions, years: backtest.years ?? "" })}</p>
 
       <section className="panel mt-5 p-5">
         <div className="flex items-center gap-2 text-sm font-semibold text-grass-800">
@@ -75,14 +75,14 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
           {t(OPTION_KEYS[head.option])}
         </div>
         <p className="display num mt-3 text-[52px] leading-none text-grass-700">{signed(head.mean_gain_rwf_per_tonne)}</p>
-        <p className="mt-2 text-sm text-muted">{t("proof.headline")}</p>
+        <p className="font-body mt-2 text-sm text-muted">{t("proof.headline")}</p>
       </section>
 
       <section className="card mt-3 p-5">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="display num text-[34px] leading-none">{pct(head.share_not_worse_than_selling)}</p>
-            <p className="mt-1.5 text-sm text-muted">{t("proof.notWorse")}</p>
+            <p className="font-body mt-1.5 text-sm text-muted">{t("proof.notWorse")}</p>
           </div>
           <Waffle share={head.share_not_worse_than_selling} />
         </div>
@@ -92,13 +92,13 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
         {head.mean_gain_when_stored_rwf_per_tonne != null ? (
           <div className="card p-4">
             <p className="display num text-[24px] leading-none text-grass-700">{signed(head.mean_gain_when_stored_rwf_per_tonne)}</p>
-            <p className="mt-2 text-xs leading-snug text-muted">{t("proof.whenStore")}</p>
+            <p className="font-body mt-2 text-xs leading-snug text-muted">{t("proof.whenStore")}</p>
           </div>
         ) : null}
         {saved != null ? (
           <div className="rounded-[16px] bg-grass-800 p-4 text-white">
             <p className="display num text-[24px] leading-none">{money(Math.abs(saved))}</p>
-            <p className="mt-2 text-xs leading-snug text-white/80">{t("proof.avoid")}</p>
+            <p className="font-body mt-2 text-xs leading-snug text-white/80">{t("proof.avoid")}</p>
           </div>
         ) : null}
       </div>
@@ -131,7 +131,7 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
         </summary>
         <div className="pb-4 text-sm">
           {beans ? (
-            <p className="mt-1 rounded-[12px] bg-grass-50 p-3 text-grass-800">
+            <p className="font-body mt-1 rounded-[12px] bg-grass-50 p-3 text-grass-800">
               <span className="num font-semibold">{signed(beans.mean_gain_rwf_per_tonne * 100)} RWF</span> · {t("proof.coop")}
             </p>
           ) : null}
@@ -172,9 +172,9 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
           </ul>
 
           <p className="eyebrow mt-5">{t("proof.models")}</p>
-          {v1 ? <p className="mt-1">{t("proof.coverage", { share: pct(v1.coverage_all) })}</p> : null}
+          {v1 ? <p className="font-body mt-1">{t("proof.coverage", { share: pct(v1.coverage_all) })}</p> : null}
           {gainV1?.mean_gain_compared_rwf_per_tonne != null && gainV2?.mean_gain_compared_rwf_per_tonne != null ? (
-            <p className="mt-1 text-muted">{t("proof.v2Short", { v1: signed(gainV1.mean_gain_compared_rwf_per_tonne), v2: signed(gainV2.mean_gain_compared_rwf_per_tonne) })}</p>
+            <p className="font-body mt-1 text-muted">{t("proof.v2Short", { v1: signed(gainV1.mean_gain_compared_rwf_per_tonne), v2: signed(gainV2.mean_gain_compared_rwf_per_tonne) })}</p>
           ) : null}
 
           {checks.length ? (
@@ -192,7 +192,7 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
               </table>
             </>
           ) : null}
-          <p className="mt-4 text-xs text-faint">{t("proof.money")}</p>
+          <p className="font-body mt-4 text-xs text-faint">{t("proof.money")}</p>
         </div>
       </details>
     </div>

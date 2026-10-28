@@ -175,7 +175,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
   return (
     <div className="flex flex-1 flex-col px-4 pt-7 pb-3">
       <h1 className="display px-1 text-[30px] leading-[1.05]">{t("decide.heroA")}</h1>
-      <p className="mt-2 px-1 text-[15px] leading-snug text-muted">{t("decide.intro")}</p>
+      <p className="font-body mt-2 px-1 text-[15px] leading-snug text-muted">{t("decide.intro")}</p>
 
       <section className="panel mt-5 flex flex-1 flex-col p-3">
         <h2 className="mb-2 px-1 text-[17px] font-semibold text-ink">{t("decide.cropLabel")}</h2>
@@ -287,7 +287,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
         </div>
       </section>
 
-      {view && forecast?.status !== "ok" ? <p className="card rise-in mt-5 p-5 text-lg">{t("decide.notEnough")}</p> : null}
+      {view && forecast?.status !== "ok" ? <p className="font-body card rise-in mt-5 p-5 text-lg">{t("decide.notEnough")}</p> : null}
 
       {view && compare && forecast?.status === "ok" && forecast.price_now != null ? (
         <section key={round} ref={result} data-stale={submittedKey !== inputKey} className="answer card rise-in mt-5 scroll-mt-4 p-5 shadow-[0_8px_8px_-4px_rgba(0,0,0,0.06),0_4px_6px_-4px_rgba(0,0,0,0.1)]">
@@ -300,7 +300,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
           {verdict === "store" ? (
             <p className="num mt-3 inline-flex rounded-full bg-grass-100 px-3 py-1 text-sm font-semibold text-grass-800">{t("decide.gain", { amount: money(view.verdict.likely_gain) })}</p>
           ) : null}
-          <p className="mt-3 text-[15px] leading-snug text-muted">
+          <p className="font-body mt-3 text-[15px] leading-snug text-muted">
             {verdict === "store"
               ? t("decide.why.store", { months: compare.horizon })
               : verdict === "sell_now"
@@ -387,7 +387,7 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
           <button type="button" className="key-light mt-3 min-h-12 w-full" onClick={onShare}>
             {t("decide.shareThis")}
           </button>
-          <p className="mt-3 text-center text-xs text-faint">
+          <p className="font-body mt-3 text-center text-xs text-faint">
             {t("decide.dataDate", { date: forecast.price_date || "" })} · {t("decide.notice")}
           </p>
         </section>

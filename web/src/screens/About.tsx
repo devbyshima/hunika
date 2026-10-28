@@ -55,14 +55,14 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
                 <span className="mr-1.5 text-faint">{index + 1}</span>
                 {t(title)}
               </span>
-              <span className="block text-[13px] text-muted">{t(note)}</span>
+              <span className="font-body block text-[13px] text-muted">{t(note)}</span>
             </span>
           </li>
         ))}
       </ol>
 
       <p className="eyebrow mt-8 px-1">{t("about.sources")}</p>
-      <ol className="card mt-2 grid gap-2 p-4 text-sm">
+      <ol className="font-body card mt-2 grid gap-2 p-4 text-sm">
         {sources.map((text, index) => (
           <li key={index} className="flex gap-2.5">
             <span className="fn mt-0.5 w-3 shrink-0 text-right">{index + 1}</span>
@@ -90,7 +90,7 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
                     <ChevronDownPic className="chevron size-3.5 text-faint" />
                   </span>
                 </summary>
-                <p className="pb-3 pl-4 text-xs leading-snug text-muted">
+                <p className="font-body pb-3 pl-4 text-xs leading-snug text-muted">
                   {item.source}
                   {item.url ? (
                     <>

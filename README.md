@@ -70,7 +70,7 @@ Kinyarwanda review: `python scripts/rw_review.py export` writes `docs/review/kin
 | `pipeline/` | Ingest, panel, model v1 and v2, decision rule, backtest, JSON export |
 | `config/` | Markets, season calendar, storage assumptions |
 | `data/processed/` | Panel, SAS extract and anomalies, rainfall extract, backtest rows and decisions |
-| `web/` | Vite, React, TypeScript, Tailwind, Recharts, Leaflet, installable PWA. The font is Inter (SIL Open Font License), self-hosted in `web/public/fonts/` with `LICENSES.md` |
+| `web/` | Vite, React, TypeScript, Tailwind, Leaflet, installable PWA. The fonts are Space Grotesk and Inter (both SIL Open Font License), self-hosted in `web/public/fonts/` with `LICENSES.md` |
 | `docs/` | Problem, methodology, data, declaration, phase 2 |
 
 ## Team

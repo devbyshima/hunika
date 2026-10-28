@@ -23,7 +23,7 @@ export default function Share({
       <div className="px-4 pt-8">
         <h1 className="display px-1 text-[30px] leading-[1.05]">{t("share.title")}</h1>
         <div className="card mt-6 p-5">
-          <p className="text-[17px] leading-snug">{t("share.empty")}</p>
+          <p className="font-body text-[17px] leading-snug">{t("share.empty")}</p>
           <button type="button" className="key-dark mt-4 min-h-12 w-full" onClick={onDecide}>
             {t("nav.decide")}
           </button>
@@ -109,8 +109,8 @@ export default function Share({
             </div>
           ) : null}
         </dl>
-        {view.verdict.verdict === "unpriced" ? <p className="mt-2 text-sm leading-snug text-muted">{t("decide.unpriced")}</p> : null}
-        <p className="mt-auto pt-4 text-xs leading-snug text-faint">{t("decide.notice")}</p>
+        {view.verdict.verdict === "unpriced" ? <p className="font-body mt-2 text-sm leading-snug text-muted">{t("decide.unpriced")}</p> : null}
+        <p className="font-body mt-auto pt-4 text-xs leading-snug text-faint">{t("decide.notice")}</p>
       </article>
       <div className="no-print mt-4 grid gap-2">
         <button type="button" className="key-grass min-h-14 w-full text-[17px]" onClick={shareCard}>
