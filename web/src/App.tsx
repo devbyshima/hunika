@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useState } from "react"
 import Decide from "./screens/Decide"
 import Share from "./screens/Share"
 import { Mark } from "./components/Mark"
-import { AboutIcon, DecideIcon, PlanIcon, ProofIcon, ShareIcon } from "./components/Icons"
+import { AboutIcon, DecideIcon, PlanIcon, ProofIcon } from "./components/Icons"
 import { translate, type Lang } from "./lib/i18n"
 import type { Bundle } from "./types"
 import type { DecideResult } from "./lib/decide"
@@ -14,6 +14,8 @@ const About = lazy(() => import("./screens/About"))
 
 export type Screen = "decide" | "share" | "plan" | "proof" | "about"
 
+export type Compare = { horizon: number; likely: number; low: number; high: number; raw: boolean }
+
 export type View = {
   district: string
   crop: "maize" | "beans"
@@ -22,11 +24,12 @@ export type View = {
   verdict: DecideResult
   horizon: number
   ownCosts?: boolean
+  cashOnly?: boolean
+  compare: Compare
 }
 
 const NAV: [Screen, (props: { className?: string }) => React.ReactNode][] = [
   ["decide", DecideIcon],
-  ["share", ShareIcon],
   ["plan", PlanIcon],
   ["proof", ProofIcon],
   ["about", AboutIcon],

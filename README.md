@@ -27,11 +27,11 @@ Post-harvest losses were 13.8% in 2023 against a government target of 5% by 2029
 ## How someone uses it
 
 1. Open the link on a phone. Kinyarwanda is the default, English is one tap away. The Kinyarwanda text is a draft awaiting team review.
-2. **Decide:** pick maize or beans, the district, the quantity, the storage the cooperative can use, and whether cash is needed now. Optionally type today's price at your market (from eSoko or the market), and under "Your costs" your own loss rate, bag cost or loan rate. A cooperative that knows its warehouse's monthly loss can price a warehouse receipt there. Read the verdict, the money line, the range and the reason. The card warns when the newest price is more than 60 days old and when a district price is a province estimate.
-3. **Share:** a square card and a short message for WhatsApp, through the phone's share sheet or a `wa.me` link, and a print view.
-4. **Plan:** a map of the seven districts coloured by the likely price change over three months. Tap a district for its price path and its latest SAS production change.
-5. **Proof:** the backtest, per season, by storage, crop and district, with every losing season and the model comparison.
-6. **About:** the method, data sources and every assumption with its source.
+2. **Decide:** tap the crop and the storage, pick the district and the amount, and tap "Get the answer". "More options" holds today's market price, your own storage costs and "We need cash now".
+3. Read the answer: the verdict, two bars comparing selling now with storing (after losses and costs, with the likely range shaded), a risk meter, dots for how often the price rose in past seasons, and the price line for the next 4 months. A short line says why. Warnings show when the newest price is over 60 days old or the district uses the province price.
+4. **Share** from the answer: a square card for WhatsApp, a `wa.me` text link, or print.
+5. **Plan:** the seven districts coloured by the likely price change in 3 months. Tap one for its price line and its harvest against the usual.
+6. **Proof:** the backtest at a glance, with the full tables under "Details". **About:** how it works in three steps, the data, and every number the app assumes.
 
 The phone runs the same decision rule as `pipeline/decide.py`. Both are tested against `tests/fixtures/decide_cases.json`.
 

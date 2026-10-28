@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from "react"
 import { GeoJSON, MapContainer, useMap } from "react-leaflet"
 import type { GeoJsonObject, FeatureCollection } from "geojson"
-import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import "leaflet/dist/leaflet.css"
-import { money, monthLabel } from "../lib/format"
+import { ChangeBar, Spark } from "../components/Charts"
+import { BeansPic, MaizePic } from "../components/Illustrations"
 import type { Bundle, SupplyEntry } from "../types"
+
+type T = (key: string, vars?: Record<string, string | number>) => string
 
 const DISTRICTS = ["Bugesera", "Gatsibo", "Kayonza", "Kirehe", "Ngoma", "Nyagatare", "Rwamagana"]
 
@@ -19,9 +21,9 @@ function changeFor(bundle: Bundle, district: string, crop: "maize" | "beans") {
 // Rises in grass green, falls in greys.
 const SCALE = [
   { key: "up10", color: "#276b1f", label: "+10%" },
-  { key: "up", color: "#6cc057", label: "0 to +10%" },
-  { key: "down", color: "#c9c9c3", label: "0 to -5%" },
-  { key: "down5", color: "#525252", label: "-5%" },
+  { key: "up", color: "#6cc057", label: "+" },
+  { key: "down", color: "#c9c9c3", label: "−" },
+  { key: "down5", color: "#525252", label: "−5%" },
 ]
 const NONE = "#ececea"
 
@@ -31,6 +33,10 @@ function fill(change: number | null) {
   if (change >= 0) return SCALE[1].color
   if (change > -0.05) return SCALE[2].color
   return SCALE[3].color
+}
+
+function percent(value: number) {
+  return `${value >= 0 ? "+" : "−"}${Math.abs(Math.round(value * 100))}%`
 }
 
 function Fit({ data }: { data: FeatureCollection }) {
@@ -68,35 +74,22 @@ function awaitBounds(data: FeatureCollection): [[number, number], [number, numbe
   ]
 }
 
-function tonnes(value: number) {
-  return Math.round(value).toLocaleString("en-US")
-}
-
-function shift(value: number | null) {
-  if (value == null) return null
-  const change = Math.exp(value) - 1
-  return `${change >= 0 ? "+" : "−"}${Math.abs(Math.round(change * 100))}%`
-}
-
-function SupplyLine({ season, entry, crop, t }: { season: string; entry: SupplyEntry | null; crop: "maize" | "beans"; t: (key: string, vars?: Record<string, string | number>) => string }) {
-  if (!entry) return <li className="text-muted">{t("plan.notEnough")}</li>
-  const amount = crop === "maize" ? entry.maize_tonnes : entry.beans_tonnes
-  const change = shift(crop === "maize" ? entry.maize_anomaly : entry.beans_anomaly)
+function Harvest({ season, entry, crop }: { season: string; entry: SupplyEntry | null; crop: "maize" | "beans" }) {
+  const anomaly = entry ? (crop === "maize" ? entry.maize_anomaly : entry.beans_anomaly) : null
+  if (!entry || anomaly == null) return null
+  const change = Math.exp(anomaly) - 1
   return (
-    <li className="num border-b border-hair py-1.5 last:border-0">
-      {t("plan.supplyLine", { season, year: entry.year, amount: tonnes(amount) })}
-      {change ? <span className={change.startsWith("+") ? "font-semibold text-grass-700" : "font-semibold text-loss"}> {t("plan.vsAverage", { change })}</span> : null}
-    </li>
+    <div className="grid grid-cols-[3.5rem_1fr_3rem] items-center gap-2 text-[13px]">
+      <span className="text-muted">
+        {season} {entry.year}
+      </span>
+      <ChangeBar value={change} />
+      <span className={`num text-right font-semibold ${change >= 0 ? "text-grass-700" : "text-muted"}`}>{percent(change)}</span>
+    </div>
   )
 }
 
-export default function Plan({
-  bundle,
-  t,
-}: {
-  bundle: Bundle
-  t: (key: string, vars?: Record<string, string | number>) => string
-}) {
+export default function Plan({ bundle, t }: { bundle: Bundle; t: T }) {
   const [crop, setCrop] = useState<"maize" | "beans">("maize")
   const [geo, setGeo] = useState<FeatureCollection | null>(null)
   const [selected, setSelected] = useState("Kayonza")
@@ -111,16 +104,6 @@ export default function Plan({
   const change = changeFor(bundle, selected, crop)
   const forecast = bundle.forecasts.districts[selected]?.[crop]
   const supply = bundle.supply.districts[selected]
-  const path = forecast?.status === "ok" && forecast.price_now != null
-    ? [
-        { name: t("decide.now"), p50: forecast.price_now, band: [forecast.price_now, forecast.price_now] as [number, number] },
-        ...Object.entries(forecast.horizons ?? {}).map(([key, item]) => ({
-          name: t("decide.plusMonths", { months: key }),
-          p50: Math.round(item.p50),
-          band: [Math.round(item.p10), Math.round(item.p90)] as [number, number],
-        })),
-      ]
-    : []
   const style = useMemo(
     () => (feature?: { properties?: { shapeName?: string } }) => {
       const name = feature?.properties?.shapeName || ""
@@ -136,18 +119,17 @@ export default function Plan({
   )
 
   return (
-    <div className="px-4 pt-8">
-      <h1 className="display px-1 text-[34px] leading-[1.02] tracking-[-0.02em]">
-        {t("plan.title")}
-        <span className="mt-1.5 block text-[24px] leading-[1.08] text-ghost">{t("plan.lead")}</span>
-      </h1>
-      <div className="mt-5 grid grid-cols-2 gap-2">
-        {(["maize", "beans"] as const).map((item) => (
-          <button key={item} type="button" aria-pressed={crop === item} className="chip w-full" onClick={() => setCrop(item)}>
-            {t(`decide.${item}`)}
+    <div className="px-4 pt-7">
+      <h1 className="display px-1 text-[30px] leading-[1.05]">{t("plan.title")}</h1>
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        {([["maize", MaizePic], ["beans", BeansPic]] as const).map(([id, Pic]) => (
+          <button key={id} type="button" aria-pressed={crop === id} className="chip w-full" onClick={() => setCrop(id)}>
+            <Pic className="size-5" />
+            {t(`decide.${id}`)}
           </button>
         ))}
       </div>
+
       <div className="card mt-3 overflow-hidden p-1.5">
         {geo ? (
           <MapContainer
@@ -156,7 +138,7 @@ export default function Plan({
             scrollWheelZoom={false}
             attributionControl={false}
             zoomControl={false}
-            style={{ height: 300, width: "100%", borderRadius: 12, background: "#f1f8ec" }}
+            style={{ height: 280, width: "100%", borderRadius: 12, background: "#f1f8ec" }}
           >
             <Fit data={geo} />
             <GeoJSON
@@ -170,23 +152,23 @@ export default function Plan({
             />
           </MapContainer>
         ) : (
-          <p className="p-4">{t("plan.notEnough")}</p>
+          <p className="p-4 text-muted">{t("plan.notEnough")}</p>
         )}
-      </div>
-      <div className="mt-2.5 flex flex-wrap gap-x-3 gap-y-1.5 px-1 text-xs text-muted">
-        {SCALE.map((item) => (
-          <span key={item.key} className="inline-flex items-center gap-1.5">
-            <i className="inline-block size-2.5 rounded-[2px]" style={{ background: item.color }} />
-            {item.label}
+        <div className="flex items-center justify-between px-2.5 pt-2 pb-1 text-[11px] text-faint">
+          <span>{t("plan.legend")}</span>
+          <span className="flex items-center gap-1">
+            {[...SCALE].reverse().map((item) => (
+              <span key={item.key} className="flex flex-col items-center gap-0.5">
+                <i className="block h-2 w-7 rounded-sm" style={{ background: item.color }} />
+                {item.label}
+              </span>
+            ))}
           </span>
-        ))}
-        <span className="inline-flex items-center gap-1.5">
-          <i className="inline-block size-2.5 rounded-[2px] border border-line" style={{ background: NONE }} />
-          {t("plan.notEnough")}
-        </span>
+        </div>
       </div>
 
-      <div className="no-scrollbar -mx-4 mt-4 flex gap-2 overflow-x-auto px-4 pb-1">
+      <p className="mt-4 px-1 text-[13px] text-muted">{t("plan.tap")}</p>
+      <div className="no-scrollbar -mx-4 mt-2 flex gap-2 overflow-x-auto px-4 pb-1">
         {DISTRICTS.map((name) => (
           <button key={name} type="button" aria-pressed={selected === name} className="chip shrink-0" onClick={() => setSelected(name)}>
             {name}
@@ -195,40 +177,37 @@ export default function Plan({
       </div>
 
       <section key={`${selected}-${crop}`} className="card rise-in mt-3 p-5">
-        <p className="eyebrow">{t(`decide.${crop}`)} · {selected}</p>
-        {change == null ? (
-          <p className="mt-2 text-muted">{t("plan.notEnough")}</p>
-        ) : (
-          <p className={`display mt-2 text-[44px] leading-none ${change >= 0 ? "text-grass-700" : "text-ink"}`}>{`${change >= 0 ? "+" : "−"}${Math.abs(Math.round(change * 100))}%`}</p>
-        )}
-        {forecast?.price_pooled ? <p className="mt-2 text-xs text-faint">{t("plan.province")}</p> : null}
-        {path.length ? (
+        <div className="flex items-baseline justify-between gap-3">
+          <p className="text-[17px] font-semibold">{selected}</p>
+          {change == null ? (
+            <p className="text-muted">{t("plan.notEnough")}</p>
+          ) : (
+            <p className={`display num text-[34px] leading-none ${change >= 0 ? "text-grass-700" : "text-ink"}`}>{percent(change)}</p>
+          )}
+        </div>
+        <p className="mt-1 text-right text-[11px] text-faint">{t("plan.lead")}</p>
+
+        {forecast?.status === "ok" && forecast.price_now != null ? (
+          <div className="mt-2">
+            <Spark
+              mark={3}
+              points={[
+                { label: t("decide.now"), p10: forecast.price_now, p50: forecast.price_now, p90: forecast.price_now },
+                ...Object.entries(forecast.horizons ?? {}).map(([key, item]) => ({ label: t("decide.plusMonths", { months: key }), p10: item.p10, p50: item.p50, p90: item.p90 })),
+              ]}
+            />
+          </div>
+        ) : null}
+
+        {supply && (supply.A || supply.B) ? (
           <>
-            <p className="eyebrow mt-5">{t("plan.path")}</p>
-            <div className="mt-2 h-40 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <ComposedChart data={path} margin={{ left: 0, right: 8, top: 6, bottom: 0 }}>
-                  <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#737373" }} axisLine={{ stroke: "rgba(23,23,23,0.13)" }} tickLine={false} />
-                  <YAxis width={40} tick={{ fontSize: 10, fill: "#737373" }} axisLine={false} tickLine={false} domain={["auto", "auto"]} />
-                  <Tooltip formatter={(value) => (Array.isArray(value) ? `${money(Number(value[0]))} to ${money(Number(value[1]))}` : money(Number(value)))} />
-                  <Area dataKey="band" stroke="none" fill="#bfe3ae" fillOpacity={0.7} isAnimationActive={false} />
-                  <Line dataKey="p50" stroke="#276b1f" strokeWidth={2.5} dot={{ r: 3, fill: "#276b1f" }} isAnimationActive={false} />
-                </ComposedChart>
-              </ResponsiveContainer>
+            <p className="eyebrow mt-5">{t("plan.supply")}</p>
+            <div className="mt-2 grid gap-2">
+              <Harvest season="A" entry={supply.A} crop={crop} />
+              <Harvest season="B" entry={supply.B} crop={crop} />
             </div>
-            <p className="text-xs leading-snug text-faint">{t("plan.pathNote", { month: monthLabel(forecast?.price_month ?? "") })}</p>
           </>
         ) : null}
-        <p className="eyebrow mt-5">{t("plan.supply")}</p>
-        {supply ? (
-          <ul className="mt-1 text-sm">
-            <SupplyLine season="A" entry={supply.A} crop={crop} t={t} />
-            <SupplyLine season="B" entry={supply.B} crop={crop} t={t} />
-          </ul>
-        ) : (
-          <p className="mt-1 text-sm text-muted">{t("plan.notEnough")}</p>
-        )}
-        <p className="mt-3 text-xs leading-snug text-faint">{t("plan.anomaly")}</p>
       </section>
     </div>
   )

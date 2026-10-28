@@ -1,16 +1,24 @@
 import { useEffect, useRef, useState } from "react"
-import { decide, type DecideInput } from "../lib/decide"
+import { decide, storageValue, type DecideInput } from "../lib/decide"
 import { money, monthLabel, quantityLabel } from "../lib/format"
 import { readCosts, withPrice, type CostOverrides } from "../lib/outlook"
 import type { Assumption, Bundle, CropForecast } from "../types"
-import type { View } from "../App"
+import type { Compare, View } from "../App"
 import { Dot } from "../components/Icons"
+import { BeansPic, MaizePic, SackPic, SealedSackPic, WarehousePic } from "../components/Illustrations"
+import { PastDots, RiskMeter, Spark, ValueBars } from "../components/Charts"
+
+type T = (key: string, vars?: Record<string, string | number>) => string
 
 const DISTRICTS = ["Bugesera", "Gatsibo", "Kayonza", "Kirehe", "Ngoma", "Nyagatare", "Rwamagana"]
+const CROPS = [
+  ["maize", MaizePic],
+  ["beans", BeansPic],
+] as const
 const OPTIONS = [
-  ["home_bags", "decide.home"],
-  ["hermetic_bags", "decide.hermetic"],
-  ["warehouse", "decide.warehouse"],
+  ["home_bags", "decide.home", SackPic],
+  ["hermetic_bags", "decide.hermetic", SealedSackPic],
+  ["warehouse", "decide.warehouse", WarehousePic],
 ] as const
 
 function defaultFor(items: Assumption[], storageId: string, field: string) {
@@ -45,20 +53,30 @@ function inputFor(items: Assumption[], forecast: CropForecast, quantityKg: numbe
   }
 }
 
-function percentPlaceholder(value: number | null, t: (key: string, vars?: Record<string, string | number>) => string) {
-  if (value == null) return t("decide.costUnknown")
-  return t("decide.costDefault", { value: `${(value * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%` })
+/** What storing would bring at its best horizon, after costs when the option is priced. */
+function compareFor(input: DecideInput, forecast: CropForecast): Compare {
+  const option = input.options[0]
+  const priced = option && option.loss_monthly != null && option.fee != null && option.cost_per_kg != null && option.borrow_share != null && !(option.borrow_share > 0 && option.interest_annual == null)
+  let best: Compare | null = null
+  for (const [key, item] of Object.entries(forecast.horizons ?? {})) {
+    const horizon = Number(key)
+    const value = (price: number) =>
+      priced
+        ? storageValue(input.quantity_kg, price, horizon, option.loss_monthly as number, option.fee as number, option.cost_per_kg as number, option.interest_annual ?? 0, option.borrow_share as number, input.price_now)
+        : input.quantity_kg * price
+    const likely = value(item.p50)
+    const low = value(item.p10)
+    const high = value(item.p90)
+    if (likely == null || low == null || high == null) continue
+    if (!best || likely > best.likely) best = { horizon, likely, low, high, raw: !priced }
+  }
+  return best ?? { horizon: 0, likely: input.quantity_kg * input.price_now, low: input.quantity_kg * input.price_now, high: input.quantity_kg * input.price_now, raw: true }
 }
 
-function numberPlaceholder(value: number | null, t: (key: string, vars?: Record<string, string | number>) => string) {
+function placeholder(value: number | null, t: T, percent: boolean) {
   if (value == null) return t("decide.costUnknown")
-  return t("decide.costDefault", { value: `${value.toLocaleString("en-US", { maximumFractionDigits: 1 })} RWF` })
-}
-
-function bestHorizon(forecast: CropForecast) {
-  const entries = Object.entries(forecast.horizons ?? {})
-  if (!entries.length) return 0
-  return Number(entries.reduce((best, item) => (item[1].p50 > best[1].p50 ? item : best))[0])
+  const text = percent ? `${(value * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%` : `${value.toLocaleString("en-US", { maximumFractionDigits: 1 })} RWF`
+  return t("decide.costDefault", { value: text })
 }
 
 function Pill({ tone, children }: { tone: "good" | "warn" | "neutral"; children: React.ReactNode }) {
@@ -71,17 +89,7 @@ function Pill({ tone, children }: { tone: "good" | "warn" | "neutral"; children:
   )
 }
 
-export default function Decide({
-  bundle,
-  t,
-  onView,
-  onShare,
-}: {
-  bundle: Bundle
-  t: (key: string, vars?: Record<string, string | number>) => string
-  onView: (view: View) => void
-  onShare: () => void
-}) {
+export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle; t: T; onView: (view: View) => void; onShare: () => void }) {
   const [crop, setCrop] = useState<"maize" | "beans">("maize")
   const [district, setDistrict] = useState("Kayonza")
   const [amount, setAmount] = useState("5")
@@ -112,8 +120,13 @@ export default function Decide({
     const forecast = ownPrice && dataForecast.status === "ok" ? { ...withPrice(dataForecast, typedPrice), own_price: true } : dataForecast
     const quantityKg = unit === "t" ? quantity * 1000 : quantity
     const costs = readCosts(loss, cost, interest)
-    const verdict = decide(inputFor(bundle.assumptions.items, forecast, quantityKg, cash, storage, costs))
-    const next = { district, crop, quantityKg, forecast, verdict, horizon: bestHorizon(forecast), ownCosts: Object.keys(costs).length > 0 }
+    const input = inputFor(bundle.assumptions.items, forecast, quantityKg, cash, storage, costs)
+    const verdict = decide(input)
+    const compare: Compare =
+      verdict.verdict === "store"
+        ? { horizon: verdict.horizon_months, likely: verdict.likely_value, low: verdict.low_value, high: verdict.high_value, raw: false }
+        : compareFor(input, forecast)
+    const next = { district, crop, quantityKg, forecast, verdict, horizon: compare.horizon, compare, ownCosts: Object.keys(costs).length > 0, cashOnly: cash && storage !== "warehouse" }
     setView(next)
     onView(next)
     setRound((value) => value + 1)
@@ -127,184 +140,190 @@ export default function Decide({
   }
 
   const forecast = view?.forecast
-  const horizon = forecast?.horizons?.[String(view?.horizon)]
-  const total = (price: number) => (view ? price * view.quantityKg : 0)
+  const compare = view?.compare
+  const horizon = forecast?.horizons?.[String(compare?.horizon)]
   const verdict = view?.verdict.verdict
-  const band = view?.verdict.loss_band
+  const gate = (field: string) => Number(bundle.assumptions.items.find((item) => item.field === field && item.option == null)?.value ?? 0)
+  const tooRisky = !!view && !!compare && compare.likely - view.verdict.v0 >= gate("g_min") * view.verdict.v0 && compare.low - view.verdict.v0 < -gate("d_max") * view.verdict.v0
+  const risk: 0 | 1 | 2 = !view || !compare ? 0 : compare.likely < view.verdict.v0 ? 2 : compare.low < view.verdict.v0 ? 1 : 0
 
   return (
-    <div className="px-4 pt-8">
-      <h1 className="display px-1 text-[34px] leading-[1.02] tracking-[-0.02em] text-ink">
-        {t("decide.heroA")}
-        <span className="mt-1.5 block text-[24px] leading-[1.08] text-ghost">{t("decide.heroB")}</span>
-      </h1>
+    <div className="px-4 pt-7">
+      <h1 className="display px-1 text-[30px] leading-[1.05]">{t("decide.heroA")}</h1>
+      <p className="mt-2 px-1 text-[15px] leading-snug text-muted">{t("decide.intro")}</p>
 
-      <section className="panel mt-6 p-3">
+      <section className="panel mt-5 p-3">
+        <p className="label mb-1.5 px-1">{t("decide.cropLabel")}</p>
         <div className="grid grid-cols-2 gap-2">
-          {(["maize", "beans"] as const).map((item) => (
-            <button key={item} type="button" aria-pressed={crop === item} className="chip w-full" onClick={() => setCrop(item)}>
-              {t(`decide.${item}`)}
+          {CROPS.map(([id, Pic]) => (
+            <button key={id} type="button" aria-pressed={crop === id} className="tile" onClick={() => setCrop(id)}>
+              <Pic className="size-8" />
+              <span>{t(`decide.${id}`)}</span>
             </button>
           ))}
         </div>
 
-        <label className="mt-3 block">
-          <span className="label">{t("decide.district")}</span>
-          <select className="field mt-1" value={district} onChange={(event) => setDistrict(event.target.value)}>
+        <div className="mt-3 grid grid-cols-[1.4fr_1fr] gap-x-2 gap-y-1.5">
+          <p className="label px-1">{t("decide.district")}</p>
+          <p className="label px-1">{t("decide.quantity")}</p>
+          <select aria-label={t("decide.district")} className="field" value={district} onChange={(event) => setDistrict(event.target.value)}>
             {DISTRICTS.map((name) => (
               <option key={name}>{name}</option>
             ))}
           </select>
-        </label>
-
-        <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-2">
-          <label className="block">
-            <span className="label">{t("decide.quantity")}</span>
-            <input className="field num mt-1" inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} />
-          </label>
-          <div className="flex gap-1 rounded-full border border-line bg-white p-1">
-            {(["t", "kg"] as const).map((item) => (
-              <button
-                key={item}
-                type="button"
-                aria-pressed={unit === item}
-                className={`min-h-10 rounded-full px-3 text-sm font-semibold ${unit === item ? "bg-ink text-white" : "text-muted"}`}
-                onClick={() => setUnit(item)}
-              >
-                {t(item === "t" ? "decide.tonnes" : "decide.kg")}
-              </button>
-            ))}
+          <div className="field flex items-center gap-1 !px-1.5">
+            <input aria-label={t("decide.quantity")} className="num w-full min-w-0 bg-transparent px-1.5 outline-none" inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} />
+            <button type="button" className="shrink-0 rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-white" onClick={() => setUnit(unit === "t" ? "kg" : "t")}>
+              {t(unit === "t" ? "decide.tonnes" : "decide.kg")}
+            </button>
           </div>
         </div>
 
-        <label className="mt-3 block">
-          <span className="label">{t("decide.todayPrice")}</span>
-          <input
-            className="field num mt-1"
-            inputMode="decimal"
-            value={typed}
-            placeholder={dataForecast?.price_now != null ? t("decide.todayPricePlaceholder", { price: money(dataForecast.price_now), month: monthLabel(dataForecast.price_month || "") }) : ""}
-            onChange={(event) => setTyped(event.target.value)}
-          />
-        </label>
-
-        <p className="label mt-4">{t("decide.storage")}</p>
-        <div className="mt-1.5 flex flex-wrap gap-2">
-          {OPTIONS.map(([id, key]) => (
-            <button key={id} type="button" aria-pressed={storage === id} className="chip" onClick={() => pickStorage(id)}>
-              {t(key)}
+        <p className="label mt-3 mb-1.5 px-1">{t("decide.storage")}</p>
+        <div className="grid grid-cols-3 gap-2">
+          {OPTIONS.map(([id, key, Pic]) => (
+            <button key={id} type="button" aria-pressed={storage === id} className="tile !min-h-[84px] !text-[13px]" onClick={() => pickStorage(id)}>
+              <Pic className="size-7" />
+              <span className="leading-tight">{t(key)}</span>
             </button>
           ))}
         </div>
 
         <details className="mt-3 rounded-[14px] border border-line bg-white/80 px-3.5">
-          <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold text-ink">{t("decide.yourCosts")}</summary>
-          <div className="grid gap-2 pt-2 pb-3.5">
-            <label className="block text-sm text-muted">
-              {t("decide.costLoss")}
-              <input className="field num mt-1 !min-h-11" inputMode="decimal" value={loss} onChange={(event) => setLoss(event.target.value)} placeholder={percentPlaceholder(defaultFor(bundle.assumptions.items, storage, "loss_monthly"), t)} />
+          <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("decide.more")}</summary>
+          <div className="grid gap-2.5 pb-3.5">
+            <label className="block text-[13px] text-muted">
+              {t("decide.todayPrice")}
+              <input
+                className="field num mt-1 !min-h-11"
+                inputMode="decimal"
+                value={typed}
+                placeholder={dataForecast?.price_now != null ? `${money(dataForecast.price_now)} · ${monthLabel(dataForecast.price_month || "")}` : ""}
+                onChange={(event) => setTyped(event.target.value)}
+              />
             </label>
-            <label className="block text-sm text-muted">
+            <label className="block text-[13px] text-muted">
+              {t("decide.costLoss")}
+              <input className="field num mt-1 !min-h-11" inputMode="decimal" value={loss} onChange={(event) => setLoss(event.target.value)} placeholder={placeholder(defaultFor(bundle.assumptions.items, storage, "loss_monthly"), t, true)} />
+            </label>
+            <label className="block text-[13px] text-muted">
               {t("decide.costBags")}
-              <input className="field num mt-1 !min-h-11" inputMode="decimal" value={cost} onChange={(event) => setCost(event.target.value)} placeholder={numberPlaceholder(defaultFor(bundle.assumptions.items, storage, "cost_per_kg"), t)} />
+              <input className="field num mt-1 !min-h-11" inputMode="decimal" value={cost} onChange={(event) => setCost(event.target.value)} placeholder={placeholder(defaultFor(bundle.assumptions.items, storage, "cost_per_kg"), t, false)} />
             </label>
             {storage === "warehouse" ? (
-              <label className="block text-sm text-muted">
+              <label className="block text-[13px] text-muted">
                 {t("decide.costInterest")}
-                <input className="field num mt-1 !min-h-11" inputMode="decimal" value={interest} onChange={(event) => setInterest(event.target.value)} placeholder={percentPlaceholder(defaultFor(bundle.assumptions.items, storage, "interest_annual"), t)} />
+                <input className="field num mt-1 !min-h-11" inputMode="decimal" value={interest} onChange={(event) => setInterest(event.target.value)} placeholder={placeholder(defaultFor(bundle.assumptions.items, storage, "interest_annual"), t, true)} />
               </label>
             ) : null}
+            <label className="flex min-h-11 cursor-pointer items-center justify-between gap-3 text-sm font-medium">
+              {t("decide.cash")}
+              <input type="checkbox" className="peer sr-only" checked={cash} onChange={(event) => setCash(event.target.checked)} />
+              <span aria-hidden className="relative h-7 w-12 shrink-0 rounded-full bg-[#d4d4d4] transition-colors peer-checked:bg-grass-700 peer-focus-visible:outline-2 peer-focus-visible:outline-grass-500 after:absolute after:top-1 after:left-1 after:size-5 after:rounded-full after:bg-white after:shadow after:transition-transform peer-checked:after:translate-x-5" />
+            </label>
           </div>
         </details>
 
-        <label className="mt-3 flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-[14px] border border-line bg-white/80 px-3.5 text-sm font-semibold">
-          {t("decide.cash")}
-          <input type="checkbox" className="peer sr-only" checked={cash} onChange={(event) => setCash(event.target.checked)} />
-          <span aria-hidden className="relative h-7 w-12 shrink-0 rounded-full bg-[#d4d4d4] transition-colors peer-checked:bg-grass-700 peer-focus-visible:outline-2 peer-focus-visible:outline-grass-500 after:absolute after:top-1 after:left-1 after:size-5 after:rounded-full after:bg-white after:shadow after:transition-transform peer-checked:after:translate-x-5" />
-        </label>
-
-        <button type="button" className="key-dark mt-4 min-h-14 w-full text-[17px]" onClick={submit}>
+        <button type="button" className="key-dark mt-3 min-h-14 w-full text-[17px]" onClick={submit}>
           {t("decide.show")}
         </button>
       </section>
 
       {view && forecast?.status !== "ok" ? <p className="card rise-in mt-5 p-5 text-lg">{t("decide.notEnough")}</p> : null}
 
-      {view && forecast?.status === "ok" && horizon && forecast.price_now != null ? (
+      {view && compare && forecast?.status === "ok" && forecast.price_now != null ? (
         <section key={round} ref={result} className="card rise-in mt-5 scroll-mt-4 p-5 shadow-[0_8px_8px_-4px_rgba(0,0,0,0.06),0_4px_6px_-4px_rgba(0,0,0,0.1)]">
           <p className="eyebrow">
             {t(`decide.${view.crop}`)} · {view.district} · {quantityLabel(view.quantityKg)}
           </p>
-          <h2 className={`display mt-3 text-[44px] leading-[0.98] tracking-[-0.02em] ${verdict === "store" ? "text-grass-700" : verdict === "sell_now" ? "text-ink" : "text-ghost"}`}>
+          <h2 className={`display mt-2 text-[40px] leading-[1.02] ${verdict === "store" ? "text-grass-700" : verdict === "sell_now" ? "text-ink" : "text-ghost"}`}>
             {verdict === "store" ? t("decide.store", { months: view.verdict.horizon_months }) : verdict === "sell_now" ? t("decide.sellNow") : t("decide.noVerdict")}
           </h2>
-
-          <dl className="num mt-5 grid gap-2 text-[15px]">
-            <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-muted">{t("decide.rowSell")}</dt>
-              <dd className="font-semibold">{money(view.verdict.v0)} RWF</dd>
-            </div>
-            <div className="flex items-baseline justify-between gap-3">
-              <dt className="text-muted">{verdict === "store" ? t("decide.rowStore") : t("decide.rowStoreRaw")}</dt>
-              <dd className="text-right font-semibold">
-                {money(verdict === "store" ? view.verdict.likely_value : total(horizon.p50))} RWF
-                <span className="block text-xs font-normal text-faint">
-                  {money(verdict === "store" ? view.verdict.low_value : total(horizon.p10))} to {money(verdict === "store" ? view.verdict.high_value : total(horizon.p90))}
-                </span>
-              </dd>
-            </div>
-          </dl>
-          {verdict === "unpriced" ? <p className="mt-3 text-sm leading-snug text-muted">{t("decide.unpriced")}</p> : null}
-
-          {verdict === "store" || band ? (
-            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-              {verdict === "store" ? (
-                <span className="num rounded-full bg-grass-100 px-3 py-1 font-semibold text-grass-800">{t("decide.gain", { amount: money(view.verdict.likely_gain) })}</span>
-              ) : null}
-              {band ? (
-                <span className="inline-flex items-center gap-1.5 text-muted">
-                  <Dot tone={band === "under_10" ? "good" : band === "over_50" ? "bad" : "warn"} />
-                  {t(`decide.loss.${band === "between_10_and_50" ? "mid" : band === "over_50" ? "over50" : "under10"}`)}
-                </span>
-              ) : null}
-            </div>
+          {verdict === "store" ? (
+            <p className="num mt-3 inline-flex rounded-full bg-grass-100 px-3 py-1 text-sm font-semibold text-grass-800">{t("decide.gain", { amount: money(view.verdict.likely_gain) })}</p>
           ) : null}
-          <p className="mt-3 text-[13px] text-faint">{t("decide.reason", { up: horizon.n_up, n: horizon.n, months: view.horizon })}</p>
+          <p className="mt-3 text-[15px] leading-snug text-muted">
+            {verdict === "store"
+              ? t("decide.why.store", { months: compare.horizon })
+              : verdict === "sell_now"
+                ? t(view.cashOnly ? "decide.why.cash" : tooRisky ? "decide.why.risk" : "decide.why.small")
+                : t("decide.unpriced")}
+          </p>
 
-          <div className="mt-4 flex flex-wrap gap-1.5 text-xs">
+          <div className="mt-5">
+            <ValueBars
+              sellLabel={t("decide.rowSell")}
+              storeLabel={t(compare.raw ? "decide.rowStoreRaw" : "decide.rowStore", { months: compare.horizon })}
+              now={view.verdict.v0}
+              likely={compare.likely}
+              low={compare.low}
+              high={compare.high}
+              better={verdict === "store" ? "store" : "sell"}
+            />
+          </div>
+
+          <div className="mt-5 grid grid-cols-2 gap-2">
+            <div className="rounded-[12px] bg-paper/70 p-3">
+              <RiskMeter level={risk} />
+              <p className="mt-2 text-[13px] font-semibold">{t(`decide.risk.${risk}`)}</p>
+              <p className="text-[11px] text-faint">{t("decide.riskLabel")}</p>
+            </div>
+            {horizon ? (
+              <div className="rounded-[12px] bg-paper/70 p-3">
+                <PastDots up={horizon.n_up} n={horizon.n} />
+                <p className="num mt-2 text-[13px] font-semibold">
+                  {horizon.n_up} / {horizon.n}
+                </p>
+                <p className="text-[11px] text-faint">{t("decide.pastUp", { months: compare.horizon })}</p>
+              </div>
+            ) : null}
+          </div>
+
+          <div className="mt-6 flex items-baseline justify-between gap-3">
+            <p className="eyebrow">{t("decide.outlook")}</p>
+            <p className="flex items-center gap-2 text-[11px] text-faint">
+              <span className="inline-flex items-center gap-1">
+                <i className="inline-block h-0.5 w-3 rounded bg-grass-700" />
+                {t("decide.legendLikely")}
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <i className="inline-block h-2 w-3 rounded-sm bg-grass-100" />
+                {t("decide.legendRange")}
+              </span>
+            </p>
+          </div>
+          <div className="mt-1">
+            <Spark
+              mark={compare.horizon}
+              points={[
+                { label: t("decide.now"), p10: forecast.price_now, p50: forecast.price_now, p90: forecast.price_now },
+                ...Object.entries(forecast.horizons ?? {}).map(([key, item]) => ({ label: t("decide.plusMonths", { months: key }), p10: item.p10, p50: item.p50, p90: item.p90 })),
+              ]}
+            />
+          </div>
+
+          <div className="mt-3 flex flex-wrap gap-1.5 text-xs">
             {forecast.own_price ? <Pill tone="good">{t("decide.ownPrice")}</Pill> : null}
             {view.ownCosts ? <Pill tone="good">{t("decide.ownCosts")}</Pill> : null}
             {!forecast.own_price && forecast.stale ? <Pill tone="warn">{t("decide.stale", { days: forecast.stale_days ?? "" })}</Pill> : null}
             {!forecast.own_price && forecast.price_pooled ? <Pill tone="neutral">{t("decide.provincePrice")}</Pill> : null}
-            {forecast.pattern_last_year && forecast.pattern_last_year < "2022" ? <Pill tone="neutral">{t("decide.oldPattern", { year: forecast.pattern_last_year })}</Pill> : null}
           </div>
 
-          <p className="eyebrow mt-6">{t("decide.outlook")}</p>
-          <div className="mt-2 grid grid-cols-4 gap-1.5">
-            {Object.entries(forecast.horizons ?? {}).map(([key, item]) => {
-              const up = item.p50 >= (forecast.price_now ?? 0)
-              return (
-                <div key={key} className={`rounded-[12px] border px-1 py-2.5 text-center ${String(view.verdict.horizon_months) === key && verdict === "store" ? "border-grass-700 bg-grass-50" : "border-hair bg-paper/60"}`}>
-                  <div className="text-xs font-medium text-faint">{t("decide.plusMonths", { months: key })}</div>
-                  <div className={`num mt-1.5 text-[15px] font-semibold ${up ? "text-grass-700" : "text-ink"}`}>{money(item.p50)}</div>
-                </div>
-              )
-            })}
-          </div>
+          <details className="mt-4 border-t border-hair">
+            <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("decide.markets")}</summary>
+            <ul className="num grid gap-1 pb-2 text-[13px]">
+              {(forecast.nearest_markets ?? []).map((market) => (
+                <li key={market.name} className="flex justify-between gap-3">
+                  <span>{market.name}</span>
+                  <span className="text-muted">
+                    {money(market.price)} RWF/kg · {monthLabel(market.month)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </details>
 
-          <p className="eyebrow mt-6">{t("decide.markets")}</p>
-          <ul className="num mt-2 grid gap-1 text-[13px]">
-            {(forecast.nearest_markets ?? []).map((market) => (
-              <li key={market.name} className="flex justify-between gap-3">
-                <span>{market.name}</span>
-                <span className="text-muted">
-                  {money(market.price)} · {monthLabel(market.month)}
-                </span>
-              </li>
-            ))}
-          </ul>
-
-          <button type="button" className="key-light mt-6 min-h-12 w-full" onClick={onShare}>
+          <button type="button" className="key-light mt-3 min-h-12 w-full" onClick={onShare}>
             {t("decide.shareThis")}
           </button>
           <p className="mt-3 text-center text-xs text-faint">

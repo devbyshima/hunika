@@ -1,4 +1,5 @@
 import { Mark } from "../components/Mark"
+import { BackPic } from "../components/Illustrations"
 import { money, quantityLabel } from "../lib/format"
 import type { View } from "../App"
 
@@ -20,7 +21,7 @@ export default function Share({
   if (!view || view.forecast.status !== "ok") {
     return (
       <div className="px-4 pt-8">
-        <h1 className="display px-1 text-[34px] leading-[1.02] tracking-[-0.02em]">{t("share.title")}</h1>
+        <h1 className="display px-1 text-[30px] leading-[1.05]">{t("share.title")}</h1>
         <div className="card mt-6 p-5">
           <p className="text-[17px] leading-snug">{t("share.empty")}</p>
           <button type="button" className="key-dark mt-4 min-h-12 w-full" onClick={onDecide}>
@@ -73,8 +74,12 @@ export default function Share({
   const store = view.verdict.verdict === "store"
 
   return (
-    <div className="px-4 pt-8">
-      <h1 className="display px-1 text-[34px] leading-[1.02] tracking-[-0.02em]">{t("share.title")}</h1>
+    <div className="px-4 pt-6">
+      <button type="button" className="-ml-1 inline-flex min-h-11 items-center gap-1 pr-3 text-sm font-semibold text-muted" onClick={onDecide}>
+        <BackPic className="size-5" />
+        {t("nav.decide")}
+      </button>
+      <h1 className="display mt-1 px-1 text-[30px] leading-[1.05]">{t("share.title")}</h1>
       <article
         id="share-card"
         className="relative mt-6 flex aspect-square flex-col overflow-hidden rounded-[22px] border border-line bg-white p-6"

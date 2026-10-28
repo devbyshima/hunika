@@ -10,7 +10,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.svg"],
+      includeAssets: ["favicon.svg", "apple-touch-icon.png"],
       manifest: {
         name: "Hunika",
         short_name: "Hunika",
@@ -18,7 +18,12 @@ export default defineConfig({
         theme_color: "#1f5418",
         background_color: "#fbfbf8",
         display: "standalone",
-        icons: [{ src: "favicon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" }],
+        icons: [
+          { src: "icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+          { src: "icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+          { src: "icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+          { src: "favicon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
+        ],
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,json,geojson,webmanifest,woff2}"],

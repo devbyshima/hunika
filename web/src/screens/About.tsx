@@ -1,4 +1,5 @@
 import { Dot } from "../components/Icons"
+import { AnswerPic, CostsPic, PricesPic } from "../components/Illustrations"
 import type { Assumption, Bundle } from "../types"
 
 type T = (key: string, vars?: Record<string, string | number>) => string
@@ -29,76 +30,79 @@ function valueText(item: Assumption, t: T) {
   }
 }
 
+const STEPS = [
+  ["about.step1", "about.step1Note", PricesPic],
+  ["about.step2", "about.step2Note", CostsPic],
+  ["about.step3", "about.step3Note", AnswerPic],
+] as const
+
 export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
   const ahs = bundle.supply.ahs
-  const sources = [
-    t("about.wfp"),
-    t("about.cpi"),
-    t("about.sas"),
-    t("about.rain"),
-    ahs
-      ? t("about.ahsUsed", {
-          households: Math.round(ahs.weighted_households / 1000).toLocaleString("en-US"),
-          n: ahs.sample_households,
-          maize: ahs.median_harvest_kg.maize?.A ?? "",
-          beans: ahs.median_harvest_kg.beans?.A ?? "",
-          coop: pct(ahs.cooperative_member),
-          storage: pct(ahs.cooperative_storage),
-          markets: pct(ahs.cooperative_markets),
-          loan: pct(ahs.loan_requested),
-        })
-      : t("about.ahs"),
-  ]
+  const sources = [t("about.wfp"), t("about.cpi"), t("about.sas"), t("about.rain"), ahs ? t("about.ahsUsed", { storage: pct(ahs.cooperative_storage) }) : t("about.ahs")]
 
   return (
-    <div className="px-4 pt-8 pb-6">
-      <h1 className="display px-1 text-[34px] leading-[1.02] tracking-[-0.02em]">{t("about.title")}</h1>
-      <p className="mt-3 px-1 text-[15px] leading-snug text-muted">{t("about.lead")}</p>
+    <div className="px-4 pt-7 pb-6">
+      <h1 className="display px-1 text-[30px] leading-[1.05]">{t("about.title")}</h1>
 
-      <h2 className="eyebrow mt-8 px-1">{t("about.sources")}</h2>
+      <ol className="mt-5 grid gap-2">
+        {STEPS.map(([title, note, Pic], index) => (
+          <li key={title} className="card flex items-center gap-4 p-4">
+            <span className="grid size-12 shrink-0 place-items-center rounded-[14px] bg-grass-50 text-grass-700">
+              <Pic className="size-6" />
+            </span>
+            <span>
+              <span className="block text-[15px] font-semibold">
+                <span className="mr-1.5 text-faint">{index + 1}</span>
+                {t(title)}
+              </span>
+              <span className="block text-[13px] text-muted">{t(note)}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+
+      <p className="eyebrow mt-8 px-1">{t("about.sources")}</p>
       <ol className="card mt-2 grid gap-2 p-4 text-sm">
         {sources.map((text, index) => (
           <li key={index} className="flex gap-2.5">
-            <span className="fn mt-0.5 w-4 shrink-0 text-right">{index + 1}</span>
+            <span className="fn mt-0.5 w-3 shrink-0 text-right">{index + 1}</span>
             <span>{text}</span>
           </li>
         ))}
       </ol>
 
-      <h2 className="eyebrow mt-8 px-1">{t("about.assumptions")}</h2>
-      <ul className="card mt-2 px-4">
-        {bundle.assumptions.items.map((item) => (
-          <li key={item.id} className="border-b border-hair last:border-0">
-            <details>
-              <summary className="flex min-h-12 cursor-pointer items-center justify-between gap-3 py-2 text-sm">
-                <span className="flex items-center gap-2">
-                  <Dot tone={item.value == null ? "neutral" : item.status === "sourced" ? "good" : "warn"} />
-                  {item.label}
-                </span>
-                <span className={`num shrink-0 font-semibold ${item.value == null ? "text-ghost" : "text-grass-700"}`}>{valueText(item, t)}</span>
-              </summary>
-              <p className="pb-3 pl-4 text-[13px] leading-snug text-muted">
-                {item.source}
-                {item.url ? (
-                  <>
-                    {" "}
-                    <a className="font-medium text-grass-700 underline decoration-grass-200 underline-offset-2" href={item.url} target="_blank" rel="noreferrer">
-                      {t("about.source")}
-                    </a>
-                  </>
-                ) : null}
-              </p>
-            </details>
-          </li>
-        ))}
-      </ul>
+      <details className="card mt-3 px-4">
+        <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("about.assumptions")}</summary>
+        <ul className="pb-2">
+          {bundle.assumptions.items.map((item) => (
+            <li key={item.id} className="border-t border-hair">
+              <details>
+                <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-3 py-1.5 text-[13px]">
+                  <span className="flex items-center gap-2">
+                    <Dot tone={item.value == null ? "neutral" : item.status === "sourced" ? "good" : "warn"} />
+                    {item.label}
+                  </span>
+                  <span className={`num shrink-0 font-semibold ${item.value == null ? "text-ghost" : "text-grass-700"}`}>{valueText(item, t)}</span>
+                </summary>
+                <p className="pb-3 pl-4 text-xs leading-snug text-muted">
+                  {item.source}
+                  {item.url ? (
+                    <>
+                      {" "}
+                      <a className="font-medium text-grass-700 underline decoration-grass-200 underline-offset-2" href={item.url} target="_blank" rel="noreferrer">
+                        {t("about.source")}
+                      </a>
+                    </>
+                  ) : null}
+                </p>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </details>
 
-      <h2 className="eyebrow mt-8 px-1">{t("about.teamTitle")}</h2>
-      <div className="card mt-2 grid gap-1.5 p-4 text-sm">
-        <p>{t("about.team")}</p>
-        <p className="text-[13px] text-muted">{t("about.ai")}</p>
-      </div>
-      <p className="mt-4 px-1 text-xs leading-snug text-faint">{t("about.notice")}</p>
+      <p className="mt-6 px-1 text-center text-xs text-faint">{t("about.team")}</p>
+      <p className="mt-1 px-1 text-center text-xs text-faint">{t("about.ai")}</p>
     </div>
   )
 }
