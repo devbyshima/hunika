@@ -119,7 +119,15 @@
     "decide.costInterest",
     "decide.costDefault",
     "decide.costUnknown",
-    "decide.ownCosts"
+    "decide.ownCosts",
+    "decide.heroA",
+    "decide.heroB",
+    "decide.shareThis",
+    "about.perMonth",
+    "about.perYear",
+    "about.days",
+    "about.years",
+    "about.source"
   ],
   "app.name": "Hunika",
   "app.tagline": "eSoko iguhaye igiciro cy'uyu munsi. Hunika ikubwira icyo ukora.",
@@ -241,5 +249,13 @@
   "decide.costInterest": "Inyungu y'inguzanyo, % ku mwaka",
   "decide.costDefault": "Bisanzwe {value}",
   "decide.costUnknown": "Ntibyatangajwe, andika ibyanyu",
-  "decide.ownCosts": "Hakoreshejwe ibiciro mwanditse."
+  "decide.ownCosts": "Hakoreshejwe ibiciro mwanditse.",
+  "decide.heroA": "Kugurisha ubu, cyangwa kubika?",
+  "decide.heroB": "Hunika ibipima nyuma y'ibyangirika n'ibiciro.",
+  "decide.shareThis": "Sangiza iki cyemezo",
+  "about.perMonth": "ku kwezi",
+  "about.perYear": "ku mwaka",
+  "about.days": "iminsi",
+  "about.years": "imyaka",
+  "about.source": "Inkomoko"
 }

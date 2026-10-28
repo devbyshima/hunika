@@ -1,3 +1,4 @@
+import { Mark } from "../components/Mark"
 import { money, quantityLabel } from "../lib/format"
 import type { View } from "../App"
 
@@ -10,12 +11,24 @@ function verdictLine(view: View, t: (key: string, vars?: Record<string, string |
 export default function Share({
   t,
   view,
+  onDecide,
 }: {
   t: (key: string, vars?: Record<string, string | number>) => string
   view: View | null
+  onDecide: () => void
 }) {
   if (!view || view.forecast.status !== "ok") {
-    return <p className="px-5 pt-8 text-lg leading-snug">{t("share.empty")}</p>
+    return (
+      <div className="px-4 pt-8">
+        <h1 className="display px-1 text-[34px] leading-[1.02] tracking-[-0.02em]">{t("share.title")}</h1>
+        <div className="card mt-6 p-5">
+          <p className="text-[17px] leading-snug">{t("share.empty")}</p>
+          <button type="button" className="key-dark mt-4 min-h-12 w-full" onClick={onDecide}>
+            {t("nav.decide")}
+          </button>
+        </div>
+      </div>
+    )
   }
 
   const line = verdictLine(view, t)
@@ -34,7 +47,7 @@ export default function Share({
       const { toBlob } = await import("html-to-image")
       const side = node.offsetWidth
       const blob = await toBlob(node, {
-        backgroundColor: "#f4efe6",
+        backgroundColor: "#ffffff",
         cacheBust: true,
         pixelRatio: 1080 / side,
         canvasWidth: side,
@@ -57,19 +70,31 @@ export default function Share({
     }
   }
 
+  const store = view.verdict.verdict === "store"
+
   return (
-    <div className="px-4 pt-5">
-      <h1 className="text-lg font-semibold">{t("share.title")}</h1>
-      <article id="share-card" className="mt-4 aspect-square rounded-3xl bg-white p-5">
-        <p className="ledger text-3xl text-[#14532d]">{t("app.name")}</p>
-        <p className="mt-2 text-sm">
+    <div className="px-4 pt-8">
+      <h1 className="display px-1 text-[34px] leading-[1.02] tracking-[-0.02em]">{t("share.title")}</h1>
+      <article
+        id="share-card"
+        className="relative mt-6 flex aspect-square flex-col overflow-hidden rounded-[22px] border border-line bg-white p-6"
+        style={{
+          backgroundImage:
+            "radial-gradient(120% 55% at 50% 0%, rgba(69,165,53,0.20), rgba(69,165,53,0) 62%), radial-gradient(rgba(23,23,23,0.08) 1px, transparent 1.2px)",
+          backgroundSize: "auto, 14px 14px",
+        }}
+      >
+        <div className="flex items-center gap-2">
+          <Mark size={26} />
+          <span className="display text-[22px] leading-none">{t("app.name")}</span>
+        </div>
+        <p className="eyebrow mt-6">
           {t(`decide.${view.crop}`)} · {view.district} · {quantityLabel(view.quantityKg)}
         </p>
-        <h2 className={`ledger mt-6 text-4xl leading-tight ${view.verdict.verdict === "store" ? "text-[#14532d]" : "text-[#9a3412]"}`}>{line}</h2>
-        <p className="mt-4 text-lg leading-snug">{t("decide.sellNowWorth", { quantity: quantityLabel(view.quantityKg), amount: money(view.verdict.v0) })}</p>
-        {view.verdict.verdict === "unpriced" ? <p className="mt-3 text-sm leading-snug">{t("decide.unpriced")}</p> : null}
-        {view.verdict.verdict === "store" ? (
-          <p className="mt-3 text-lg leading-snug">
+        <h2 className={`display mt-3 text-[42px] leading-[0.98] tracking-[-0.02em] ${store ? "text-grass-700" : "text-ink"}`}>{line}</h2>
+        <p className="num mt-4 text-[17px] leading-snug">{t("decide.sellNowWorth", { quantity: quantityLabel(view.quantityKg), amount: money(view.verdict.v0) })}</p>
+        {store ? (
+          <p className="num mt-2 text-[17px] leading-snug">
             {t("decide.likelyLine", {
               amount: money(view.verdict.likely_value),
               low: money(view.verdict.low_value),
@@ -77,17 +102,22 @@ export default function Share({
             })}
           </p>
         ) : null}
-        <p className="mt-6 text-sm leading-snug text-[#5c564c]">{t("decide.notice")}</p>
+        {view.verdict.verdict === "unpriced" ? <p className="mt-2 text-sm leading-snug text-muted">{t("decide.unpriced")}</p> : null}
+        <p className="mt-auto pt-4 text-xs leading-snug text-faint">{t("decide.notice")}</p>
       </article>
-      <button type="button" className="no-print mt-4 min-h-14 w-full rounded-2xl bg-[#14532d] text-lg font-semibold text-white" onClick={shareCard}>
-        {t("share.button")}
-      </button>
-      <a className="no-print mt-2 flex min-h-12 items-center justify-center rounded-2xl bg-[#8a6a12] font-semibold text-white" href={whatsapp} target="_blank" rel="noreferrer">
-        {t("share.whatsapp")}
-      </a>
-      <button type="button" className="no-print mt-2 min-h-12 w-full rounded-2xl bg-white font-semibold" onClick={() => window.print()}>
-        {t("share.print")}
-      </button>
+      <div className="no-print mt-4 grid gap-2">
+        <button type="button" className="key-grass min-h-14 w-full text-[17px]" onClick={shareCard}>
+          {t("share.button")}
+        </button>
+        <div className="grid grid-cols-2 gap-2">
+          <a className="key-light min-h-12" href={whatsapp} target="_blank" rel="noreferrer">
+            {t("share.whatsapp")}
+          </a>
+          <button type="button" className="key-light min-h-12" onClick={() => window.print()}>
+            {t("share.print")}
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

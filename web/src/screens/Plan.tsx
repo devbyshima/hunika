@@ -16,12 +16,21 @@ function changeFor(bundle: Bundle, district: string, crop: "maize" | "beans") {
   return likely / forecast.price_now - 1
 }
 
+// Rises in grass green, falls in greys.
+const SCALE = [
+  { key: "up10", color: "#276b1f", label: "+10%" },
+  { key: "up", color: "#6cc057", label: "0 to +10%" },
+  { key: "down", color: "#c9c9c3", label: "0 to -5%" },
+  { key: "down5", color: "#525252", label: "-5%" },
+]
+const NONE = "#ececea"
+
 function fill(change: number | null) {
-  if (change == null) return "#d6d3cb"
-  if (change >= 0.1) return "#14532d"
-  if (change >= 0) return "#4d7c54"
-  if (change > -0.05) return "#c4a574"
-  return "#9a3412"
+  if (change == null) return NONE
+  if (change >= 0.1) return SCALE[0].color
+  if (change >= 0) return SCALE[1].color
+  if (change > -0.05) return SCALE[2].color
+  return SCALE[3].color
 }
 
 function Fit({ data }: { data: FeatureCollection }) {
@@ -70,13 +79,13 @@ function shift(value: number | null) {
 }
 
 function SupplyLine({ season, entry, crop, t }: { season: string; entry: SupplyEntry | null; crop: "maize" | "beans"; t: (key: string, vars?: Record<string, string | number>) => string }) {
-  if (!entry) return <li>{t("plan.notEnough")}</li>
+  if (!entry) return <li className="text-muted">{t("plan.notEnough")}</li>
   const amount = crop === "maize" ? entry.maize_tonnes : entry.beans_tonnes
   const change = shift(crop === "maize" ? entry.maize_anomaly : entry.beans_anomaly)
   return (
-    <li>
+    <li className="num border-b border-hair py-1.5 last:border-0">
       {t("plan.supplyLine", { season, year: entry.year, amount: tonnes(amount) })}
-      {change ? <span className={change.startsWith("+") ? "text-[#14532d]" : "text-[#9a3412]"}> {t("plan.vsAverage", { change })}</span> : null}
+      {change ? <span className={change.startsWith("+") ? "font-semibold text-grass-700" : "font-semibold text-loss"}> {t("plan.vsAverage", { change })}</span> : null}
     </li>
   )
 }
@@ -117,8 +126,8 @@ export default function Plan({
       const name = feature?.properties?.shapeName || ""
       const active = name === selected
       return {
-        color: active ? "#1c1915" : "#f4efe6",
-        weight: active ? 2.5 : 1,
+        color: active ? "#171717" : "#ffffff",
+        weight: active ? 2.5 : 1.25,
         fillColor: fill(changeFor(bundle, name, crop)),
         fillOpacity: 0.92,
       }
@@ -127,29 +136,27 @@ export default function Plan({
   )
 
   return (
-    <div className="px-4 pt-5">
-      <h1 className="ledger text-3xl text-[#14532d]">{t("plan.title")}</h1>
-      <p className="mt-2 text-sm leading-snug">{t("plan.lead")}</p>
-      <div className="mt-3 grid grid-cols-2 gap-2">
+    <div className="px-4 pt-8">
+      <h1 className="display px-1 text-[34px] leading-[1.02] tracking-[-0.02em]">
+        {t("plan.title")}
+        <span className="mt-1.5 block text-[24px] leading-[1.08] text-ghost">{t("plan.lead")}</span>
+      </h1>
+      <div className="mt-5 grid grid-cols-2 gap-2">
         {(["maize", "beans"] as const).map((item) => (
-          <button
-            key={item}
-            type="button"
-            className={`min-h-12 rounded-xl font-semibold ${crop === item ? "bg-[#14532d] text-white" : "bg-white"}`}
-            onClick={() => setCrop(item)}
-          >
+          <button key={item} type="button" aria-pressed={crop === item} className="chip w-full" onClick={() => setCrop(item)}>
             {t(`decide.${item}`)}
           </button>
         ))}
       </div>
-      <div className="mt-3 overflow-hidden rounded-2xl">
+      <div className="card mt-3 overflow-hidden p-1.5">
         {geo ? (
           <MapContainer
             center={[-1.85, 30.45]}
             zoom={8}
             scrollWheelZoom={false}
             attributionControl={false}
-            style={{ height: 320, width: "100%", background: "#e7e0d2" }}
+            zoomControl={false}
+            style={{ height: 300, width: "100%", borderRadius: 12, background: "#f1f8ec" }}
           >
             <Fit data={geo} />
             <GeoJSON
@@ -163,59 +170,66 @@ export default function Plan({
             />
           </MapContainer>
         ) : (
-          <p className="bg-white p-4">{t("plan.notEnough")}</p>
+          <p className="p-4">{t("plan.notEnough")}</p>
         )}
       </div>
-      <div className="mt-2 flex flex-wrap gap-2 text-xs">
-        <span className="inline-flex items-center gap-1"><i className="inline-block h-3 w-3 bg-[#14532d]" /> +10%</span>
-        <span className="inline-flex items-center gap-1"><i className="inline-block h-3 w-3 bg-[#4d7c54]" /> 0–10%</span>
-        <span className="inline-flex items-center gap-1"><i className="inline-block h-3 w-3 bg-[#c4a574]" /> −5–0%</span>
-        <span className="inline-flex items-center gap-1"><i className="inline-block h-3 w-3 bg-[#9a3412]" /> −5%</span>
-        <span className="inline-flex items-center gap-1"><i className="inline-block h-3 w-3 bg-[#d6d3cb]" /> {t("plan.notEnough")}</span>
+      <div className="mt-2.5 flex flex-wrap gap-x-3 gap-y-1.5 px-1 text-xs text-muted">
+        {SCALE.map((item) => (
+          <span key={item.key} className="inline-flex items-center gap-1.5">
+            <i className="inline-block size-2.5 rounded-[2px]" style={{ background: item.color }} />
+            {item.label}
+          </span>
+        ))}
+        <span className="inline-flex items-center gap-1.5">
+          <i className="inline-block size-2.5 rounded-[2px] border border-line" style={{ background: NONE }} />
+          {t("plan.notEnough")}
+        </span>
       </div>
-      <section className="mt-4 rounded-3xl bg-white p-4">
-        <h2 className="text-xl font-semibold">{selected}</h2>
-        {change == null ? (
-          <p className="mt-2">{t("plan.notEnough")}</p>
-        ) : (
-          <p className="ledger mt-2 text-3xl">{`${change >= 0 ? "+" : ""}${Math.round(change * 100)}%`}</p>
-        )}
-        {forecast?.price_pooled ? <p className="mt-2 text-sm">{t("plan.province")}</p> : null}
-        {path.length ? (
-          <>
-            <h3 className="mt-4 text-sm font-semibold">{t("plan.path")}</h3>
-            <div className="mt-1 h-40 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <ComposedChart data={path} margin={{ left: 0, right: 8, top: 6, bottom: 0 }}>
-                  <XAxis dataKey="name" tick={{ fontSize: 11 }} />
-                  <YAxis width={40} tick={{ fontSize: 10 }} domain={["auto", "auto"]} />
-                  <Tooltip formatter={(value) => (Array.isArray(value) ? `${money(Number(value[0]))}–${money(Number(value[1]))}` : money(Number(value)))} />
-                  <Area dataKey="band" stroke="none" fill="#c4a574" fillOpacity={0.45} isAnimationActive={false} />
-                  <Line dataKey="p50" stroke="#14532d" strokeWidth={2.5} dot={{ r: 3 }} isAnimationActive={false} />
-                </ComposedChart>
-              </ResponsiveContainer>
-            </div>
-            <p className="text-xs leading-snug text-[#5c564c]">{t("plan.pathNote", { month: monthLabel(forecast?.price_month ?? "") })}</p>
-          </>
-        ) : null}
-        <h3 className="mt-4 text-sm font-semibold">{t("plan.supply")}</h3>
-        {supply ? (
-          <ul className="mt-1 text-sm leading-6">
-            <SupplyLine season="A" entry={supply.A} crop={crop} t={t} />
-            <SupplyLine season="B" entry={supply.B} crop={crop} t={t} />
-          </ul>
-        ) : (
-          <p className="mt-1 text-sm">{t("plan.notEnough")}</p>
-        )}
-        <p className="mt-2 text-xs leading-snug text-[#5c564c]">{t("plan.anomaly")}</p>
-      </section>
-      <div className="mt-3 flex flex-wrap gap-2">
+
+      <div className="no-scrollbar -mx-4 mt-4 flex gap-2 overflow-x-auto px-4 pb-1">
         {DISTRICTS.map((name) => (
-          <button key={name} type="button" className={`min-h-11 rounded-full px-3 text-sm ${selected === name ? "bg-[#14532d] text-white" : "bg-white"}`} onClick={() => setSelected(name)}>
+          <button key={name} type="button" aria-pressed={selected === name} className="chip shrink-0" onClick={() => setSelected(name)}>
             {name}
           </button>
         ))}
       </div>
+
+      <section key={`${selected}-${crop}`} className="card rise-in mt-3 p-5">
+        <p className="eyebrow">{t(`decide.${crop}`)} · {selected}</p>
+        {change == null ? (
+          <p className="mt-2 text-muted">{t("plan.notEnough")}</p>
+        ) : (
+          <p className={`display mt-2 text-[44px] leading-none ${change >= 0 ? "text-grass-700" : "text-ink"}`}>{`${change >= 0 ? "+" : "−"}${Math.abs(Math.round(change * 100))}%`}</p>
+        )}
+        {forecast?.price_pooled ? <p className="mt-2 text-xs text-faint">{t("plan.province")}</p> : null}
+        {path.length ? (
+          <>
+            <p className="eyebrow mt-5">{t("plan.path")}</p>
+            <div className="mt-2 h-40 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <ComposedChart data={path} margin={{ left: 0, right: 8, top: 6, bottom: 0 }}>
+                  <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#737373" }} axisLine={{ stroke: "rgba(23,23,23,0.13)" }} tickLine={false} />
+                  <YAxis width={40} tick={{ fontSize: 10, fill: "#737373" }} axisLine={false} tickLine={false} domain={["auto", "auto"]} />
+                  <Tooltip formatter={(value) => (Array.isArray(value) ? `${money(Number(value[0]))} to ${money(Number(value[1]))}` : money(Number(value)))} />
+                  <Area dataKey="band" stroke="none" fill="#bfe3ae" fillOpacity={0.7} isAnimationActive={false} />
+                  <Line dataKey="p50" stroke="#276b1f" strokeWidth={2.5} dot={{ r: 3, fill: "#276b1f" }} isAnimationActive={false} />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </div>
+            <p className="text-xs leading-snug text-faint">{t("plan.pathNote", { month: monthLabel(forecast?.price_month ?? "") })}</p>
+          </>
+        ) : null}
+        <p className="eyebrow mt-5">{t("plan.supply")}</p>
+        {supply ? (
+          <ul className="mt-1 text-sm">
+            <SupplyLine season="A" entry={supply.A} crop={crop} t={t} />
+            <SupplyLine season="B" entry={supply.B} crop={crop} t={t} />
+          </ul>
+        ) : (
+          <p className="mt-1 text-sm text-muted">{t("plan.notEnough")}</p>
+        )}
+        <p className="mt-3 text-xs leading-snug text-faint">{t("plan.anomaly")}</p>
+      </section>
     </div>
   )
 }

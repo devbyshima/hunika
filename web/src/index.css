@@ -1,25 +1,281 @@
 @import "tailwindcss";
 
-body {
-  margin: 0;
-  background: #e7e0d2;
-  color: #1c1915;
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+/* Self-hosted fonts (public/fonts, licences in public/fonts/LICENSES.md).
+   Inter is the sans everywhere. Pixelify Sans sets the wordmark, headlines
+   and the verdict. Press Start 2P is the small pixel accent for labels. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter/Inter-Variable.1.woff2") format("woff2");
+  unicode-range: U+??, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter/Inter-Variable.7.woff2") format("woff2");
+  unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Pixelify Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/pixelify-sans/pixelify-sans-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Pixelify Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/pixelify-sans/pixelify-sans-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Press Start 2P";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/press-start-2p/Press-Start-2P-Regular-400.1.woff2") format("woff2");
 }
 
-.ledger {
-  font-family: Georgia, "Iowan Old Style", Palatino, serif;
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Pixelify Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: "Press Start 2P", ui-monospace, monospace;
+
+  --color-ink: #171717;
+  --color-muted: #525252;
+  --color-faint: #737373;
+  --color-ghost: #8f8f8f;
+  --color-canvas: #fbfbf8;
+  --color-paper: #f4f4f5;
+  --color-card: #ffffff;
+  --color-line: rgba(23, 23, 23, 0.13);
+  --color-hair: rgba(23, 23, 23, 0.08);
+
+  --color-grass-50: #f1f8ec;
+  --color-grass-100: #e2f2d8;
+  --color-grass-200: #bfe3ae;
+  --color-grass-400: #6cc057;
+  --color-grass-500: #45a535;
+  --color-grass-700: #276b1f;
+  --color-grass-800: #1f5418;
+  --color-grass-900: #173f12;
+
+  --color-loss: #b42318;
+  --color-loss-100: #fbe9e7;
+  --color-warn: #8a5a12;
+  --color-warn-100: #f6eedc;
+
+  --radius-card: 16px;
+  --radius-panel: 26px;
+}
+
+@layer base {
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
 }
 
 button,
 select,
 input {
   font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-grass-500);
+  outline-offset: 2px;
+}
+
+}
+
+@layer components {
+/* The phone column: a grass haze over a fine dot grid that fades out down the
+   page. */
+.canvas {
+  position: relative;
+  background:
+    radial-gradient(120% 42% at 50% 0%, rgba(69, 165, 53, 0.22), rgba(69, 165, 53, 0) 62%),
+    radial-gradient(80% 30% at 100% 100%, rgba(39, 107, 31, 0.08), rgba(39, 107, 31, 0) 60%),
+    var(--color-canvas);
+}
+.canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(23, 23, 23, 0.09) 1px, transparent 1.2px);
+  background-size: 14px 14px;
+  mask-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.35) 420px, transparent 900px);
+}
+
+/* Frosted panel. */
+.panel {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.62);
+  border-radius: var(--radius-panel);
+  box-shadow: 0 20px 60px -40px rgba(23, 23, 23, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+/* Keys: a charcoal one and a light one, each with a soft gradient, a hairline
+   border, an inner top highlight and a small drop shadow. They press down. */
+.key-dark,
+.key-light,
+.key-grass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 14px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: transform 100ms ease, filter 150ms ease, box-shadow 150ms ease;
+}
+.key-dark {
+  color: #fff;
+  background: linear-gradient(180deg, #3d3d3d 0%, #2b2b2b 100%);
+  border: 1px solid #1c1c1c;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 1px 2px rgba(0, 0, 0, 0.22), 0 6px 14px -8px rgba(0, 0, 0, 0.45);
+}
+.key-grass {
+  color: #fff;
+  background: linear-gradient(180deg, #2f7d24 0%, #1f5418 100%);
+  border: 1px solid #173f12;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 1px 2px rgba(0, 0, 0, 0.2), 0 6px 14px -8px rgba(23, 63, 18, 0.55);
+}
+.key-light {
+  color: var(--color-ink);
+  background: linear-gradient(180deg, #ffffff 0%, #ececea 100%);
+  border: 1px solid #d4d2cd;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 10px -6px rgba(0, 0, 0, 0.18);
+}
+.key-dark:active,
+.key-grass:active,
+.key-light:active {
+  transform: scale(0.97);
+  filter: brightness(0.96);
+}
+
+/* Chips: tinted pills that turn solid when chosen. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0 1rem;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 100ms ease;
+}
+.chip:active {
+  transform: scale(0.97);
+}
+.chip[aria-pressed="true"] {
+  border-color: var(--color-grass-700);
+  background: var(--color-grass-700);
+  color: #fff;
+}
+
+.field {
+  min-height: 48px;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--color-line);
+  background: #fff;
+  padding: 0 0.875rem;
+  font-size: 16px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.eyebrow {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Footnote marks, for sources. */
+.fn {
+  font-size: 0.7em;
+  vertical-align: super;
+  color: var(--color-grass-700);
+  font-weight: 600;
+}
+
+}
+
+/* Motion only where it adds information: a result arriving. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.rise-in {
+  animation: rise-in 0.4s cubic-bezier(0.22, 0.98, 0.3, 1.2) both;
+}
+@keyframes pixel-shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.pixel-shimmer rect {
+  animation: pixel-shimmer 1.6s ease-in-out infinite;
 }
 
 .leaflet-container {
-  background: #e7e0d2;
+  background: var(--color-grass-50);
   font: inherit;
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in,
+  .pixel-shimmer rect {
+    animation: none;
+  }
 }
 
 @media print {
@@ -32,5 +288,9 @@ input {
   .phone {
     box-shadow: none !important;
     max-width: none !important;
+  }
+  .canvas,
+  .canvas::before {
+    background: none;
   }
 }

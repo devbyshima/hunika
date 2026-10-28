@@ -1,6 +1,8 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from "react"
 import Decide from "./screens/Decide"
 import Share from "./screens/Share"
+import { Mark } from "./components/Mark"
+import { AboutIcon, DecideIcon, PlanIcon, ProofIcon, ShareIcon } from "./components/Icons"
 import { translate, type Lang } from "./lib/i18n"
 import type { Bundle } from "./types"
 import type { DecideResult } from "./lib/decide"
@@ -22,10 +24,32 @@ export type View = {
   ownCosts?: boolean
 }
 
-const nav: Screen[] = ["decide", "share", "plan", "proof", "about"]
+const NAV: [Screen, (props: { className?: string }) => React.ReactNode][] = [
+  ["decide", DecideIcon],
+  ["share", ShareIcon],
+  ["plan", PlanIcon],
+  ["proof", ProofIcon],
+  ["about", AboutIcon],
+]
+
+function savedLang(): Lang {
+  try {
+    return (localStorage.getItem("hunika-lang") as Lang) || "rw"
+  } catch {
+    return "rw"
+  }
+}
+
+function Loading() {
+  return (
+    <div className="flex justify-center pt-24">
+      <Mark size={48} busy />
+    </div>
+  )
+}
 
 export default function App() {
-  const [lang, setLang] = useState<Lang>(() => (localStorage.getItem("hunika-lang") as Lang) || "rw")
+  const [lang, setLang] = useState<Lang>(savedLang)
   const [screen, setScreen] = useState<Screen>("decide")
   const [bundle, setBundle] = useState<Bundle | null>(null)
   const [error, setError] = useState("")
@@ -33,7 +57,11 @@ export default function App() {
   const t = useMemo(() => (key: string, vars?: Record<string, string | number>) => translate(lang, key, vars), [lang])
 
   useEffect(() => {
-    localStorage.setItem("hunika-lang", lang)
+    try {
+      localStorage.setItem("hunika-lang", lang)
+    } catch {
+      // Private windows can refuse storage; the language still switches.
+    }
     document.documentElement.lang = lang
   }, [lang])
 
@@ -50,33 +78,25 @@ export default function App() {
       .catch(() => setError("The data files did not load."))
   }, [])
 
-  const screenNode = !bundle ? (
-    <p className="px-5 pt-16 text-lg">{error || "…"}</p>
-  ) : screen === "decide" ? (
-    <Decide bundle={bundle} t={t} onView={setView} />
-  ) : screen === "share" ? (
-    <Share t={t} view={view} />
-  ) : (
-    <Suspense fallback={<p className="px-5 pt-16">…</p>}>
-      {screen === "plan" ? <Plan bundle={bundle} t={t} /> : null}
-      {screen === "proof" ? <Proof bundle={bundle} t={t} /> : null}
-      {screen === "about" ? <About bundle={bundle} t={t} /> : null}
-    </Suspense>
-  )
+  function go(next: Screen) {
+    setScreen(next)
+    window.scrollTo({ top: 0 })
+  }
 
   return (
-    <div className="phone relative mx-auto flex min-h-dvh max-w-[480px] flex-col bg-[#f4efe6] pb-20 shadow-xl">
-      <header className="no-print flex items-center justify-between px-4 pt-4">
-        <div>
-          <p className="ledger text-2xl leading-none text-[#14532d]">{t("app.name")}</p>
-          <p className="mt-1 max-w-[16rem] text-sm leading-snug text-[#5c564c]">{t("app.tagline")}</p>
+    <div className="phone canvas mx-auto flex min-h-dvh max-w-[480px] flex-col pb-32 shadow-[0_0_0_1px_rgba(23,23,23,0.06),0_30px_80px_-40px_rgba(23,23,23,0.35)]">
+      <header className="no-print relative z-10 flex items-center justify-between px-5 pt-5">
+        <div className="flex items-center gap-2.5">
+          <Mark size={30} />
+          <span className="display text-[26px] leading-none text-ink">{t("app.name")}</span>
         </div>
-        <div className="flex rounded-full bg-[#e7e0d2] p-1">
+        <div className="panel flex !rounded-full p-1" role="group" aria-label="Language">
           {(["rw", "en"] as const).map((code) => (
             <button
               key={code}
               type="button"
-              className={`min-h-11 min-w-11 rounded-full px-3 text-sm font-semibold ${lang === code ? "bg-[#14532d] text-white" : "text-[#3f3a33]"}`}
+              aria-pressed={lang === code}
+              className={`min-h-11 min-w-12 rounded-full px-3 text-sm font-semibold transition-colors ${lang === code ? "bg-ink text-white" : "text-muted"}`}
               onClick={() => setLang(code)}
             >
               {code.toUpperCase()}
@@ -84,18 +104,43 @@ export default function App() {
           ))}
         </div>
       </header>
-      <main className="flex-1">{screenNode}</main>
-      <nav className="no-print fixed inset-x-0 bottom-0 mx-auto flex max-w-[480px] border-t border-[#e0d6c4] bg-[#fffdf8]">
-        {nav.map((item) => (
-          <button
-            key={item}
-            type="button"
-            className={`min-h-16 flex-1 text-xs font-semibold ${screen === item ? "text-[#14532d]" : "text-[#6b6458]"}`}
-            onClick={() => setScreen(item)}
-          >
-            {t(`nav.${item}`)}
-          </button>
-        ))}
+
+      <main className="relative z-10 flex-1">
+        {!bundle ? (
+          error ? <p className="px-5 pt-16 text-lg">{error}</p> : <Loading />
+        ) : (
+          <>
+            <div hidden={screen !== "decide"}>
+              <Decide bundle={bundle} t={t} onView={setView} onShare={() => go("share")} />
+            </div>
+            {screen === "share" ? <Share t={t} view={view} onDecide={() => go("decide")} /> : null}
+            <Suspense fallback={<Loading />}>
+              {screen === "plan" ? <Plan bundle={bundle} t={t} /> : null}
+              {screen === "proof" ? <Proof bundle={bundle} t={t} /> : null}
+              {screen === "about" ? <About bundle={bundle} t={t} /> : null}
+            </Suspense>
+          </>
+        )}
+      </main>
+
+      <nav className="no-print fixed inset-x-0 bottom-0 z-20 mx-auto max-w-[480px] px-2 pb-[max(10px,env(safe-area-inset-bottom))] min-[400px]:px-3">
+        <div className="panel flex p-1 min-[400px]:p-1.5">
+          {NAV.map(([item, Icon]) => {
+            const active = screen === item
+            return (
+              <button
+                key={item}
+                type="button"
+                aria-current={active ? "page" : undefined}
+                className={`flex min-h-14 min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-[20px] px-0 text-[10px] leading-tight font-semibold tracking-[-0.02em] transition-colors min-[400px]:text-[11px] ${active ? "bg-grass-100 text-grass-800" : "text-faint"}`}
+                onClick={() => go(item)}
+              >
+                <Icon />
+                <span className="whitespace-nowrap">{t(`nav.${item}`)}</span>
+              </button>
+            )
+          })}
+        </div>
       </nav>
     </div>
   )

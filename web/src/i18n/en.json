@@ -119,5 +119,13 @@
   "decide.costInterest": "Loan interest, % a year",
   "decide.costDefault": "Default {value}",
   "decide.costUnknown": "Not published, type yours",
-  "decide.ownCosts": "Using the costs you entered."
+  "decide.ownCosts": "Using the costs you entered.",
+  "decide.heroA": "Sell now, or store?",
+  "decide.heroB": "Hunika weighs it after losses and costs.",
+  "decide.shareThis": "Share this verdict",
+  "about.perMonth": "a month",
+  "about.perYear": "a year",
+  "about.days": "days",
+  "about.years": "years",
+  "about.source": "Source"
 }
