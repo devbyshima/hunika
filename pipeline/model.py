@@ -156,7 +156,10 @@ def build_forecasts(panel: pd.DataFrame, cpi: pd.DataFrame, as_of: str | None = 
         province_latest = _latest_price(east)
         if province_latest is None:
             continue
-        before = province_latest["month"]
+        # Horizons run from the decision month, not from the month of the newest
+        # price. The newest price stands in for today's price until the user
+        # types the price at their own market.
+        before = as_of[:7]
         calendar_month = int(before[5:7])
 
         for district in EASTERN_DISTRICTS:
@@ -222,6 +225,8 @@ def build_forecasts(panel: pd.DataFrame, cpi: pd.DataFrame, as_of: str | None = 
     return {
         "generated_on": date.today().isoformat(),
         "decision_date": as_of,
+        "decision_month": as_of[:7],
+        "inflation": inflation,
         "model": "v1_seasonal_ratios",
         "cpi": cpi_info,
         "stale_days_limit": 60,
@@ -230,7 +235,7 @@ def build_forecasts(panel: pd.DataFrame, cpi: pd.DataFrame, as_of: str | None = 
 
 
 def nearest_markets(panel: pd.DataFrame, centroids: dict[str, tuple[float, float]], limit: int = 3) -> dict:
-    """Three nearest non-camp markets for each district and crop, with the latest retail price."""
+    """Three nearest non-camp markets with a price in the last 12 months, for each district and crop."""
     frame = panel.copy()
     frame["is_camp"] = _bool(frame["is_camp"])
     frame["filled"] = _bool(frame["filled"])
@@ -251,6 +256,10 @@ def nearest_markets(panel: pd.DataFrame, centroids: dict[str, tuple[float, float
                 .groupby("market", as_index=False)
                 .tail(1)
             )
+            # A market whose last price is more than a year older than the newest
+            # price is not a market a manager can sell in today.
+            recent = add_months(str(crop_rows["month"].max()), -12)
+            latest = latest[latest["month"] > recent]
             ranked = []
             for row in latest.itertuples(index=False):
                 distance = _km(lat, lon, float(row.latitude), float(row.longitude))

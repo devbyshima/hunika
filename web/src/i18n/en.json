@@ -25,7 +25,7 @@
   "decide.beforeLosses": "Likely {amount} RWF before storage losses (between {low} and {high}).",
   "decide.likelyLine": "Likely {amount} RWF (between {low} and {high}).",
   "decide.gain": "Gain against selling now: {amount} RWF.",
-  "decide.outlook": "Price outlook",
+  "decide.outlook": "Price outlook from this month",
   "decide.now": "Now",
   "decide.plusMonths": "+{months}",
   "decide.reason": "In {up} of {n} past market windows, the price was higher {months} months later.",
@@ -39,7 +39,7 @@
   "decide.loss.under10": "The low case does not lose money.",
   "decide.loss.mid": "The low case loses money. The likely case does not.",
   "decide.loss.over50": "The likely case loses money.",
-  "decide.unpriced": "Storage loss rates and interest are still blank, so Hunika will not recommend storing.",
+  "decide.unpriced": "The warehouse loss rate is not published yet, so Hunika will not price a warehouse receipt.",
   "share.title": "Share",
   "share.button": "Share the card",
   "share.whatsapp": "WhatsApp text",
@@ -72,7 +72,7 @@
   "plan.supplyLine": "Season {season} {year}: {amount} t",
   "plan.vsAverage": "({change} against the 3 seasons before)",
   "plan.path": "Price path, RWF per kg",
-  "plan.pathNote": "Likely price and likely range from the {month} price.",
+  "plan.pathNote": "Likely price and likely range for the coming months, with the {month} price standing in for today's price.",
   "proof.headline": "RWF per tonne, on average, from following Hunika with {option} instead of selling at harvest.",
   "proof.headlineNote": "{n} past harvest decisions, each made only with data published before that day. After storage losses, bags, fees and interest. {francs}.",
   "proof.notWorse": "Decisions at least as good as selling",
@@ -91,5 +91,8 @@
   "proof.models": "How good is the price range?",
   "proof.v2": "With the rainfall signal (model v2), on the same {n} forecasts: average error {v2} against {v1} without it, and the range held {c2} against {c1}.",
   "proof.v2Gain": "On the {n} decisions both models could make: {v2} RWF per tonne with rainfall, {v1} without it.",
-  "about.rain": "CHIRPS rainfall by district, from WFP on HDX, through October 2026."
+  "about.rain": "CHIRPS rainfall by district, from WFP on HDX, through October 2026.",
+  "decide.todayPrice": "Today's price at your market, RWF per kg (optional)",
+  "decide.todayPricePlaceholder": "Leave empty to use {price} ({month})",
+  "decide.ownPrice": "Using the price you entered: {price} RWF per kg."
 }

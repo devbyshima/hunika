@@ -1,26 +1,28 @@
 # Storage parameters for the decision engine.
 # value: null means the number is not sourced. Hunika will not price that
 # option, and it will not invent a loss rate from a different kind of figure.
+# Money is September 2026 RWF. Loss rates are spread evenly over the months
+# of the trial they come from, because the formula takes one monthly rate.
 items:
   - id: loss_home_bags
     label: Monthly loss, home bags
     option: home_bags
     field: loss_monthly
-    value: null
+    value: 0.0356
     unit: fraction_per_month
     status: ASSUMPTION
-    source: "Team to source. Check the Agricultural Household Survey 2024 first. Hinga Weze reports that poor handling loses 15–30% of output overall. That is not a monthly storage rate, so it is not used here."
-    url: "https://agrilinks.org/post/improved-post-harvest-handling-techniques-increase-income-rwandas-smallholder-farmers-0"
+    source: "Likhayo et al. 2016, J. Econ. Entomol. 109(4): 32% maize weight loss in polypropylene bags without Actellic, 270 days after storage, on 32 Kenyan farms. 0.32 / 9 months. Applied to beans too, because no on-farm bean trial with a stated period was found. Other trials lose faster: 41.2% in 8 months in Makueni, Kenya (Ng'ang'a et al. 2016). That rate is the sensitivity case in docs/METHODOLOGY.md. Replace with AHS 2024 when the team has it."
+    url: "https://thehive.icipe.org/all-prp/4162"
 
   - id: loss_hermetic_bags
     label: Monthly loss, hermetic bags
     option: hermetic_bags
     field: loss_monthly
-    value: null
+    value: 0.002
     unit: fraction_per_month
     status: ASSUMPTION
-    source: "Team to source. Check the Agricultural Household Survey 2024 first, then a published trial."
-    url: null
+    source: "Likhayo et al. 2016: 1.8% maize weight loss in SuperGrain IV-R hermetic bags after 270 days, same Kenyan farms. 0.018 / 9 months. Ng'ang'a et al. 2016 found under 1% in PICS bags after 8 months. Applied to beans too."
+    url: "https://thehive.icipe.org/all-prp/4162"
 
   - id: loss_warehouse
     label: Monthly loss, certified warehouse
@@ -29,8 +31,8 @@ items:
     value: null
     unit: fraction_per_month
     status: ASSUMPTION
-    source: "Team to source. Ask EAX."
-    url: "https://ea-africaexchange.com/news/collateral-financing/ecobank-extends-loans-to-rwandan-farmers-through-eax-electronic-warehouse-receipt-2"
+    source: "Not published. Warehouse-receipt rules leave shrinkage to each warehouse's tariff (Uganda S.I. 33 of 2007, reg. 42). Ask EAX. Until then the warehouse option is not priced."
+    url: "https://faolex.fao.org/docs/pdf/uga145742.pdf"
 
   - id: fee_home_bags
     label: Fee, home bags
@@ -59,28 +61,28 @@ items:
     value: 0.025
     unit: share_of_value
     status: sourced
-    source: "Older EAX figure of 2.5% of value, reported by The New Times. The team should confirm the current rate."
-    url: "https://www.newtimes.co.rw/article/152743/News/commodities-exchange-sees-rwandan-farmers-earn-more"
+    source: "EAX notice of 30 January 2017: warehouse service charges are a flat fee of 2.5% of the total value of the commodity. No newer EAX figure was found. The team should confirm the current rate."
+    url: "https://ea-africaexchange.com/blog_detail/4/"
 
   - id: cost_home_bags
     label: Home bag cost
     option: home_bags
     field: cost_per_kg
-    value: null
+    value: 0
     unit: rwf_per_kg
     status: ASSUMPTION
-    source: "Team to source a local bag and handling cost."
+    source: "No extra cost against selling. Grain sold at harvest leaves in the same woven bags, so storing at home adds no bag purchase. The loss rate is for untreated bags, so no storage chemical is counted."
     url: null
 
   - id: cost_hermetic_bags
     label: Hermetic bag cost
     option: hermetic_bags
     field: cost_per_kg
-    value: null
+    value: 35.5
     unit: rwf_per_kg
     status: ASSUMPTION
-    source: "Team to source a local supplier price, per kg stored."
-    url: null
+    source: "A PICS bag sold for Rwf 1,700 in Rwanda (The New Times, 11 March 2019). NISR all-items CPI rose 2.09 times from March 2019 to September 2026, so about Rwf 3,554 now. Divided by 100 kg, the larger of the 50 kg and 100 kg sizes (IITA ProPAS), and charged in full to one season, although the bags can be reused for several years. Bags sell for US$2 to $3 (IITA ProPAS)."
+    url: "https://www.newtimes.co.rw/article/164788/News/new-technology-that-could-reduce-post-harvest-losses/amp"
 
   - id: cost_warehouse
     label: Warehouse handling cost
@@ -126,11 +128,11 @@ items:
     label: Annual interest rate
     option: warehouse
     field: interest_annual
-    value: null
+    value: 0.157
     unit: fraction_per_year
     status: ASSUMPTION
-    source: "Team to source from a SACCO or partner bank. Required before the warehouse option can be priced, because the borrowed share is 70%."
-    url: null
+    source: "National Bank of Rwanda average lending rate, 15.70% in August 2026, as reported by Trading Economics. Not a quoted warehouse-receipt rate. EAX warehouse-receipt loans were about 17 to 18% in 2014 and 2015 (The New Times). Subsidised cooperative loans at 8% exist (Bank of Kigali Kungahara, KT Press, November 2024)."
+    url: "https://tradingeconomics.com/rwanda/lending-rate"
 
   - id: g_min
     label: Minimum likely gain

@@ -91,7 +91,10 @@
     "proof.models",
     "proof.v2",
     "proof.v2Gain",
-    "about.rain"
+    "about.rain",
+    "decide.todayPrice",
+    "decide.todayPricePlaceholder",
+    "decide.ownPrice"
   ],
   "app.name": "Hunika",
   "app.tagline": "eSoko iguhaye igiciro cy'uyu munsi. Hunika ikubwira icyo ukora.",
@@ -119,7 +122,7 @@
   "decide.beforeLosses": "Hashobora kuba {amount} RWF mbere y'igihombo cy'ububiko (hagati ya {low} na {high}).",
   "decide.likelyLine": "Hashobora kuba {amount} RWF (hagati ya {low} na {high}).",
   "decide.gain": "Inyungu igereranijwe no kugurisha ubu: {amount} RWF.",
-  "decide.outlook": "Igihe kizaza cy'igiciro",
+  "decide.outlook": "Uko igiciro kizagenda uhereye uku kwezi",
   "decide.now": "Ubu",
   "decide.plusMonths": "+{months}",
   "decide.reason": "Mu nshuro {up} muri {n} z'amasoko yashize, igiciro cyari hejuru nyuma y'amezi {months}.",
@@ -133,7 +136,7 @@
   "decide.loss.under10": "Icyo cyiza cyo hasi nticyangiza.",
   "decide.loss.mid": "Icyo cyiza cyo hasi kirangiza. Icyo gishoboka nticirangiza.",
   "decide.loss.over50": "Icyo gishoboka kirangiza.",
-  "decide.unpriced": "Igipimo cy'ibyangiritse n'inyungu biracyabuze, Hunika ntiyagira inama yo kubika.",
+  "decide.unpriced": "Igipimo cy'ibyangirika mu bubiko rusange ntikiratangazwa, bityo Hunika ntibara inyandiko y'ububiko.",
   "share.title": "Sangiza",
   "share.button": "Sangiza ikarita",
   "share.whatsapp": "Ubutumwa bwa WhatsApp",
@@ -166,7 +169,7 @@
   "plan.supplyLine": "Igihembwe {season} {year}: {amount} t",
   "plan.vsAverage": "({change} ugereranyije n'ibihembwe 3 byabanje)",
   "plan.path": "Uko igiciro kizagenda, RWF ku kilo",
-  "plan.pathNote": "Igiciro gishoboka n'intera ishoboka uhereye ku giciro cya {month}.",
+  "plan.pathNote": "Igiciro gishoboka n'intera ishoboka mu mezi ari imbere, igiciro cya {month} gisimbura icy'uyu munsi.",
   "proof.headline": "RWF ku toni, ugereranyije, ukurikije Hunika ukoresheje {option} aho kugurisha mu isarura.",
   "proof.headlineNote": "Ibyemezo {n} byo mu isarura byashize, buri kimwe gifashwe hakoreshejwe amakuru yari yatangajwe mbere y'uwo munsi. Nyuma y'ibyangirika, imifuka, amafaranga y'ububiko n'inyungu. {francs}.",
   "proof.notWorse": "Ibyemezo bitari munsi yo kugurisha",
@@ -185,5 +188,8 @@
   "proof.models": "Intera y'igiciro ifite ireme ringana iki?",
   "proof.v2": "Hongewemo imvura (model v2), ku biteganyo {n} bimwe: ikosa riringaniye {v2} ugereranyije na {v1} nta mvura, n'intera yafashe {c2} ugereranyije na {c1}.",
   "proof.v2Gain": "Ku byemezo {n} byombi byashoboraga gufata: {v2} RWF ku toni hamwe n'imvura, {v1} nta mvura.",
-  "about.rain": "Imvura ya CHIRPS ku karere, ivuye kuri WFP binyuze kuri HDX, kugeza Ukwakira 2026."
+  "about.rain": "Imvura ya CHIRPS ku karere, ivuye kuri WFP binyuze kuri HDX, kugeza Ukwakira 2026.",
+  "decide.todayPrice": "Igiciro cy'uyu munsi ku isoko ryanyu, RWF ku kilo (si ngombwa)",
+  "decide.todayPricePlaceholder": "Siga ubusa ukoreshe {price} ({month})",
+  "decide.ownPrice": "Hakoreshejwe igiciro wanditse: {price} RWF ku kilo."
 }

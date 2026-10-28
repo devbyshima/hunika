@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { decide, type DecideInput } from "../lib/decide"
 import { money, monthLabel, quantityLabel } from "../lib/format"
+import { withPrice } from "../lib/outlook"
 import type { Assumption, Bundle, CropForecast } from "../types"
 import type { View } from "../App"
 
@@ -61,12 +62,17 @@ export default function Decide({
   const [unit, setUnit] = useState<"t" | "kg">("t")
   const [storage, setStorage] = useState("home_bags")
   const [cash, setCash] = useState(false)
+  const [typed, setTyped] = useState("")
   const [view, setView] = useState<View | null>(null)
 
+  const dataForecast = bundle.forecasts.districts[district]?.[crop]
+  const typedPrice = Number(typed.replace(/,/g, ""))
+  const ownPrice = typed.trim() !== "" && Number.isFinite(typedPrice) && typedPrice > 0
+
   function submit() {
-    const forecast = bundle.forecasts.districts[district]?.[crop]
     const quantity = Number(amount)
-    if (!forecast || !Number.isFinite(quantity) || quantity <= 0) return
+    if (!dataForecast || !Number.isFinite(quantity) || quantity <= 0) return
+    const forecast = ownPrice && dataForecast.status === "ok" ? { ...withPrice(dataForecast, typedPrice, bundle.forecasts.inflation), own_price: true } : dataForecast
     const quantityKg = unit === "t" ? quantity * 1000 : quantity
     const verdict = decide(inputFor(bundle.assumptions.items, forecast, quantityKg, cash, storage))
     const next = { district, crop, quantityKg, forecast, verdict, horizon: bestHorizon(forecast) }
@@ -113,6 +119,16 @@ export default function Decide({
           ))}
         </div>
       </div>
+      <label className="mt-4 block text-sm font-semibold">
+        {t("decide.todayPrice")}
+        <input
+          className="mt-1 min-h-12 w-full rounded-xl border border-[#e0d6c4] bg-white px-3"
+          inputMode="decimal"
+          value={typed}
+          placeholder={dataForecast?.price_now != null ? t("decide.todayPricePlaceholder", { price: money(dataForecast.price_now), month: monthLabel(dataForecast.price_month || "") }) : ""}
+          onChange={(event) => setTyped(event.target.value)}
+        />
+      </label>
       <p className="mt-4 text-sm font-semibold">{t("decide.storage")}</p>
       <div className="mt-1 grid gap-2">
         {OPTIONS.map(([id, key]) => (
@@ -154,8 +170,9 @@ export default function Decide({
           {view.verdict.verdict === "store" ? <p className="mt-2">{t("decide.gain", { amount: money(view.verdict.likely_gain) })}</p> : null}
           {view.verdict.loss_band ? <p className="mt-2 text-sm">{t(`decide.loss.${view.verdict.loss_band === "between_10_and_50" ? "mid" : view.verdict.loss_band === "over_50" ? "over50" : "under10"}`)}</p> : null}
           <p className="mt-3 text-sm leading-snug">{t("decide.reason", { up: horizon.n_up, n: horizon.n, months: view.horizon })}</p>
-          {forecast.stale ? <p className="mt-3 rounded-xl bg-[#f8e7c8] px-3 py-2 text-sm">{t("decide.stale", { days: forecast.stale_days ?? "" })}</p> : null}
-          {forecast.price_pooled ? <p className="mt-2 text-sm">{t("decide.provincePrice", { month: monthLabel(forecast.price_month || "") })}</p> : null}
+          {forecast.own_price ? <p className="mt-3 text-sm">{t("decide.ownPrice", { price: money(forecast.price_now) })}</p> : null}
+          {!forecast.own_price && forecast.stale ? <p className="mt-3 rounded-xl bg-[#f8e7c8] px-3 py-2 text-sm">{t("decide.stale", { days: forecast.stale_days ?? "" })}</p> : null}
+          {!forecast.own_price && forecast.price_pooled ? <p className="mt-2 text-sm">{t("decide.provincePrice", { month: monthLabel(forecast.price_month || "") })}</p> : null}
           {forecast.pattern_last_year && forecast.pattern_last_year < "2022" ? <p className="mt-2 text-sm">{t("decide.oldPattern", { year: forecast.pattern_last_year })}</p> : null}
           <p className="mt-4 text-sm font-semibold">{t("decide.outlook")}</p>
           <div className="mt-2 grid grid-cols-4 gap-1 text-center text-xs">

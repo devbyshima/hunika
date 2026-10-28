@@ -367,6 +367,41 @@ def _summarise(detail: pd.DataFrame, choices: pd.DataFrame, options: dict) -> di
     return summary
 
 
+SENSITIVITY = (
+    ("base", "Values in config/assumptions.yaml", {}),
+    ("home_loss_fast", "Home bags lose 41.2% in 8 months (Ng'ang'a et al. 2016)", {"loss_home_bags": 0.412 / 8}),
+    ("hermetic_reused", "Hermetic bag reused for 3 seasons", {"cost_hermetic_bags": 35.5 / 3}),
+    ("no_gates", "Store whenever the likely gain is above zero", {"g_min": 0.0, "d_max": 10.0}),
+)
+
+
+def sensitivity(panel, cpi, seasons, rain, assumptions) -> list[dict]:
+    """Headline v1 result under other storage values. Only the backtest changes."""
+    rows = []
+    for key, label, overrides in SENSITIVITY:
+        changed = {**assumptions, "items": [dict(item) for item in assumptions.get("items") or []]}
+        for item in changed["items"]:
+            if item["id"] in overrides:
+                item["value"] = overrides[item["id"]]
+        result = run_backtest(panel, cpi, seasons, None if key != "base" else rain, changed)
+        for entry in result["summary"]["net"]:
+            if entry["model"] != "v1":
+                continue
+            rows.append(
+                {
+                    "case": key,
+                    "label": label,
+                    "option": entry["option"],
+                    "n_decisions": entry["n_decisions"],
+                    "store_count": entry["store_count"],
+                    "mean_gain_rwf_per_tonne": entry["mean_gain_rwf_per_tonne"],
+                    "share_not_worse_than_selling": entry["share_not_worse_than_selling"],
+                    "mean_always_store_4_rwf_per_tonne": entry["mean_always_store_4_rwf_per_tonne"],
+                }
+            )
+    return rows
+
+
 def load_seasons() -> dict:
     return yaml.safe_load((CONFIG / "seasons.yaml").read_text()) or {}
 

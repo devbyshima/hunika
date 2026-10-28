@@ -1,4 +1,7 @@
 export type Horizon = {
+  ratio_p10: number
+  ratio_p50: number
+  ratio_p90: number
   p10: number
   p50: number
   p90: number
@@ -17,6 +20,7 @@ export type CropForecast = {
   stale_days?: number
   stale?: boolean
   price_pooled?: boolean
+  own_price?: boolean
   pattern_last_year?: string
   horizons?: Record<string, Horizon>
   nearest_markets?: MarketPrice[]
@@ -72,6 +76,8 @@ export type SupplyEntry = {
 export type Bundle = {
   forecasts: {
     decision_date: string
+    decision_month: string
+    inflation: number
     cpi: { index_month: string; published_on: string; trailing_12m_inflation: number }
     districts: Record<string, Record<string, CropForecast>>
   }
