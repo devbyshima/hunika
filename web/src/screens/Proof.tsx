@@ -179,7 +179,7 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
 
       <h2 className="eyebrow mt-8 px-1">{t("proof.losing")}</h2>
       <ul className="card mt-2 px-4 py-2 text-sm leading-7">
-        {backtest.losing_seasons.map((row) => (
+        {backtest.losing_seasons.slice(0, 5).map((row) => (
           <li key={`${row.crop}-${row.district}-${row.season}-${row.year}`} className="num flex justify-between gap-3 border-b border-hair last:border-0">
             <span>
               {t(`decide.${row.crop}`)} · {row.district} {row.season} {row.year} <span className="text-faint">· {t("decide.plusMonths", { months: row.horizon })}</span>
@@ -192,37 +192,20 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
 
       <h2 className="eyebrow mt-8 px-1">{t("proof.models")}</h2>
       <div className="card mt-2 grid gap-2 p-4">
-      {v1 ? <p className="text-sm leading-snug">{t("proof.coverage", { share: pct(v1.coverage_all), raw: pct(v1.coverage_raw_all), n: v1.rows_all.toLocaleString("en-US") })}</p> : null}
-      {v1 && v2 && v1.pinball_mean != null && v2.pinball_mean != null && v2.coverage_compared != null && v1.coverage_compared != null ? (
-        <p className="text-sm leading-snug text-muted">
-          {t("proof.v2", {
-            n: v2.rows_compared.toLocaleString("en-US"),
-            v1: v1.pinball_mean.toFixed(1),
-            v2: v2.pinball_mean.toFixed(1),
-            c1: pct(v1.coverage_compared),
-            c2: pct(v2.coverage_compared),
-          })}
-        </p>
-      ) : null}
+      {v1 ? <p className="text-sm leading-snug">{t("proof.coverage", { share: pct(v1.coverage_all) })}</p> : null}
       {gainV1?.mean_gain_compared_rwf_per_tonne != null && gainV2?.mean_gain_compared_rwf_per_tonne != null ? (
         <p className="text-sm leading-snug text-muted">
-          {t("proof.v2Gain", {
-            n: gainV2.n_compared,
-            v1: signed(gainV1.mean_gain_compared_rwf_per_tonne),
-            v2: signed(gainV2.mean_gain_compared_rwf_per_tonne),
-          })}
+          {t("proof.v2Short", { v1: signed(gainV1.mean_gain_compared_rwf_per_tonne), v2: signed(gainV2.mean_gain_compared_rwf_per_tonne) })}
         </p>
       ) : null}
-
       </div>
       {checks.length ? (
-        <>
-          <h2 className="eyebrow mt-8 px-1">{t("proof.checks", { option: optionName })}</h2>
-          <div className="card mt-2 px-4 py-1">
-          <table className="w-full text-sm">
+        <details className="card mt-3 px-4">
+          <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold">{t("proof.checks")}</summary>
+          <table className="mb-3 w-full text-sm">
             <tbody>
               {checks.map((row) => (
-                <tr key={row.case} className="border-t border-hair align-top first:border-0">
+                <tr key={row.case} className="border-t border-hair align-top">
                   <td className="py-2 pr-2 leading-snug">{t(`proof.case.${row.case}`)}</td>
                   <td className={`num py-2 pr-2 text-right font-semibold ${row.mean_gain_rwf_per_tonne < 0 ? "text-loss" : "text-grass-700"}`}>{signed(row.mean_gain_rwf_per_tonne)}</td>
                   <td className="num py-2 text-right text-muted">{pct(row.share_not_worse_than_selling)}</td>
@@ -230,10 +213,9 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
               ))}
             </tbody>
           </table>
-          </div>
-        </>
+        </details>
       ) : null}
-      <p className="mt-3 px-1 text-xs leading-snug text-faint">{t("proof.money", { francs: backtest.francs })}</p>
+      <p className="mt-3 px-1 text-xs leading-snug text-faint">{t("proof.money")}</p>
     </div>
   )
 }

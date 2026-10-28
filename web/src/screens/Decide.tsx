@@ -61,6 +61,16 @@ function bestHorizon(forecast: CropForecast) {
   return Number(entries.reduce((best, item) => (item[1].p50 > best[1].p50 ? item : best))[0])
 }
 
+function Pill({ tone, children }: { tone: "good" | "warn" | "neutral"; children: React.ReactNode }) {
+  const look = tone === "warn" ? "bg-warn-100 text-warn" : tone === "good" ? "bg-grass-50 text-grass-800" : "bg-paper text-muted"
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-medium ${look}`}>
+      <Dot tone={tone} />
+      {children}
+    </span>
+  )
+}
+
 export default function Decide({
   bundle,
   t,
@@ -128,7 +138,6 @@ export default function Decide({
         {t("decide.heroA")}
         <span className="mt-1.5 block text-[24px] leading-[1.08] text-ghost">{t("decide.heroB")}</span>
       </h1>
-      <p className="mt-3 px-1 text-[13px] leading-snug text-muted">{t("app.tagline")}</p>
 
       <section className="panel mt-6 p-3">
         <div className="grid grid-cols-2 gap-2">
@@ -190,7 +199,6 @@ export default function Decide({
 
         <details className="mt-3 rounded-[14px] border border-line bg-white/80 px-3.5">
           <summary className="flex min-h-12 cursor-pointer items-center text-sm font-semibold text-ink">{t("decide.yourCosts")}</summary>
-          <p className="text-xs leading-snug text-muted">{t("decide.yourCostsNote")}</p>
           <div className="grid gap-2 pt-2 pb-3.5">
             <label className="block text-sm text-muted">
               {t("decide.costLoss")}
@@ -231,48 +239,47 @@ export default function Decide({
             {verdict === "store" ? t("decide.store", { months: view.verdict.horizon_months }) : verdict === "sell_now" ? t("decide.sellNow") : t("decide.noVerdict")}
           </h2>
 
-          <div className="mt-4 grid gap-1.5 text-[17px] leading-snug">
-            <p>{t("decide.sellNowWorth", { quantity: quantityLabel(view.quantityKg), amount: money(view.verdict.v0) })}</p>
-            <p>
-              {verdict === "store"
-                ? t("decide.likelyLine", { amount: money(view.verdict.likely_value), low: money(view.verdict.low_value), high: money(view.verdict.high_value) })
-                : t("decide.beforeLosses", { amount: money(total(horizon.p50)), low: money(total(horizon.p10)), high: money(total(horizon.p90)) })}
-            </p>
+          <dl className="num mt-5 grid gap-2 text-[15px]">
+            <div className="flex items-baseline justify-between gap-3">
+              <dt className="text-muted">{t("decide.rowSell")}</dt>
+              <dd className="font-semibold">{money(view.verdict.v0)} RWF</dd>
+            </div>
+            <div className="flex items-baseline justify-between gap-3">
+              <dt className="text-muted">{verdict === "store" ? t("decide.rowStore") : t("decide.rowStoreRaw")}</dt>
+              <dd className="text-right font-semibold">
+                {money(verdict === "store" ? view.verdict.likely_value : total(horizon.p50))} RWF
+                <span className="block text-xs font-normal text-faint">
+                  {money(verdict === "store" ? view.verdict.low_value : total(horizon.p10))} to {money(verdict === "store" ? view.verdict.high_value : total(horizon.p90))}
+                </span>
+              </dd>
+            </div>
+          </dl>
+          {verdict === "unpriced" ? <p className="mt-3 text-sm leading-snug text-muted">{t("decide.unpriced")}</p> : null}
+
+          {verdict === "store" || band ? (
+            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+              {verdict === "store" ? (
+                <span className="num rounded-full bg-grass-100 px-3 py-1 font-semibold text-grass-800">{t("decide.gain", { amount: money(view.verdict.likely_gain) })}</span>
+              ) : null}
+              {band ? (
+                <span className="inline-flex items-center gap-1.5 text-muted">
+                  <Dot tone={band === "under_10" ? "good" : band === "over_50" ? "bad" : "warn"} />
+                  {t(`decide.loss.${band === "between_10_and_50" ? "mid" : band === "over_50" ? "over50" : "under10"}`)}
+                </span>
+              ) : null}
+            </div>
+          ) : null}
+          <p className="mt-3 text-[13px] text-faint">{t("decide.reason", { up: horizon.n_up, n: horizon.n, months: view.horizon })}</p>
+
+          <div className="mt-4 flex flex-wrap gap-1.5 text-xs">
+            {forecast.own_price ? <Pill tone="good">{t("decide.ownPrice")}</Pill> : null}
+            {view.ownCosts ? <Pill tone="good">{t("decide.ownCosts")}</Pill> : null}
+            {!forecast.own_price && forecast.stale ? <Pill tone="warn">{t("decide.stale", { days: forecast.stale_days ?? "" })}</Pill> : null}
+            {!forecast.own_price && forecast.price_pooled ? <Pill tone="neutral">{t("decide.provincePrice")}</Pill> : null}
+            {forecast.pattern_last_year && forecast.pattern_last_year < "2022" ? <Pill tone="neutral">{t("decide.oldPattern", { year: forecast.pattern_last_year })}</Pill> : null}
           </div>
-          {verdict === "unpriced" ? <p className="mt-2 text-sm leading-snug text-muted">{t("decide.unpriced")}</p> : null}
 
-          {verdict === "store" ? (
-            <p className="num mt-4 inline-flex items-center gap-2 rounded-full bg-grass-100 px-3 py-1.5 text-sm font-semibold text-grass-800">
-              {t("decide.gain", { amount: money(view.verdict.likely_gain) })}
-            </p>
-          ) : null}
-          {band ? (
-            <p className="mt-3 flex items-center gap-2 text-sm">
-              <Dot tone={band === "under_10" ? "good" : band === "over_50" ? "bad" : "warn"} />
-              {t(`decide.loss.${band === "between_10_and_50" ? "mid" : band === "over_50" ? "over50" : "under10"}`)}
-            </p>
-          ) : null}
-          <p className="mt-3 text-sm leading-snug text-muted">{t("decide.reason", { up: horizon.n_up, n: horizon.n, months: view.horizon })}</p>
-
-          <ul className="mt-4 grid gap-1.5 text-[13px] leading-snug">
-            {forecast.own_price ? (
-              <li className="flex items-start gap-2"><span className="mt-1.5"><Dot tone="good" /></span>{t("decide.ownPrice", { price: money(forecast.price_now) })}</li>
-            ) : null}
-            {view.ownCosts ? (
-              <li className="flex items-start gap-2"><span className="mt-1.5"><Dot tone="good" /></span>{t("decide.ownCosts")}</li>
-            ) : null}
-            {!forecast.own_price && forecast.stale ? (
-              <li className="flex items-start gap-2 rounded-[10px] bg-warn-100 px-2.5 py-2 text-warn"><span className="mt-1"><Dot tone="warn" /></span>{t("decide.stale", { days: forecast.stale_days ?? "" })}</li>
-            ) : null}
-            {!forecast.own_price && forecast.price_pooled ? (
-              <li className="flex items-start gap-2 text-muted"><span className="mt-1.5"><Dot tone="neutral" /></span>{t("decide.provincePrice", { month: monthLabel(forecast.price_month || "") })}</li>
-            ) : null}
-            {forecast.pattern_last_year && forecast.pattern_last_year < "2022" ? (
-              <li className="flex items-start gap-2 text-muted"><span className="mt-1.5"><Dot tone="neutral" /></span>{t("decide.oldPattern", { year: forecast.pattern_last_year })}</li>
-            ) : null}
-          </ul>
-
-          <p className="eyebrow mt-5">{t("decide.outlook")}</p>
+          <p className="eyebrow mt-6">{t("decide.outlook")}</p>
           <div className="mt-2 grid grid-cols-4 gap-1.5">
             {Object.entries(forecast.horizons ?? {}).map(([key, item]) => {
               const up = item.p50 >= (forecast.price_now ?? 0)
@@ -285,26 +292,24 @@ export default function Decide({
             })}
           </div>
 
-          <p className="eyebrow mt-5">{t("decide.markets")}</p>
-          <ol className="mt-1.5 grid gap-1 text-sm">
-            {(forecast.nearest_markets ?? []).map((market, index) => (
-              <li key={market.name} className="flex items-baseline justify-between gap-3 border-b border-hair pb-1 last:border-0">
-                <span>
-                  <span className="fn mr-1">{index + 1}</span>
-                  {market.name}
-                </span>
-                <span className="num text-muted">
-                  {money(market.price)} RWF/kg · {monthLabel(market.month)}
+          <p className="eyebrow mt-6">{t("decide.markets")}</p>
+          <ul className="num mt-2 grid gap-1 text-[13px]">
+            {(forecast.nearest_markets ?? []).map((market) => (
+              <li key={market.name} className="flex justify-between gap-3">
+                <span>{market.name}</span>
+                <span className="text-muted">
+                  {money(market.price)} · {monthLabel(market.month)}
                 </span>
               </li>
             ))}
-          </ol>
-          <p className="mt-3 text-xs text-faint">{t("decide.dataDate", { date: forecast.price_date || "" })}</p>
+          </ul>
 
-          <button type="button" className="key-light mt-5 min-h-12 w-full" onClick={onShare}>
+          <button type="button" className="key-light mt-6 min-h-12 w-full" onClick={onShare}>
             {t("decide.shareThis")}
           </button>
-          <p className="mt-3 text-xs leading-snug text-faint">{t("decide.notice")}</p>
+          <p className="mt-3 text-center text-xs text-faint">
+            {t("decide.dataDate", { date: forecast.price_date || "" })} · {t("decide.notice")}
+          </p>
         </section>
       ) : null}
     </div>

@@ -53,10 +53,10 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
   return (
     <div className="px-4 pt-8 pb-6">
       <h1 className="display px-1 text-[34px] leading-[1.02] tracking-[-0.02em]">{t("about.title")}</h1>
-      <p className="mt-3 px-1 text-[15px] leading-relaxed text-muted">{t("about.lead")}</p>
+      <p className="mt-3 px-1 text-[15px] leading-snug text-muted">{t("about.lead")}</p>
 
       <h2 className="eyebrow mt-8 px-1">{t("about.sources")}</h2>
-      <ol className="card mt-2 grid gap-3 p-4 text-sm leading-relaxed">
+      <ol className="card mt-2 grid gap-2 p-4 text-sm">
         {sources.map((text, index) => (
           <li key={index} className="flex gap-2.5">
             <span className="fn mt-0.5 w-4 shrink-0 text-right">{index + 1}</span>
@@ -68,16 +68,16 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
       <h2 className="eyebrow mt-8 px-1">{t("about.assumptions")}</h2>
       <ul className="card mt-2 px-4">
         {bundle.assumptions.items.map((item) => (
-          <li key={item.id} className="border-b border-hair py-3.5 last:border-0">
-            <div className="flex items-baseline justify-between gap-3">
-              <p className="font-semibold">{item.label}</p>
-              <p className={`num shrink-0 text-sm font-semibold ${item.value == null ? "text-ghost" : "text-grass-700"}`}>{valueText(item, t)}</p>
-            </div>
-            <p className="mt-1.5 flex items-start gap-2 text-[13px] leading-snug text-muted">
-              <span className="mt-1.5">
-                <Dot tone={item.value == null ? "neutral" : item.status === "sourced" ? "good" : "warn"} />
-              </span>
-              <span>
+          <li key={item.id} className="border-b border-hair last:border-0">
+            <details>
+              <summary className="flex min-h-12 cursor-pointer items-center justify-between gap-3 py-2 text-sm">
+                <span className="flex items-center gap-2">
+                  <Dot tone={item.value == null ? "neutral" : item.status === "sourced" ? "good" : "warn"} />
+                  {item.label}
+                </span>
+                <span className={`num shrink-0 font-semibold ${item.value == null ? "text-ghost" : "text-grass-700"}`}>{valueText(item, t)}</span>
+              </summary>
+              <p className="pb-3 pl-4 text-[13px] leading-snug text-muted">
                 {item.source}
                 {item.url ? (
                   <>
@@ -87,16 +87,16 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
                     </a>
                   </>
                 ) : null}
-              </span>
-            </p>
+              </p>
+            </details>
           </li>
         ))}
       </ul>
 
       <h2 className="eyebrow mt-8 px-1">{t("about.teamTitle")}</h2>
-      <div className="card mt-2 grid gap-2 p-4 text-sm leading-relaxed">
+      <div className="card mt-2 grid gap-1.5 p-4 text-sm">
         <p>{t("about.team")}</p>
-        <p className="text-muted">{t("about.ai")}</p>
+        <p className="text-[13px] text-muted">{t("about.ai")}</p>
       </div>
       <p className="mt-4 px-1 text-xs leading-snug text-faint">{t("about.notice")}</p>
     </div>

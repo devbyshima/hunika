@@ -92,16 +92,18 @@ export default function Share({
           {t(`decide.${view.crop}`)} · {view.district} · {quantityLabel(view.quantityKg)}
         </p>
         <h2 className={`display mt-3 text-[42px] leading-[0.98] tracking-[-0.02em] ${store ? "text-grass-700" : "text-ink"}`}>{line}</h2>
-        <p className="num mt-4 text-[17px] leading-snug">{t("decide.sellNowWorth", { quantity: quantityLabel(view.quantityKg), amount: money(view.verdict.v0) })}</p>
-        {store ? (
-          <p className="num mt-2 text-[17px] leading-snug">
-            {t("decide.likelyLine", {
-              amount: money(view.verdict.likely_value),
-              low: money(view.verdict.low_value),
-              high: money(view.verdict.high_value),
-            })}
-          </p>
-        ) : null}
+        <dl className="num mt-5 grid gap-1.5 text-[15px]">
+          <div className="flex justify-between gap-3">
+            <dt className="text-muted">{t("decide.rowSell")}</dt>
+            <dd className="font-semibold">{money(view.verdict.v0)} RWF</dd>
+          </div>
+          {store ? (
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted">{t("decide.rowStore")}</dt>
+              <dd className="font-semibold">{money(view.verdict.likely_value)} RWF</dd>
+            </div>
+          ) : null}
+        </dl>
         {view.verdict.verdict === "unpriced" ? <p className="mt-2 text-sm leading-snug text-muted">{t("decide.unpriced")}</p> : null}
         <p className="mt-auto pt-4 text-xs leading-snug text-faint">{t("decide.notice")}</p>
       </article>
