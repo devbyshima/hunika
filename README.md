@@ -16,9 +16,9 @@ Hunika is a mobile web app for cooperative managers and farmer promoters in Rwan
 - **CHIRPS rainfall** by district, from WFP on HDX, 1981 to October 2026. Feeds model v2.
 - **geoBoundaries** district boundaries for the map.
 - **Storage costs and losses** from published trials and notices, each with a source in [`config/assumptions.yaml`](config/assumptions.yaml) and on the app's Method screen.
-- The **Agricultural Household Survey 2024** is not used. It sits behind an NISR microdata login. See [`data/raw/nisr/AHS_2024_MISSING.txt`](data/raw/nisr/AHS_2024_MISSING.txt).
+- **NISR Agricultural Household Survey 2024**, public-use files, weighted for Eastern Province maize and bean households: harvest size, cooperative membership and services, loans and why seasons went badly. Only 7.7% of cooperative members get storage from their cooperative, and buying food is the top reason for loans. AHS has no question on sales, storage or losses. The microdata needs an NISR login and is not committed; the summary is in `data/processed/ahs_summary.json`.
 
-Prices are market retail, not farm-gate. Every source, licence and download date is in [`docs/DATA.md`](docs/DATA.md). Processed data is committed under `data/processed/` and `web/public/data/`. The NISR workbooks and the national rainfall file are linked, not committed: `scripts/fetch_public_data.sh` downloads them.
+Prices are market retail, not farm-gate. Every source, licence and download date is in [`docs/DATA.md`](docs/DATA.md). Processed data is committed under `data/processed/` and `web/public/data/`. The NISR workbooks and the national rainfall file are linked, not committed: `scripts/fetch_public_data.sh` downloads them. AHS 2024 must be downloaded by hand from the [NISR microdata catalog](https://microdata.statistics.gov.rw/index.php/catalog/123) into `data/raw/nisr/ahs2024/`; without it the pipeline reuses the committed summary.
 
 ## What the app is trying to communicate
 

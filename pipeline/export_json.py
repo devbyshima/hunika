@@ -141,6 +141,19 @@ def write_all(panel, cpi, sas, backtest_summary, rain=None) -> None:
         rain = pd.read_csv(PROCESSED / "rain_dekadal_east.csv")
     checks = rain_check(rain, anomaly) if rain is not None and not anomaly.empty else []
     supply = _sas_public(sas, anomaly, checks)
+    ahs_path = PROCESSED / "ahs_summary.json"
+    if ahs_path.exists():
+        ahs = json.loads(ahs_path.read_text())
+        supply["ahs"] = {
+            "weighted_households": ahs["weighted_households"],
+            "sample_households": ahs["sample_households"],
+            "median_harvest_kg": {crop: {season[-1]: item["median_harvest_kg"] for season, item in seasons.items()} for crop, seasons in ahs["crops"].items()},
+            "cooperative_member": ahs["cooperative_member"],
+            "cooperative_storage": next(item["share"] for item in ahs["cooperative_services"] if item["code"] == "4"),
+            "cooperative_markets": next(item["share"] for item in ahs["cooperative_services"] if item["code"] == "2"),
+            "loan_requested": ahs["loan_requested"],
+            "loan_for_food": next((item["share"] for item in ahs["loan_purpose"] if item["answer"] == "Food purchase"), None),
+        }
     for district, crops in forecasts["districts"].items():
         for crop, payload in crops.items():
             if isinstance(payload, dict):

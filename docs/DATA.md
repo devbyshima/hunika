@@ -10,7 +10,7 @@ Downloaded 25 October 2026 unless a row says otherwise. Every number in the app 
 | [NISR Seasonal Agricultural Survey](https://statistics.gov.rw/data-sources/surveys/Seasonal-Agricultural-Survey), district tables 2018–2026 | Maize and total beans, in tonnes, for all 30 districts, Seasons A and B. 18 seasons, 540 rows. Downloaded 28 October 2026. Editions and tables are listed below. | The SAS report PDFs say all rights reserved, so the workbooks are not committed. Season C is not extracted. | Extract: `data/processed/sas_district_production.csv` and `data/processed/sas_supply_anomaly.csv`. Workbooks gitignored. |
 | [CHIRPS rainfall by district, WFP on HDX](https://data.humdata.org/dataset/rwa-rainfall-subnational) | Dekadal rainfall (`rfh`) for the seven Eastern districts, January 1981 to October 2026. Downloaded 28 October 2026. | CC BY. The 7 MB national file is local only. PCODEs RW51–RW57 are the NISR district codes (Rwamagana, Nyagatare, Gatsibo, Kayonza, Kirehe, Ngoma, Bugesera); pixel counts match the district sizes. | Extract: `data/processed/rain_dekadal_east.csv`. Full file gitignored. |
 | [geoBoundaries Rwanda ADM2](https://www.geoboundaries.org/api/current/gbOpen/RWA/ADM2/) | Seven Eastern districts. Simplified file from commit `9469f09`. | CC BY 4.0. Source named as Open Data Rwanda. | `data/raw/geoBoundaries-RWA-ADM2_simplified.geojson` and `web/public/data/districts.geojson` |
-| [NISR microdata catalog](https://microdata.statistics.gov.rw/index.php/catalog), AHS 2024 (`RWA-NISR-RAHS-2024`) | Not downloaded | Login required. Do not commit microdata if the terms forbid it. | `data/raw/nisr/AHS_2024_MISSING.txt` only |
+| [NISR Agricultural Household Survey 2024](https://microdata.statistics.gov.rw/index.php/catalog/123) (`RWA-NISR-RAHS-2024-V0.1`), public-use files | Crop file (harvest per plot, comparison with an earlier season, reasons), extension and cooperatives, credit, saving, household weights. Downloaded by the team on 28 October 2026. [Questionnaire](https://microdata.statistics.gov.rw/index.php/catalog/123/download/1106). | NISR microdata login required. Microdata is not committed. The files have no question on maize or bean sales, sale timing, storage or post-harvest losses. | Weighted summary: `data/processed/ahs_summary.json`. Microdata gitignored in `data/raw/nisr/ahs2024/`. |
 
 Direct downloads, also in `scripts/fetch_public_data.sh`:
 
@@ -21,6 +21,22 @@ Direct downloads, also in `scripts/fetch_public_data.sh`:
 - SAS workbooks: one `curl` line per edition in the script.
 
 World Bank and eSoko were not used. eSoko needs a MINAGRI login.
+
+## AHS 2024 variables
+
+All shares use `weight` ("Final Season A weight") from Section 0. The universe is Eastern Province households with a maize, climbing bean or bush bean plot in Season A or B 2024 (983 sampled, 664,308 weighted).
+
+| Variable | Question | Use |
+| --- | --- | --- |
+| `s3_q4_k`, `s3_q20_k` | 3.4 crop name, 3.20 total harvest of the plot in kg, crop slots 1–7 | Median harvest per household and season |
+| `s2q23_k` | 2.22 production of this crop this season compared with an earlier one. The published label is cut off before the comparison period. | Share reporting a lower harvest |
+| `s3_q21_k_1` | 3.21 explanation, stored as letters. A is questionnaire code 1 (drought), B is 2, and so on; Z is other. Letters A–O and Z only occur with a lower harvest and Q–T only with a higher one, which confirms the order. | Main reason for a lower harvest |
+| `s6q10`, `s6q12` | 6.10 cooperative member, 6.12 services from it (1 advice, 2 markets products, 3 inputs, 4 storage, 5 loans, 6 profit share, 7 none, 8 other) | Cooperative reach and storage services |
+| `s6q1`, `s6q3` | 6.1 extension service, 6.3 received this season | Post-harvest handling advice |
+| `loan`, `s10q6`, `s10aq7` | Any loan requested, source, main purpose | Borrowing and cash needs |
+| `account` | Any member has a bank or mobile money account | Reach |
+
+The questionnaire lists code tables for "market place" and "types of storage facilities", but no question uses them.
 
 ## SAS editions
 

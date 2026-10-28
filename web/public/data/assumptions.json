@@ -8,7 +8,7 @@
       "value": 0.0356,
       "unit": "fraction_per_month",
       "status": "ASSUMPTION",
-      "source": "Likhayo et al. 2016, J. Econ. Entomol. 109(4): 32% maize weight loss in polypropylene bags without Actellic, 270 days after storage, on 32 Kenyan farms. 0.32 / 9 months. Applied to beans too, because no on-farm bean trial with a stated period was found. Other trials lose faster: 41.2% in 8 months in Makueni, Kenya (Ng'ang'a et al. 2016). That rate is the sensitivity case in docs/METHODOLOGY.md. Replace with AHS 2024 when the team has it.",
+      "source": "Likhayo et al. 2016, J. Econ. Entomol. 109(4): 32% maize weight loss in polypropylene bags without Actellic, 270 days after storage, on 32 Kenyan farms. 0.32 / 9 months. Applied to beans too, because no on-farm bean trial with a stated period was found. Other trials lose faster: 41.2% in 8 months in Makueni, Kenya (Ng'ang'a et al. 2016). That rate is the sensitivity case in docs/METHODOLOGY.md. The Agricultural Household Survey 2024 has no storage-loss question, so it cannot replace this.",
       "url": "https://thehive.icipe.org/all-prp/4162"
     },
     {

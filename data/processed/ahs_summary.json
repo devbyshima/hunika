@@ -1,0 +1,254 @@
+{
+  "source": "NISR Agricultural Household Survey 2024, RWA-NISR-RAHS-2024-V0.1, public-use files",
+  "catalog": "https://microdata.statistics.gov.rw/index.php/catalog/123",
+  "questionnaire": "https://microdata.statistics.gov.rw/index.php/catalog/123/download/1106",
+  "scope": "Eastern Province households that grew maize or beans in Season A or B 2024. Shares and counts use the survey weight.",
+  "not_in_survey": "The public-use files have no question on maize or bean sales, timing of sales, storage or post-harvest losses. The questionnaire's market-place and storage code lists are not used by any question.",
+  "sample_households": 983,
+  "weighted_households": 664308,
+  "eastern_households_sampled": 1013,
+  "share_of_eastern_households": 0.9745,
+  "crops": {
+    "beans": {
+      "Season A": {
+        "households_sampled": 861,
+        "households_weighted": 587040,
+        "median_harvest_kg": 80.0,
+        "p90_harvest_kg": 308.0,
+        "plots_compared": 1624,
+        "share_lower_than_last_season": 0.458,
+        "main_reason_when_lower": [
+          {
+            "answer": "Heavy rainfall or hailstones",
+            "share": 0.7904
+          },
+          {
+            "answer": "Insufficient or no fertiliser",
+            "share": 0.1428
+          },
+          {
+            "answer": "Unfertile soil",
+            "share": 0.0176
+          },
+          {
+            "answer": "Insufficient rainfall",
+            "share": 0.015
+          },
+          {
+            "answer": "Drought",
+            "share": 0.0104
+          },
+          {
+            "answer": "Late sowing",
+            "share": 0.008
+          }
+        ]
+      },
+      "Season B": {
+        "households_sampled": 816,
+        "households_weighted": 564796,
+        "median_harvest_kg": 57.0,
+        "p90_harvest_kg": 265.0,
+        "plots_compared": 1490,
+        "share_lower_than_last_season": 0.8398,
+        "main_reason_when_lower": [
+          {
+            "answer": "Insufficient rainfall",
+            "share": 0.4617
+          },
+          {
+            "answer": "Drought",
+            "share": 0.2362
+          },
+          {
+            "answer": "Heavy rainfall or hailstones",
+            "share": 0.2148
+          },
+          {
+            "answer": "Insufficient or no fertiliser",
+            "share": 0.049
+          },
+          {
+            "answer": "Other reason",
+            "share": 0.0134
+          },
+          {
+            "answer": "Diseases and pests",
+            "share": 0.008
+          }
+        ]
+      }
+    },
+    "maize": {
+      "Season A": {
+        "households_sampled": 890,
+        "households_weighted": 607235,
+        "median_harvest_kg": 239.0,
+        "p90_harvest_kg": 1305.0,
+        "plots_compared": 1757,
+        "share_lower_than_last_season": 0.2604,
+        "main_reason_when_lower": [
+          {
+            "answer": "Insufficient or no fertiliser",
+            "share": 0.4292
+          },
+          {
+            "answer": "Late sowing",
+            "share": 0.1524
+          },
+          {
+            "answer": "Inappropriate seeds",
+            "share": 0.144
+          },
+          {
+            "answer": "Insufficient rainfall",
+            "share": 0.0619
+          },
+          {
+            "answer": "Drought",
+            "share": 0.0545
+          },
+          {
+            "answer": "Heavy rainfall or hailstones",
+            "share": 0.0535
+          }
+        ]
+      },
+      "Season B": {
+        "households_sampled": 509,
+        "households_weighted": 376794,
+        "median_harvest_kg": 100.0,
+        "p90_harvest_kg": 761.0,
+        "plots_compared": 783,
+        "share_lower_than_last_season": 0.8594,
+        "main_reason_when_lower": [
+          {
+            "answer": "Insufficient rainfall",
+            "share": 0.6759
+          },
+          {
+            "answer": "Drought",
+            "share": 0.2142
+          },
+          {
+            "answer": "Insufficient or no fertiliser",
+            "share": 0.0474
+          },
+          {
+            "answer": "Heavy rainfall or hailstones",
+            "share": 0.0252
+          },
+          {
+            "answer": "Inappropriate seeds",
+            "share": 0.0138
+          },
+          {
+            "answer": "Late sowing",
+            "share": 0.0126
+          }
+        ]
+      }
+    }
+  },
+  "cooperative_member": 0.1392,
+  "cooperative_members_sampled": 130,
+  "cooperative_services": [
+    {
+      "code": "1",
+      "answer": "Farming advice",
+      "share": 0.3842
+    },
+    {
+      "code": "2",
+      "answer": "Markets our products",
+      "share": 0.3979
+    },
+    {
+      "code": "3",
+      "answer": "Access to farm inputs",
+      "share": 0.4255
+    },
+    {
+      "code": "4",
+      "answer": "Storage facilities",
+      "share": 0.0772
+    },
+    {
+      "code": "5",
+      "answer": "Access to loans",
+      "share": 0.4927
+    },
+    {
+      "code": "6",
+      "answer": "Share in the profit",
+      "share": 0.1169
+    },
+    {
+      "code": "7",
+      "answer": "None",
+      "share": 0.0725
+    },
+    {
+      "code": "8",
+      "answer": "Other",
+      "share": 0.0337
+    }
+  ],
+  "post_harvest_advice_this_season": 0.1275,
+  "crop_insurance": 0.0262,
+  "loan_requested": 0.6917,
+  "loans_sampled": 1044,
+  "loan_source": [
+    {
+      "answer": "Tontine/Solidarity fund",
+      "share": 0.6979
+    },
+    {
+      "answer": "Relative/friend",
+      "share": 0.1761
+    },
+    {
+      "answer": "Savings & Credit Cooperatives (SACCO)",
+      "share": 0.0524
+    },
+    {
+      "answer": "Commercial Bank",
+      "share": 0.0499
+    },
+    {
+      "answer": "VUP financial services",
+      "share": 0.0138
+    },
+    {
+      "answer": "Microfinance",
+      "share": 0.0092
+    }
+  ],
+  "loan_purpose": [
+    {
+      "answer": "Food purchase",
+      "share": 0.2185
+    },
+    {
+      "answer": "Business expansion",
+      "share": 0.149
+    },
+    {
+      "answer": "Agricultural inputs",
+      "share": 0.1085
+    },
+    {
+      "answer": "Agricultural equipment",
+      "share": 0.0987
+    },
+    {
+      "answer": "Others (specify)",
+      "share": 0.0909
+    },
+    {
+      "answer": "Home improvement",
+      "share": 0.0909
+    }
+  ],
+  "account": 0.3005
+}

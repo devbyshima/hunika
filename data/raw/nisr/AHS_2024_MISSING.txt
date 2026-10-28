@@ -1,5 +1,0 @@
-Agricultural Household Survey 2024 is not in this folder.
-The build needs it for Eastern Province sales timing, storage and losses.
-Register and download RWA-NISR-RAHS-2024 from https://microdata.statistics.gov.rw/index.php/catalog
-Place the public-use files in data/raw/nisr/ahs2024/.
-Do not commit microdata if the NISR terms forbid redistribution.

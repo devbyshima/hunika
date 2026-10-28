@@ -100,5 +100,15 @@ export type Bundle = {
     districts: Record<string, { A: SupplyEntry | null; B: SupplyEntry | null }>
     rwanda: { A: SupplyEntry | null; B: SupplyEntry | null }
     rain_check: { crop: string; season: string; n: number; years: string; correlation: number }[]
+    ahs?: {
+      weighted_households: number
+      sample_households: number
+      median_harvest_kg: Record<string, Record<string, number>>
+      cooperative_member: number
+      cooperative_storage: number
+      cooperative_markets: number
+      loan_requested: number
+      loan_for_food: number | null
+    }
   }
 }

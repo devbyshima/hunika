@@ -97,5 +97,6 @@
   "decide.ownPrice": "Using the price you entered: {price} RWF per kg.",
   "about.teamTitle": "Team",
   "about.team": "Shima Serein, for the NISR 2026 Big Data Hackathon. All rights in the submission pass to NISR.",
-  "about.ai": "AI use: the code, the data pipeline and the first drafts of the text were written with Claude, an AI assistant, from the team's build guide. Every figure comes from the sources listed here."
+  "about.ai": "AI use: the code, the data pipeline and the first drafts of the text were written with Claude, an AI assistant, from the team's build guide. Every figure comes from the sources listed here.",
+  "about.ahsUsed": "NISR Agricultural Household Survey 2024 ({n} sampled households): about {households} thousand Eastern Province households grow maize or beans. Median Season A harvest: {maize} kg of maize, {beans} kg of beans. {coop} belong to a cooperative; {markets} of members say it markets their crop, but only {storage} get storage from it. {loan} asked for a loan, and buying food was the most common reason. The survey has no question on crop sales, storage or losses, so the loss rates come from published trials."
 }

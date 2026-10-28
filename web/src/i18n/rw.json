@@ -97,7 +97,8 @@
     "decide.ownPrice",
     "about.teamTitle",
     "about.team",
-    "about.ai"
+    "about.ai",
+    "about.ahsUsed"
   ],
   "app.name": "Hunika",
   "app.tagline": "eSoko iguhaye igiciro cy'uyu munsi. Hunika ikubwira icyo ukora.",
@@ -197,5 +198,6 @@
   "decide.ownPrice": "Hakoreshejwe igiciro wanditse: {price} RWF ku kilo.",
   "about.teamTitle": "Itsinda",
   "about.team": "Shima Serein, mu marushanwa ya NISR 2026 Big Data Hackathon. Uburenganzira bwose ku byatanzwe bwegurirwa NISR.",
-  "about.ai": "Ikoreshwa rya AI: kode, uburyo bwo gutunganya amakuru n'inyandiko za mbere byanditswe hifashishijwe Claude, umufasha wa AI, hakurikijwe igitabo cy'itsinda. Buri mubare uva ku masoko yavuzwe hano."
+  "about.ai": "Ikoreshwa rya AI: kode, uburyo bwo gutunganya amakuru n'inyandiko za mbere byanditswe hifashishijwe Claude, umufasha wa AI, hakurikijwe igitabo cy'itsinda. Buri mubare uva ku masoko yavuzwe hano.",
+  "about.ahsUsed": "Ubushakashatsi bwa NISR ku ngo z'abahinzi 2024 (ingo {n} zabajijwe): ingo zigera ku bihumbi {households} mu Ntara y'Iburasirazuba zihinga ibigori cyangwa ibishyimbo. Umusaruro uringaniye w'Igihembwe A: ibiro {maize} by'ibigori, ibiro {beans} by'ibishyimbo. {coop} ziri muri koperative; {markets} by'abanyamuryango bavuga ko ibagurishiriza umusaruro, ariko {storage} gusa ni bo ibonera ububiko. {loan} basabye inguzanyo, kandi kugura ibiribwa ni yo mpamvu yagarutsweho cyane. Ubushakashatsi ntibubaza ku igurishwa, ububiko cyangwa ibyangirika by'umusaruro, bityo ibipimo by'ibyangirika biva mu bigeragezo byatangajwe."
 }

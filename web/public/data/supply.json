@@ -1057,5 +1057,24 @@
       "years": "2021-2026",
       "correlation": 0.384
     }
-  ]
+  ],
+  "ahs": {
+    "weighted_households": 664308,
+    "sample_households": 983,
+    "median_harvest_kg": {
+      "beans": {
+        "A": 80.0,
+        "B": 57.0
+      },
+      "maize": {
+        "A": 239.0,
+        "B": 100.0
+      }
+    },
+    "cooperative_member": 0.1392,
+    "cooperative_storage": 0.0772,
+    "cooperative_markets": 0.3979,
+    "loan_requested": 0.6917,
+    "loan_for_food": 0.2185
+  }
 }

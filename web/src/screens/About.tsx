@@ -1,5 +1,9 @@
 import type { Bundle } from "../types"
 
+function pct(value: number) {
+  return `${Math.round(value * 100)}%`
+}
+
 export default function About({
   bundle,
   t,
@@ -7,6 +11,7 @@ export default function About({
   bundle: Bundle
   t: (key: string, vars?: Record<string, string | number>) => string
 }) {
+  const ahs = bundle.supply.ahs
   return (
     <div className="px-4 pt-5 pb-6">
       <h1 className="ledger text-3xl text-[#14532d]">{t("about.title")}</h1>
@@ -17,7 +22,20 @@ export default function About({
         <li>{t("about.cpi")}</li>
         <li>{t("about.sas")}</li>
         <li>{t("about.rain")}</li>
-        <li>{t("about.ahs")}</li>
+        <li>
+          {ahs
+            ? t("about.ahsUsed", {
+                households: Math.round(ahs.weighted_households / 1000).toLocaleString("en-US"),
+                n: ahs.sample_households,
+                maize: ahs.median_harvest_kg.maize?.A ?? "",
+                beans: ahs.median_harvest_kg.beans?.A ?? "",
+                coop: pct(ahs.cooperative_member),
+                storage: pct(ahs.cooperative_storage),
+                markets: pct(ahs.cooperative_markets),
+                loan: pct(ahs.loan_requested),
+              })
+            : t("about.ahs")}
+        </li>
       </ul>
       <h2 className="mt-6 text-sm font-semibold">{t("about.assumptions")}</h2>
       <ul className="mt-2 space-y-3">

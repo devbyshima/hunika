@@ -147,7 +147,7 @@ The gates halve the average hermetic gain and cut the share of losing decisions 
 - Decision months were picked from the whole price series (the month the price most often bottoms). That flatters every storage strategy against selling, Hunika and always-store alike.
 - Five of seven districts have had no market of their own since 2015 and use the province price, so 48% of decisions share a price path with another district. The worst seasons repeat for that reason.
 - Prices are market retail, not farm-gate.
-- Loss rates are from Kenyan maize trials, not Rwandan beans. AHS 2024, which asks Rwandan households about storage losses, is behind an NISR login and was not used.
+- Loss rates are from Kenyan maize trials, not Rwandan beans. AHS 2024 was checked: its public-use files have no question on storage, sales or post-harvest losses, so it cannot calibrate them. It is used for who faces the decision (`docs/PROBLEM.md`).
 - The v1 range holds 62% of outcomes, not 80%. The low case on the card can be worse than shown.
 - g_min and d_max were not tuned.
 - The live outlook starts from an August 2026 price that is 74 days old on 28 October 2026, unless the manager types today's price.

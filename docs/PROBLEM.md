@@ -21,7 +21,14 @@ Hunika's own price file does not measure those national drops. The app's prices 
 
 ## Agricultural Household Survey 2024
 
-Not summarised. The public-use file needs an NISR microdata login. It was not downloaded in this build. It is the right place to look for how Eastern households sell, when they sell, and what they lose in storage.
+Weighted summary of Eastern Province households with a maize or bean plot in Season A or B 2024: 983 sampled households, about 664,000 households in the population. Source: NISR AHS 2024 public-use files, `data/processed/ahs_summary.json`.
+
+- **Small lots.** The median household harvested 239 kg of maize and 80 kg of beans in Season A 2024 (Season B: 100 kg and 57 kg). One household cannot store or sell well alone; a cooperative manager advising members is the right user.
+- **Cooperatives rarely store.** 13.9% belong to an agricultural cooperative. Of those members, 39.8% say the cooperative markets their products, 49.3% get loans and 42.6% inputs through it, but only 7.7% get storage facilities from it.
+- **Cash pressure.** 69.2% of households requested a loan. 69.8% of loans came from tontines or solidarity funds and 17.6% from relatives or friends; SACCOs and banks gave about 5% each. Buying food was the most common purpose (21.9% of loans).
+- **Little post-harvest support.** 12.8% received advice on post-harvest handling and storage this season. 2.6% took crop insurance.
+- **Bad seasons are common.** In Season B 2024, 85.9% of maize plots and 84.0% of bean plots were reported as producing less than before, mostly from insufficient rainfall or drought. In Season A 2024, 26.0% of maize plots and 45.8% of bean plots produced less. For beans the main reason was heavy rain or hailstones (79.0%); for maize, a lack of fertiliser (42.9%).
+- **What AHS cannot tell us.** The public-use files have no question on crop sales, when households sell, storage or post-harvest losses. Hunika's loss rates therefore come from published trials (`config/assumptions.yaml`).
 
 ## Interviews
 
