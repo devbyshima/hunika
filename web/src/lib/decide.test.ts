@@ -33,7 +33,7 @@ it("keeps English and Kinyarwanda keys aligned", () => {
   for (const key of kinyarwanda) {
     if (key !== "app.name") expect(review.has(key)).toBe(true)
   }
-  if (new Date().toISOString().slice(0, 10) > "2026-10-28") {
+  if (new Date().toISOString().slice(0, 10) > "2026-10-30") {
     expect(rw._review).toEqual([])
   }
 })

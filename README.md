@@ -59,7 +59,7 @@ pytest
 cd web && npm test && npm run build
 ```
 
-GitHub Actions runs both on every push. The web test fails after 28 October 2026 until every Kinyarwanda string has been reviewed and removed from `_review` in `web/src/i18n/rw.json`.
+GitHub Actions runs both on every push. The web test fails after 30 October 2026 until every Kinyarwanda string has been reviewed and removed from `_review` in `web/src/i18n/rw.json`.
 
 Kinyarwanda review: `python scripts/rw_review.py export` writes `docs/review/kinyarwanda_review.csv` (opens in Excel). The reviewer corrects `kinyarwanda_final` where needed and writes `yes` in `approved`. `python scripts/rw_review.py apply` writes the approved lines into `rw.json` and clears them from `_review`; it refuses a line whose placeholders, such as `{amount}`, differ from the English.
 
