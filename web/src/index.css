@@ -225,7 +225,7 @@ input {
 .picker:active {
   background: var(--color-grass-200);
 }
-@media (max-width: 379px) {
+@media (max-width: 419px) {
   .picker {
     padding-left: 0.85rem;
   }

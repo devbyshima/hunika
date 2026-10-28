@@ -185,11 +185,11 @@ export default function Decide({ bundle, t, onView, onShare }: { bundle: Bundle;
           ))}
         </div>
 
-        <div className="mt-3 grid grid-cols-[1.25fr_1fr] gap-2">
+        <div className="mt-3 grid grid-cols-2 gap-2">
           <label className="block">
             <span className="label block px-1 pb-1.5">{t("decide.district")}</span>
             <span className="relative block">
-              <PinPic className="pointer-events-none absolute top-1/2 left-2.5 size-5 -translate-y-1/2 text-grass-700 max-[379px]:hidden" />
+              <PinPic className="pointer-events-none absolute top-1/2 left-2.5 size-5 -translate-y-1/2 text-grass-700 max-[419px]:hidden" />
               <select className="picker" value={district} onChange={(event) => setDistrict(event.target.value)}>
                 {DISTRICTS.map((name) => (
                   <option key={name}>{name}</option>
