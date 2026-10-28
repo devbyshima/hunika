@@ -101,8 +101,6 @@ export default function About({ bundle, t }: { bundle: Bundle; t: T }) {
         </ul>
       </details>
 
-      <p className="mt-6 px-1 text-center text-xs text-faint">{t("about.team")}</p>
-      <p className="mt-1 px-1 text-center text-xs text-faint">{t("about.ai")}</p>
     </div>
   )
 }

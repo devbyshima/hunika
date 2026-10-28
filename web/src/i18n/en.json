@@ -60,8 +60,6 @@
   "about.rain": "CHIRPS rainfall · to Oct 2026",
   "decide.todayPrice": "Today's price, RWF/kg",
   "decide.ownPrice": "Your price",
-  "about.team": "Shima Serein · NISR Big Data Hackathon 2026",
-  "about.ai": "Built with Claude, an AI assistant. Every figure comes from the sources above.",
   "about.ahsUsed": "NISR Agricultural Household Survey 2024 · {storage} of co-op members get storage",
   "proof.lead": "{n} past harvests · {years}",
   "proof.whenStore": "per tonne when it said store",
