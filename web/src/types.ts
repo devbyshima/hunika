@@ -49,6 +49,9 @@ export type NetStats = {
   share_not_worse_than_selling: number
   losing_count: number
   mean_gain_when_stored_rwf_per_tonne: number | null
+  share_stored_losing: number | null
+  mean_store_4_when_sell_rwf_per_tonne: number | null
+  share_store_4_losing_when_sell: number | null
   mean_always_store_4_rwf_per_tonne: number | null
   share_always_store_4_losing: number | null
   worst: { crop: string; district: string; season: string; year: number; gain_rwf_per_tonne: number }
@@ -58,6 +61,7 @@ export type ModelScore = {
   model: string
   rows_all: number
   coverage_all: number
+  coverage_raw_all: number
   rows_compared: number
   pinball_mean: number | null
   coverage_compared: number | null
@@ -85,6 +89,8 @@ export type Bundle = {
   backtest: {
     lot_kg: number
     francs: string
+    years: string | null
+    sensitivity?: { case: string; label: string; option: string; n_decisions: number; store_count: number; mean_gain_rwf_per_tonne: number; share_not_worse_than_selling: number }[]
     headline: (NetStats & { model: string; option: string }) | null
     unpriced_options: string[]
     net: (NetStats & { model: string; option: string; n_compared: number; mean_gain_compared_rwf_per_tonne: number | null })[]

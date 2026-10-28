@@ -10,6 +10,7 @@ from __future__ import annotations
 import math
 from datetime import date, datetime
 
+import numpy as np
 import pandas as pd
 
 from pipeline.months import add_months, blend, collect_ratios, quantiles
@@ -102,6 +103,37 @@ def v2_quantiles(samples, anomaly_now):
     return math.exp(centre + low), math.exp(centre + mid), math.exp(centre + high)
 
 
+CALIBRATION_TARGET = 0.8
+CALIBRATION_MIN_ROWS = 60
+
+
+def widen(ratios, width: float):
+    """Stretch a p10, p50, p90 triple around its p50 in log space."""
+    low, mid, high = ratios
+    return mid * (low / mid) ** width, mid, mid * (high / mid) ** width
+
+
+def fit_width(records) -> float | None:
+    """Smallest stretch that would have put 80% of past outcomes inside the range.
+
+    `records` holds (ratio_p10, ratio_p50, ratio_p90, actual_ratio) for forecasts
+    whose outcome is already known. For each one, the stretch it needs is the
+    log distance to the actual over the log half-width on that side. The fitted
+    width is the conformal 80% quantile of those stretches.
+    """
+    if len(records) < CALIBRATION_MIN_ROWS:
+        return None
+    array = np.asarray(records, dtype=float)
+    low = np.log(array[:, 0] / array[:, 1])
+    high = np.log(array[:, 2] / array[:, 1])
+    gap = np.log(array[:, 3] / array[:, 1])
+    with np.errstate(divide="ignore", invalid="ignore"):
+        need = np.where(gap < 0, gap / np.minimum(low, -1e-9), gap / np.maximum(high, 1e-9))
+    need = np.maximum(need, 0.0)
+    level = min(1.0, math.ceil((len(need) + 1) * CALIBRATION_TARGET) / len(need))
+    return float(np.quantile(need, level, method="higher"))
+
+
 def inflation_at(cpi: pd.DataFrame, as_of: str) -> dict | None:
     rural = cpi[cpi["series"].eq("rural")].copy()
     rural = rural[rural["published_on"] <= as_of].sort_values("month")
@@ -138,11 +170,9 @@ def _latest_price(frame: pd.DataFrame) -> dict | None:
     }
 
 
-def _nominal(price_now: float, ratio: float, inflation: float, horizon: int) -> float:
-    return price_now * ratio * (1 + inflation) ** (horizon / 12)
-
-
-def build_forecasts(panel: pd.DataFrame, cpi: pd.DataFrame, as_of: str | None = None) -> dict:
+def build_forecasts(panel: pd.DataFrame, cpi: pd.DataFrame, as_of: str | None = None, widths: dict | None = None) -> dict:
+    """Today's outlook in today's money. `widths` stretches each crop's range by its past misses."""
+    widths = widths or {}
     as_of = as_of or date.today().isoformat()
     cpi_info = inflation_at(cpi, as_of)
     if cpi_info is None:
@@ -180,15 +210,17 @@ def build_forecasts(panel: pd.DataFrame, cpi: pd.DataFrame, as_of: str | None = 
                 blended, weight = blend(local_q, province_q, len(local_years))
                 if blended is None:
                     continue
+                if widths.get(crop):
+                    blended = widen(blended, widths[crop])
                 heavy = local_ratios if weight >= 0.5 else province_ratios
                 heavy_years = local_years if weight >= 0.5 else province_years
                 horizons[str(horizon)] = {
                     "ratio_p10": blended[0],
                     "ratio_p50": blended[1],
                     "ratio_p90": blended[2],
-                    "p10": _nominal(price["price"], blended[0], inflation, horizon),
-                    "p50": _nominal(price["price"], blended[1], inflation, horizon),
-                    "p90": _nominal(price["price"], blended[2], inflation, horizon),
+                    "p10": price["price"] * blended[0],
+                    "p50": price["price"] * blended[1],
+                    "p90": price["price"] * blended[2],
                     "n": len(heavy),
                     "n_up": int(sum(ratio > 1 for ratio in heavy)),
                     "years": len(heavy_years),
@@ -219,6 +251,7 @@ def build_forecasts(panel: pd.DataFrame, cpi: pd.DataFrame, as_of: str | None = 
                 "pattern_weight_market": pattern_weight,
                 "pattern_years": pattern_years,
                 "pattern_last_year": last_year,
+                "range_width": widths.get(crop),
                 "horizons": horizons,
             }
 
@@ -227,6 +260,7 @@ def build_forecasts(panel: pd.DataFrame, cpi: pd.DataFrame, as_of: str | None = 
         "decision_date": as_of,
         "decision_month": as_of[:7],
         "inflation": inflation,
+        "money": "today",
         "model": "v1_seasonal_ratios",
         "cpi": cpi_info,
         "stale_days_limit": 60,

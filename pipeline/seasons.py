@@ -63,6 +63,43 @@ def bottoms(series: dict[str, float], season: str) -> dict | None:
     }
 
 
+def season_bottoms(series: dict[str, float], season: str) -> dict[int, int]:
+    """The bottom calendar month of every complete window, by season year."""
+    found = {}
+    if not series:
+        return found
+    order = {month: position for position, month in enumerate(WINDOWS[season])}
+    for year in range(int(min(series)[:4]), int(max(series)[:4]) + 1):
+        months = _window_months(season, year)
+        if any(month not in series for month in months):
+            continue
+        winner = min(months, key=lambda month: (series[month], -order[int(month[5:7])]))
+        found[year] = int(winner[5:7])
+    return found
+
+
+def rolling_months(series: dict[str, float], season: str, min_years: int = 4) -> dict[int, int]:
+    """Decision month for each season year, from the bottoms of earlier years only.
+
+    A season's window closes before the next year's window opens, so every
+    bottom used for year Y was known before any decision in year Y.
+    """
+    bottoms_by_year = season_bottoms(series, season)
+    order = list(WINDOWS[season])
+    months = {}
+    first = min(bottoms_by_year) if bottoms_by_year else None
+    if first is None:
+        return months
+    for year in range(first + 1, int(max(series)[:4]) + 1):
+        earlier = [month for past, month in bottoms_by_year.items() if past < year]
+        if len(earlier) < min_years:
+            continue
+        counts = {month: earlier.count(month) for month in set(earlier)}
+        best = max(counts.values())
+        months[year] = max((month for month, count in counts.items() if count == best), key=order.index)
+    return months
+
+
 def province_series(panel: pd.DataFrame, crop: str) -> dict[str, float]:
     frame = retail(panel, crop)
     if frame.empty:

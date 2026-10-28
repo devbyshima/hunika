@@ -130,10 +130,10 @@ def rain_check(rain: pd.DataFrame, anomaly: pd.DataFrame) -> list[dict]:
     return out
 
 
-def write_all(panel, cpi, sas, backtest_summary, rain=None) -> None:
+def write_all(panel, cpi, sas, backtest_summary, rain=None, widths=None) -> None:
     WEB_DATA.mkdir(parents=True, exist_ok=True)
     assumptions = yaml.safe_load((CONFIG / "assumptions.yaml").read_text())
-    forecasts = build_forecasts(panel, cpi)
+    forecasts = build_forecasts(panel, cpi, widths=widths)
     geojson = _districts_geojson()
     nearest = nearest_markets(panel, _centroids(geojson))
     anomaly = pd.read_csv(PROCESSED / "sas_supply_anomaly.csv") if (PROCESSED / "sas_supply_anomaly.csv").exists() else pd.DataFrame()

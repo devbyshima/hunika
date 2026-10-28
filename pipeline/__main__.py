@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pipeline import coverage, markets
-from pipeline.backtest import load_assumptions, run_backtest, sensitivity, write as write_backtest
+from pipeline.backtest import live_widths, load_assumptions, run_backtest, sensitivity, write as write_backtest
 from pipeline.build_panel import main as build_panel
 from pipeline.export_json import load_sas, write_all
 from pipeline.ingest_ahs import main as ingest_ahs
@@ -35,7 +35,9 @@ def main():
     result = run_backtest(panel, cpi, seasons, rain, assumptions)
     result["summary"]["sensitivity"] = sensitivity(panel, cpi, seasons, rain, assumptions)
     write_backtest(result)
-    write_all(panel, cpi, sas, result["summary"], rain)
+    widths = live_widths(panel, cpi, seasons)
+    result["summary"]["live_range_width"] = widths
+    write_all(panel, cpi, sas, result["summary"], rain, widths)
 
 
 def load_seasons():

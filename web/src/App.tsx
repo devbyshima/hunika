@@ -19,6 +19,7 @@ export type View = {
   forecast: CropForecast
   verdict: DecideResult
   horizon: number
+  ownCosts?: boolean
 }
 
 const nav: Screen[] = ["decide", "share", "plan", "proof", "about"]

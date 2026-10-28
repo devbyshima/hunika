@@ -2,10 +2,13 @@
 
 For every Eastern district, crop, season and year, the forecast uses only
 prices, CPI and rainfall known before the 15th of the decision month. The
-decision then runs through pipeline.decide with the parameters in
-config/assumptions.yaml and a 1-tonne lot, and the real price at the chosen
-horizon scores it. Money is in September 2026 francs: each cash flow is
-deflated by the rural food CPI of the month it happens in.
+decision month itself is the most common price bottom of earlier years. The
+likely range is widened by how often past ranges missed, using only forecasts
+whose outcome was already known. The decision then runs through
+pipeline.decide with the parameters in config/assumptions.yaml and a 1-tonne
+lot, in today's money, and the real price at the chosen horizon scores it.
+Money is in September 2026 francs: each cash flow is deflated by the rural
+food CPI of the month it happens in.
 """
 
 from __future__ import annotations
@@ -16,23 +19,28 @@ import yaml
 from pipeline.decide import decide
 from pipeline.ingest_rain import season_rain
 from pipeline.model import (
-    _nominal,
     _pool_ratios,
     _quantile_or_none,
     _series_map,
+    fit_width,
     inflation_at,
     retail,
     v2_quantiles,
     v2_samples,
+    widen,
 )
 from pipeline.months import add_months, blend
 from pipeline.paths import CONFIG, EASTERN_DISTRICTS, PROCESSED
+from pipeline.seasons import province_series, rolling_months
 
 MIN_YEARS = 4
 LOT_KG = 1000
 OPTIONS = ("home_bags", "hermetic_bags", "warehouse")
 MODELS = ("v1", "v2")
 HEADLINE = {"model": "v1", "option": "hermetic_bags"}
+# real: the forecast price is in today's money, as the backtest scores it.
+# calibrate: widen the range by its past misses. months: rolling or fixed.
+DEFAULT_SETTINGS = {"real": True, "calibrate": True, "months": "rolling"}
 
 
 def _month_value(frame: pd.DataFrame, month: str, column: str) -> float | None:
@@ -68,6 +76,12 @@ def storage_options(assumptions: dict) -> tuple[dict, dict]:
     return options, gates
 
 
+def _priced(option: dict) -> bool:
+    if any(option[key] is None for key in ("loss_monthly", "fee", "cost_per_kg", "borrow_share")):
+        return False
+    return not (option["borrow_share"] > 0 and option["interest_annual"] is None)
+
+
 def _realised(option: dict, horizon: int, price_now: float, real_now: float, actual: float, actual_real: float) -> float | None:
     """Real gain over selling now, RWF per lot. Bags are bought now, the loan is repaid at sale."""
     retained = 1 - option["loss_monthly"] * horizon
@@ -79,37 +93,40 @@ def _realised(option: dict, horizon: int, price_now: float, real_now: float, act
     return sale - interest * deflator_sale - LOT_KG * option["cost_per_kg"] - LOT_KG * real_now
 
 
-def run_backtest(panel: pd.DataFrame, cpi: pd.DataFrame, seasons: dict, rain: pd.DataFrame | None = None, assumptions: dict | None = None) -> dict:
-    options, gates = storage_options(assumptions or load_assumptions())
-    rows = []
-    decisions = []
+def _decision_months(panel, seasons, crop, settings) -> dict[str, dict[int, int]]:
+    if settings["months"] == "fixed":
+        found = {}
+        for season, spec in ((seasons.get("crops") or {}).get(crop) or {}).items():
+            if spec:
+                found[season] = {year: int(spec["decision_month"]) for year in range(int(spec["year_min"]), int(spec["year_max"]) + 1)}
+        return found
+    series = province_series(panel, crop)
+    return {season: rolling_months(series, season) for season in ("A", "B")}
+
+
+def collect_points(panel, cpi, seasons, rain, settings) -> list[dict]:
+    """Every decision point with its raw ratio bands and outcomes."""
+    points = []
     for crop in ("maize", "beans"):
         east = retail(panel, crop)
         by_market = _series_map(east)
         market_district = dict(zip(east["market"], east["admin2"]))
-        crop_seasons = (seasons.get("crops") or {}).get(crop) or {}
-        for season, spec in crop_seasons.items():
-            if not spec:
-                continue
-            decision_month = int(spec["decision_month"])
-            rain_by_district = {}
-            if rain is not None:
-                rain_by_district = {district: season_rain(rain, district, season, decision_month) for district in EASTERN_DISTRICTS}
+        for season, months in _decision_months(panel, seasons, crop, settings).items():
+            rain_cache: dict[int, dict] = {}
             for district in EASTERN_DISTRICTS:
                 local = east[east["admin2"].eq(district)]
                 local_markets = {name: by_market[name] for name in local["market"].unique() if name in by_market}
-                for year in range(int(spec["year_min"]), int(spec["year_max"]) + 1):
+                for year, month in months.items():
+                    decision_year = year - 1 if season == "A" and month == 12 else year
+                    if rain is not None and month not in rain_cache:
+                        rain_cache[month] = {name: season_rain(rain, name, season, month) for name in EASTERN_DISTRICTS}
                     point = _decision_point(
-                        crop, season, district, year + int(spec["year_shift"]), decision_month,
-                        east, local, local_markets, by_market, market_district, rain_by_district, cpi,
+                        crop, season, district, decision_year, month,
+                        east, local, local_markets, by_market, market_district, rain_cache.get(month, {}), cpi,
                     )
-                    if point is None:
-                        continue
-                    rows.extend(point["rows"])
-                    decisions.extend(_decisions(point, options, gates))
-    detail = pd.DataFrame(rows)
-    choices = pd.DataFrame(decisions)
-    return {"detail": detail, "decisions": choices, "summary": _summarise(detail, choices, options)}
+                    if point is not None:
+                        points.append(point)
+    return points
 
 
 def _decision_point(crop, season, district, decision_year, decision_month, east, local, local_markets, by_market, market_district, rain_by_district, cpi):
@@ -127,11 +144,9 @@ def _decision_point(crop, season, district, decision_year, decision_month, east,
     real_now = _month_value(scored, decision_ym, "price_real")
     if real_now is None:
         return None
-    inflation = cpi_info["trailing_12m_inflation"]
     anomaly_now = (rain_by_district.get(district) or {}).get(decision_year)
-    bands = {"v1": {}, "v2": {}}
+    ratios = {"v1": {}, "v2": {}}
     outcomes = {}
-    rows = []
     for horizon in (1, 2, 3, 4):
         future = add_months(decision_ym, horizon)
         actual = _month_value(scored, future, "price_rwf_per_kg")
@@ -139,69 +154,130 @@ def _decision_point(crop, season, district, decision_year, decision_month, east,
         if actual is None or actual_real is None:
             continue
         outcomes[horizon] = (actual, actual_real)
-        found = {"v1": _v1_band(local_markets, by_market, decision_month, horizon, decision_ym)}
+        found = _v1_band(local_markets, by_market, decision_month, horizon, decision_ym)
+        if found is not None:
+            ratios["v1"][horizon] = found
         if rain_by_district:
             samples = v2_samples(by_market, market_district, rain_by_district, decision_month, horizon, decision_ym)
-            found["v2"] = v2_quantiles(samples, anomaly_now)
-        for model, ratios in found.items():
-            if ratios is None:
-                continue
-            nominal = [_nominal(price_now, ratio, inflation, horizon) for ratio in ratios]
-            real_band = [real_now * ratio for ratio in ratios]
-            bands[model][horizon] = {"p10": nominal[0], "p50": nominal[1], "p90": nominal[2]}
-            rows.append(
-                {
-                    "model": model,
-                    "crop": crop,
-                    "district": district,
-                    "season": season,
-                    "year": decision_year,
-                    "horizon": horizon,
-                    "price_pooled": price_pooled,
-                    "price_now": price_now,
-                    "p10": nominal[0],
-                    "p50": nominal[1],
-                    "p90": nominal[2],
-                    "actual": actual,
-                    "actual_real": actual_real,
-                    "inside": real_band[0] <= actual_real <= real_band[2],
-                    "inside_nominal": nominal[0] <= actual <= nominal[2],
-                    "pinball_10": _pinball(actual_real, real_band[0], 0.1),
-                    "pinball_50": _pinball(actual_real, real_band[1], 0.5),
-                    "pinball_90": _pinball(actual_real, real_band[2], 0.9),
-                    "rain_anomaly": anomaly_now,
-                }
-            )
-    if not rows:
+            found = v2_quantiles(samples, anomaly_now)
+            if found is not None:
+                ratios["v2"][horizon] = found
+    if not outcomes or not any(ratios.values()):
         return None
     return {
         "crop": crop,
         "season": season,
         "district": district,
         "year": decision_year,
+        "decision_ym": decision_ym,
         "price_pooled": price_pooled,
         "price_now": price_now,
         "real_now": real_now,
-        "bands": bands,
+        "inflation": cpi_info["trailing_12m_inflation"],
+        "rain_anomaly": anomaly_now,
+        "ratios": ratios,
         "outcomes": outcomes,
-        "rows": rows,
     }
 
 
-def _decisions(point: dict, options: dict, gates: dict) -> list[dict]:
+def _records(points) -> list[dict]:
+    """One raw forecast per point, model and horizon, for calibration."""
+    out = []
+    for point in points:
+        for model, bands in point["ratios"].items():
+            for horizon, ratio in bands.items():
+                actual, actual_real = point["outcomes"][horizon]
+                out.append(
+                    {
+                        "model": model,
+                        "crop": point["crop"],
+                        "known_from": add_months(point["decision_ym"], horizon + 1),
+                        "ratio": ratio,
+                        "actual_ratio": actual_real / point["real_now"],
+                    }
+                )
+    return out
+
+
+def widths_for(points, records, settings) -> dict:
+    """Range stretch for each point and model, from outcomes known before its decision month."""
+    widths = {}
+    for index, point in enumerate(points):
+        for model in MODELS:
+            width = None
+            if settings["calibrate"]:
+                past = [
+                    (*row["ratio"], row["actual_ratio"])
+                    for row in records
+                    if row["model"] == model and row["crop"] == point["crop"] and row["known_from"] <= point["decision_ym"]
+                ]
+                width = fit_width(past)
+            widths[(index, model)] = width
+    return widths
+
+
+def run_backtest(panel, cpi, seasons, rain=None, assumptions=None, settings=None) -> dict:
+    settings = {**DEFAULT_SETTINGS, **(settings or {})}
+    options, gates = storage_options(assumptions or load_assumptions())
+    points = collect_points(panel, cpi, seasons, rain, settings)
+    records = _records(points)
+    widths = widths_for(points, records, settings)
+    rows = []
+    decisions = []
+    for index, point in enumerate(points):
+        bands = {}
+        for model, model_ratios in point["ratios"].items():
+            width = widths[(index, model)]
+            bands[model] = {}
+            for horizon, raw in model_ratios.items():
+                ratio = widen(raw, width) if width else raw
+                actual, actual_real = point["outcomes"][horizon]
+                growth = 1.0 if settings["real"] else (1 + point["inflation"]) ** (horizon / 12)
+                prices = [point["price_now"] * value * growth for value in ratio]
+                real_band = [point["real_now"] * value for value in ratio]
+                bands[model][horizon] = {"p10": prices[0], "p50": prices[1], "p90": prices[2]}
+                rows.append(
+                    {
+                        "model": model,
+                        "crop": point["crop"],
+                        "district": point["district"],
+                        "season": point["season"],
+                        "year": point["year"],
+                        "horizon": horizon,
+                        "price_pooled": point["price_pooled"],
+                        "price_now": point["price_now"],
+                        "p10": prices[0],
+                        "p50": prices[1],
+                        "p90": prices[2],
+                        "actual": actual,
+                        "actual_real": actual_real,
+                        "width": width,
+                        "inside": real_band[0] <= actual_real <= real_band[2],
+                        "inside_raw": point["real_now"] * raw[0] <= actual_real <= point["real_now"] * raw[2],
+                        "pinball_10": _pinball(actual_real, real_band[0], 0.1),
+                        "pinball_50": _pinball(actual_real, real_band[1], 0.5),
+                        "pinball_90": _pinball(actual_real, real_band[2], 0.9),
+                        "rain_anomaly": point["rain_anomaly"],
+                    }
+                )
+        decisions.extend(_decisions(point, bands, options, gates))
+    detail = pd.DataFrame(rows)
+    choices = pd.DataFrame(decisions)
+    return {"detail": detail, "decisions": choices, "summary": _summarise(detail, choices, options)}
+
+
+def _decisions(point: dict, bands: dict, options: dict, gates: dict) -> list[dict]:
     found = []
     deflator_now = point["real_now"] / point["price_now"]
     for option_id, option in options.items():
-        if any(option[key] is None for key in ("loss_monthly", "fee", "cost_per_kg", "borrow_share")):
-            continue
-        if option["borrow_share"] > 0 and option["interest_annual"] is None:
+        if not _priced(option):
             continue
         # Costs in assumptions.yaml are September 2026 francs. The decision is made in that year's francs.
         then = dict(option, cost_per_kg=option["cost_per_kg"] / deflator_now)
         hold = None
         if 4 in point["outcomes"]:
             hold = _realised(option, 4, point["price_now"], point["real_now"], *point["outcomes"][4])
-        for model, band in point["bands"].items():
+        for model, band in bands.items():
             if not band:
                 continue
             result = decide(
@@ -245,11 +321,18 @@ def _pinball(actual: float, predicted: float, quantile: float) -> float:
     return (quantile - below) * gap
 
 
+def _mean(series: pd.Series) -> float | None:
+    series = series.dropna()
+    return float(series.mean()) if len(series) else None
+
+
 def _net_stats(part: pd.DataFrame) -> dict:
     gains = part["gain_rwf_per_tonne"]
     stored = part[part["verdict"].eq("store")]
+    sold = part[~part["verdict"].eq("store")]
     worst = part.loc[gains.idxmin()]
     hold = part["always_store_4_rwf_per_tonne"].dropna()
+    hold_when_sold = sold["always_store_4_rwf_per_tonne"].dropna()
     return {
         "n_decisions": int(len(part)),
         "store_count": int(len(stored)),
@@ -260,7 +343,10 @@ def _net_stats(part: pd.DataFrame) -> dict:
         "max_gain_rwf_per_tonne": float(gains.max()),
         "share_not_worse_than_selling": float((gains >= 0).mean()),
         "losing_count": int((gains < 0).sum()),
-        "mean_gain_when_stored_rwf_per_tonne": float(stored["gain_rwf_per_tonne"].mean()) if len(stored) else None,
+        "mean_gain_when_stored_rwf_per_tonne": _mean(stored["gain_rwf_per_tonne"]),
+        "share_stored_losing": float((stored["gain_rwf_per_tonne"] < 0).mean()) if len(stored) else None,
+        "mean_store_4_when_sell_rwf_per_tonne": _mean(hold_when_sold),
+        "share_store_4_losing_when_sell": float((hold_when_sold < 0).mean()) if len(hold_when_sold) else None,
         "mean_always_store_4_rwf_per_tonne": float(hold.mean()) if len(hold) else None,
         "share_always_store_4_losing": float((hold < 0).mean()) if len(hold) else None,
         "worst": {
@@ -274,17 +360,12 @@ def _net_stats(part: pd.DataFrame) -> dict:
 
 
 def _summarise(detail: pd.DataFrame, choices: pd.DataFrame, options: dict) -> dict:
-    unpriced = [
-        option_id
-        for option_id, option in options.items()
-        if any(option[key] is None for key in ("loss_monthly", "fee", "cost_per_kg", "borrow_share"))
-        or (option["borrow_share"] or 0) > 0 and option["interest_annual"] is None
-    ]
     summary = {
         "lot_kg": LOT_KG,
         "francs": "September 2026 RWF, deflated by the NISR rural food CPI",
         "headline": None,
-        "unpriced_options": unpriced,
+        "unpriced_options": [option_id for option_id, option in options.items() if not _priced(option)],
+        "years": None,
         "net": [],
         "net_by_crop": [],
         "net_by_district": [],
@@ -295,6 +376,7 @@ def _summarise(detail: pd.DataFrame, choices: pd.DataFrame, options: dict) -> di
     }
     if detail.empty:
         return summary
+    summary["years"] = f"{int(detail['year'].min())}-{int(detail['year'].max())}"
 
     v1 = detail[detail["model"].eq("v1")]
     for keys, part in v1.groupby(["crop", "district", "horizon"]):
@@ -320,6 +402,8 @@ def _summarise(detail: pd.DataFrame, choices: pd.DataFrame, options: dict) -> di
                 "model": model,
                 "rows_all": int(len(part)),
                 "coverage_all": float(part["inside"].mean()),
+                "coverage_raw_all": float(part["inside_raw"].mean()),
+                "below_p10_all": float((part["actual_real"] < part["p10"] * part["actual_real"] / part["actual"]).mean()),
                 "rows_compared": int(len(paired)),
                 "pinball_10": float(paired["pinball_10"].mean()) if len(paired) else None,
                 "pinball_50": float(paired["pinball_50"].mean()) if len(paired) else None,
@@ -367,23 +451,38 @@ def _summarise(detail: pd.DataFrame, choices: pd.DataFrame, options: dict) -> di
     return summary
 
 
+def live_widths(panel, cpi, seasons, rain=None) -> dict[str, float | None]:
+    """Range stretch for today's outlook, from every v1 forecast whose outcome is known."""
+    points = collect_points(panel, cpi, seasons, None, DEFAULT_SETTINGS)
+    records = _records(points)
+    out = {}
+    for crop in ("maize", "beans"):
+        past = [(*row["ratio"], row["actual_ratio"]) for row in records if row["model"] == "v1" and row["crop"] == crop]
+        out[crop] = fit_width(past)
+    return out
+
+
 SENSITIVITY = (
-    ("base", "Values in config/assumptions.yaml", {}),
-    ("home_loss_fast", "Home bags lose 41.2% in 8 months (Ng'ang'a et al. 2016)", {"loss_home_bags": 0.412 / 8}),
-    ("hermetic_reused", "Hermetic bag reused for 3 seasons", {"cost_hermetic_bags": 35.5 / 3}),
-    ("no_gates", "Store whenever the likely gain is above zero", {"g_min": 0.0, "d_max": 10.0}),
+    ("base", "Values in config/assumptions.yaml", {}, {}),
+    ("nominal_decision", "Decide on nominal prices, carrying food inflation forward", {}, {"real": False}),
+    ("uncalibrated", "Ranges not widened by past misses", {}, {"calibrate": False}),
+    ("fixed_months", "Decision months picked from all years (look-ahead), from 2010", {}, {"months": "fixed"}),
+    ("home_loss_fast", "Home bags lose 41.2% in 8 months (Ng'ang'a et al. 2016)", {"loss_home_bags": 0.412 / 8}, {}),
+    ("hermetic_reused", "Hermetic bag reused for 3 seasons", {"cost_hermetic_bags": 35.5 / 3}, {}),
+    ("no_gates", "Store whenever the likely gain is above zero", {"g_min": 0.0, "d_max": 10.0}, {}),
 )
 
 
 def sensitivity(panel, cpi, seasons, rain, assumptions) -> list[dict]:
-    """Headline v1 result under other storage values. Only the backtest changes."""
+    """Headline v1 result under other choices. Only the backtest changes."""
     rows = []
-    for key, label, overrides in SENSITIVITY:
+    for key, label, overrides, settings in SENSITIVITY:
         changed = {**assumptions, "items": [dict(item) for item in assumptions.get("items") or []]}
         for item in changed["items"]:
             if item["id"] in overrides:
                 item["value"] = overrides[item["id"]]
-        result = run_backtest(panel, cpi, seasons, None if key != "base" else rain, changed)
+        result = run_backtest(panel, cpi, seasons, None, changed, settings)
+        v1 = next((row for row in result["summary"]["models"] if row["model"] == "v1"), {})
         for entry in result["summary"]["net"]:
             if entry["model"] != "v1":
                 continue
@@ -396,7 +495,9 @@ def sensitivity(panel, cpi, seasons, rain, assumptions) -> list[dict]:
                     "store_count": entry["store_count"],
                     "mean_gain_rwf_per_tonne": entry["mean_gain_rwf_per_tonne"],
                     "share_not_worse_than_selling": entry["share_not_worse_than_selling"],
-                    "mean_always_store_4_rwf_per_tonne": entry["mean_always_store_4_rwf_per_tonne"],
+                    "mean_gain_when_stored_rwf_per_tonne": entry["mean_gain_when_stored_rwf_per_tonne"],
+                    "mean_store_4_when_sell_rwf_per_tonne": entry["mean_store_4_when_sell_rwf_per_tonne"],
+                    "range_coverage": v1.get("coverage_all"),
                 }
             )
     return rows

@@ -4,129 +4,145 @@
   "headline": {
     "model": "v1",
     "option": "hermetic_bags",
-    "n_decisions": 441,
-    "store_count": 147,
-    "mean_gain_rwf_per_tonne": 16111.2512,
-    "p10_gain_rwf_per_tonne": -26311.7455,
-    "p90_gain_rwf_per_tonne": 105617.1381,
-    "min_gain_rwf_per_tonne": -379884.1238,
-    "max_gain_rwf_per_tonne": 616393.0795,
-    "share_not_worse_than_selling": 0.8798,
-    "losing_count": 53,
-    "mean_gain_when_stored_rwf_per_tonne": 48333.7537,
-    "mean_always_store_4_rwf_per_tonne": 34300.2944,
-    "share_always_store_4_losing": 0.4524,
+    "n_decisions": 350,
+    "store_count": 63,
+    "mean_gain_rwf_per_tonne": 14443.3993,
+    "p10_gain_rwf_per_tonne": 0.0,
+    "p90_gain_rwf_per_tonne": 57872.1473,
+    "min_gain_rwf_per_tonne": -262691.4843,
+    "max_gain_rwf_per_tonne": 433699.0474,
+    "share_not_worse_than_selling": 0.9514,
+    "losing_count": 17,
+    "mean_gain_when_stored_rwf_per_tonne": 80241.1069,
+    "share_stored_losing": 0.2698,
+    "mean_store_4_when_sell_rwf_per_tonne": 33956.9499,
+    "share_store_4_losing_when_sell": 0.4571,
+    "mean_always_store_4_rwf_per_tonne": 26930.5471,
+    "share_always_store_4_losing": 0.4636,
     "worst": {
       "crop": "beans",
-      "district": "Gatsibo",
-      "season": "B",
-      "year": 2023,
-      "gain_rwf_per_tonne": -379884.1
+      "district": "Kirehe",
+      "season": "A",
+      "year": 2021,
+      "gain_rwf_per_tonne": -262691.5
     }
   },
   "unpriced_options": [
     "warehouse"
   ],
+  "years": "2013-2026",
   "net": [
     {
       "model": "v1",
       "option": "hermetic_bags",
-      "n_decisions": 441,
-      "store_count": 147,
-      "mean_gain_rwf_per_tonne": 16111.2512,
-      "p10_gain_rwf_per_tonne": -26311.7455,
-      "p90_gain_rwf_per_tonne": 105617.1381,
-      "min_gain_rwf_per_tonne": -379884.1238,
-      "max_gain_rwf_per_tonne": 616393.0795,
-      "share_not_worse_than_selling": 0.8798,
-      "losing_count": 53,
-      "mean_gain_when_stored_rwf_per_tonne": 48333.7537,
-      "mean_always_store_4_rwf_per_tonne": 34300.2944,
-      "share_always_store_4_losing": 0.4524,
+      "n_decisions": 350,
+      "store_count": 63,
+      "mean_gain_rwf_per_tonne": 14443.3993,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 57872.1473,
+      "min_gain_rwf_per_tonne": -262691.4843,
+      "max_gain_rwf_per_tonne": 433699.0474,
+      "share_not_worse_than_selling": 0.9514,
+      "losing_count": 17,
+      "mean_gain_when_stored_rwf_per_tonne": 80241.1069,
+      "share_stored_losing": 0.2698,
+      "mean_store_4_when_sell_rwf_per_tonne": 33956.9499,
+      "share_store_4_losing_when_sell": 0.4571,
+      "mean_always_store_4_rwf_per_tonne": 26930.5471,
+      "share_always_store_4_losing": 0.4636,
       "worst": {
         "crop": "beans",
-        "district": "Gatsibo",
-        "season": "B",
-        "year": 2023,
-        "gain_rwf_per_tonne": -379884.1
+        "district": "Kirehe",
+        "season": "A",
+        "year": 2021,
+        "gain_rwf_per_tonne": -262691.5
       },
       "n_compared": 329,
-      "mean_gain_compared_rwf_per_tonne": 10488.8471
+      "mean_gain_compared_rwf_per_tonne": 14784.7486
     },
     {
       "model": "v1",
       "option": "home_bags",
-      "n_decisions": 441,
-      "store_count": 83,
-      "mean_gain_rwf_per_tonne": -2592.0773,
+      "n_decisions": 350,
+      "store_count": 31,
+      "mean_gain_rwf_per_tonne": -1127.7407,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -369071.3667,
-      "max_gain_rwf_per_tonne": 445187.2951,
-      "share_not_worse_than_selling": 0.9025,
-      "losing_count": 43,
-      "mean_gain_when_stored_rwf_per_tonne": -13772.3628,
-      "mean_always_store_4_rwf_per_tonne": -44956.3271,
-      "share_always_store_4_losing": 0.6752,
+      "min_gain_rwf_per_tonne": -338577.4106,
+      "max_gain_rwf_per_tonne": 290040.4461,
+      "share_not_worse_than_selling": 0.9514,
+      "losing_count": 17,
+      "mean_gain_when_stored_rwf_per_tonne": -12732.556,
+      "share_stored_losing": 0.5484,
+      "mean_store_4_when_sell_rwf_per_tonne": -46847.2559,
+      "share_store_4_losing_when_sell": 0.6923,
+      "mean_always_store_4_rwf_per_tonne": -49058.2409,
+      "share_always_store_4_losing": 0.7026,
       "worst": {
         "crop": "beans",
-        "district": "Nyagatare",
-        "season": "B",
-        "year": 2011,
-        "gain_rwf_per_tonne": -369071.4
+        "district": "Kirehe",
+        "season": "A",
+        "year": 2021,
+        "gain_rwf_per_tonne": -338577.4
       },
       "n_compared": 329,
-      "mean_gain_compared_rwf_per_tonne": -1036.5936
+      "mean_gain_compared_rwf_per_tonne": -1106.6545
     },
     {
       "model": "v2",
       "option": "hermetic_bags",
       "n_decisions": 329,
-      "store_count": 93,
-      "mean_gain_rwf_per_tonne": -10644.562,
-      "p10_gain_rwf_per_tonne": -87360.438,
+      "store_count": 40,
+      "mean_gain_rwf_per_tonne": 370.1125,
+      "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -379884.1238,
-      "max_gain_rwf_per_tonne": 232166.295,
-      "share_not_worse_than_selling": 0.8146,
-      "losing_count": 61,
-      "mean_gain_when_stored_rwf_per_tonne": -37656.5687,
+      "min_gain_rwf_per_tonne": -156811.5305,
+      "max_gain_rwf_per_tonne": 223942.9624,
+      "share_not_worse_than_selling": 0.9483,
+      "losing_count": 17,
+      "mean_gain_when_stored_rwf_per_tonne": 3044.1751,
+      "share_stored_losing": 0.425,
+      "mean_store_4_when_sell_rwf_per_tonne": 24511.0392,
+      "share_store_4_losing_when_sell": 0.4787,
       "mean_always_store_4_rwf_per_tonne": 22573.7018,
       "share_always_store_4_losing": 0.4627,
       "worst": {
-        "crop": "beans",
-        "district": "Gatsibo",
+        "crop": "maize",
+        "district": "Bugesera",
         "season": "B",
-        "year": 2023,
-        "gain_rwf_per_tonne": -379884.1
+        "year": 2017,
+        "gain_rwf_per_tonne": -156811.5
       },
       "n_compared": 329,
-      "mean_gain_compared_rwf_per_tonne": -10644.562
+      "mean_gain_compared_rwf_per_tonne": 370.1125
     },
     {
       "model": "v2",
       "option": "home_bags",
       "n_decisions": 329,
-      "store_count": 30,
-      "mean_gain_rwf_per_tonne": -505.5458,
+      "store_count": 19,
+      "mean_gain_rwf_per_tonne": 10.4706,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -201673.1402,
+      "min_gain_rwf_per_tonne": -190513.6682,
       "max_gain_rwf_per_tonne": 196569.063,
-      "share_not_worse_than_selling": 0.9574,
-      "losing_count": 14,
-      "mean_gain_when_stored_rwf_per_tonne": -5544.1518,
+      "share_not_worse_than_selling": 0.9787,
+      "losing_count": 7,
+      "mean_gain_when_stored_rwf_per_tonne": 181.3062,
+      "share_stored_losing": 0.3684,
+      "mean_store_4_when_sell_rwf_per_tonne": -53572.7893,
+      "share_store_4_losing_when_sell": 0.7129,
       "mean_always_store_4_rwf_per_tonne": -50785.5855,
       "share_always_store_4_losing": 0.7081,
       "worst": {
-        "crop": "beans",
-        "district": "Nyagatare",
+        "crop": "maize",
+        "district": "Ngoma",
         "season": "B",
-        "year": 2018,
-        "gain_rwf_per_tonne": -201673.1
+        "year": 2017,
+        "gain_rwf_per_tonne": -190513.7
       },
       "n_compared": 329,
-      "mean_gain_compared_rwf_per_tonne": -505.5458
+      "mean_gain_compared_rwf_per_tonne": 10.4706
     }
   ],
   "net_by_crop": [
@@ -134,90 +150,102 @@
       "model": "v1",
       "option": "hermetic_bags",
       "crop": "beans",
-      "n_decisions": 217,
-      "store_count": 105,
-      "mean_gain_rwf_per_tonne": 37313.3106,
-      "p10_gain_rwf_per_tonne": -36980.2273,
-      "p90_gain_rwf_per_tonne": 203746.2988,
-      "min_gain_rwf_per_tonne": -379884.1238,
-      "max_gain_rwf_per_tonne": 616393.0795,
-      "share_not_worse_than_selling": 0.8894,
-      "losing_count": 24,
-      "mean_gain_when_stored_rwf_per_tonne": 77114.1752,
-      "mean_always_store_4_rwf_per_tonne": 60988.8959,
-      "share_always_store_4_losing": 0.3828,
+      "n_decisions": 175,
+      "store_count": 41,
+      "mean_gain_rwf_per_tonne": 28033.1063,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 138450.8615,
+      "min_gain_rwf_per_tonne": -262691.4843,
+      "max_gain_rwf_per_tonne": 433699.0474,
+      "share_not_worse_than_selling": 0.9714,
+      "losing_count": 5,
+      "mean_gain_when_stored_rwf_per_tonne": 119653.5026,
+      "share_stored_losing": 0.122,
+      "mean_store_4_when_sell_rwf_per_tonne": 68921.4073,
+      "share_store_4_losing_when_sell": 0.378,
+      "mean_always_store_4_rwf_per_tonne": 50190.1373,
+      "share_always_store_4_losing": 0.3988,
       "worst": {
         "crop": "beans",
-        "district": "Gatsibo",
-        "season": "B",
-        "year": 2023,
-        "gain_rwf_per_tonne": -379884.1
+        "district": "Kirehe",
+        "season": "A",
+        "year": 2021,
+        "gain_rwf_per_tonne": -262691.5
       }
     },
     {
       "model": "v1",
       "option": "hermetic_bags",
       "crop": "maize",
-      "n_decisions": 224,
-      "store_count": 42,
-      "mean_gain_rwf_per_tonne": -4428.2437,
-      "p10_gain_rwf_per_tonne": -26070.1939,
+      "n_decisions": 175,
+      "store_count": 22,
+      "mean_gain_rwf_per_tonne": 853.6922,
+      "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -264571.8483,
+      "min_gain_rwf_per_tonne": -156811.5305,
       "max_gain_rwf_per_tonne": 218799.2183,
-      "share_not_worse_than_selling": 0.8705,
-      "losing_count": 29,
-      "mean_gain_when_stored_rwf_per_tonne": -23617.2998,
-      "mean_always_store_4_rwf_per_tonne": 9174.539,
-      "share_always_store_4_losing": 0.518,
+      "share_not_worse_than_selling": 0.9314,
+      "losing_count": 12,
+      "mean_gain_when_stored_rwf_per_tonne": 6790.7332,
+      "share_stored_losing": 0.5455,
+      "mean_store_4_when_sell_rwf_per_tonne": 4934.1651,
+      "share_store_4_losing_when_sell": 0.5229,
+      "mean_always_store_4_rwf_per_tonne": 4601.3406,
+      "share_always_store_4_losing": 0.5257,
       "worst": {
         "crop": "maize",
-        "district": "Rwamagana",
-        "season": "A",
-        "year": 2010,
-        "gain_rwf_per_tonne": -264571.8
+        "district": "Kayonza",
+        "season": "B",
+        "year": 2017,
+        "gain_rwf_per_tonne": -156811.5
       }
     },
     {
       "model": "v1",
       "option": "home_bags",
       "crop": "beans",
-      "n_decisions": 217,
-      "store_count": 58,
-      "mean_gain_rwf_per_tonne": -117.1287,
-      "p10_gain_rwf_per_tonne": -25010.1163,
-      "p90_gain_rwf_per_tonne": 52439.07,
-      "min_gain_rwf_per_tonne": -369071.3667,
-      "max_gain_rwf_per_tonne": 445187.2951,
-      "share_not_worse_than_selling": 0.8848,
-      "losing_count": 25,
-      "mean_gain_when_stored_rwf_per_tonne": -438.223,
-      "mean_always_store_4_rwf_per_tonne": -49620.0931,
-      "share_always_store_4_losing": 0.6555,
+      "n_decisions": 175,
+      "store_count": 10,
+      "mean_gain_rwf_per_tonne": 2979.1234,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 0.0,
+      "min_gain_rwf_per_tonne": -338577.4106,
+      "max_gain_rwf_per_tonne": 290040.4461,
+      "share_not_worse_than_selling": 0.9886,
+      "losing_count": 2,
+      "mean_gain_when_stored_rwf_per_tonne": 52134.6589,
+      "share_stored_losing": 0.2,
+      "mean_store_4_when_sell_rwf_per_tonne": -52426.6428,
+      "share_store_4_losing_when_sell": 0.6772,
+      "mean_always_store_4_rwf_per_tonne": -56501.2363,
+      "share_always_store_4_losing": 0.6905,
       "worst": {
         "crop": "beans",
-        "district": "Nyagatare",
-        "season": "B",
-        "year": 2011,
-        "gain_rwf_per_tonne": -369071.4
+        "district": "Kirehe",
+        "season": "A",
+        "year": 2021,
+        "gain_rwf_per_tonne": -338577.4
       }
     },
     {
       "model": "v1",
       "option": "home_bags",
       "crop": "maize",
-      "n_decisions": 224,
-      "store_count": 25,
-      "mean_gain_rwf_per_tonne": -4989.6838,
+      "n_decisions": 175,
+      "store_count": 21,
+      "mean_gain_rwf_per_tonne": -5234.6047,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
       "min_gain_rwf_per_tonne": -190513.6682,
       "max_gain_rwf_per_tonne": 80766.3978,
-      "share_not_worse_than_selling": 0.9196,
-      "losing_count": 18,
-      "mean_gain_when_stored_rwf_per_tonne": -44707.5671,
-      "mean_always_store_4_rwf_per_tonne": -40565.6645,
-      "share_always_store_4_losing": 0.6937,
+      "share_not_worse_than_selling": 0.9143,
+      "losing_count": 15,
+      "mean_gain_when_stored_rwf_per_tonne": -43621.706,
+      "share_stored_losing": 0.7143,
+      "mean_store_4_when_sell_rwf_per_tonne": -41122.9497,
+      "share_store_4_losing_when_sell": 0.7078,
+      "mean_always_store_4_rwf_per_tonne": -41912.9653,
+      "share_always_store_4_losing": 0.7143,
       "worst": {
         "crop": "maize",
         "district": "Kayonza",
@@ -231,23 +259,26 @@
       "option": "hermetic_bags",
       "crop": "beans",
       "n_decisions": 161,
-      "store_count": 31,
-      "mean_gain_rwf_per_tonne": -18523.962,
-      "p10_gain_rwf_per_tonne": -130465.1525,
+      "store_count": 7,
+      "mean_gain_rwf_per_tonne": -3242.5206,
+      "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -379884.1238,
-      "max_gain_rwf_per_tonne": 232166.295,
-      "share_not_worse_than_selling": 0.8634,
-      "losing_count": 22,
-      "mean_gain_when_stored_rwf_per_tonne": -96205.0932,
+      "min_gain_rwf_per_tonne": -130465.1525,
+      "max_gain_rwf_per_tonne": 197704.2543,
+      "share_not_worse_than_selling": 0.9627,
+      "losing_count": 6,
+      "mean_gain_when_stored_rwf_per_tonne": -74577.9747,
+      "share_stored_losing": 0.8571,
+      "mean_store_4_when_sell_rwf_per_tonne": 48351.9412,
+      "share_store_4_losing_when_sell": 0.381,
       "mean_always_store_4_rwf_per_tonne": 42764.2178,
       "share_always_store_4_losing": 0.4026,
       "worst": {
         "crop": "beans",
-        "district": "Gatsibo",
+        "district": "Bugesera",
         "season": "B",
-        "year": 2023,
-        "gain_rwf_per_tonne": -379884.1
+        "year": 2018,
+        "gain_rwf_per_tonne": -130465.2
       }
     },
     {
@@ -255,15 +286,18 @@
       "option": "hermetic_bags",
       "crop": "maize",
       "n_decisions": 168,
-      "store_count": 62,
-      "mean_gain_rwf_per_tonne": -3093.4702,
-      "p10_gain_rwf_per_tonne": -47482.3668,
-      "p90_gain_rwf_per_tonne": 45067.0162,
+      "store_count": 33,
+      "mean_gain_rwf_per_tonne": 3832.2192,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 20828.1752,
       "min_gain_rwf_per_tonne": -156811.5305,
       "max_gain_rwf_per_tonne": 223942.9624,
-      "share_not_worse_than_selling": 0.7679,
-      "losing_count": 39,
-      "mean_gain_when_stored_rwf_per_tonne": -8382.3064,
+      "share_not_worse_than_selling": 0.9345,
+      "losing_count": 11,
+      "mean_gain_when_stored_rwf_per_tonne": 19509.4796,
+      "share_stored_losing": 0.3333,
+      "mean_store_4_when_sell_rwf_per_tonne": -1449.0541,
+      "share_store_4_losing_when_sell": 0.5852,
       "mean_always_store_4_rwf_per_tonne": 4065.7288,
       "share_always_store_4_losing": 0.5179,
       "worst": {
@@ -279,23 +313,26 @@
       "option": "home_bags",
       "crop": "beans",
       "n_decisions": 161,
-      "store_count": 8,
-      "mean_gain_rwf_per_tonne": 4173.0711,
+      "store_count": 0,
+      "mean_gain_rwf_per_tonne": 0.0,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -201673.1402,
-      "max_gain_rwf_per_tonne": 139615.2426,
-      "share_not_worse_than_selling": 0.9938,
-      "losing_count": 1,
-      "mean_gain_when_stored_rwf_per_tonne": 83983.0568,
+      "min_gain_rwf_per_tonne": 0.0,
+      "max_gain_rwf_per_tonne": 0.0,
+      "share_not_worse_than_selling": 1.0,
+      "losing_count": 0,
+      "mean_gain_when_stored_rwf_per_tonne": null,
+      "share_stored_losing": null,
+      "mean_store_4_when_sell_rwf_per_tonne": -60895.4351,
+      "share_store_4_losing_when_sell": 0.7078,
       "mean_always_store_4_rwf_per_tonne": -60895.4351,
       "share_always_store_4_losing": 0.7078,
       "worst": {
         "crop": "beans",
-        "district": "Nyagatare",
-        "season": "B",
-        "year": 2018,
-        "gain_rwf_per_tonne": -201673.1
+        "district": "Bugesera",
+        "season": "A",
+        "year": 2015,
+        "gain_rwf_per_tonne": 0.0
       }
     },
     {
@@ -303,20 +340,23 @@
       "option": "home_bags",
       "crop": "maize",
       "n_decisions": 168,
-      "store_count": 22,
-      "mean_gain_rwf_per_tonne": -4989.2203,
+      "store_count": 19,
+      "mean_gain_rwf_per_tonne": 20.5049,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
       "min_gain_rwf_per_tonne": -190513.6682,
       "max_gain_rwf_per_tonne": 196569.063,
-      "share_not_worse_than_selling": 0.9226,
-      "losing_count": 13,
-      "mean_gain_when_stored_rwf_per_tonne": -38099.5004,
+      "share_not_worse_than_selling": 0.9583,
+      "losing_count": 7,
+      "mean_gain_when_stored_rwf_per_tonne": 181.3062,
+      "share_stored_losing": 0.3684,
+      "mean_store_4_when_sell_rwf_per_tonne": -46004.4172,
+      "share_store_4_losing_when_sell": 0.7181,
       "mean_always_store_4_rwf_per_tonne": -41518.2234,
       "share_always_store_4_losing": 0.7083,
       "worst": {
         "crop": "maize",
-        "district": "Bugesera",
+        "district": "Ngoma",
         "season": "B",
         "year": 2017,
         "gain_rwf_per_tonne": -190513.7
@@ -328,18 +368,21 @@
       "model": "v1",
       "option": "hermetic_bags",
       "district": "Bugesera",
-      "n_decisions": 63,
-      "store_count": 22,
-      "mean_gain_rwf_per_tonne": 24494.8547,
-      "p10_gain_rwf_per_tonne": -3866.277,
-      "p90_gain_rwf_per_tonne": 156739.2028,
+      "n_decisions": 50,
+      "store_count": 12,
+      "mean_gain_rwf_per_tonne": 28099.8369,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 130266.0532,
       "min_gain_rwf_per_tonne": -240598.4763,
       "max_gain_rwf_per_tonne": 391061.3059,
-      "share_not_worse_than_selling": 0.8889,
-      "losing_count": 7,
-      "mean_gain_when_stored_rwf_per_tonne": 70144.3566,
-      "mean_always_store_4_rwf_per_tonne": 28222.7799,
-      "share_always_store_4_losing": 0.4516,
+      "share_not_worse_than_selling": 0.98,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 117082.6539,
+      "share_stored_losing": 0.0833,
+      "mean_store_4_when_sell_rwf_per_tonne": 35250.3113,
+      "share_store_4_losing_when_sell": 0.4595,
+      "mean_always_store_4_rwf_per_tonne": 23590.505,
+      "share_always_store_4_losing": 0.4694,
       "worst": {
         "crop": "beans",
         "district": "Bugesera",
@@ -352,66 +395,75 @@
       "model": "v1",
       "option": "hermetic_bags",
       "district": "Gatsibo",
-      "n_decisions": 63,
-      "store_count": 15,
-      "mean_gain_rwf_per_tonne": 180.4007,
-      "p10_gain_rwf_per_tonne": -14311.7494,
-      "p90_gain_rwf_per_tonne": 26736.1317,
-      "min_gain_rwf_per_tonne": -379884.1238,
-      "max_gain_rwf_per_tonne": 330422.7528,
-      "share_not_worse_than_selling": 0.8889,
-      "losing_count": 7,
-      "mean_gain_when_stored_rwf_per_tonne": 757.683,
-      "mean_always_store_4_rwf_per_tonne": 32969.6558,
-      "share_always_store_4_losing": 0.4667,
+      "n_decisions": 50,
+      "store_count": 1,
+      "mean_gain_rwf_per_tonne": 619.2686,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 0.0,
+      "min_gain_rwf_per_tonne": 0.0,
+      "max_gain_rwf_per_tonne": 30963.4324,
+      "share_not_worse_than_selling": 1.0,
+      "losing_count": 0,
+      "mean_gain_when_stored_rwf_per_tonne": 30963.4324,
+      "share_stored_losing": 0.0,
+      "mean_store_4_when_sell_rwf_per_tonne": 37290.9859,
+      "share_store_4_losing_when_sell": 0.4583,
+      "mean_always_store_4_rwf_per_tonne": 37161.8522,
+      "share_always_store_4_losing": 0.449,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Gatsibo",
-        "season": "B",
-        "year": 2023,
-        "gain_rwf_per_tonne": -379884.1
+        "season": "A",
+        "year": 2014,
+        "gain_rwf_per_tonne": 0.0
       }
     },
     {
       "model": "v1",
       "option": "hermetic_bags",
       "district": "Kayonza",
-      "n_decisions": 63,
-      "store_count": 30,
-      "mean_gain_rwf_per_tonne": 11790.6793,
-      "p10_gain_rwf_per_tonne": -85442.349,
-      "p90_gain_rwf_per_tonne": 111983.2604,
-      "min_gain_rwf_per_tonne": -191448.2315,
-      "max_gain_rwf_per_tonne": 393303.0509,
-      "share_not_worse_than_selling": 0.7619,
-      "losing_count": 15,
-      "mean_gain_when_stored_rwf_per_tonne": 24760.4265,
-      "mean_always_store_4_rwf_per_tonne": 39265.5845,
-      "share_always_store_4_losing": 0.4516,
+      "n_decisions": 50,
+      "store_count": 23,
+      "mean_gain_rwf_per_tonne": 447.7199,
+      "p10_gain_rwf_per_tonne": -70324.6008,
+      "p90_gain_rwf_per_tonne": 58164.74,
+      "min_gain_rwf_per_tonne": -156811.5305,
+      "max_gain_rwf_per_tonne": 218799.2183,
+      "share_not_worse_than_selling": 0.74,
+      "losing_count": 13,
+      "mean_gain_when_stored_rwf_per_tonne": 973.3041,
+      "share_stored_losing": 0.5652,
+      "mean_store_4_when_sell_rwf_per_tonne": 46114.0377,
+      "share_store_4_losing_when_sell": 0.3846,
+      "mean_always_store_4_rwf_per_tonne": 22723.659,
+      "share_always_store_4_losing": 0.4694,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Kayonza",
         "season": "B",
-        "year": 2023,
-        "gain_rwf_per_tonne": -191448.2
+        "year": 2017,
+        "gain_rwf_per_tonne": -156811.5
       }
     },
     {
       "model": "v1",
       "option": "hermetic_bags",
       "district": "Kirehe",
-      "n_decisions": 63,
-      "store_count": 22,
-      "mean_gain_rwf_per_tonne": 15778.5483,
-      "p10_gain_rwf_per_tonne": -43529.0198,
-      "p90_gain_rwf_per_tonne": 130183.3794,
+      "n_decisions": 50,
+      "store_count": 6,
+      "mean_gain_rwf_per_tonne": 15071.995,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 7220.4733,
       "min_gain_rwf_per_tonne": -262691.4843,
-      "max_gain_rwf_per_tonne": 339503.733,
-      "share_not_worse_than_selling": 0.873,
-      "losing_count": 8,
-      "mean_gain_when_stored_rwf_per_tonne": 45184.0247,
-      "mean_always_store_4_rwf_per_tonne": 40511.3998,
-      "share_always_store_4_losing": 0.4355,
+      "max_gain_rwf_per_tonne": 363586.8699,
+      "share_not_worse_than_selling": 0.98,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 125599.9579,
+      "share_stored_losing": 0.1667,
+      "mean_store_4_when_sell_rwf_per_tonne": 33081.9562,
+      "share_store_4_losing_when_sell": 0.4419,
+      "mean_always_store_4_rwf_per_tonne": 24350.9824,
+      "share_always_store_4_losing": 0.449,
       "worst": {
         "crop": "beans",
         "district": "Kirehe",
@@ -424,18 +476,21 @@
       "model": "v1",
       "option": "hermetic_bags",
       "district": "Ngoma",
-      "n_decisions": 63,
-      "store_count": 28,
-      "mean_gain_rwf_per_tonne": 39694.4245,
+      "n_decisions": 50,
+      "store_count": 10,
+      "mean_gain_rwf_per_tonne": 23569.1201,
       "p10_gain_rwf_per_tonne": 0.0,
-      "p90_gain_rwf_per_tonne": 196733.2702,
+      "p90_gain_rwf_per_tonne": 99912.6641,
       "min_gain_rwf_per_tonne": -240598.4763,
-      "max_gain_rwf_per_tonne": 572181.154,
-      "share_not_worse_than_selling": 0.9048,
-      "losing_count": 6,
-      "mean_gain_when_stored_rwf_per_tonne": 89312.4551,
-      "mean_always_store_4_rwf_per_tonne": 42749.0931,
-      "share_always_store_4_losing": 0.4262,
+      "max_gain_rwf_per_tonne": 391061.3059,
+      "share_not_worse_than_selling": 0.98,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 117845.6007,
+      "share_stored_losing": 0.1,
+      "mean_store_4_when_sell_rwf_per_tonne": 36584.4738,
+      "share_store_4_losing_when_sell": 0.4615,
+      "mean_always_store_4_rwf_per_tonne": 27436.637,
+      "share_always_store_4_losing": 0.449,
       "worst": {
         "crop": "beans",
         "district": "Ngoma",
@@ -448,18 +503,21 @@
       "model": "v1",
       "option": "hermetic_bags",
       "district": "Nyagatare",
-      "n_decisions": 63,
-      "store_count": 20,
-      "mean_gain_rwf_per_tonne": 22829.5903,
+      "n_decisions": 50,
+      "store_count": 11,
+      "mean_gain_rwf_per_tonne": 33295.8542,
       "p10_gain_rwf_per_tonne": 0.0,
-      "p90_gain_rwf_per_tonne": 98918.2619,
+      "p90_gain_rwf_per_tonne": 150057.8226,
       "min_gain_rwf_per_tonne": -240598.4763,
-      "max_gain_rwf_per_tonne": 436040.8518,
-      "share_not_worse_than_selling": 0.9206,
-      "losing_count": 5,
-      "mean_gain_when_stored_rwf_per_tonne": 71913.2095,
-      "mean_always_store_4_rwf_per_tonne": 25190.3993,
-      "share_always_store_4_losing": 0.4839,
+      "max_gain_rwf_per_tonne": 433699.0474,
+      "share_not_worse_than_selling": 0.98,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 151344.7919,
+      "share_stored_losing": 0.0909,
+      "mean_store_4_when_sell_rwf_per_tonne": 16873.2857,
+      "share_store_4_losing_when_sell": 0.5,
+      "mean_always_store_4_rwf_per_tonne": 18061.4451,
+      "share_always_store_4_losing": 0.4898,
       "worst": {
         "crop": "beans",
         "district": "Nyagatare",
@@ -472,114 +530,129 @@
       "model": "v1",
       "option": "hermetic_bags",
       "district": "Rwamagana",
-      "n_decisions": 63,
-      "store_count": 10,
-      "mean_gain_rwf_per_tonne": -1989.7391,
+      "n_decisions": 50,
+      "store_count": 0,
+      "mean_gain_rwf_per_tonne": 0.0,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -335720.8509,
-      "max_gain_rwf_per_tonne": 616393.0795,
-      "share_not_worse_than_selling": 0.9206,
-      "losing_count": 5,
-      "mean_gain_when_stored_rwf_per_tonne": -12535.3566,
-      "mean_always_store_4_rwf_per_tonne": 31286.4956,
-      "share_always_store_4_losing": 0.4516,
+      "min_gain_rwf_per_tonne": 0.0,
+      "max_gain_rwf_per_tonne": 0.0,
+      "share_not_worse_than_selling": 1.0,
+      "losing_count": 0,
+      "mean_gain_when_stored_rwf_per_tonne": null,
+      "share_stored_losing": null,
+      "mean_store_4_when_sell_rwf_per_tonne": 35188.7491,
+      "share_store_4_losing_when_sell": 0.4694,
+      "mean_always_store_4_rwf_per_tonne": 35188.7491,
+      "share_always_store_4_losing": 0.4694,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Rwamagana",
         "season": "A",
-        "year": 2011,
-        "gain_rwf_per_tonne": -335720.9
+        "year": 2014,
+        "gain_rwf_per_tonne": 0.0
       }
     },
     {
       "model": "v1",
       "option": "home_bags",
       "district": "Bugesera",
-      "n_decisions": 63,
-      "store_count": 14,
-      "mean_gain_rwf_per_tonne": 3151.134,
+      "n_decisions": 50,
+      "store_count": 4,
+      "mean_gain_rwf_per_tonne": 6314.5592,
       "p10_gain_rwf_per_tonne": 0.0,
-      "p90_gain_rwf_per_tonne": 29538.7894,
-      "min_gain_rwf_per_tonne": -316484.4026,
+      "p90_gain_rwf_per_tonne": 0.0,
+      "min_gain_rwf_per_tonne": -18331.2678,
       "max_gain_rwf_per_tonne": 290040.4461,
-      "share_not_worse_than_selling": 0.9048,
-      "losing_count": 6,
-      "mean_gain_when_stored_rwf_per_tonne": 14180.1031,
-      "mean_always_store_4_rwf_per_tonne": -49959.9841,
-      "share_always_store_4_losing": 0.6774,
+      "share_not_worse_than_selling": 0.98,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 78931.9895,
+      "share_stored_losing": 0.25,
+      "mean_store_4_when_sell_rwf_per_tonne": -51426.8929,
+      "share_store_4_losing_when_sell": 0.7111,
+      "mean_always_store_4_rwf_per_tonne": -51428.1459,
+      "share_always_store_4_losing": 0.7143,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Bugesera",
         "season": "A",
-        "year": 2021,
-        "gain_rwf_per_tonne": -316484.4
+        "year": 2014,
+        "gain_rwf_per_tonne": -18331.3
       }
     },
     {
       "model": "v1",
       "option": "home_bags",
       "district": "Gatsibo",
-      "n_decisions": 63,
-      "store_count": 6,
-      "mean_gain_rwf_per_tonne": -4109.4686,
+      "n_decisions": 50,
+      "store_count": 0,
+      "mean_gain_rwf_per_tonne": 0.0,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -271436.532,
-      "max_gain_rwf_per_tonne": 211244.9549,
-      "share_not_worse_than_selling": 0.9524,
-      "losing_count": 3,
-      "mean_gain_when_stored_rwf_per_tonne": -43149.4205,
-      "mean_always_store_4_rwf_per_tonne": -51603.0012,
-      "share_always_store_4_losing": 0.65,
+      "min_gain_rwf_per_tonne": 0.0,
+      "max_gain_rwf_per_tonne": 0.0,
+      "share_not_worse_than_selling": 1.0,
+      "losing_count": 0,
+      "mean_gain_when_stored_rwf_per_tonne": null,
+      "share_stored_losing": null,
+      "mean_store_4_when_sell_rwf_per_tonne": -44232.1385,
+      "share_store_4_losing_when_sell": 0.6122,
+      "mean_always_store_4_rwf_per_tonne": -44232.1385,
+      "share_always_store_4_losing": 0.6122,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Gatsibo",
-        "season": "B",
-        "year": 2011,
-        "gain_rwf_per_tonne": -271436.5
+        "season": "A",
+        "year": 2014,
+        "gain_rwf_per_tonne": 0.0
       }
     },
     {
       "model": "v1",
       "option": "home_bags",
       "district": "Kayonza",
-      "n_decisions": 63,
-      "store_count": 21,
-      "mean_gain_rwf_per_tonne": -16115.5404,
-      "p10_gain_rwf_per_tonne": -96618.8215,
-      "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -290385.262,
-      "max_gain_rwf_per_tonne": 254438.9879,
-      "share_not_worse_than_selling": 0.7619,
-      "losing_count": 15,
-      "mean_gain_when_stored_rwf_per_tonne": -48346.6213,
-      "mean_always_store_4_rwf_per_tonne": -40107.9664,
-      "share_always_store_4_losing": 0.6774,
+      "n_decisions": 50,
+      "store_count": 20,
+      "mean_gain_rwf_per_tonne": -17954.4912,
+      "p10_gain_rwf_per_tonne": -85241.8724,
+      "p90_gain_rwf_per_tonne": 5639.7819,
+      "min_gain_rwf_per_tonne": -190513.6682,
+      "max_gain_rwf_per_tonne": 80766.3978,
+      "share_not_worse_than_selling": 0.72,
+      "losing_count": 14,
+      "mean_gain_when_stored_rwf_per_tonne": -44886.2279,
+      "share_stored_losing": 0.7,
+      "mean_store_4_when_sell_rwf_per_tonne": -53916.3333,
+      "share_store_4_losing_when_sell": 0.6897,
+      "mean_always_store_4_rwf_per_tonne": -53316.4586,
+      "share_always_store_4_losing": 0.7347,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Kayonza",
         "season": "B",
-        "year": 2011,
-        "gain_rwf_per_tonne": -290385.3
+        "year": 2017,
+        "gain_rwf_per_tonne": -190513.7
       }
     },
     {
       "model": "v1",
       "option": "home_bags",
       "district": "Kirehe",
-      "n_decisions": 63,
-      "store_count": 10,
-      "mean_gain_rwf_per_tonne": -1965.938,
+      "n_decisions": 50,
+      "store_count": 5,
+      "mean_gain_rwf_per_tonne": 3802.098,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
       "min_gain_rwf_per_tonne": -338577.4106,
       "max_gain_rwf_per_tonne": 265352.15,
-      "share_not_worse_than_selling": 0.9365,
-      "losing_count": 4,
-      "mean_gain_when_stored_rwf_per_tonne": -12385.4096,
-      "mean_always_store_4_rwf_per_tonne": -34579.1115,
-      "share_always_store_4_losing": 0.6452,
+      "share_not_worse_than_selling": 0.98,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 38020.9799,
+      "share_stored_losing": 0.2,
+      "mean_store_4_when_sell_rwf_per_tonne": -38049.0361,
+      "share_store_4_losing_when_sell": 0.6591,
+      "mean_always_store_4_rwf_per_tonne": -47840.0358,
+      "share_always_store_4_losing": 0.6735,
       "worst": {
         "crop": "beans",
         "district": "Kirehe",
@@ -592,72 +665,81 @@
       "model": "v1",
       "option": "home_bags",
       "district": "Ngoma",
-      "n_decisions": 63,
-      "store_count": 13,
-      "mean_gain_rwf_per_tonne": -2587.4345,
-      "p10_gain_rwf_per_tonne": -17016.1979,
+      "n_decisions": 50,
+      "store_count": 1,
+      "mean_gain_rwf_per_tonne": -612.3984,
+      "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -320828.4744,
-      "max_gain_rwf_per_tonne": 290040.4461,
-      "share_not_worse_than_selling": 0.8889,
-      "losing_count": 7,
-      "mean_gain_when_stored_rwf_per_tonne": -12539.1058,
-      "mean_always_store_4_rwf_per_tonne": -34619.5424,
-      "share_always_store_4_losing": 0.6721,
+      "min_gain_rwf_per_tonne": -30619.9197,
+      "max_gain_rwf_per_tonne": 0.0,
+      "share_not_worse_than_selling": 0.98,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": -30619.9197,
+      "share_stored_losing": 1.0,
+      "mean_store_4_when_sell_rwf_per_tonne": -46898.805,
+      "share_store_4_losing_when_sell": 0.7083,
+      "mean_always_store_4_rwf_per_tonne": -47580.0724,
+      "share_always_store_4_losing": 0.7143,
       "worst": {
         "crop": "beans",
         "district": "Ngoma",
-        "season": "B",
-        "year": 2023,
-        "gain_rwf_per_tonne": -320828.5
+        "season": "A",
+        "year": 2014,
+        "gain_rwf_per_tonne": -30619.9
       }
     },
     {
       "model": "v1",
       "option": "home_bags",
       "district": "Nyagatare",
-      "n_decisions": 63,
-      "store_count": 15,
-      "mean_gain_rwf_per_tonne": 2249.1057,
+      "n_decisions": 50,
+      "store_count": 1,
+      "mean_gain_rwf_per_tonne": 556.0477,
       "p10_gain_rwf_per_tonne": 0.0,
-      "p90_gain_rwf_per_tonne": 25485.1864,
-      "min_gain_rwf_per_tonne": -369071.3667,
-      "max_gain_rwf_per_tonne": 290040.4461,
-      "share_not_worse_than_selling": 0.9206,
-      "losing_count": 5,
-      "mean_gain_when_stored_rwf_per_tonne": 9446.2439,
-      "mean_always_store_4_rwf_per_tonne": -53108.1341,
-      "share_always_store_4_losing": 0.6774,
+      "p90_gain_rwf_per_tonne": 0.0,
+      "min_gain_rwf_per_tonne": 0.0,
+      "max_gain_rwf_per_tonne": 27802.3841,
+      "share_not_worse_than_selling": 1.0,
+      "losing_count": 0,
+      "mean_gain_when_stored_rwf_per_tonne": 27802.3841,
+      "share_stored_losing": 0.0,
+      "mean_store_4_when_sell_rwf_per_tonne": -53498.9476,
+      "share_store_4_losing_when_sell": 0.7292,
+      "mean_always_store_4_rwf_per_tonne": -56603.9884,
+      "share_always_store_4_losing": 0.7347,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Nyagatare",
-        "season": "B",
-        "year": 2011,
-        "gain_rwf_per_tonne": -369071.4
+        "season": "A",
+        "year": 2014,
+        "gain_rwf_per_tonne": 0.0
       }
     },
     {
       "model": "v1",
       "option": "home_bags",
       "district": "Rwamagana",
-      "n_decisions": 63,
-      "store_count": 4,
-      "mean_gain_rwf_per_tonne": 1233.6005,
+      "n_decisions": 50,
+      "store_count": 0,
+      "mean_gain_rwf_per_tonne": 0.0,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -241252.5557,
-      "max_gain_rwf_per_tonne": 445187.2951,
-      "share_not_worse_than_selling": 0.9524,
-      "losing_count": 3,
-      "mean_gain_when_stored_rwf_per_tonne": 19429.2072,
-      "mean_always_store_4_rwf_per_tonne": -50764.2363,
-      "share_always_store_4_losing": 0.7258,
+      "min_gain_rwf_per_tonne": 0.0,
+      "max_gain_rwf_per_tonne": 0.0,
+      "share_not_worse_than_selling": 1.0,
+      "losing_count": 0,
+      "mean_gain_when_stored_rwf_per_tonne": null,
+      "share_stored_losing": null,
+      "mean_store_4_when_sell_rwf_per_tonne": -42406.8466,
+      "share_store_4_losing_when_sell": 0.7347,
+      "mean_always_store_4_rwf_per_tonne": -42406.8466,
+      "share_always_store_4_losing": 0.7347,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Rwamagana",
         "season": "A",
-        "year": 2011,
-        "gain_rwf_per_tonne": -241252.6
+        "year": 2014,
+        "gain_rwf_per_tonne": 0.0
       }
     },
     {
@@ -665,23 +747,26 @@
       "option": "hermetic_bags",
       "district": "Bugesera",
       "n_decisions": 47,
-      "store_count": 13,
-      "mean_gain_rwf_per_tonne": -14715.2478,
-      "p10_gain_rwf_per_tonne": -87960.7549,
+      "store_count": 6,
+      "mean_gain_rwf_per_tonne": -3874.44,
+      "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -240598.4763,
+      "min_gain_rwf_per_tonne": -156811.5305,
       "max_gain_rwf_per_tonne": 123996.0375,
-      "share_not_worse_than_selling": 0.8085,
-      "losing_count": 9,
-      "mean_gain_when_stored_rwf_per_tonne": -53201.2805,
+      "share_not_worse_than_selling": 0.9362,
+      "losing_count": 3,
+      "mean_gain_when_stored_rwf_per_tonne": -30349.7798,
+      "share_stored_losing": 0.5,
+      "mean_store_4_when_sell_rwf_per_tonne": 24944.0259,
+      "share_store_4_losing_when_sell": 0.475,
       "mean_always_store_4_rwf_per_tonne": 21918.62,
       "share_always_store_4_losing": 0.4565,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Bugesera",
-        "season": "A",
-        "year": 2021,
-        "gain_rwf_per_tonne": -240598.5
+        "season": "B",
+        "year": 2017,
+        "gain_rwf_per_tonne": -156811.5
       }
     },
     {
@@ -689,23 +774,26 @@
       "option": "hermetic_bags",
       "district": "Gatsibo",
       "n_decisions": 47,
-      "store_count": 15,
-      "mean_gain_rwf_per_tonne": 1508.5627,
-      "p10_gain_rwf_per_tonne": -32465.2392,
-      "p90_gain_rwf_per_tonne": 19421.6299,
-      "min_gain_rwf_per_tonne": -379884.1238,
-      "max_gain_rwf_per_tonne": 232166.295,
-      "share_not_worse_than_selling": 0.8085,
-      "losing_count": 9,
-      "mean_gain_when_stored_rwf_per_tonne": 4726.8299,
+      "store_count": 5,
+      "mean_gain_rwf_per_tonne": 11720.1985,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 0.0,
+      "min_gain_rwf_per_tonne": -26052.0387,
+      "max_gain_rwf_per_tonne": 223942.9624,
+      "share_not_worse_than_selling": 0.9787,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 110169.8654,
+      "share_stored_losing": 0.2,
+      "mean_store_4_when_sell_rwf_per_tonne": 35449.0503,
+      "share_store_4_losing_when_sell": 0.4634,
       "mean_always_store_4_rwf_per_tonne": 43628.3155,
       "share_always_store_4_losing": 0.4348,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Gatsibo",
         "season": "B",
-        "year": 2023,
-        "gain_rwf_per_tonne": -379884.1
+        "year": 2025,
+        "gain_rwf_per_tonne": -26052.0
       }
     },
     {
@@ -713,23 +801,26 @@
       "option": "hermetic_bags",
       "district": "Kayonza",
       "n_decisions": 47,
-      "store_count": 13,
-      "mean_gain_rwf_per_tonne": -9509.9665,
-      "p10_gain_rwf_per_tonne": -51691.7295,
-      "p90_gain_rwf_per_tonne": 8331.2701,
-      "min_gain_rwf_per_tonne": -240598.4763,
+      "store_count": 6,
+      "mean_gain_rwf_per_tonne": 1330.8413,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 0.0,
+      "min_gain_rwf_per_tonne": -156811.5305,
       "max_gain_rwf_per_tonne": 157888.0983,
-      "share_not_worse_than_selling": 0.8298,
-      "losing_count": 8,
-      "mean_gain_when_stored_rwf_per_tonne": -34382.1867,
+      "share_not_worse_than_selling": 0.9574,
+      "losing_count": 2,
+      "mean_gain_when_stored_rwf_per_tonne": 10424.9234,
+      "share_stored_losing": 0.3333,
+      "mean_store_4_when_sell_rwf_per_tonne": 13425.9886,
+      "share_store_4_losing_when_sell": 0.5,
       "mean_always_store_4_rwf_per_tonne": 10118.9055,
       "share_always_store_4_losing": 0.4783,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Kayonza",
-        "season": "A",
-        "year": 2021,
-        "gain_rwf_per_tonne": -240598.5
+        "season": "B",
+        "year": 2017,
+        "gain_rwf_per_tonne": -156811.5
       }
     },
     {
@@ -737,23 +828,26 @@
       "option": "hermetic_bags",
       "district": "Kirehe",
       "n_decisions": 47,
-      "store_count": 13,
-      "mean_gain_rwf_per_tonne": -8285.4061,
-      "p10_gain_rwf_per_tonne": -90981.0761,
-      "p90_gain_rwf_per_tonne": 24451.869,
-      "min_gain_rwf_per_tonne": -262691.4843,
+      "store_count": 6,
+      "mean_gain_rwf_per_tonne": 226.0026,
+      "p10_gain_rwf_per_tonne": 0.0,
+      "p90_gain_rwf_per_tonne": 0.0,
+      "min_gain_rwf_per_tonne": -156811.5305,
       "max_gain_rwf_per_tonne": 168023.6634,
-      "share_not_worse_than_selling": 0.8511,
-      "losing_count": 7,
-      "mean_gain_when_stored_rwf_per_tonne": -29954.9296,
+      "share_not_worse_than_selling": 0.9362,
+      "losing_count": 3,
+      "mean_gain_when_stored_rwf_per_tonne": 1770.3538,
+      "share_stored_losing": 0.5,
+      "mean_store_4_when_sell_rwf_per_tonne": 20580.7832,
+      "share_store_4_losing_when_sell": 0.45,
       "mean_always_store_4_rwf_per_tonne": 19109.9881,
       "share_always_store_4_losing": 0.4565,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Kirehe",
-        "season": "A",
-        "year": 2021,
-        "gain_rwf_per_tonne": -262691.5
+        "season": "B",
+        "year": 2017,
+        "gain_rwf_per_tonne": -156811.5
       }
     },
     {
@@ -761,23 +855,26 @@
       "option": "hermetic_bags",
       "district": "Ngoma",
       "n_decisions": 47,
-      "store_count": 13,
-      "mean_gain_rwf_per_tonne": -16083.473,
-      "p10_gain_rwf_per_tonne": -106043.0843,
+      "store_count": 6,
+      "mean_gain_rwf_per_tonne": -5242.6652,
+      "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -240598.4763,
+      "min_gain_rwf_per_tonne": -156811.5305,
       "max_gain_rwf_per_tonne": 123996.0375,
-      "share_not_worse_than_selling": 0.8085,
-      "losing_count": 9,
-      "mean_gain_when_stored_rwf_per_tonne": -58147.941,
+      "share_not_worse_than_selling": 0.9362,
+      "losing_count": 3,
+      "mean_gain_when_stored_rwf_per_tonne": -41067.5442,
+      "share_stored_losing": 0.5,
+      "mean_store_4_when_sell_rwf_per_tonne": 29913.9162,
+      "share_store_4_losing_when_sell": 0.45,
       "mean_always_store_4_rwf_per_tonne": 22792.6131,
       "share_always_store_4_losing": 0.4565,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Ngoma",
-        "season": "A",
-        "year": 2021,
-        "gain_rwf_per_tonne": -240598.5
+        "season": "B",
+        "year": 2017,
+        "gain_rwf_per_tonne": -156811.5
       }
     },
     {
@@ -785,23 +882,26 @@
       "option": "hermetic_bags",
       "district": "Nyagatare",
       "n_decisions": 47,
-      "store_count": 13,
-      "mean_gain_rwf_per_tonne": -14074.071,
-      "p10_gain_rwf_per_tonne": -51691.7295,
+      "store_count": 5,
+      "mean_gain_rwf_per_tonne": 942.3744,
+      "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -240598.4763,
+      "min_gain_rwf_per_tonne": -130465.1525,
       "max_gain_rwf_per_tonne": 123996.0375,
-      "share_not_worse_than_selling": 0.7872,
-      "losing_count": 10,
-      "mean_gain_when_stored_rwf_per_tonne": -50883.1798,
+      "share_not_worse_than_selling": 0.9574,
+      "losing_count": 2,
+      "mean_gain_when_stored_rwf_per_tonne": 8858.3193,
+      "share_stored_losing": 0.4,
+      "mean_store_4_when_sell_rwf_per_tonne": 20567.7212,
+      "share_store_4_losing_when_sell": 0.5122,
       "mean_always_store_4_rwf_per_tonne": 19265.38,
       "share_always_store_4_losing": 0.4783,
       "worst": {
         "crop": "beans",
         "district": "Nyagatare",
-        "season": "A",
-        "year": 2021,
-        "gain_rwf_per_tonne": -240598.5
+        "season": "B",
+        "year": 2018,
+        "gain_rwf_per_tonne": -130465.2
       }
     },
     {
@@ -809,23 +909,26 @@
       "option": "hermetic_bags",
       "district": "Rwamagana",
       "n_decisions": 47,
-      "store_count": 13,
-      "mean_gain_rwf_per_tonne": -13352.332,
-      "p10_gain_rwf_per_tonne": -51691.7295,
+      "store_count": 6,
+      "mean_gain_rwf_per_tonne": -2511.5242,
+      "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -240598.4763,
+      "min_gain_rwf_per_tonne": -156811.5305,
       "max_gain_rwf_per_tonne": 123996.0375,
-      "share_not_worse_than_selling": 0.8085,
-      "losing_count": 9,
-      "mean_gain_when_stored_rwf_per_tonne": -48273.8158,
+      "share_not_worse_than_selling": 0.9362,
+      "losing_count": 3,
+      "mean_gain_when_stored_rwf_per_tonne": -19673.6065,
+      "share_stored_losing": 0.5,
+      "mean_store_4_when_sell_rwf_per_tonne": 26520.9217,
+      "share_store_4_losing_when_sell": 0.5,
       "mean_always_store_4_rwf_per_tonne": 21182.0902,
       "share_always_store_4_losing": 0.4783,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Rwamagana",
-        "season": "A",
-        "year": 2021,
-        "gain_rwf_per_tonne": -240598.5
+        "season": "B",
+        "year": 2017,
+        "gain_rwf_per_tonne": -156811.5
       }
     },
     {
@@ -833,23 +936,26 @@
       "option": "home_bags",
       "district": "Bugesera",
       "n_decisions": 47,
-      "store_count": 5,
-      "mean_gain_rwf_per_tonne": -3526.7954,
+      "store_count": 3,
+      "mean_gain_rwf_per_tonne": -1355.2851,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -190513.6682,
-      "max_gain_rwf_per_tonne": 139615.2426,
-      "share_not_worse_than_selling": 0.9362,
-      "losing_count": 3,
-      "mean_gain_when_stored_rwf_per_tonne": -33151.877,
+      "min_gain_rwf_per_tonne": -88169.0889,
+      "max_gain_rwf_per_tonne": 24449.3031,
+      "share_not_worse_than_selling": 0.9787,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": -21232.7995,
+      "share_stored_losing": 0.3333,
+      "mean_store_4_when_sell_rwf_per_tonne": -56070.4259,
+      "share_store_4_losing_when_sell": 0.7442,
       "mean_always_store_4_rwf_per_tonne": -50921.9021,
       "share_always_store_4_losing": 0.7174,
       "worst": {
         "crop": "maize",
         "district": "Bugesera",
         "season": "B",
-        "year": 2017,
-        "gain_rwf_per_tonne": -190513.7
+        "year": 2015,
+        "gain_rwf_per_tonne": -88169.1
       }
     },
     {
@@ -857,23 +963,26 @@
       "option": "home_bags",
       "district": "Gatsibo",
       "n_decisions": 47,
-      "store_count": 4,
-      "mean_gain_rwf_per_tonne": 5200.4077,
+      "store_count": 2,
+      "mean_gain_rwf_per_tonne": 4147.8418,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -84045.4591,
+      "min_gain_rwf_per_tonne": -1620.4986,
       "max_gain_rwf_per_tonne": 196569.063,
-      "share_not_worse_than_selling": 0.9574,
-      "losing_count": 2,
-      "mean_gain_when_stored_rwf_per_tonne": 61104.791,
+      "share_not_worse_than_selling": 0.9787,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 97474.2822,
+      "share_stored_losing": 0.5,
+      "mean_store_4_when_sell_rwf_per_tonne": -37826.688,
+      "share_store_4_losing_when_sell": 0.5909,
       "mean_always_store_4_rwf_per_tonne": -35255.7769,
       "share_always_store_4_losing": 0.587,
       "worst": {
         "crop": "maize",
         "district": "Gatsibo",
         "season": "B",
-        "year": 2023,
-        "gain_rwf_per_tonne": -84045.5
+        "year": 2025,
+        "gain_rwf_per_tonne": -1620.5
       }
     },
     {
@@ -881,15 +990,18 @@
       "option": "home_bags",
       "district": "Kayonza",
       "n_decisions": 47,
-      "store_count": 3,
-      "mean_gain_rwf_per_tonne": 6348.8999,
+      "store_count": 2,
+      "mean_gain_rwf_per_tonne": 3378.3628,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
       "min_gain_rwf_per_tonne": 0.0,
-      "max_gain_rwf_per_tonne": 139615.2426,
+      "max_gain_rwf_per_tonne": 134333.7498,
       "share_not_worse_than_selling": 1.0,
       "losing_count": 0,
-      "mean_gain_when_stored_rwf_per_tonne": 99466.0985,
+      "mean_gain_when_stored_rwf_per_tonne": 79391.5265,
+      "share_stored_losing": 0.0,
+      "mean_store_4_when_sell_rwf_per_tonne": -64196.2635,
+      "share_store_4_losing_when_sell": 0.75,
       "mean_always_store_4_rwf_per_tonne": -62390.4126,
       "share_always_store_4_losing": 0.7609,
       "worst": {
@@ -905,23 +1017,26 @@
       "option": "home_bags",
       "district": "Kirehe",
       "n_decisions": 47,
-      "store_count": 4,
-      "mean_gain_rwf_per_tonne": -4740.8941,
+      "store_count": 3,
+      "mean_gain_rwf_per_tonne": -150.5098,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -190513.6682,
-      "max_gain_rwf_per_tonne": 49253.3405,
-      "share_not_worse_than_selling": 0.9574,
-      "losing_count": 2,
-      "mean_gain_when_stored_rwf_per_tonne": -55705.5057,
+      "min_gain_rwf_per_tonne": -123507.0183,
+      "max_gain_rwf_per_tonne": 67179.7185,
+      "share_not_worse_than_selling": 0.9787,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": -2357.9864,
+      "share_stored_losing": 0.3333,
+      "mean_store_4_when_sell_rwf_per_tonne": -56918.5795,
+      "share_store_4_losing_when_sell": 0.7209,
       "mean_always_store_4_rwf_per_tonne": -50745.5927,
       "share_always_store_4_losing": 0.6957,
       "worst": {
         "crop": "maize",
         "district": "Kirehe",
         "season": "B",
-        "year": 2017,
-        "gain_rwf_per_tonne": -190513.7
+        "year": 2015,
+        "gain_rwf_per_tonne": -123507.0
       }
     },
     {
@@ -930,14 +1045,17 @@
       "district": "Ngoma",
       "n_decisions": 47,
       "store_count": 4,
-      "mean_gain_rwf_per_tonne": -3694.7253,
+      "mean_gain_rwf_per_tonne": -6312.8387,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
       "min_gain_rwf_per_tonne": -190513.6682,
-      "max_gain_rwf_per_tonne": 139615.2426,
+      "max_gain_rwf_per_tonne": 24449.3031,
       "share_not_worse_than_selling": 0.9574,
       "losing_count": 2,
-      "mean_gain_when_stored_rwf_per_tonne": -43413.0221,
+      "mean_gain_when_stored_rwf_per_tonne": -74175.8551,
+      "share_stored_losing": 0.5,
+      "mean_store_4_when_sell_rwf_per_tonne": -48588.3374,
+      "share_store_4_losing_when_sell": 0.7143,
       "mean_always_store_4_rwf_per_tonne": -49809.2185,
       "share_always_store_4_losing": 0.7174,
       "worst": {
@@ -953,23 +1071,26 @@
       "option": "home_bags",
       "district": "Nyagatare",
       "n_decisions": 47,
-      "store_count": 4,
-      "mean_gain_rwf_per_tonne": -1183.0003,
+      "store_count": 2,
+      "mean_gain_rwf_per_tonne": 137.3805,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -201673.1402,
-      "max_gain_rwf_per_tonne": 139615.2426,
-      "share_not_worse_than_selling": 0.9574,
-      "losing_count": 2,
-      "mean_gain_when_stored_rwf_per_tonne": -13900.2533,
+      "min_gain_rwf_per_tonne": -17992.4188,
+      "max_gain_rwf_per_tonne": 24449.3031,
+      "share_not_worse_than_selling": 0.9787,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 3228.4422,
+      "share_stored_losing": 0.5,
+      "mean_store_4_when_sell_rwf_per_tonne": -54915.5057,
+      "share_store_4_losing_when_sell": 0.7273,
       "mean_always_store_4_rwf_per_tonne": -53181.9735,
       "share_always_store_4_losing": 0.7391,
       "worst": {
-        "crop": "beans",
+        "crop": "maize",
         "district": "Nyagatare",
         "season": "B",
-        "year": 2018,
-        "gain_rwf_per_tonne": -201673.1
+        "year": 2015,
+        "gain_rwf_per_tonne": -17992.4
       }
     },
     {
@@ -977,23 +1098,26 @@
       "option": "home_bags",
       "district": "Rwamagana",
       "n_decisions": 47,
-      "store_count": 6,
-      "mean_gain_rwf_per_tonne": -1942.7129,
+      "store_count": 3,
+      "mean_gain_rwf_per_tonne": 228.3424,
       "p10_gain_rwf_per_tonne": 0.0,
       "p90_gain_rwf_per_tonne": 0.0,
-      "min_gain_rwf_per_tonne": -190513.6682,
-      "max_gain_rwf_per_tonne": 139615.2426,
-      "share_not_worse_than_selling": 0.9362,
-      "losing_count": 3,
-      "mean_gain_when_stored_rwf_per_tonne": -15217.9175,
+      "min_gain_rwf_per_tonne": -30281.1192,
+      "max_gain_rwf_per_tonne": 24449.3031,
+      "share_not_worse_than_selling": 0.9787,
+      "losing_count": 1,
+      "mean_gain_when_stored_rwf_per_tonne": 3577.3648,
+      "share_stored_losing": 0.3333,
+      "mean_store_4_when_sell_rwf_per_tonne": -56465.7129,
+      "share_store_4_losing_when_sell": 0.7442,
       "mean_always_store_4_rwf_per_tonne": -53194.2225,
       "share_always_store_4_losing": 0.7391,
       "worst": {
         "crop": "maize",
         "district": "Rwamagana",
         "season": "B",
-        "year": 2017,
-        "gain_rwf_per_tonne": -190513.7
+        "year": 2015,
+        "gain_rwf_per_tonne": -30281.1
       }
     }
   ],
@@ -1001,84 +1125,6 @@
     {
       "crop": "beans",
       "season": "B",
-      "year": 2010,
-      "gain_rwf_per_tonne": 362412.1
-    },
-    {
-      "crop": "maize",
-      "season": "A",
-      "year": 2010,
-      "gain_rwf_per_tonne": -37796.0
-    },
-    {
-      "crop": "maize",
-      "season": "B",
-      "year": 2010,
-      "gain_rwf_per_tonne": 0.0
-    },
-    {
-      "crop": "beans",
-      "season": "A",
-      "year": 2011,
-      "gain_rwf_per_tonne": 18346.1
-    },
-    {
-      "crop": "beans",
-      "season": "B",
-      "year": 2011,
-      "gain_rwf_per_tonne": -111203.7
-    },
-    {
-      "crop": "maize",
-      "season": "A",
-      "year": 2011,
-      "gain_rwf_per_tonne": 0.0
-    },
-    {
-      "crop": "maize",
-      "season": "B",
-      "year": 2011,
-      "gain_rwf_per_tonne": 0.0
-    },
-    {
-      "crop": "beans",
-      "season": "A",
-      "year": 2012,
-      "gain_rwf_per_tonne": 114415.7
-    },
-    {
-      "crop": "beans",
-      "season": "B",
-      "year": 2012,
-      "gain_rwf_per_tonne": -23649.6
-    },
-    {
-      "crop": "maize",
-      "season": "A",
-      "year": 2012,
-      "gain_rwf_per_tonne": 0.0
-    },
-    {
-      "crop": "maize",
-      "season": "B",
-      "year": 2012,
-      "gain_rwf_per_tonne": 0.0
-    },
-    {
-      "crop": "beans",
-      "season": "A",
-      "year": 2013,
-      "gain_rwf_per_tonne": 192058.3
-    },
-    {
-      "crop": "beans",
-      "season": "B",
-      "year": 2013,
-      "gain_rwf_per_tonne": 11008.8
-    },
-    {
-      "crop": "maize",
-      "season": "A",
       "year": 2013,
       "gain_rwf_per_tonne": 0.0
     },
@@ -1086,13 +1132,13 @@
       "crop": "maize",
       "season": "B",
       "year": 2013,
-      "gain_rwf_per_tonne": -6833.3
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "beans",
       "season": "A",
       "year": 2014,
-      "gain_rwf_per_tonne": 3274.6
+      "gain_rwf_per_tonne": 27286.8
     },
     {
       "crop": "beans",
@@ -1122,13 +1168,13 @@
       "crop": "beans",
       "season": "B",
       "year": 2015,
-      "gain_rwf_per_tonne": 1289.5
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "maize",
       "season": "A",
       "year": 2015,
-      "gain_rwf_per_tonne": 33231.7
+      "gain_rwf_per_tonne": 31257.0
     },
     {
       "crop": "maize",
@@ -1140,25 +1186,25 @@
       "crop": "beans",
       "season": "A",
       "year": 2017,
-      "gain_rwf_per_tonne": 76784.8
+      "gain_rwf_per_tonne": 105925.4
     },
     {
       "crop": "beans",
       "season": "B",
       "year": 2017,
-      "gain_rwf_per_tonne": 12052.2
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "maize",
       "season": "A",
       "year": 2017,
-      "gain_rwf_per_tonne": -11276.5
+      "gain_rwf_per_tonne": -3758.8
     },
     {
       "crop": "maize",
       "season": "B",
       "year": 2017,
-      "gain_rwf_per_tonne": -44803.3
+      "gain_rwf_per_tonne": -22401.6
     },
     {
       "crop": "beans",
@@ -1170,7 +1216,7 @@
       "crop": "beans",
       "season": "B",
       "year": 2018,
-      "gain_rwf_per_tonne": -18637.9
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "maize",
@@ -1194,7 +1240,7 @@
       "crop": "beans",
       "season": "B",
       "year": 2019,
-      "gain_rwf_per_tonne": 23988.8
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "maize",
@@ -1212,25 +1258,25 @@
       "crop": "beans",
       "season": "A",
       "year": 2020,
-      "gain_rwf_per_tonne": 145528.6
+      "gain_rwf_per_tonne": 219538.7
     },
     {
       "crop": "beans",
       "season": "B",
       "year": 2020,
-      "gain_rwf_per_tonne": 19579.9
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "maize",
       "season": "A",
       "year": 2020,
-      "gain_rwf_per_tonne": 2376.3
+      "gain_rwf_per_tonne": -690.4
     },
     {
       "crop": "maize",
       "season": "B",
       "year": 2020,
-      "gain_rwf_per_tonne": -35537.3
+      "gain_rwf_per_tonne": -6346.1
     },
     {
       "crop": "beans",
@@ -1242,7 +1288,7 @@
       "crop": "beans",
       "season": "B",
       "year": 2021,
-      "gain_rwf_per_tonne": -23051.1
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "maize",
@@ -1266,7 +1312,7 @@
       "crop": "beans",
       "season": "B",
       "year": 2022,
-      "gain_rwf_per_tonne": 81740.2
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "maize",
@@ -1284,31 +1330,31 @@
       "crop": "beans",
       "season": "A",
       "year": 2023,
-      "gain_rwf_per_tonne": 125255.1
+      "gain_rwf_per_tonne": 112765.3
     },
     {
       "crop": "beans",
       "season": "B",
       "year": 2023,
-      "gain_rwf_per_tonne": -189404.6
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "maize",
       "season": "A",
       "year": 2023,
-      "gain_rwf_per_tonne": -82134.6
+      "gain_rwf_per_tonne": -12823.1
     },
     {
       "crop": "maize",
       "season": "B",
       "year": 2023,
-      "gain_rwf_per_tonne": 1320.0
+      "gain_rwf_per_tonne": -3643.8
     },
     {
       "crop": "beans",
       "season": "A",
       "year": 2024,
-      "gain_rwf_per_tonne": 4829.3
+      "gain_rwf_per_tonne": 4682.5
     },
     {
       "crop": "beans",
@@ -1332,13 +1378,13 @@
       "crop": "beans",
       "season": "A",
       "year": 2025,
-      "gain_rwf_per_tonne": 36449.0
+      "gain_rwf_per_tonne": 6733.8
     },
     {
       "crop": "beans",
       "season": "B",
       "year": 2025,
-      "gain_rwf_per_tonne": 8766.7
+      "gain_rwf_per_tonne": 0.0
     },
     {
       "crop": "maize",
@@ -1356,7 +1402,7 @@
       "crop": "beans",
       "season": "A",
       "year": 2026,
-      "gain_rwf_per_tonne": 127580.2
+      "gain_rwf_per_tonne": 66595.4
     },
     {
       "crop": "beans",
@@ -1380,30 +1426,6 @@
   "losing_seasons": [
     {
       "crop": "beans",
-      "district": "Gatsibo",
-      "season": "B",
-      "year": 2023,
-      "horizon": 4,
-      "gain_rwf_per_tonne": -379884.1
-    },
-    {
-      "crop": "beans",
-      "district": "Rwamagana",
-      "season": "A",
-      "year": 2011,
-      "horizon": 3,
-      "gain_rwf_per_tonne": -335720.9
-    },
-    {
-      "crop": "maize",
-      "district": "Rwamagana",
-      "season": "A",
-      "year": 2010,
-      "horizon": 3,
-      "gain_rwf_per_tonne": -264571.8
-    },
-    {
-      "crop": "beans",
       "district": "Kirehe",
       "season": "A",
       "year": 2021,
@@ -1420,14 +1442,6 @@
     },
     {
       "crop": "beans",
-      "district": "Bugesera",
-      "season": "A",
-      "year": 2021,
-      "horizon": 3,
-      "gain_rwf_per_tonne": -240598.5
-    },
-    {
-      "crop": "beans",
       "district": "Ngoma",
       "season": "A",
       "year": 2021,
@@ -1436,43 +1450,75 @@
     },
     {
       "crop": "beans",
-      "district": "Nyagatare",
-      "season": "B",
-      "year": 2011,
-      "horizon": 4,
-      "gain_rwf_per_tonne": -239204.9
-    },
-    {
-      "crop": "beans",
       "district": "Bugesera",
+      "season": "A",
+      "year": 2021,
+      "horizon": 3,
+      "gain_rwf_per_tonne": -240598.5
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
       "season": "B",
-      "year": 2023,
-      "horizon": 4,
-      "gain_rwf_per_tonne": -191448.2
+      "year": 2017,
+      "horizon": 3,
+      "gain_rwf_per_tonne": -156811.5
     },
     {
       "crop": "beans",
-      "district": "Rwamagana",
-      "season": "B",
-      "year": 2023,
-      "horizon": 4,
-      "gain_rwf_per_tonne": -191448.2
+      "district": "Kayonza",
+      "season": "A",
+      "year": 2014,
+      "horizon": 3,
+      "gain_rwf_per_tonne": -127010.1
     },
     {
-      "crop": "beans",
-      "district": "Nyagatare",
-      "season": "B",
-      "year": 2023,
+      "crop": "maize",
+      "district": "Kayonza",
+      "season": "A",
+      "year": 2026,
       "horizon": 4,
-      "gain_rwf_per_tonne": -191448.2
+      "gain_rwf_per_tonne": -108305.7
     },
     {
-      "crop": "beans",
-      "district": "Ngoma",
+      "crop": "maize",
+      "district": "Kayonza",
       "season": "B",
+      "year": 2026,
+      "horizon": 3,
+      "gain_rwf_per_tonne": -102322.4
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
+      "season": "A",
       "year": 2023,
       "horizon": 4,
-      "gain_rwf_per_tonne": -191448.2
+      "gain_rwf_per_tonne": -89761.7
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
+      "season": "B",
+      "year": 2022,
+      "horizon": 3,
+      "gain_rwf_per_tonne": -68164.9
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
+      "season": "A",
+      "year": 2018,
+      "horizon": 4,
+      "gain_rwf_per_tonne": -44893.8
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
+      "season": "B",
+      "year": 2020,
+      "horizon": 3,
+      "gain_rwf_per_tonne": -44422.6
     }
   ],
   "coverage": [
@@ -1480,473 +1526,477 @@
       "crop": "beans",
       "district": "Bugesera",
       "horizon": 1,
-      "n": 30,
+      "n": 24,
       "inside": 20,
-      "share": 0.6667
+      "share": 0.8333
     },
     {
       "crop": "beans",
       "district": "Bugesera",
       "horizon": 2,
-      "n": 31,
-      "inside": 18,
-      "share": 0.5806
+      "n": 25,
+      "inside": 17,
+      "share": 0.68
     },
     {
       "crop": "beans",
       "district": "Bugesera",
       "horizon": 3,
-      "n": 31,
+      "n": 25,
       "inside": 21,
-      "share": 0.6774
+      "share": 0.84
     },
     {
       "crop": "beans",
       "district": "Bugesera",
       "horizon": 4,
-      "n": 30,
-      "inside": 16,
-      "share": 0.5333
-    },
-    {
-      "crop": "beans",
-      "district": "Gatsibo",
-      "horizon": 1,
-      "n": 30,
-      "inside": 22,
-      "share": 0.7333
-    },
-    {
-      "crop": "beans",
-      "district": "Gatsibo",
-      "horizon": 2,
-      "n": 31,
-      "inside": 15,
-      "share": 0.4839
-    },
-    {
-      "crop": "beans",
-      "district": "Gatsibo",
-      "horizon": 3,
-      "n": 31,
-      "inside": 14,
-      "share": 0.4516
-    },
-    {
-      "crop": "beans",
-      "district": "Gatsibo",
-      "horizon": 4,
-      "n": 30,
-      "inside": 20,
-      "share": 0.6667
-    },
-    {
-      "crop": "beans",
-      "district": "Kayonza",
-      "horizon": 1,
-      "n": 30,
-      "inside": 16,
-      "share": 0.5333
-    },
-    {
-      "crop": "beans",
-      "district": "Kayonza",
-      "horizon": 2,
-      "n": 31,
-      "inside": 19,
-      "share": 0.6129
-    },
-    {
-      "crop": "beans",
-      "district": "Kayonza",
-      "horizon": 3,
-      "n": 31,
-      "inside": 17,
-      "share": 0.5484
-    },
-    {
-      "crop": "beans",
-      "district": "Kayonza",
-      "horizon": 4,
-      "n": 30,
-      "inside": 17,
-      "share": 0.5667
-    },
-    {
-      "crop": "beans",
-      "district": "Kirehe",
-      "horizon": 1,
-      "n": 29,
-      "inside": 20,
-      "share": 0.6897
-    },
-    {
-      "crop": "beans",
-      "district": "Kirehe",
-      "horizon": 2,
-      "n": 31,
-      "inside": 17,
-      "share": 0.5484
-    },
-    {
-      "crop": "beans",
-      "district": "Kirehe",
-      "horizon": 3,
-      "n": 30,
-      "inside": 19,
-      "share": 0.6333
-    },
-    {
-      "crop": "beans",
-      "district": "Kirehe",
-      "horizon": 4,
-      "n": 30,
-      "inside": 20,
-      "share": 0.6667
-    },
-    {
-      "crop": "beans",
-      "district": "Ngoma",
-      "horizon": 1,
-      "n": 30,
-      "inside": 13,
-      "share": 0.4333
-    },
-    {
-      "crop": "beans",
-      "district": "Ngoma",
-      "horizon": 2,
-      "n": 31,
-      "inside": 11,
-      "share": 0.3548
-    },
-    {
-      "crop": "beans",
-      "district": "Ngoma",
-      "horizon": 3,
-      "n": 31,
-      "inside": 16,
-      "share": 0.5161
-    },
-    {
-      "crop": "beans",
-      "district": "Ngoma",
-      "horizon": 4,
-      "n": 29,
-      "inside": 12,
-      "share": 0.4138
-    },
-    {
-      "crop": "beans",
-      "district": "Nyagatare",
-      "horizon": 1,
-      "n": 30,
-      "inside": 17,
-      "share": 0.5667
-    },
-    {
-      "crop": "beans",
-      "district": "Nyagatare",
-      "horizon": 2,
-      "n": 31,
-      "inside": 14,
-      "share": 0.4516
-    },
-    {
-      "crop": "beans",
-      "district": "Nyagatare",
-      "horizon": 3,
-      "n": 31,
-      "inside": 23,
-      "share": 0.7419
-    },
-    {
-      "crop": "beans",
-      "district": "Nyagatare",
-      "horizon": 4,
-      "n": 30,
-      "inside": 14,
-      "share": 0.4667
-    },
-    {
-      "crop": "beans",
-      "district": "Rwamagana",
-      "horizon": 1,
-      "n": 30,
+      "n": 24,
       "inside": 18,
+      "share": 0.75
+    },
+    {
+      "crop": "beans",
+      "district": "Gatsibo",
+      "horizon": 1,
+      "n": 24,
+      "inside": 21,
+      "share": 0.875
+    },
+    {
+      "crop": "beans",
+      "district": "Gatsibo",
+      "horizon": 2,
+      "n": 25,
+      "inside": 20,
+      "share": 0.8
+    },
+    {
+      "crop": "beans",
+      "district": "Gatsibo",
+      "horizon": 3,
+      "n": 25,
+      "inside": 17,
+      "share": 0.68
+    },
+    {
+      "crop": "beans",
+      "district": "Gatsibo",
+      "horizon": 4,
+      "n": 24,
+      "inside": 20,
+      "share": 0.8333
+    },
+    {
+      "crop": "beans",
+      "district": "Kayonza",
+      "horizon": 1,
+      "n": 24,
+      "inside": 16,
+      "share": 0.6667
+    },
+    {
+      "crop": "beans",
+      "district": "Kayonza",
+      "horizon": 2,
+      "n": 25,
+      "inside": 18,
+      "share": 0.72
+    },
+    {
+      "crop": "beans",
+      "district": "Kayonza",
+      "horizon": 3,
+      "n": 25,
+      "inside": 18,
+      "share": 0.72
+    },
+    {
+      "crop": "beans",
+      "district": "Kayonza",
+      "horizon": 4,
+      "n": 24,
+      "inside": 16,
+      "share": 0.6667
+    },
+    {
+      "crop": "beans",
+      "district": "Kirehe",
+      "horizon": 1,
+      "n": 23,
+      "inside": 18,
+      "share": 0.7826
+    },
+    {
+      "crop": "beans",
+      "district": "Kirehe",
+      "horizon": 2,
+      "n": 25,
+      "inside": 18,
+      "share": 0.72
+    },
+    {
+      "crop": "beans",
+      "district": "Kirehe",
+      "horizon": 3,
+      "n": 24,
+      "inside": 20,
+      "share": 0.8333
+    },
+    {
+      "crop": "beans",
+      "district": "Kirehe",
+      "horizon": 4,
+      "n": 24,
+      "inside": 21,
+      "share": 0.875
+    },
+    {
+      "crop": "beans",
+      "district": "Ngoma",
+      "horizon": 1,
+      "n": 24,
+      "inside": 14,
+      "share": 0.5833
+    },
+    {
+      "crop": "beans",
+      "district": "Ngoma",
+      "horizon": 2,
+      "n": 25,
+      "inside": 12,
+      "share": 0.48
+    },
+    {
+      "crop": "beans",
+      "district": "Ngoma",
+      "horizon": 3,
+      "n": 25,
+      "inside": 15,
       "share": 0.6
     },
     {
       "crop": "beans",
-      "district": "Rwamagana",
-      "horizon": 2,
-      "n": 31,
-      "inside": 14,
-      "share": 0.4516
-    },
-    {
-      "crop": "beans",
-      "district": "Rwamagana",
-      "horizon": 3,
-      "n": 31,
-      "inside": 16,
-      "share": 0.5161
-    },
-    {
-      "crop": "beans",
-      "district": "Rwamagana",
+      "district": "Ngoma",
       "horizon": 4,
-      "n": 30,
+      "n": 24,
       "inside": 16,
-      "share": 0.5333
-    },
-    {
-      "crop": "maize",
-      "district": "Bugesera",
-      "horizon": 1,
-      "n": 32,
-      "inside": 22,
-      "share": 0.6875
-    },
-    {
-      "crop": "maize",
-      "district": "Bugesera",
-      "horizon": 2,
-      "n": 32,
-      "inside": 22,
-      "share": 0.6875
-    },
-    {
-      "crop": "maize",
-      "district": "Bugesera",
-      "horizon": 3,
-      "n": 32,
-      "inside": 22,
-      "share": 0.6875
-    },
-    {
-      "crop": "maize",
-      "district": "Bugesera",
-      "horizon": 4,
-      "n": 32,
-      "inside": 23,
-      "share": 0.7188
-    },
-    {
-      "crop": "maize",
-      "district": "Gatsibo",
-      "horizon": 1,
-      "n": 31,
-      "inside": 17,
-      "share": 0.5484
-    },
-    {
-      "crop": "maize",
-      "district": "Gatsibo",
-      "horizon": 2,
-      "n": 31,
-      "inside": 19,
-      "share": 0.6129
-    },
-    {
-      "crop": "maize",
-      "district": "Gatsibo",
-      "horizon": 3,
-      "n": 30,
-      "inside": 20,
       "share": 0.6667
     },
     {
+      "crop": "beans",
+      "district": "Nyagatare",
+      "horizon": 1,
+      "n": 24,
+      "inside": 18,
+      "share": 0.75
+    },
+    {
+      "crop": "beans",
+      "district": "Nyagatare",
+      "horizon": 2,
+      "n": 25,
+      "inside": 21,
+      "share": 0.84
+    },
+    {
+      "crop": "beans",
+      "district": "Nyagatare",
+      "horizon": 3,
+      "n": 25,
+      "inside": 22,
+      "share": 0.88
+    },
+    {
+      "crop": "beans",
+      "district": "Nyagatare",
+      "horizon": 4,
+      "n": 24,
+      "inside": 18,
+      "share": 0.75
+    },
+    {
+      "crop": "beans",
+      "district": "Rwamagana",
+      "horizon": 1,
+      "n": 24,
+      "inside": 22,
+      "share": 0.9167
+    },
+    {
+      "crop": "beans",
+      "district": "Rwamagana",
+      "horizon": 2,
+      "n": 25,
+      "inside": 20,
+      "share": 0.8
+    },
+    {
+      "crop": "beans",
+      "district": "Rwamagana",
+      "horizon": 3,
+      "n": 25,
+      "inside": 16,
+      "share": 0.64
+    },
+    {
+      "crop": "beans",
+      "district": "Rwamagana",
+      "horizon": 4,
+      "n": 24,
+      "inside": 19,
+      "share": 0.7917
+    },
+    {
+      "crop": "maize",
+      "district": "Bugesera",
+      "horizon": 1,
+      "n": 25,
+      "inside": 18,
+      "share": 0.72
+    },
+    {
+      "crop": "maize",
+      "district": "Bugesera",
+      "horizon": 2,
+      "n": 25,
+      "inside": 20,
+      "share": 0.8
+    },
+    {
+      "crop": "maize",
+      "district": "Bugesera",
+      "horizon": 3,
+      "n": 25,
+      "inside": 22,
+      "share": 0.88
+    },
+    {
+      "crop": "maize",
+      "district": "Bugesera",
+      "horizon": 4,
+      "n": 25,
+      "inside": 22,
+      "share": 0.88
+    },
+    {
+      "crop": "maize",
+      "district": "Gatsibo",
+      "horizon": 1,
+      "n": 25,
+      "inside": 17,
+      "share": 0.68
+    },
+    {
+      "crop": "maize",
+      "district": "Gatsibo",
+      "horizon": 2,
+      "n": 25,
+      "inside": 19,
+      "share": 0.76
+    },
+    {
+      "crop": "maize",
+      "district": "Gatsibo",
+      "horizon": 3,
+      "n": 25,
+      "inside": 20,
+      "share": 0.8
+    },
+    {
       "crop": "maize",
       "district": "Gatsibo",
       "horizon": 4,
-      "n": 30,
-      "inside": 21,
-      "share": 0.7
+      "n": 25,
+      "inside": 19,
+      "share": 0.76
     },
     {
       "crop": "maize",
       "district": "Kayonza",
       "horizon": 1,
-      "n": 32,
-      "inside": 22,
-      "share": 0.6875
+      "n": 25,
+      "inside": 19,
+      "share": 0.76
     },
     {
       "crop": "maize",
       "district": "Kayonza",
       "horizon": 2,
-      "n": 32,
-      "inside": 20,
-      "share": 0.625
+      "n": 25,
+      "inside": 21,
+      "share": 0.84
     },
     {
       "crop": "maize",
       "district": "Kayonza",
       "horizon": 3,
-      "n": 32,
-      "inside": 20,
-      "share": 0.625
-    },
-    {
-      "crop": "maize",
-      "district": "Kayonza",
-      "horizon": 4,
-      "n": 32,
-      "inside": 17,
-      "share": 0.5312
-    },
-    {
-      "crop": "maize",
-      "district": "Kirehe",
-      "horizon": 1,
-      "n": 31,
-      "inside": 21,
-      "share": 0.6774
-    },
-    {
-      "crop": "maize",
-      "district": "Kirehe",
-      "horizon": 2,
-      "n": 32,
-      "inside": 22,
-      "share": 0.6875
-    },
-    {
-      "crop": "maize",
-      "district": "Kirehe",
-      "horizon": 3,
-      "n": 32,
-      "inside": 21,
-      "share": 0.6562
-    },
-    {
-      "crop": "maize",
-      "district": "Kirehe",
-      "horizon": 4,
-      "n": 32,
+      "n": 25,
       "inside": 18,
-      "share": 0.5625
+      "share": 0.72
+    },
+    {
+      "crop": "maize",
+      "district": "Kayonza",
+      "horizon": 4,
+      "n": 25,
+      "inside": 14,
+      "share": 0.56
+    },
+    {
+      "crop": "maize",
+      "district": "Kirehe",
+      "horizon": 1,
+      "n": 24,
+      "inside": 17,
+      "share": 0.7083
+    },
+    {
+      "crop": "maize",
+      "district": "Kirehe",
+      "horizon": 2,
+      "n": 25,
+      "inside": 20,
+      "share": 0.8
+    },
+    {
+      "crop": "maize",
+      "district": "Kirehe",
+      "horizon": 3,
+      "n": 25,
+      "inside": 19,
+      "share": 0.76
+    },
+    {
+      "crop": "maize",
+      "district": "Kirehe",
+      "horizon": 4,
+      "n": 25,
+      "inside": 18,
+      "share": 0.72
     },
     {
       "crop": "maize",
       "district": "Ngoma",
       "horizon": 1,
-      "n": 32,
-      "inside": 24,
-      "share": 0.75
+      "n": 25,
+      "inside": 22,
+      "share": 0.88
     },
     {
       "crop": "maize",
       "district": "Ngoma",
       "horizon": 2,
-      "n": 32,
+      "n": 25,
       "inside": 25,
-      "share": 0.7812
+      "share": 1.0
     },
     {
       "crop": "maize",
       "district": "Ngoma",
       "horizon": 3,
-      "n": 32,
-      "inside": 26,
-      "share": 0.8125
+      "n": 25,
+      "inside": 25,
+      "share": 1.0
     },
     {
       "crop": "maize",
       "district": "Ngoma",
       "horizon": 4,
-      "n": 32,
+      "n": 25,
       "inside": 23,
-      "share": 0.7188
+      "share": 0.92
     },
     {
       "crop": "maize",
       "district": "Nyagatare",
       "horizon": 1,
-      "n": 32,
+      "n": 25,
+      "inside": 19,
+      "share": 0.76
+    },
+    {
+      "crop": "maize",
+      "district": "Nyagatare",
+      "horizon": 2,
+      "n": 25,
+      "inside": 24,
+      "share": 0.96
+    },
+    {
+      "crop": "maize",
+      "district": "Nyagatare",
+      "horizon": 3,
+      "n": 25,
       "inside": 21,
-      "share": 0.6562
-    },
-    {
-      "crop": "maize",
-      "district": "Nyagatare",
-      "horizon": 2,
-      "n": 32,
-      "inside": 23,
-      "share": 0.7188
-    },
-    {
-      "crop": "maize",
-      "district": "Nyagatare",
-      "horizon": 3,
-      "n": 32,
-      "inside": 23,
-      "share": 0.7188
+      "share": 0.84
     },
     {
       "crop": "maize",
       "district": "Nyagatare",
       "horizon": 4,
-      "n": 32,
-      "inside": 23,
-      "share": 0.7188
+      "n": 25,
+      "inside": 20,
+      "share": 0.8
     },
     {
       "crop": "maize",
       "district": "Rwamagana",
       "horizon": 1,
-      "n": 32,
-      "inside": 24,
-      "share": 0.75
+      "n": 25,
+      "inside": 22,
+      "share": 0.88
     },
     {
       "crop": "maize",
       "district": "Rwamagana",
       "horizon": 2,
-      "n": 32,
-      "inside": 22,
-      "share": 0.6875
+      "n": 25,
+      "inside": 23,
+      "share": 0.92
     },
     {
       "crop": "maize",
       "district": "Rwamagana",
       "horizon": 3,
-      "n": 32,
+      "n": 25,
       "inside": 22,
-      "share": 0.6875
+      "share": 0.88
     },
     {
       "crop": "maize",
       "district": "Rwamagana",
       "horizon": 4,
-      "n": 32,
-      "inside": 25,
-      "share": 0.7812
+      "n": 25,
+      "inside": 23,
+      "share": 0.92
     }
   ],
   "models": [
     {
       "model": "v1",
-      "rows_all": 1740,
-      "coverage_all": 0.6224,
+      "rows_all": 1383,
+      "coverage_all": 0.7838,
+      "coverage_raw_all": 0.6602,
+      "below_p10_all": 0.1222,
       "rows_compared": 1299,
-      "pinball_10": 24.9658,
+      "pinball_10": 23.4646,
       "pinball_50": 55.1718,
-      "pinball_90": 32.3253,
-      "pinball_mean": 37.4876,
-      "coverage_compared": 0.6582
+      "pinball_90": 32.7972,
+      "pinball_mean": 37.1445,
+      "coverage_compared": 0.7898
     },
     {
       "model": "v2",
       "rows_all": 1299,
-      "coverage_all": 0.7375,
+      "coverage_all": 0.8068,
+      "coverage_raw_all": 0.7375,
+      "below_p10_all": 0.1263,
       "rows_compared": 1299,
-      "pinball_10": 23.5477,
+      "pinball_10": 23.2922,
       "pinball_50": 56.154,
-      "pinball_90": 29.9079,
-      "pinball_mean": 36.5365,
-      "coverage_compared": 0.7375
+      "pinball_90": 27.5946,
+      "pinball_mean": 35.6803,
+      "coverage_compared": 0.8068
     }
   ],
   "sensitivity": [
@@ -1954,81 +2004,173 @@
       "case": "base",
       "label": "Values in config/assumptions.yaml",
       "option": "hermetic_bags",
-      "n_decisions": 441,
-      "store_count": 147,
-      "mean_gain_rwf_per_tonne": 16111.2512,
-      "share_not_worse_than_selling": 0.8798,
-      "mean_always_store_4_rwf_per_tonne": 34300.2944
+      "n_decisions": 350,
+      "store_count": 63,
+      "mean_gain_rwf_per_tonne": 14443.3993,
+      "share_not_worse_than_selling": 0.9514,
+      "mean_gain_when_stored_rwf_per_tonne": 80241.1069,
+      "mean_store_4_when_sell_rwf_per_tonne": 33956.9499,
+      "range_coverage": 0.7838
     },
     {
       "case": "base",
       "label": "Values in config/assumptions.yaml",
       "option": "home_bags",
-      "n_decisions": 441,
+      "n_decisions": 350,
+      "store_count": 31,
+      "mean_gain_rwf_per_tonne": -1127.7407,
+      "share_not_worse_than_selling": 0.9514,
+      "mean_gain_when_stored_rwf_per_tonne": -12732.556,
+      "mean_store_4_when_sell_rwf_per_tonne": -46847.2559,
+      "range_coverage": 0.7838
+    },
+    {
+      "case": "nominal_decision",
+      "label": "Decide on nominal prices, carrying food inflation forward",
+      "option": "hermetic_bags",
+      "n_decisions": 350,
+      "store_count": 78,
+      "mean_gain_rwf_per_tonne": 7503.3781,
+      "share_not_worse_than_selling": 0.9114,
+      "mean_gain_when_stored_rwf_per_tonne": 33669.0043,
+      "mean_store_4_when_sell_rwf_per_tonne": 40087.4669,
+      "range_coverage": 0.7838
+    },
+    {
+      "case": "nominal_decision",
+      "label": "Decide on nominal prices, carrying food inflation forward",
+      "option": "home_bags",
+      "n_decisions": 350,
+      "store_count": 36,
+      "mean_gain_rwf_per_tonne": 2071.0582,
+      "share_not_worse_than_selling": 0.9514,
+      "mean_gain_when_stored_rwf_per_tonne": 20135.2885,
+      "mean_store_4_when_sell_rwf_per_tonne": -44693.0621,
+      "range_coverage": 0.7838
+    },
+    {
+      "case": "uncalibrated",
+      "label": "Ranges not widened by past misses",
+      "option": "hermetic_bags",
+      "n_decisions": 350,
       "store_count": 83,
-      "mean_gain_rwf_per_tonne": -2592.0773,
-      "share_not_worse_than_selling": 0.9025,
-      "mean_always_store_4_rwf_per_tonne": -44956.3271
+      "mean_gain_rwf_per_tonne": 18783.3541,
+      "share_not_worse_than_selling": 0.9371,
+      "mean_gain_when_stored_rwf_per_tonne": 79206.9148,
+      "mean_store_4_when_sell_rwf_per_tonne": 33641.1679,
+      "range_coverage": 0.6602
+    },
+    {
+      "case": "uncalibrated",
+      "label": "Ranges not widened by past misses",
+      "option": "home_bags",
+      "n_decisions": 350,
+      "store_count": 60,
+      "mean_gain_rwf_per_tonne": 1802.9054,
+      "share_not_worse_than_selling": 0.9314,
+      "mean_gain_when_stored_rwf_per_tonne": 10516.9484,
+      "mean_store_4_when_sell_rwf_per_tonne": -41049.7347,
+      "range_coverage": 0.6602
+    },
+    {
+      "case": "fixed_months",
+      "label": "Decision months picked from all years (look-ahead), from 2010",
+      "option": "hermetic_bags",
+      "n_decisions": 441,
+      "store_count": 76,
+      "mean_gain_rwf_per_tonne": 13269.3651,
+      "share_not_worse_than_selling": 0.9478,
+      "mean_gain_when_stored_rwf_per_tonne": 76997.2368,
+      "mean_store_4_when_sell_rwf_per_tonne": 38136.344,
+      "range_coverage": 0.7948
+    },
+    {
+      "case": "fixed_months",
+      "label": "Decision months picked from all years (look-ahead), from 2010",
+      "option": "home_bags",
+      "n_decisions": 441,
+      "store_count": 29,
+      "mean_gain_rwf_per_tonne": -2480.9086,
+      "share_not_worse_than_selling": 0.9637,
+      "mean_gain_when_stored_rwf_per_tonne": -37726.9199,
+      "mean_store_4_when_sell_rwf_per_tonne": -45168.4663,
+      "range_coverage": 0.7948
     },
     {
       "case": "home_loss_fast",
       "label": "Home bags lose 41.2% in 8 months (Ng'ang'a et al. 2016)",
       "option": "hermetic_bags",
-      "n_decisions": 441,
-      "store_count": 147,
-      "mean_gain_rwf_per_tonne": 16111.2512,
-      "share_not_worse_than_selling": 0.8798,
-      "mean_always_store_4_rwf_per_tonne": 34300.2944
+      "n_decisions": 350,
+      "store_count": 63,
+      "mean_gain_rwf_per_tonne": 14443.3993,
+      "share_not_worse_than_selling": 0.9514,
+      "mean_gain_when_stored_rwf_per_tonne": 80241.1069,
+      "mean_store_4_when_sell_rwf_per_tonne": 33956.9499,
+      "range_coverage": 0.7838
     },
     {
       "case": "home_loss_fast",
       "label": "Home bags lose 41.2% in 8 months (Ng'ang'a et al. 2016)",
       "option": "home_bags",
-      "n_decisions": 441,
-      "store_count": 42,
-      "mean_gain_rwf_per_tonne": -5560.8805,
-      "share_not_worse_than_selling": 0.9456,
-      "mean_always_store_4_rwf_per_tonne": -99260.7997
+      "n_decisions": 350,
+      "store_count": 0,
+      "mean_gain_rwf_per_tonne": 0.0,
+      "share_not_worse_than_selling": 1.0,
+      "mean_gain_when_stored_rwf_per_tonne": null,
+      "mean_store_4_when_sell_rwf_per_tonne": -101816.3281,
+      "range_coverage": 0.7838
     },
     {
       "case": "hermetic_reused",
       "label": "Hermetic bag reused for 3 seasons",
       "option": "hermetic_bags",
-      "n_decisions": 441,
-      "store_count": 181,
-      "mean_gain_rwf_per_tonne": 25689.2336,
-      "share_not_worse_than_selling": 0.8617,
-      "mean_always_store_4_rwf_per_tonne": 57966.9611
+      "n_decisions": 350,
+      "store_count": 72,
+      "mean_gain_rwf_per_tonne": 19737.5345,
+      "share_not_worse_than_selling": 0.9486,
+      "mean_gain_when_stored_rwf_per_tonne": 95946.3481,
+      "mean_store_4_when_sell_rwf_per_tonne": 58005.8036,
+      "range_coverage": 0.7838
     },
     {
       "case": "hermetic_reused",
       "label": "Hermetic bag reused for 3 seasons",
       "option": "home_bags",
-      "n_decisions": 441,
-      "store_count": 83,
-      "mean_gain_rwf_per_tonne": -2592.0773,
-      "share_not_worse_than_selling": 0.9025,
-      "mean_always_store_4_rwf_per_tonne": -44956.3271
+      "n_decisions": 350,
+      "store_count": 31,
+      "mean_gain_rwf_per_tonne": -1127.7407,
+      "share_not_worse_than_selling": 0.9514,
+      "mean_gain_when_stored_rwf_per_tonne": -12732.556,
+      "mean_store_4_when_sell_rwf_per_tonne": -46847.2559,
+      "range_coverage": 0.7838
     },
     {
       "case": "no_gates",
       "label": "Store whenever the likely gain is above zero",
       "option": "hermetic_bags",
-      "n_decisions": 441,
-      "store_count": 383,
-      "mean_gain_rwf_per_tonne": 31837.4297,
-      "share_not_worse_than_selling": 0.6145,
-      "mean_always_store_4_rwf_per_tonne": 34300.2944
+      "n_decisions": 350,
+      "store_count": 311,
+      "mean_gain_rwf_per_tonne": 30098.3627,
+      "share_not_worse_than_selling": 0.6171,
+      "mean_gain_when_stored_rwf_per_tonne": 33872.7554,
+      "mean_store_4_when_sell_rwf_per_tonne": 106716.4126,
+      "range_coverage": 0.7838
     },
     {
       "case": "no_gates",
       "label": "Store whenever the likely gain is above zero",
       "option": "home_bags",
-      "n_decisions": 441,
-      "store_count": 350,
-      "mean_gain_rwf_per_tonne": -9415.1973,
-      "share_not_worse_than_selling": 0.5556,
-      "mean_always_store_4_rwf_per_tonne": -44956.3271
+      "n_decisions": 350,
+      "store_count": 255,
+      "mean_gain_rwf_per_tonne": -7484.6342,
+      "share_not_worse_than_selling": 0.5943,
+      "mean_gain_when_stored_rwf_per_tonne": -10273.0274,
+      "mean_store_4_when_sell_rwf_per_tonne": -10653.2374,
+      "range_coverage": 0.7838
     }
-  ]
+  ],
+  "live_range_width": {
+    "maize": 1.1518,
+    "beans": 1.9135
+  }
 }

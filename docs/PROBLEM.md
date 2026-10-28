@@ -32,8 +32,8 @@ Weighted summary of Eastern Province households with a maize or bean plot in Sea
 
 ## Interviews
 
-Not done. The team still needs 8 to 10 conversations with farmers and cooperative leaders. Record the date, the district, and the answers. Use a quote only with consent. Do not add a name without permission. No quotes are in this file.
+Not done yet. The questions, consent script and log template are in `docs/INTERVIEWS.md`. Summarise the 8 to 10 interviews here: dates, districts, roles, when they sold and why, how they store, what they lost, and how long Hunika took them. Use a quote only with consent. No quotes are in this file yet.
 
 ## Cooperative letter
 
-Not obtained.
+Not obtained. A template the cooperative can adapt is in `docs/outreach/letter_of_interest.md`; it only counts if the cooperative writes, signs and stamps it.

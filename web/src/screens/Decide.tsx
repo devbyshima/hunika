@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { decide, type DecideInput } from "../lib/decide"
 import { money, monthLabel, quantityLabel } from "../lib/format"
-import { withPrice } from "../lib/outlook"
+import { readCosts, withPrice, type CostOverrides } from "../lib/outlook"
 import type { Assumption, Bundle, CropForecast } from "../types"
 import type { View } from "../App"
 
@@ -12,16 +12,19 @@ const OPTIONS = [
   ["warehouse", "decide.warehouse"],
 ] as const
 
-function inputFor(items: Assumption[], forecast: CropForecast, quantityKg: number, needsCash: boolean, storageId: string): DecideInput {
+function defaultFor(items: Assumption[], storageId: string, field: string) {
+  return items.find((item) => item.option === storageId && item.field === field)?.value ?? null
+}
+
+function inputFor(items: Assumption[], forecast: CropForecast, quantityKg: number, needsCash: boolean, storageId: string, costs: CostOverrides): DecideInput {
   const options = OPTIONS.filter(([id]) => id === storageId).map(([id]) => {
-    const fields = items.filter((item) => item.option === id)
-    const read = (field: string) => fields.find((item) => item.field === field)?.value ?? null
+    const read = (field: string) => defaultFor(items, id, field)
     return {
       id,
-      loss_monthly: read("loss_monthly"),
+      loss_monthly: costs.loss_monthly ?? read("loss_monthly"),
       fee: read("fee"),
-      cost_per_kg: read("cost_per_kg"),
-      interest_annual: read("interest_annual"),
+      cost_per_kg: costs.cost_per_kg ?? read("cost_per_kg"),
+      interest_annual: costs.interest_annual ?? read("interest_annual"),
       borrow_share: read("borrow_share"),
     }
   })
@@ -39,6 +42,16 @@ function inputFor(items: Assumption[], forecast: CropForecast, quantityKg: numbe
     options,
     forecasts,
   }
+}
+
+function percentPlaceholder(value: number | null, t: (key: string, vars?: Record<string, string | number>) => string) {
+  if (value == null) return t("decide.costUnknown")
+  return t("decide.costDefault", { value: `${(value * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%` })
+}
+
+function numberPlaceholder(value: number | null, t: (key: string, vars?: Record<string, string | number>) => string) {
+  if (value == null) return t("decide.costUnknown")
+  return t("decide.costDefault", { value: `${value.toLocaleString("en-US", { maximumFractionDigits: 1 })} RWF` })
 }
 
 function bestHorizon(forecast: CropForecast) {
@@ -63,6 +76,9 @@ export default function Decide({
   const [storage, setStorage] = useState("home_bags")
   const [cash, setCash] = useState(false)
   const [typed, setTyped] = useState("")
+  const [loss, setLoss] = useState("")
+  const [cost, setCost] = useState("")
+  const [interest, setInterest] = useState("")
   const [view, setView] = useState<View | null>(null)
 
   const dataForecast = bundle.forecasts.districts[district]?.[crop]
@@ -72,10 +88,11 @@ export default function Decide({
   function submit() {
     const quantity = Number(amount)
     if (!dataForecast || !Number.isFinite(quantity) || quantity <= 0) return
-    const forecast = ownPrice && dataForecast.status === "ok" ? { ...withPrice(dataForecast, typedPrice, bundle.forecasts.inflation), own_price: true } : dataForecast
+    const forecast = ownPrice && dataForecast.status === "ok" ? { ...withPrice(dataForecast, typedPrice), own_price: true } : dataForecast
     const quantityKg = unit === "t" ? quantity * 1000 : quantity
-    const verdict = decide(inputFor(bundle.assumptions.items, forecast, quantityKg, cash, storage))
-    const next = { district, crop, quantityKg, forecast, verdict, horizon: bestHorizon(forecast) }
+    const costs = readCosts(loss, cost, interest)
+    const verdict = decide(inputFor(bundle.assumptions.items, forecast, quantityKg, cash, storage, costs))
+    const next = { district, crop, quantityKg, forecast, verdict, horizon: bestHorizon(forecast), ownCosts: Object.keys(costs).length > 0 }
     setView(next)
     onView(next)
   }
@@ -132,11 +149,34 @@ export default function Decide({
       <p className="mt-4 text-sm font-semibold">{t("decide.storage")}</p>
       <div className="mt-1 grid gap-2">
         {OPTIONS.map(([id, key]) => (
-          <button key={id} type="button" className={`min-h-12 rounded-xl px-3 text-left ${storage === id ? "bg-[#14532d] text-white" : "bg-white"}`} onClick={() => setStorage(id)}>
+          <button key={id} type="button" className={`min-h-12 rounded-xl px-3 text-left ${storage === id ? "bg-[#14532d] text-white" : "bg-white"}`} onClick={() => {
+              setStorage(id)
+              setLoss("")
+              setCost("")
+              setInterest("")
+            }}>
             {t(key)}
           </button>
         ))}
       </div>
+      <details className="mt-3 rounded-xl bg-white px-3 py-2">
+        <summary className="min-h-11 cursor-pointer py-2 text-sm font-semibold">{t("decide.yourCosts")}</summary>
+        <p className="text-xs leading-snug text-[#5c564c]">{t("decide.yourCostsNote")}</p>
+        <label className="mt-2 block text-sm">
+          {t("decide.costLoss")}
+          <input className="mt-1 min-h-11 w-full rounded-lg border border-[#e0d6c4] px-3" inputMode="decimal" value={loss} onChange={(event) => setLoss(event.target.value)} placeholder={percentPlaceholder(defaultFor(bundle.assumptions.items, storage, "loss_monthly"), t)} />
+        </label>
+        <label className="mt-2 block text-sm">
+          {t("decide.costBags")}
+          <input className="mt-1 min-h-11 w-full rounded-lg border border-[#e0d6c4] px-3" inputMode="decimal" value={cost} onChange={(event) => setCost(event.target.value)} placeholder={numberPlaceholder(defaultFor(bundle.assumptions.items, storage, "cost_per_kg"), t)} />
+        </label>
+        {storage === "warehouse" ? (
+          <label className="mt-2 block text-sm">
+            {t("decide.costInterest")}
+            <input className="mt-1 min-h-11 w-full rounded-lg border border-[#e0d6c4] px-3" inputMode="decimal" value={interest} onChange={(event) => setInterest(event.target.value)} placeholder={percentPlaceholder(defaultFor(bundle.assumptions.items, storage, "interest_annual"), t)} />
+          </label>
+        ) : null}
+      </details>
       <label className="mt-4 flex min-h-12 items-center gap-3 text-sm font-semibold">
         <input type="checkbox" className="h-5 w-5" checked={cash} onChange={(event) => setCash(event.target.checked)} />
         {t("decide.cash")}
@@ -171,6 +211,7 @@ export default function Decide({
           {view.verdict.loss_band ? <p className="mt-2 text-sm">{t(`decide.loss.${view.verdict.loss_band === "between_10_and_50" ? "mid" : view.verdict.loss_band === "over_50" ? "over50" : "under10"}`)}</p> : null}
           <p className="mt-3 text-sm leading-snug">{t("decide.reason", { up: horizon.n_up, n: horizon.n, months: view.horizon })}</p>
           {forecast.own_price ? <p className="mt-3 text-sm">{t("decide.ownPrice", { price: money(forecast.price_now) })}</p> : null}
+          {view.ownCosts ? <p className="mt-2 text-sm">{t("decide.ownCosts")}</p> : null}
           {!forecast.own_price && forecast.stale ? <p className="mt-3 rounded-xl bg-[#f8e7c8] px-3 py-2 text-sm">{t("decide.stale", { days: forecast.stale_days ?? "" })}</p> : null}
           {!forecast.own_price && forecast.price_pooled ? <p className="mt-2 text-sm">{t("decide.provincePrice", { month: monthLabel(forecast.price_month || "") })}</p> : null}
           {forecast.pattern_last_year && forecast.pattern_last_year < "2022" ? <p className="mt-2 text-sm">{t("decide.oldPattern", { year: forecast.pattern_last_year })}</p> : null}
