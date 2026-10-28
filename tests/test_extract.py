@@ -1,3 +1,4 @@
+import math
 from datetime import datetime
 
 import pandas as pd
@@ -5,7 +6,7 @@ import pytest
 
 from pipeline.ingest_cpi import extract_food, publication_date
 from pipeline.ingest_prices import kg_price, load_prices
-from pipeline.ingest_sas import extract_table
+from pipeline.ingest_sas import Edition, extract_table, supply_anomaly
 
 
 def test_kg_price_converts_bags_and_rejects_unknown_units():
@@ -57,6 +58,9 @@ def test_cpi_food_row_and_publication_lag():
     assert publication_date("2026-09") == "2026-10-10"
 
 
+EDITION = Edition("x.xlsx", "Table 24", "A", 2025, "rows", "2025-12-31", "NISR publication page", "https://example.org/x.xlsx")
+
+
 def test_sas_district_table_reads_maize_and_beans():
     frame = pd.DataFrame(
         [
@@ -66,7 +70,7 @@ def test_sas_district_table_reads_maize_and_beans():
             [None, "Total", 30, 12.5, 40, 15],
         ]
     )
-    rows = extract_table(frame, "A", 2025)
+    rows = extract_table(frame, EDITION)
     assert rows == [
         {
             "sas_year": 2025,
@@ -76,7 +80,45 @@ def test_sas_district_table_reads_maize_and_beans():
             "maize_tonnes": 12.5,
             "beans_tonnes": 40.0,
             "published_on": "2025-12-31",
-            "source_table": "SAS 2025 annual tables, season A",
-            "source_url": "https://statistics.gov.rw/sites/default/files/documents/2025-12/SAS%202025_Annual%20Tables.xlsx",
+            "date_basis": "NISR publication page",
+            "source_table": "SAS 2025 Table 24, season A",
+            "source_url": "https://example.org/x.xlsx",
         }
     ]
+
+
+def test_sas_without_bean_total_adds_bush_and_climbing():
+    frame = pd.DataFrame(
+        [
+            [None, None, "Maize", "Bush bean", "Climbing bean"],
+            [None, "Kirehe", 10, 7, "-"],
+            [None, "Ngoma", 5, 3, 2],
+        ]
+    )
+    rows = extract_table(frame, EDITION)
+    assert [(row["district"], row["beans_tonnes"]) for row in rows] == [("Kirehe", 7.0), ("Ngoma", 5.0)]
+
+
+def test_sas_crops_down_the_side_layout():
+    edition = Edition("x.xlsx", "Appendix 6", "A", 2018, "columns", "2019-03-31", "late", "u")
+    frame = pd.DataFrame(
+        [
+            ["Appendix 6", None, None, None],
+            ["Crop/District", "Kayonza", "East", "Grand Total"],
+            ["Maize", 20, 50, 90],
+            ["Beans", 9, 30, 70],
+        ]
+    )
+    rows = extract_table(frame, edition)
+    assert [(row["district"], row["maize_tonnes"], row["beans_tonnes"]) for row in rows] == [("Kayonza", 20.0, 9.0)]
+
+
+def test_supply_anomaly_uses_three_previous_same_letter_seasons():
+    rows = []
+    for year, maize in [(2018, 100), (2019, 200), (2020, 300), (2021, 400)]:
+        rows.append({"sas_year": year, "season": "A", "district": "Kayonza", "maize_tonnes": maize, "beans_tonnes": 10, "published_on": f"{year}-12-31"})
+        rows.append({"sas_year": year, "season": "B", "district": "Kayonza", "maize_tonnes": 1, "beans_tonnes": 10, "published_on": f"{year}-12-31"})
+    anomaly = supply_anomaly(pd.DataFrame(rows))
+    maize_a = anomaly[(anomaly.district == "Kayonza") & (anomaly.season == "A") & (anomaly.crop == "maize")]
+    assert list(maize_a.sas_year) == [2021]
+    assert maize_a.anomaly.iloc[0] == pytest.approx(math.log(400 / 200))

@@ -1,6 +1,8 @@
 {
   "name": "Hunika",
   "model": "v1_seasonal_ratios",
+  "rain_source": "CHIRPS dekadal rainfall by district, WFP on HDX",
+  "sas_source": "NISR Seasonal Agricultural Survey 2018-2026, seasons A and B",
   "crops": [
     "maize",
     "beans"

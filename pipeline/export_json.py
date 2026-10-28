@@ -51,36 +51,96 @@ def _centroids(geojson: dict) -> dict[str, tuple[float, float]]:
     return found
 
 
-def _sas_public(sas: pd.DataFrame) -> dict:
-    districts = {}
-    eastern = sas[sas["eastern"] & sas["season"].isin(["A", "B"])]
-    for row in eastern.itertuples(index=False):
-        entry = districts.setdefault(row.district, {})
-        entry[row.season] = {
-            "maize_tonnes": round(float(row.maize_tonnes), 1),
-            "beans_tonnes": round(float(row.beans_tonnes), 1),
-        }
+def _supply_entry(rows: pd.DataFrame, anomaly: pd.DataFrame, district: str, season: str) -> dict | None:
+    part = rows[rows["season"].eq(season)].sort_values("sas_year")
+    if part.empty:
+        return None
+    latest = part.iloc[-1]
+    year = int(latest["sas_year"])
+    found = anomaly[anomaly["district"].eq(district) & anomaly["season"].eq(season) & anomaly["sas_year"].eq(year)]
+    shift = {row.crop: row.anomaly for row in found.itertuples(index=False)}
     return {
-        "published_on": "2025-12-31",
-        "source_url": "https://statistics.gov.rw/sites/default/files/documents/2025-12/SAS%202025_Annual%20Tables.xlsx",
-        "anomaly": None,
-        "anomaly_reason": "The supply anomaly needs the three previous seasons of the same letter. Only SAS 2025 is loaded.",
-        "districts": districts,
+        "year": year,
+        "published_on": latest["published_on"],
+        "maize_tonnes": round(float(latest["maize_tonnes"]), 1),
+        "beans_tonnes": round(float(latest["beans_tonnes"]), 1),
+        "maize_anomaly": None if "maize" not in shift else round(float(shift["maize"]), 4),
+        "beans_anomaly": None if "beans" not in shift else round(float(shift["beans"]), 4),
+        "history": [
+            {"year": int(row.sas_year), "maize_tonnes": round(float(row.maize_tonnes), 1), "beans_tonnes": round(float(row.beans_tonnes), 1)}
+            for row in part.itertuples(index=False)
+        ],
     }
 
 
-def write_all(panel, cpi, sas, backtest_summary) -> None:
+def _sas_public(sas: pd.DataFrame, anomaly: pd.DataFrame, rain_check: list[dict]) -> dict:
+    districts = {}
+    for district in EASTERN_DISTRICTS:
+        rows = sas[sas["district"].eq(district) & sas["season"].isin(["A", "B"])]
+        districts[district] = {season: _supply_entry(rows, anomaly, district, season) for season in ("A", "B")}
+    national_rows = (
+        sas.groupby(["sas_year", "season"], as_index=False)
+        .agg(maize_tonnes=("maize_tonnes", "sum"), beans_tonnes=("beans_tonnes", "sum"), published_on=("published_on", "max"))
+    )
+    editions = (
+        sas[["sas_year", "season", "published_on", "date_basis", "source_url"]]
+        .drop_duplicates()
+        .sort_values(["sas_year", "season"])
+    )
+    return {
+        "source": "NISR Seasonal Agricultural Survey, district production tables",
+        "anomaly_definition": "Log of production over the mean of the three previous seasons of the same letter.",
+        "first_anomaly_year": int(anomaly["sas_year"].min()) if not anomaly.empty else None,
+        "editions": [
+            {"year": int(row.sas_year), "season": row.season, "published_on": row.published_on, "date_basis": row.date_basis, "url": row.source_url}
+            for row in editions.itertuples(index=False)
+        ],
+        "districts": districts,
+        "rwanda": {season: _supply_entry(national_rows, anomaly, "Rwanda", season) for season in ("A", "B")},
+        "rain_check": rain_check,
+    }
+
+
+def rain_check(rain: pd.DataFrame, anomaly: pd.DataFrame) -> list[dict]:
+    """How well the full-season rainfall anomaly tracks the SAS production anomaly."""
+    from pipeline.ingest_rain import season_rain
+
+    east = anomaly[anomaly["district"].isin(EASTERN_DISTRICTS)]
+    tables = {(district, season): season_rain(rain, district, season) for district in EASTERN_DISTRICTS for season in ("A", "B")}
+    out = []
+    for (crop, season), part in east.groupby(["crop", "season"]):
+        pairs = [
+            (tables[(row.district, season)].get(int(row.sas_year)), row.anomaly)
+            for row in part.itertuples(index=False)
+        ]
+        pairs = [(x, y) for x, y in pairs if x is not None]
+        if len(pairs) < 5:
+            continue
+        xs, ys = zip(*pairs)
+        frame = pd.DataFrame({"rain": xs, "supply": ys})
+        out.append(
+            {
+                "crop": crop,
+                "season": season,
+                "n": len(pairs),
+                "years": f"{int(part['sas_year'].min())}-{int(part['sas_year'].max())}",
+                "correlation": round(float(frame["rain"].corr(frame["supply"])), 3),
+            }
+        )
+    return out
+
+
+def write_all(panel, cpi, sas, backtest_summary, rain=None) -> None:
     WEB_DATA.mkdir(parents=True, exist_ok=True)
     assumptions = yaml.safe_load((CONFIG / "assumptions.yaml").read_text())
     forecasts = build_forecasts(panel, cpi)
     geojson = _districts_geojson()
     nearest = nearest_markets(panel, _centroids(geojson))
-    supply = _sas_public(sas) if not sas.empty else {
-        "published_on": None,
-        "anomaly": None,
-        "anomaly_reason": "SAS extract is missing.",
-        "districts": {},
-    }
+    anomaly = pd.read_csv(PROCESSED / "sas_supply_anomaly.csv") if (PROCESSED / "sas_supply_anomaly.csv").exists() else pd.DataFrame()
+    if rain is None and (PROCESSED / "rain_dekadal_east.csv").exists():
+        rain = pd.read_csv(PROCESSED / "rain_dekadal_east.csv")
+    checks = rain_check(rain, anomaly) if rain is not None and not anomaly.empty else []
+    supply = _sas_public(sas, anomaly, checks)
     for district, crops in forecasts["districts"].items():
         for crop, payload in crops.items():
             if isinstance(payload, dict):
@@ -93,6 +153,8 @@ def write_all(panel, cpi, sas, backtest_summary) -> None:
         "meta": {
             "name": "Hunika",
             "model": "v1_seasonal_ratios",
+            "rain_source": "CHIRPS dekadal rainfall by district, WFP on HDX",
+            "sas_source": "NISR Seasonal Agricultural Survey 2018-2026, seasons A and B",
             "crops": ["maize", "beans"],
             "districts": list(EASTERN_DISTRICTS),
             "price_source": "WFP Rwanda food prices, retail, RWF per kg",

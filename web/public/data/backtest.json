@@ -1,6 +1,17 @@
 {
-  "net_gain_rwf_per_tonne": null,
-  "net_blocked_reason": "Net gain per tonne is not calculated. Monthly loss rates, bag costs and the interest rate are still blank in config/assumptions.yaml.",
+  "lot_kg": 1000,
+  "francs": "September 2026 RWF, deflated by the NISR rural food CPI",
+  "headline": null,
+  "unpriced_options": [
+    "home_bags",
+    "hermetic_bags",
+    "warehouse"
+  ],
+  "net": [],
+  "net_by_crop": [],
+  "net_by_district": [],
+  "seasons": [],
+  "losing_seasons": [],
   "coverage": [
     {
       "crop": "beans",
@@ -451,168 +462,28 @@
       "share": 0.7812
     }
   ],
-  "pinball": [
+  "models": [
     {
-      "crop": "beans",
-      "horizon": 1,
-      "n": 209,
-      "p10": 27.7144,
-      "p50": 57.2023,
-      "p90": 32.4265
+      "model": "v1",
+      "rows_all": 1740,
+      "coverage_all": 0.6224,
+      "rows_compared": 1299,
+      "pinball_10": 24.9658,
+      "pinball_50": 55.1718,
+      "pinball_90": 32.3253,
+      "pinball_mean": 37.4876,
+      "coverage_compared": 0.6582
     },
     {
-      "crop": "beans",
-      "horizon": 2,
-      "n": 217,
-      "p10": 37.9819,
-      "p50": 79.7438,
-      "p90": 49.4892
-    },
-    {
-      "crop": "beans",
-      "horizon": 3,
-      "n": 216,
-      "p10": 43.0293,
-      "p50": 83.811,
-      "p90": 46.6777
-    },
-    {
-      "crop": "beans",
-      "horizon": 4,
-      "n": 209,
-      "p10": 59.6025,
-      "p50": 107.0714,
-      "p90": 53.4693
-    },
-    {
-      "crop": "maize",
-      "horizon": 1,
-      "n": 222,
-      "p10": 16.2785,
-      "p50": 32.2818,
-      "p90": 16.7157
-    },
-    {
-      "crop": "maize",
-      "horizon": 2,
-      "n": 223,
-      "p10": 16.956,
-      "p50": 42.3429,
-      "p90": 24.0897
-    },
-    {
-      "crop": "maize",
-      "horizon": 3,
-      "n": 222,
-      "p10": 22.6973,
-      "p50": 53.0416,
-      "p90": 31.5046
-    },
-    {
-      "crop": "maize",
-      "horizon": 4,
-      "n": 222,
-      "p10": 21.5817,
-      "p50": 48.4836,
-      "p90": 27.6245
+      "model": "v2",
+      "rows_all": 1299,
+      "coverage_all": 0.7375,
+      "rows_compared": 1299,
+      "pinball_10": 23.5477,
+      "pinball_50": 56.154,
+      "pinball_90": 29.9079,
+      "pinball_mean": 36.5365,
+      "coverage_compared": 0.7375
     }
-  ],
-  "price_only_before_storage_costs": {
-    "label": "Price change only, before storage losses, fees and interest. Not the Hunika net gain. The nominal mean includes inflation.",
-    "n_decisions": 441,
-    "mean_nominal_follow_rwf_per_tonne": 47551.1224,
-    "mean_real_follow_rwf_per_tonne": 78167.9084,
-    "mean_always_store_4_nominal_rwf_per_tonne": 49151.4501,
-    "mean_always_sell_rwf_per_tonne": 0,
-    "share_real_follow_not_below_sell": 0.7256,
-    "worst_real_follow_rwf_per_tonne": -370355.2199,
-    "losing_count": 121,
-    "nominal_band_share": 0.5713,
-    "losing_seasons": [
-      {
-        "crop": "beans",
-        "district": "Kayonza",
-        "season": "A",
-        "year": 2021,
-        "real_follow_rwf_per_tonne": -370355.2
-      },
-      {
-        "crop": "beans",
-        "district": "Rwamagana",
-        "season": "A",
-        "year": 2021,
-        "real_follow_rwf_per_tonne": -370355.2
-      },
-      {
-        "crop": "beans",
-        "district": "Gatsibo",
-        "season": "B",
-        "year": 2023,
-        "real_follow_rwf_per_tonne": -334569.8
-      },
-      {
-        "crop": "beans",
-        "district": "Rwamagana",
-        "season": "A",
-        "year": 2011,
-        "real_follow_rwf_per_tonne": -292357.8
-      },
-      {
-        "crop": "beans",
-        "district": "Nyagatare",
-        "season": "B",
-        "year": 2015,
-        "real_follow_rwf_per_tonne": -275786.4
-      },
-      {
-        "crop": "beans",
-        "district": "Gatsibo",
-        "season": "A",
-        "year": 2021,
-        "real_follow_rwf_per_tonne": -270607.6
-      },
-      {
-        "crop": "beans",
-        "district": "Nyagatare",
-        "season": "B",
-        "year": 2012,
-        "real_follow_rwf_per_tonne": -231950.6
-      },
-      {
-        "crop": "maize",
-        "district": "Rwamagana",
-        "season": "A",
-        "year": 2010,
-        "real_follow_rwf_per_tonne": -223958.8
-      },
-      {
-        "crop": "beans",
-        "district": "Kirehe",
-        "season": "A",
-        "year": 2021,
-        "real_follow_rwf_per_tonne": -220561.4
-      },
-      {
-        "crop": "beans",
-        "district": "Ngoma",
-        "season": "A",
-        "year": 2021,
-        "real_follow_rwf_per_tonne": -198468.4
-      },
-      {
-        "crop": "beans",
-        "district": "Nyagatare",
-        "season": "A",
-        "year": 2021,
-        "real_follow_rwf_per_tonne": -198468.4
-      },
-      {
-        "crop": "beans",
-        "district": "Bugesera",
-        "season": "A",
-        "year": 2021,
-        "real_follow_rwf_per_tonne": -198468.4
-      }
-    ]
-  }
+  ]
 }

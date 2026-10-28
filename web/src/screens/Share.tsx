@@ -32,7 +32,14 @@ export default function Share({
     if (!node) return
     try {
       const { toBlob } = await import("html-to-image")
-      const blob = await toBlob(node, { pixelRatio: 3, backgroundColor: "#f4efe6", cacheBust: true })
+      const side = node.offsetWidth
+      const blob = await toBlob(node, {
+        backgroundColor: "#f4efe6",
+        cacheBust: true,
+        pixelRatio: 1080 / side,
+        canvasWidth: side,
+        canvasHeight: side,
+      })
       if (!blob) throw new Error("card")
       const file = new File([blob], "hunika.png", { type: "image/png" })
       if (navigator.canShare?.({ files: [file] })) {

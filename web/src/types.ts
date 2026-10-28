@@ -34,6 +34,41 @@ export type Assumption = {
   url?: string | null
 }
 
+export type NetStats = {
+  n_decisions: number
+  store_count: number
+  mean_gain_rwf_per_tonne: number
+  p10_gain_rwf_per_tonne: number
+  p90_gain_rwf_per_tonne: number
+  min_gain_rwf_per_tonne: number
+  max_gain_rwf_per_tonne: number
+  share_not_worse_than_selling: number
+  losing_count: number
+  mean_gain_when_stored_rwf_per_tonne: number | null
+  mean_always_store_4_rwf_per_tonne: number | null
+  share_always_store_4_losing: number | null
+  worst: { crop: string; district: string; season: string; year: number; gain_rwf_per_tonne: number }
+}
+
+export type ModelScore = {
+  model: string
+  rows_all: number
+  coverage_all: number
+  rows_compared: number
+  pinball_mean: number | null
+  coverage_compared: number | null
+}
+
+export type SupplyEntry = {
+  year: number
+  published_on: string
+  maize_tonnes: number
+  beans_tonnes: number
+  maize_anomaly: number | null
+  beans_anomaly: number | null
+  history: { year: number; maize_tonnes: number; beans_tonnes: number }[]
+}
+
 export type Bundle = {
   forecasts: {
     decision_date: string
@@ -42,17 +77,22 @@ export type Bundle = {
   }
   assumptions: { items: Assumption[] }
   backtest: {
-    net_gain_rwf_per_tonne: number | null
-    net_blocked_reason: string
+    lot_kg: number
+    francs: string
+    headline: (NetStats & { model: string; option: string }) | null
+    unpriced_options: string[]
+    net: (NetStats & { model: string; option: string; n_compared: number; mean_gain_compared_rwf_per_tonne: number | null })[]
+    net_by_crop: (NetStats & { model: string; option: string; crop: string })[]
+    net_by_district: (NetStats & { model: string; option: string; district: string })[]
+    seasons: { crop: string; season: string; year: number; gain_rwf_per_tonne: number }[]
+    losing_seasons: { crop: string; district: string; season: string; year: number; horizon: number; gain_rwf_per_tonne: number }[]
     coverage: { crop: string; district: string; horizon: number; n: number; inside: number; share: number }[]
-    price_only_before_storage_costs: {
-      mean_real_follow_rwf_per_tonne: number | null
-      losing_count: number
-      losing_seasons: { crop: string; district: string; season: string; year: number; real_follow_rwf_per_tonne: number }[]
-    } | null
+    models: ModelScore[]
   }
   supply: {
-    anomaly_reason: string
-    districts: Record<string, Record<string, { maize_tonnes: number; beans_tonnes: number }>>
+    first_anomaly_year: number | null
+    districts: Record<string, { A: SupplyEntry | null; B: SupplyEntry | null }>
+    rwanda: { A: SupplyEntry | null; B: SupplyEntry | null }
+    rain_check: { crop: string; season: string; n: number; years: string; correlation: number }[]
   }
 }

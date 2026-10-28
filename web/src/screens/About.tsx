@@ -16,6 +16,7 @@ export default function About({
         <li>{t("about.wfp")}</li>
         <li>{t("about.cpi")}</li>
         <li>{t("about.sas")}</li>
+        <li>{t("about.rain")}</li>
         <li>{t("about.ahs")}</li>
       </ul>
       <h2 className="mt-6 text-sm font-semibold">{t("about.assumptions")}</h2>

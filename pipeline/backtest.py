@@ -1,9 +1,11 @@
-"""Forecast backtest with no look-ahead.
+"""Backtest with no look-ahead.
 
-Net RWF per tonne needs the storage rates in assumptions.yaml. Those rates are
-still blank, so this module scores the price band and a price-only comparison.
-The price-only figures ignore losses, fees and interest. They are not the
-headline gain.
+For every Eastern district, crop, season and year, the forecast uses only
+prices, CPI and rainfall known before the 15th of the decision month. The
+decision then runs through pipeline.decide with the parameters in
+config/assumptions.yaml and a 1-tonne lot, and the real price at the chosen
+horizon scores it. Money is in September 2026 francs: each cash flow is
+deflated by the rural food CPI of the month it happens in.
 """
 
 from __future__ import annotations
@@ -11,11 +13,26 @@ from __future__ import annotations
 import pandas as pd
 import yaml
 
-from pipeline.model import _nominal, _pool_ratios, _quantile_or_none, _series_map, inflation_at, retail
+from pipeline.decide import decide
+from pipeline.ingest_rain import season_rain
+from pipeline.model import (
+    _nominal,
+    _pool_ratios,
+    _quantile_or_none,
+    _series_map,
+    inflation_at,
+    retail,
+    v2_quantiles,
+    v2_samples,
+)
 from pipeline.months import add_months, blend
 from pipeline.paths import CONFIG, EASTERN_DISTRICTS, PROCESSED
 
 MIN_YEARS = 4
+LOT_KG = 1000
+OPTIONS = ("home_bags", "hermetic_bags", "warehouse")
+MODELS = ("v1", "v2")
+HEADLINE = {"model": "v1", "option": "hermetic_bags"}
 
 
 def _month_value(frame: pd.DataFrame, month: str, column: str) -> float | None:
@@ -25,7 +42,7 @@ def _month_value(frame: pd.DataFrame, month: str, column: str) -> float | None:
     return float(part[column].median())
 
 
-def _band(local_markets, province_markets, calendar_month, horizon, before):
+def _v1_band(local_markets, province_markets, calendar_month, horizon, before):
     local_ratios, local_years = _pool_ratios(local_markets, calendar_month, horizon, before)
     province_ratios, _ = _pool_ratios(province_markets, calendar_month, horizon, before)
     blended, _weight = blend(_quantile_or_none(local_ratios), _quantile_or_none(province_ratios), len(local_years))
@@ -34,100 +51,192 @@ def _band(local_markets, province_markets, calendar_month, horizon, before):
     return blended
 
 
-def run_backtest(panel: pd.DataFrame, cpi: pd.DataFrame, seasons: dict) -> dict:
+def storage_options(assumptions: dict) -> tuple[dict, dict]:
+    items = assumptions.get("items") or []
+    options = {}
+    for option in OPTIONS:
+        fields = {item["field"]: item["value"] for item in items if item.get("option") == option}
+        options[option] = {
+            "id": option,
+            "loss_monthly": fields.get("loss_monthly"),
+            "fee": fields.get("fee"),
+            "cost_per_kg": fields.get("cost_per_kg"),
+            "interest_annual": fields.get("interest_annual"),
+            "borrow_share": fields.get("borrow_share"),
+        }
+    gates = {item["field"]: item["value"] for item in items if item.get("option") is None}
+    return options, gates
+
+
+def _realised(option: dict, horizon: int, price_now: float, real_now: float, actual: float, actual_real: float) -> float | None:
+    """Real gain over selling now, RWF per lot. Bags are bought now, the loan is repaid at sale."""
+    retained = 1 - option["loss_monthly"] * horizon
+    if retained <= 0:
+        return None
+    interest = (option["interest_annual"] or 0.0) * option["borrow_share"] * LOT_KG * price_now * horizon / 12
+    deflator_sale = actual_real / actual
+    sale = LOT_KG * actual_real * retained * (1 - option["fee"])
+    return sale - interest * deflator_sale - LOT_KG * option["cost_per_kg"] - LOT_KG * real_now
+
+
+def run_backtest(panel: pd.DataFrame, cpi: pd.DataFrame, seasons: dict, rain: pd.DataFrame | None = None, assumptions: dict | None = None) -> dict:
+    options, gates = storage_options(assumptions or load_assumptions())
     rows = []
+    decisions = []
     for crop in ("maize", "beans"):
         east = retail(panel, crop)
         by_market = _series_map(east)
-        for district in EASTERN_DISTRICTS:
-            local = east[east["admin2"].eq(district)]
-            local_markets = {name: by_market[name] for name in local["market"].unique() if name in by_market}
-            crop_seasons = (seasons.get("crops") or {}).get(crop) or {}
-            for season, spec in crop_seasons.items():
-                if not spec:
-                    continue
-                decision_month = int(spec["decision_month"])
-                shift = int(spec["year_shift"])
-                years = range(int(spec["year_min"]), int(spec["year_max"]) + 1)
-                for year in years:
-                    decision_year = year + shift
-                    decision_ym = f"{decision_year:04d}-{decision_month:02d}"
-                    as_of = f"{decision_ym}-15"
-                    cpi_info = inflation_at(cpi, as_of)
-                    if cpi_info is None:
+        market_district = dict(zip(east["market"], east["admin2"]))
+        crop_seasons = (seasons.get("crops") or {}).get(crop) or {}
+        for season, spec in crop_seasons.items():
+            if not spec:
+                continue
+            decision_month = int(spec["decision_month"])
+            rain_by_district = {}
+            if rain is not None:
+                rain_by_district = {district: season_rain(rain, district, season, decision_month) for district in EASTERN_DISTRICTS}
+            for district in EASTERN_DISTRICTS:
+                local = east[east["admin2"].eq(district)]
+                local_markets = {name: by_market[name] for name in local["market"].unique() if name in by_market}
+                for year in range(int(spec["year_min"]), int(spec["year_max"]) + 1):
+                    point = _decision_point(
+                        crop, season, district, year + int(spec["year_shift"]), decision_month,
+                        east, local, local_markets, by_market, market_district, rain_by_district, cpi,
+                    )
+                    if point is None:
                         continue
-                    local_now = _month_value(local, decision_ym, "price_rwf_per_kg")
-                    province_now = _month_value(east, decision_ym, "price_rwf_per_kg")
-                    if local_now is None and province_now is None:
-                        continue
-                    price_pooled = local_now is None
-                    price_now = province_now if price_pooled else local_now
-                    scored_frame = east if price_pooled else local
-                    real_now = _month_value(scored_frame, decision_ym, "price_real")
-                    forecasts = {}
-                    for horizon in (1, 2, 3, 4):
-                        blended = _band(local_markets, by_market, decision_month, horizon, decision_ym)
-                        if blended is None or real_now is None:
-                            continue
-                        nominal = [
-                            _nominal(price_now, ratio, cpi_info["trailing_12m_inflation"], horizon)
-                            for ratio in blended
-                        ]
-                        real_band = [real_now * ratio for ratio in blended]
-                        future = add_months(decision_ym, horizon)
-                        actual = _month_value(scored_frame, future, "price_rwf_per_kg")
-                        actual_real = _month_value(scored_frame, future, "price_real")
-                        if actual is None or actual_real is None:
-                            continue
-                        forecasts[horizon] = {
-                            "p10": nominal[0],
-                            "p50": nominal[1],
-                            "p90": nominal[2],
-                            "real_p10": real_band[0],
-                            "real_p50": real_band[1],
-                            "real_p90": real_band[2],
-                            "actual": actual,
-                            "actual_real": actual_real,
-                            "inside_nominal": nominal[0] <= actual <= nominal[2],
-                            "inside": real_band[0] <= actual_real <= real_band[2],
-                        }
-                    if not forecasts:
-                        continue
-                    best = max(forecasts, key=lambda horizon: forecasts[horizon]["real_p50"])
-                    chosen = forecasts[best]
-                    # Cash gain is nominal. It includes inflation, so it is not the net result.
-                    gross_follow = (chosen["actual"] - price_now) * 1000 if chosen["p50"] > price_now else 0.0
-                    real_follow = (chosen["actual_real"] - real_now) * 1000 if chosen["real_p50"] > real_now else 0.0
-                    gross_hold4 = None
-                    if 4 in forecasts:
-                        gross_hold4 = (forecasts[4]["actual"] - price_now) * 1000
-                    for horizon, item in forecasts.items():
-                        rows.append(
-                            {
-                                "crop": crop,
-                                "district": district,
-                                "season": season,
-                                "year": year,
-                                "horizon": horizon,
-                                "price_pooled": price_pooled,
-                                "price_now": price_now,
-                                "p10": item["p10"],
-                                "p50": item["p50"],
-                                "p90": item["p90"],
-                                "actual": item["actual"],
-                                "inside": item["inside"],
-                                "inside_nominal": item["inside_nominal"],
-                                "pinball_10": _pinball(item["actual_real"], item["real_p10"], 0.1),
-                                "pinball_50": _pinball(item["actual_real"], item["real_p50"], 0.5),
-                                "pinball_90": _pinball(item["actual_real"], item["real_p90"], 0.9),
-                                "chosen_horizon": best,
-                                "gross_follow_rwf_per_tonne": gross_follow if horizon == best else None,
-                                "real_follow_rwf_per_tonne": real_follow if horizon == best else None,
-                                "gross_hold4_rwf_per_tonne": gross_hold4 if horizon == best else None,
-                            }
-                        )
+                    rows.extend(point["rows"])
+                    decisions.extend(_decisions(point, options, gates))
     detail = pd.DataFrame(rows)
-    return {"detail": detail, "summary": _summarise(detail)}
+    choices = pd.DataFrame(decisions)
+    return {"detail": detail, "decisions": choices, "summary": _summarise(detail, choices, options)}
+
+
+def _decision_point(crop, season, district, decision_year, decision_month, east, local, local_markets, by_market, market_district, rain_by_district, cpi):
+    decision_ym = f"{decision_year:04d}-{decision_month:02d}"
+    cpi_info = inflation_at(cpi, f"{decision_ym}-15")
+    if cpi_info is None:
+        return None
+    local_now = _month_value(local, decision_ym, "price_rwf_per_kg")
+    province_now = _month_value(east, decision_ym, "price_rwf_per_kg")
+    if local_now is None and province_now is None:
+        return None
+    price_pooled = local_now is None
+    price_now = province_now if price_pooled else local_now
+    scored = east if price_pooled else local
+    real_now = _month_value(scored, decision_ym, "price_real")
+    if real_now is None:
+        return None
+    inflation = cpi_info["trailing_12m_inflation"]
+    anomaly_now = (rain_by_district.get(district) or {}).get(decision_year)
+    bands = {"v1": {}, "v2": {}}
+    outcomes = {}
+    rows = []
+    for horizon in (1, 2, 3, 4):
+        future = add_months(decision_ym, horizon)
+        actual = _month_value(scored, future, "price_rwf_per_kg")
+        actual_real = _month_value(scored, future, "price_real")
+        if actual is None or actual_real is None:
+            continue
+        outcomes[horizon] = (actual, actual_real)
+        found = {"v1": _v1_band(local_markets, by_market, decision_month, horizon, decision_ym)}
+        if rain_by_district:
+            samples = v2_samples(by_market, market_district, rain_by_district, decision_month, horizon, decision_ym)
+            found["v2"] = v2_quantiles(samples, anomaly_now)
+        for model, ratios in found.items():
+            if ratios is None:
+                continue
+            nominal = [_nominal(price_now, ratio, inflation, horizon) for ratio in ratios]
+            real_band = [real_now * ratio for ratio in ratios]
+            bands[model][horizon] = {"p10": nominal[0], "p50": nominal[1], "p90": nominal[2]}
+            rows.append(
+                {
+                    "model": model,
+                    "crop": crop,
+                    "district": district,
+                    "season": season,
+                    "year": decision_year,
+                    "horizon": horizon,
+                    "price_pooled": price_pooled,
+                    "price_now": price_now,
+                    "p10": nominal[0],
+                    "p50": nominal[1],
+                    "p90": nominal[2],
+                    "actual": actual,
+                    "actual_real": actual_real,
+                    "inside": real_band[0] <= actual_real <= real_band[2],
+                    "inside_nominal": nominal[0] <= actual <= nominal[2],
+                    "pinball_10": _pinball(actual_real, real_band[0], 0.1),
+                    "pinball_50": _pinball(actual_real, real_band[1], 0.5),
+                    "pinball_90": _pinball(actual_real, real_band[2], 0.9),
+                    "rain_anomaly": anomaly_now,
+                }
+            )
+    if not rows:
+        return None
+    return {
+        "crop": crop,
+        "season": season,
+        "district": district,
+        "year": decision_year,
+        "price_pooled": price_pooled,
+        "price_now": price_now,
+        "real_now": real_now,
+        "bands": bands,
+        "outcomes": outcomes,
+        "rows": rows,
+    }
+
+
+def _decisions(point: dict, options: dict, gates: dict) -> list[dict]:
+    found = []
+    deflator_now = point["real_now"] / point["price_now"]
+    for option_id, option in options.items():
+        if any(option[key] is None for key in ("loss_monthly", "fee", "cost_per_kg", "borrow_share")):
+            continue
+        if option["borrow_share"] > 0 and option["interest_annual"] is None:
+            continue
+        # Costs in assumptions.yaml are September 2026 francs. The decision is made in that year's francs.
+        then = dict(option, cost_per_kg=option["cost_per_kg"] / deflator_now)
+        hold = None
+        if 4 in point["outcomes"]:
+            hold = _realised(option, 4, point["price_now"], point["real_now"], *point["outcomes"][4])
+        for model, band in point["bands"].items():
+            if not band:
+                continue
+            result = decide(
+                {
+                    "quantity_kg": LOT_KG,
+                    "price_now": point["price_now"],
+                    "needs_cash_now": False,
+                    "g_min": gates.get("g_min", 0.08),
+                    "d_max": gates.get("d_max", 0.05),
+                    "options": [then],
+                    "forecasts": band,
+                }
+            )
+            gain = 0.0
+            if result["verdict"] == "store":
+                horizon = result["horizon_months"]
+                gain = _realised(option, horizon, point["price_now"], point["real_now"], *point["outcomes"][horizon])
+            found.append(
+                {
+                    "model": model,
+                    "option": option_id,
+                    "crop": point["crop"],
+                    "district": point["district"],
+                    "season": point["season"],
+                    "year": point["year"],
+                    "price_pooled": point["price_pooled"],
+                    "verdict": result["verdict"],
+                    "horizon": result["horizon_months"],
+                    "likely_gain_forecast": result["likely_gain"],
+                    "gain_rwf_per_tonne": gain,
+                    "always_store_4_rwf_per_tonne": hold,
+                    "full_band": len(band) == 4,
+                }
+            )
+    return found
 
 
 def _pinball(actual: float, predicted: float, quantile: float) -> float:
@@ -136,23 +245,61 @@ def _pinball(actual: float, predicted: float, quantile: float) -> float:
     return (quantile - below) * gap
 
 
-def _summarise(detail: pd.DataFrame) -> dict:
-    blocked = (
-        "Net gain per tonne is not calculated. Monthly loss rates, bag costs and "
-        "the interest rate are still blank in config/assumptions.yaml."
-    )
+def _net_stats(part: pd.DataFrame) -> dict:
+    gains = part["gain_rwf_per_tonne"]
+    stored = part[part["verdict"].eq("store")]
+    worst = part.loc[gains.idxmin()]
+    hold = part["always_store_4_rwf_per_tonne"].dropna()
+    return {
+        "n_decisions": int(len(part)),
+        "store_count": int(len(stored)),
+        "mean_gain_rwf_per_tonne": float(gains.mean()),
+        "p10_gain_rwf_per_tonne": float(gains.quantile(0.1)),
+        "p90_gain_rwf_per_tonne": float(gains.quantile(0.9)),
+        "min_gain_rwf_per_tonne": float(gains.min()),
+        "max_gain_rwf_per_tonne": float(gains.max()),
+        "share_not_worse_than_selling": float((gains >= 0).mean()),
+        "losing_count": int((gains < 0).sum()),
+        "mean_gain_when_stored_rwf_per_tonne": float(stored["gain_rwf_per_tonne"].mean()) if len(stored) else None,
+        "mean_always_store_4_rwf_per_tonne": float(hold.mean()) if len(hold) else None,
+        "share_always_store_4_losing": float((hold < 0).mean()) if len(hold) else None,
+        "worst": {
+            "crop": worst["crop"],
+            "district": worst["district"],
+            "season": worst["season"],
+            "year": int(worst["year"]),
+            "gain_rwf_per_tonne": round(float(worst["gain_rwf_per_tonne"]), 1),
+        },
+    }
+
+
+def _summarise(detail: pd.DataFrame, choices: pd.DataFrame, options: dict) -> dict:
+    unpriced = [
+        option_id
+        for option_id, option in options.items()
+        if any(option[key] is None for key in ("loss_monthly", "fee", "cost_per_kg", "borrow_share"))
+        or (option["borrow_share"] or 0) > 0 and option["interest_annual"] is None
+    ]
+    summary = {
+        "lot_kg": LOT_KG,
+        "francs": "September 2026 RWF, deflated by the NISR rural food CPI",
+        "headline": None,
+        "unpriced_options": unpriced,
+        "net": [],
+        "net_by_crop": [],
+        "net_by_district": [],
+        "seasons": [],
+        "losing_seasons": [],
+        "coverage": [],
+        "models": [],
+    }
     if detail.empty:
-        return {
-            "net_gain_rwf_per_tonne": None,
-            "net_blocked_reason": blocked,
-            "coverage": [],
-            "pinball": [],
-            "price_only_before_storage_costs": None,
-        }
-    coverage = []
-    for keys, part in detail.groupby(["crop", "district", "horizon"]):
+        return summary
+
+    v1 = detail[detail["model"].eq("v1")]
+    for keys, part in v1.groupby(["crop", "district", "horizon"]):
         crop, district, horizon = keys
-        coverage.append(
+        summary["coverage"].append(
             {
                 "crop": crop,
                 "district": district,
@@ -162,64 +309,92 @@ def _summarise(detail: pd.DataFrame) -> dict:
                 "share": float(part["inside"].mean()),
             }
         )
-    pinball = []
-    for keys, part in detail.groupby(["crop", "horizon"]):
-        crop, horizon = keys
-        pinball.append(
+
+    # Models are compared only where both produced a forecast for the same row.
+    keys = ["crop", "district", "season", "year", "horizon"]
+    common = detail.pivot_table(index=keys, columns="model", values="pinball_50", aggfunc="size").dropna().reset_index()[keys]
+    for model, part in detail.groupby("model"):
+        paired = part.merge(common, on=keys)
+        summary["models"].append(
             {
-                "crop": crop,
-                "horizon": int(horizon),
-                "n": int(len(part)),
-                "p10": float(part["pinball_10"].mean()),
-                "p50": float(part["pinball_50"].mean()),
-                "p90": float(part["pinball_90"].mean()),
+                "model": model,
+                "rows_all": int(len(part)),
+                "coverage_all": float(part["inside"].mean()),
+                "rows_compared": int(len(paired)),
+                "pinball_10": float(paired["pinball_10"].mean()) if len(paired) else None,
+                "pinball_50": float(paired["pinball_50"].mean()) if len(paired) else None,
+                "pinball_90": float(paired["pinball_90"].mean()) if len(paired) else None,
+                "pinball_mean": float(paired[["pinball_10", "pinball_50", "pinball_90"]].mean(axis=1).mean()) if len(paired) else None,
+                "coverage_compared": float(paired["inside"].mean()) if len(paired) else None,
             }
         )
-    decisions = detail[detail["gross_follow_rwf_per_tonne"].notna()].copy()
-    losing = decisions[decisions["real_follow_rwf_per_tonne"] < 0]
-    price_only = {
-        "label": "Price change only, before storage losses, fees and interest. Not the Hunika net gain. The nominal mean includes inflation.",
-        "n_decisions": int(len(decisions)),
-        "mean_nominal_follow_rwf_per_tonne": float(decisions["gross_follow_rwf_per_tonne"].mean()) if len(decisions) else None,
-        "mean_real_follow_rwf_per_tonne": float(decisions["real_follow_rwf_per_tonne"].mean()) if len(decisions) else None,
-        "mean_always_store_4_nominal_rwf_per_tonne": float(decisions["gross_hold4_rwf_per_tonne"].dropna().mean()) if decisions["gross_hold4_rwf_per_tonne"].notna().any() else None,
-        "mean_always_sell_rwf_per_tonne": 0,
-        "share_real_follow_not_below_sell": float((decisions["real_follow_rwf_per_tonne"] >= 0).mean()) if len(decisions) else None,
-        "worst_real_follow_rwf_per_tonne": float(decisions["real_follow_rwf_per_tonne"].min()) if len(decisions) else None,
-        "losing_count": int(len(losing)),
-        "nominal_band_share": float(detail["inside_nominal"].mean()) if "inside_nominal" in detail else None,
-        "losing_seasons": [
+
+    if choices.empty:
+        return summary
+    point_keys = ["crop", "district", "season", "year", "option"]
+    both = choices.pivot_table(index=point_keys, columns="model", values="gain_rwf_per_tonne", aggfunc="size").dropna().reset_index()[point_keys]
+    for (model, option), part in choices.groupby(["model", "option"]):
+        entry = {"model": model, "option": option, **_net_stats(part)}
+        paired = part.merge(both, on=point_keys)
+        entry["n_compared"] = int(len(paired))
+        entry["mean_gain_compared_rwf_per_tonne"] = float(paired["gain_rwf_per_tonne"].mean()) if len(paired) else None
+        summary["net"].append(entry)
+        for crop, crop_part in part.groupby("crop"):
+            summary["net_by_crop"].append({"model": model, "option": option, "crop": crop, **_net_stats(crop_part)})
+        for district, district_part in part.groupby("district"):
+            summary["net_by_district"].append({"model": model, "option": option, "district": district, **_net_stats(district_part)})
+
+    head = choices[choices["model"].eq(HEADLINE["model"]) & choices["option"].eq(HEADLINE["option"])]
+    if not head.empty:
+        summary["headline"] = {**HEADLINE, **_net_stats(head)}
+        by_season = head.groupby(["crop", "season", "year"], as_index=False)["gain_rwf_per_tonne"].mean()
+        summary["seasons"] = [
+            {"crop": row.crop, "season": row.season, "year": int(row.year), "gain_rwf_per_tonne": round(float(row.gain_rwf_per_tonne), 1)}
+            for row in by_season.sort_values(["year", "crop", "season"]).itertuples(index=False)
+        ]
+        losing = head[head["gain_rwf_per_tonne"] < 0].sort_values("gain_rwf_per_tonne")
+        summary["losing_seasons"] = [
             {
                 "crop": row.crop,
                 "district": row.district,
                 "season": row.season,
                 "year": int(row.year),
-                "real_follow_rwf_per_tonne": round(float(row.real_follow_rwf_per_tonne), 1),
+                "horizon": int(row.horizon),
+                "gain_rwf_per_tonne": round(float(row.gain_rwf_per_tonne), 1),
             }
-            for row in losing.sort_values("real_follow_rwf_per_tonne").head(12).itertuples(index=False)
-        ],
-    }
-    return {
-        "net_gain_rwf_per_tonne": None,
-        "net_blocked_reason": blocked,
-        "coverage": coverage,
-        "pinball": pinball,
-        "price_only_before_storage_costs": price_only,
-    }
+            for row in losing.head(12).itertuples(index=False)
+        ]
+    return summary
 
 
 def load_seasons() -> dict:
     return yaml.safe_load((CONFIG / "seasons.yaml").read_text()) or {}
 
 
-def main(panel=None, cpi=None):
+def load_assumptions() -> dict:
+    return yaml.safe_load((CONFIG / "assumptions.yaml").read_text()) or {}
+
+
+def main(panel=None, cpi=None, rain=None):
     if panel is None:
         panel = pd.read_csv(PROCESSED / "panel_monthly.csv")
     if cpi is None:
         cpi = pd.read_csv(PROCESSED / "cpi_food.csv")
-    result = run_backtest(panel, cpi, load_seasons())
+    if rain is None:
+        rain = pd.read_csv(PROCESSED / "rain_dekadal_east.csv")
+    result = run_backtest(panel, cpi, load_seasons(), rain)
+    write(result)
+    return result
+
+
+def write(result: dict) -> None:
     PROCESSED.mkdir(parents=True, exist_ok=True)
     if not result["detail"].empty:
         result["detail"].to_csv(PROCESSED / "backtest_rows.csv", index=False)
-    print(f"backtest rows {len(result['detail'])}")
-    return result
+    if not result["decisions"].empty:
+        result["decisions"].to_csv(PROCESSED / "backtest_decisions.csv", index=False)
+    print(f"backtest rows {len(result['detail'])} decisions {len(result['decisions'])}")
+
+
+if __name__ == "__main__":
+    main()

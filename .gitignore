@@ -10,3 +10,5 @@ data/interim/
 data/raw/nisr/*.xlsx
 data/raw/nisr/*.pdf
 data/raw/nisr/*.xls
+data/raw/nisr/sas/
+data/raw/rwa-rainfall-subnat-full.csv

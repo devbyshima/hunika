@@ -1,4 +1,9 @@
-"""Seasonal-ratio forecasts. Model v1 only. Supply is not in this version."""
+"""Price-ratio forecasts.
+
+Model v1 takes percentiles of past seasonal ratios. Model v2 adds the supply
+signal: the log ratio is regressed on the district rainfall anomaly of the
+season, pooled across Eastern Province, and the range comes from the residuals.
+"""
 
 from __future__ import annotations
 
@@ -11,6 +16,8 @@ from pipeline.months import add_months, blend, collect_ratios, quantiles
 from pipeline.paths import EASTERN_DISTRICTS
 
 MIN_RATIOS = 4
+V2_MIN_SAMPLES = 12
+V2_MIN_YEARS = 5
 
 
 def _bool(series: pd.Series) -> pd.Series:
@@ -55,6 +62,44 @@ def _quantile_or_none(ratios: list[float]):
     if len(ratios) < MIN_RATIOS:
         return None
     return quantiles(ratios)
+
+
+def v2_samples(by_market, market_district, rain_by_district, calendar_month, horizon, before):
+    """Past (rain anomaly, log real ratio, year) for every Eastern market window before `before`."""
+    samples = []
+    for market, series in by_market.items():
+        rain = rain_by_district.get(market_district.get(market))
+        if not rain:
+            continue
+        needle = f"{calendar_month:02d}"
+        for year_month, price in series.items():
+            if year_month[5:7] != needle or year_month >= before:
+                continue
+            future = add_months(year_month, horizon)
+            if future >= before or future not in series or not price or price <= 0:
+                continue
+            anomaly = rain.get(int(year_month[:4]))
+            if anomaly is None:
+                continue
+            samples.append((anomaly, math.log(series[future] / price), year_month[:4]))
+    return samples
+
+
+def v2_quantiles(samples, anomaly_now):
+    """Real-ratio p10, p50, p90 from a one-variable least-squares fit and its residuals."""
+    if anomaly_now is None or len(samples) < V2_MIN_SAMPLES or len({year for *_, year in samples}) < V2_MIN_YEARS:
+        return None
+    xs = [x for x, _, _ in samples]
+    ys = [y for _, y, _ in samples]
+    mean_x = sum(xs) / len(xs)
+    mean_y = sum(ys) / len(ys)
+    spread = sum((x - mean_x) ** 2 for x in xs)
+    slope = 0.0 if spread == 0 else sum((x - mean_x) * (y - mean_y) for x, y in zip(xs, ys)) / spread
+    intercept = mean_y - slope * mean_x
+    residuals = [y - intercept - slope * x for x, y in zip(xs, ys)]
+    centre = intercept + slope * anomaly_now
+    low, mid, high = quantiles(residuals)
+    return math.exp(centre + low), math.exp(centre + mid), math.exp(centre + high)
 
 
 def inflation_at(cpi: pd.DataFrame, as_of: str) -> dict | None:
