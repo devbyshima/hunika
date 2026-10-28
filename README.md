@@ -2,41 +2,38 @@
 
 eSoko tells you today's price. Hunika tells you what to do with it.
 
-Hunika is a mobile web app for cooperative managers in Rwanda's Eastern Province. It covers maize and beans in Bugesera, Gatsibo, Kayonza, Kirehe, Ngoma, Nyagatare and Rwamagana. There is no login and no personal data.
+**Live app:** https://devbyshima.github.io/hunika/ (no login, works offline after the first visit)
+
+**Backtest:** on 441 past harvest decisions in Eastern Province (2010–2026), a cooperative that followed Hunika with hermetic bags made **+16,111 RWF per tonne** on average against selling at harvest, after storage losses, bags and interest, in September 2026 francs. It did at least as well as selling in 88% of decisions. It lost money in 53, the worst being −379,884 RWF per tonne (beans, Gatsibo, Season B 2023). With ordinary home bags, the result was −2,592 RWF per tonne: at 3.6% loss a month, home storage rarely pays. Details: [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
+
+Hunika is a mobile web app for cooperative managers and farmer promoters in Rwanda's Eastern Province: Bugesera, Gatsibo, Kayonza, Kirehe, Ngoma, Nyagatare and Rwamagana. It covers maize and beans, Seasons A and B. NISR 2026 Big Data Hackathon, Track 1.
 
 ## What data the app uses
 
-- WFP retail prices for maize grain and dry beans, in RWF per kg, downloaded from HDX on 25 October 2026. The newest month in the file is August 2026. Wholesale prices stay in the panel and are not used for a decision.
-- NISR rural food CPI through September 2026. The September index was published on 10 October 2026. The app uses it to turn past price ratios into a nominal outlook.
-- NISR Seasonal Agricultural Survey 2025 annual tables, published 31 December 2025. The app shows district production in tonnes. One year is not enough for a supply anomaly, so that figure is blank.
-- District boundaries from geoBoundaries Rwanda ADM2, simplified GeoJSON, CC BY 4.0.
-- The Agricultural Household Survey 2024 is not in the app. It sits behind an NISR microdata login. See `data/raw/nisr/AHS_2024_MISSING.txt`.
+- **NISR Seasonal Agricultural Survey**, district tables for Seasons A and B, 2018–2026. Production of maize and beans in every district, and the change against the three previous seasons of the same letter. Newest: Season B 2026, published 22 September 2026. Eastern Province grew 59% of Rwanda's Season A 2026 maize.
+- **NISR Consumer Price Index**, rural food, through September 2026. Used to compare prices across years in real terms and to carry the outlook forward with food inflation (27.0% over the last 12 months).
+- **WFP retail prices** for maize grain and dry beans by market, from HDX, 2008 to August 2026.
+- **CHIRPS rainfall** by district, from WFP on HDX, 1981 to October 2026. Feeds model v2.
+- **geoBoundaries** district boundaries for the map.
+- **Storage costs and losses** from published trials and notices, each with a source in [`config/assumptions.yaml`](config/assumptions.yaml) and on the app's Method screen.
+- The **Agricultural Household Survey 2024** is not used. It sits behind an NISR microdata login. See [`data/raw/nisr/AHS_2024_MISSING.txt`](data/raw/nisr/AHS_2024_MISSING.txt).
 
-Prices are market retail, not farm-gate. Sources, licences and file locations are in `docs/DATA.md`.
+Prices are market retail, not farm-gate. Every source, licence and download date is in [`docs/DATA.md`](docs/DATA.md). Processed data is committed under `data/processed/` and `web/public/data/`. The NISR workbooks and the national rainfall file are linked, not committed: `scripts/fetch_public_data.sh` downloads them.
 
 ## What the app is trying to communicate
 
-A manager should be able to see whether to sell now or store, and what each choice is worth after losses and costs.
-
-**Net gain per tonne is not calculated.** Monthly loss rates, bag costs and the interest rate are still blank in `config/assumptions.yaml`. Until those numbers are sourced, Hunika will not recommend storing. The largest line on Decide says there is no store-or-sell verdict yet. It still shows what selling now is worth, and a 1–4 month price outlook from the August 2026 price.
-
-The backtest of that price outlook is in `docs/METHODOLOGY.md`. The likely range held 1,083 of 1,740 later real prices (62.2%). A useful range should hold about 80 of 100. This one is short of that. Price-only changes are also reported there. They leave out storage costs, so they are not the Hunika result.
+Post-harvest losses were 13.8% in 2023 against a government target of 5% by 2029, and over 60% of farmers lack local drying or storage ([AllAfrica](https://allafrica.com/stories/202512300006.html)). Since farm-gate price controls ended in October 2025 ([AllAfrica](https://allafrica.com/stories/202510220174.html)), a cooperative decides alone whether to sell at harvest, when prices are lowest, or to store and risk losses. Hunika answers that for one lot in under 30 seconds: **sell now** or **store for N months**, what each is worth in RWF after losses, bags, fees and interest, the likely range, and how often prices rose over that window in the past. It recommends storing only when the likely gain is at least 8% and the bad case loses no more than 5%. Every number is tested on past harvests, losing seasons included. The backtest also shows the loss side of the target: storing every harvest in home bags for 4 months lost about 45,000 RWF per tonne on average, and hermetic bags turn the same decision into a gain.
 
 ## How someone uses it
 
-1. Open the app. Kinyarwanda is the default. English is the other button. The Kinyarwanda lines are drafts and still need a team review.
-2. On Decide, pick the crop, the district, the quantity, the storage the cooperative can use, and whether cash is needed now.
-3. Read the verdict. If the newest price is more than 60 days old, the card says so. If the district has no price of its own, the card says the figure is a province estimate.
-4. Share builds a card. The phone share sheet is used when the browser allows it. Otherwise the WhatsApp link sends the text. Print uses the browser print view.
-5. Plan colours the seven districts by the likely price change over three months. Proof shows the backtest. About lists every assumption, including the blanks.
+1. Open the link on a phone. Kinyarwanda is the default, English is one tap away. The Kinyarwanda text is a draft awaiting team review.
+2. **Decide:** pick maize or beans, the district, the quantity, the storage the cooperative can use, and whether cash is needed now. Optionally type today's price at your market (from eSoko or the market). Read the verdict, the money line, the range and the reason. The card warns when the newest price is more than 60 days old and when a district price is a province estimate.
+3. **Share:** a square card and a short message for WhatsApp, through the phone's share sheet or a `wa.me` link, and a print view.
+4. **Plan:** a map of the seven districts coloured by the likely price change over three months. Tap a district for its price path and its latest SAS production change.
+5. **Proof:** the backtest, per season, by storage, crop and district, with every losing season and the model comparison.
+6. **About:** the method, data sources and every assumption with its source.
 
-The phone runs the same decision rule as `pipeline/decide.py`. The shared cases are in `tests/fixtures/decide_cases.json`.
-
-## Live link
-
-GitHub Pages: https://devbyshima.github.io/hunika/
-
-The Pages site is the backup host. Vercel is not connected yet.
+The phone runs the same decision rule as `pipeline/decide.py`. Both are tested against `tests/fixtures/decide_cases.json`.
 
 ## Run it
 
@@ -46,13 +43,14 @@ Python 3.11 and Node 22 or newer.
 python3.11 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+bash scripts/fetch_public_data.sh
 python -m pipeline
 cd web
 npm ci
 npm run dev
 ```
 
-`python -m pipeline` rebuilds the panel, the backtest and the JSON under `web/public/data/`. If the CPI workbook or the SAS workbook is missing, the pipeline reuses the committed extracts and prints that it did so. `scripts/fetch_public_data.sh` downloads the public files. The NISR workbooks are gitignored. Do not commit them.
+`python -m pipeline` rebuilds the price panel, SAS extracts, rainfall features, backtest and the JSON under `web/public/data/` in a few seconds. If a raw NISR or rainfall file is missing, it reuses the committed extract and says so.
 
 Tests:
 
@@ -61,12 +59,22 @@ pytest
 cd web && npm test && npm run build
 ```
 
+GitHub Actions runs both on every push. The web test fails after 28 October 2026 until every Kinyarwanda string has been reviewed and removed from `_review` in `web/src/i18n/rw.json`.
+
+## Repository
+
+| Path | What |
+| --- | --- |
+| `pipeline/` | Ingest, panel, model v1 and v2, decision rule, backtest, JSON export |
+| `config/` | Markets, season calendar, storage assumptions |
+| `data/processed/` | Panel, SAS extract and anomalies, rainfall extract, backtest rows and decisions |
+| `web/` | Vite, React, TypeScript, Tailwind, Recharts, Leaflet, installable PWA |
+| `docs/` | Problem, methodology, data, declaration, phase 2 |
+
 ## Team
 
 Shima Serein. Add the other members here before submission.
 
-The demo video is not recorded. Record `demo/hunika-demo.webm` at phone size, three minutes at most. A script note is in `demo/README.md`.
+The demo video is not recorded yet. It goes in `demo/hunika-demo.webm`, three minutes at most. The script is in [`demo/README.md`](demo/README.md).
 
-## Checkpoint, 25 October 2026
-
-Only Gatsibo and Kirehe have a non-camp retail price since 2024. Bugesera, Kayonza, Ngoma, Nyagatare and Rwamagana use the August 2026 Eastern Province median, and the app labels that as a province estimate. On 25 October 2026 that price is 71 days old, so the stale warning is on. Every district still has at least seven historical years. A 2015 price is not today's price. The full table is `data/processed/coverage.md`.
+Originality: [`docs/DECLARATION.md`](docs/DECLARATION.md). Intellectual property in the submission passes to NISR.

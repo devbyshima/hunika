@@ -4,9 +4,11 @@ Not in this build.
 
 - USSD or SMS through a government partner, for managers who are not on a smartphone.
 - Crops and provinces outside maize, beans and the seven Eastern districts.
-- A live eSoko feed, if MINAGRI access is granted. The current prices stop in August 2026.
-- Warehouse partners who can confirm the fee, the loss rate and the interest rate. Those blanks are what block a store-or-sell verdict.
-- Model v2: a supply anomaly from at least three earlier SAS seasons of the same letter, plus a rainfall nowcast for the season that is not published yet. Keep it only if it beats v1 on pinball loss and on net gain. v1's real-price range held 62% of outcomes, short of about 80%.
-- Loss rates from the Agricultural Household Survey 2024, after the team downloads it and checks the terms.
+- A live eSoko feed, if MINAGRI access is granted. The WFP prices stop in August 2026, so today a manager types the current price by hand.
+- Warehouse partners who can publish a loss rate and confirm the fee and loan rate. The warehouse loss rate is the one blank that keeps warehouse receipts unpriced, including for cooperatives that need cash now.
+- Loss rates from the Agricultural Household Survey 2024 for Eastern Province maize and bean growers, after the team downloads it and checks the terms. The current rates come from Kenyan maize trials.
+- Separate loss rates for maize and beans. The engine takes one rate per storage option today.
+- Model v2 kept the better price range (73.7% of outcomes against 65.8%) but lost on net gain. A next version could use v2's wider range with v1's centre, or SAS anomalies directly once enough published seasons exist (from 2021 now).
+- Tune g_min and d_max on training years only, with a held-out test period.
 - Confirmed season windows. `config/seasons.yaml` is still `confirmed: false`.
-- A reviewed Kinyarwanda text, a signed declaration, interviews, and the demo video.
+- A district price for Bugesera, Kayonza, Ngoma, Nyagatare and Rwamagana. WFP stopped collecting there in 2015, so those districts use the province price.

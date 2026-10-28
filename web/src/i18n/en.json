@@ -94,5 +94,8 @@
   "about.rain": "CHIRPS rainfall by district, from WFP on HDX, through October 2026.",
   "decide.todayPrice": "Today's price at your market, RWF per kg (optional)",
   "decide.todayPricePlaceholder": "Leave empty to use {price} ({month})",
-  "decide.ownPrice": "Using the price you entered: {price} RWF per kg."
+  "decide.ownPrice": "Using the price you entered: {price} RWF per kg.",
+  "about.teamTitle": "Team",
+  "about.team": "Shima Serein, for the NISR 2026 Big Data Hackathon. All rights in the submission pass to NISR.",
+  "about.ai": "AI use: the code, the data pipeline and the first drafts of the text were written with Claude, an AI assistant, from the team's build guide. Every figure comes from the sources listed here."
 }

@@ -94,7 +94,10 @@
     "about.rain",
     "decide.todayPrice",
     "decide.todayPricePlaceholder",
-    "decide.ownPrice"
+    "decide.ownPrice",
+    "about.teamTitle",
+    "about.team",
+    "about.ai"
   ],
   "app.name": "Hunika",
   "app.tagline": "eSoko iguhaye igiciro cy'uyu munsi. Hunika ikubwira icyo ukora.",
@@ -191,5 +194,8 @@
   "about.rain": "Imvura ya CHIRPS ku karere, ivuye kuri WFP binyuze kuri HDX, kugeza Ukwakira 2026.",
   "decide.todayPrice": "Igiciro cy'uyu munsi ku isoko ryanyu, RWF ku kilo (si ngombwa)",
   "decide.todayPricePlaceholder": "Siga ubusa ukoreshe {price} ({month})",
-  "decide.ownPrice": "Hakoreshejwe igiciro wanditse: {price} RWF ku kilo."
+  "decide.ownPrice": "Hakoreshejwe igiciro wanditse: {price} RWF ku kilo.",
+  "about.teamTitle": "Itsinda",
+  "about.team": "Shima Serein, mu marushanwa ya NISR 2026 Big Data Hackathon. Uburenganzira bwose ku byatanzwe bwegurirwa NISR.",
+  "about.ai": "Ikoreshwa rya AI: kode, uburyo bwo gutunganya amakuru n'inyandiko za mbere byanditswe hifashishijwe Claude, umufasha wa AI, hakurikijwe igitabo cy'itsinda. Buri mubare uva ku masoko yavuzwe hano."
 }
