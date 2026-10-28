@@ -30,7 +30,7 @@
       "value": null,
       "unit": "fraction_per_month",
       "status": "ASSUMPTION",
-      "source": "Not published. Warehouse-receipt rules leave shrinkage to each warehouse's tariff (Uganda S.I. 33 of 2007, reg. 42). Ask EAX. Until then the warehouse option is not priced.",
+      "source": "Not published. Rwanda's warehouse receipt law (No. 58/2017) sets no loss tolerance, and warehouse-receipt rules elsewhere leave shrinkage to each warehouse's tariff (Uganda S.I. 33 of 2007, reg. 42). No East African figure for certified warehouses was found. A cooperative that knows its warehouse's monthly loss can type it under Your costs on Decide; otherwise the warehouse option is not priced.",
       "url": "https://faolex.fao.org/docs/pdf/uga145742.pdf"
     },
     {
@@ -63,7 +63,7 @@
       "value": 0.025,
       "unit": "share_of_value",
       "status": "sourced",
-      "source": "EAX notice of 30 January 2017: warehouse service charges are a flat fee of 2.5% of the total value of the commodity. No newer EAX figure was found. The team should confirm the current rate.",
+      "source": "EAX notice of 30 January 2017: warehouse service charges are a flat fee of 2.5% of the total value of the commodity. No newer EAX figure is published, so this may be out of date.",
       "url": "https://ea-africaexchange.com/blog_detail/4/"
     },
     {
@@ -96,7 +96,7 @@
       "value": null,
       "unit": "rwf_per_kg",
       "status": "ASSUMPTION",
-      "source": "Left blank. The 2.5% fee is already a share of value. A separate handling cost is not published in the sources used here.",
+      "source": "Left blank. The 2.5% fee is already a share of value. A separate handling cost is not published. A cooperative can type its own under Your costs on Decide.",
       "url": null
     },
     {
