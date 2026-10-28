@@ -285,7 +285,7 @@ export default function Decide({
               const up = item.p50 >= (forecast.price_now ?? 0)
               return (
                 <div key={key} className={`rounded-[12px] border px-1 py-2.5 text-center ${String(view.verdict.horizon_months) === key && verdict === "store" ? "border-grass-700 bg-grass-50" : "border-hair bg-paper/60"}`}>
-                  <div className="font-pixel text-[9px] text-faint">{t("decide.plusMonths", { months: key })}</div>
+                  <div className="text-xs font-medium text-faint">{t("decide.plusMonths", { months: key })}</div>
                   <div className={`num mt-1.5 text-[15px] font-semibold ${up ? "text-grass-700" : "text-ink"}`}>{money(item.p50)}</div>
                 </div>
               )

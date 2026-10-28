@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 /* Self-hosted fonts (public/fonts, licences in public/fonts/LICENSES.md).
-   Inter is the sans everywhere. Pixelify Sans sets the wordmark, headlines
-   and the verdict. Press Start 2P is the small pixel accent for labels. */
+   Inter sets everything: text, headlines, the verdict and small labels. */
 @font-face {
   font-family: "Inter";
   font-style: normal;
@@ -19,32 +18,10 @@
   src: url("/fonts/inter/Inter-Variable.7.woff2") format("woff2");
   unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-@font-face {
-  font-family: "Pixelify Sans";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("/fonts/pixelify-sans/pixelify-sans-latin-500-normal.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Pixelify Sans";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("/fonts/pixelify-sans/pixelify-sans-latin-600-normal.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Press Start 2P";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/press-start-2p/Press-Start-2P-Regular-400.1.woff2") format("woff2");
-}
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Pixelify Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-pixel: "Press Start 2P", ui-monospace, monospace;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
 
   --color-ink: #171717;
   --color-muted: #525252;
@@ -219,18 +196,18 @@ input {
 }
 
 .eyebrow {
-  font-family: var(--font-pixel);
-  font-size: 9px;
-  line-height: 1.6;
-  letter-spacing: 0.04em;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-faint);
 }
 
 .display {
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 
 .num {

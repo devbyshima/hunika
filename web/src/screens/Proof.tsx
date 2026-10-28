@@ -99,7 +99,7 @@ export default function Proof({ bundle, t }: { bundle: Bundle; t: T }) {
 
       {home?.mean_store_4_when_sell_rwf_per_tonne != null ? (
         <section className="mt-3 rounded-[16px] bg-grass-800 p-5 text-white">
-          <p className="font-pixel text-[9px] uppercase leading-relaxed tracking-wide text-grass-200">{t("proof.avoidTitle")}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-grass-200">{t("proof.avoidTitle")}</p>
           <p className="display num mt-2 text-[36px] leading-none">{signed(home.mean_store_4_when_sell_rwf_per_tonne)}</p>
           <p className="mt-2 text-sm leading-snug text-white/85">
             {t("proof.avoid", {
