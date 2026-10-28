@@ -6,8 +6,7 @@ The Hunika entry is the team's own work. Public data and published figures are u
 
 The team has read the NISR rule that plagiarism disqualifies an entry, and the rule that intellectual property in the submission passes to NISR.
 
-Signed:
-
-Name:
-
-Date:
+| Name | Signature | Date |
+| --- | --- | --- |
+| Shima Byiringiro Serein | | |
+| Ishimwe Ngabo Alain | | |

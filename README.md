@@ -75,7 +75,8 @@ Kinyarwanda review: `python scripts/rw_review.py export` writes `docs/review/kin
 
 ## Team
 
-Shima Serein. Add the other members here before submission.
+- Shima Byiringiro Serein
+- Ishimwe Ngabo Alain
 
 The demo video is not recorded yet. It goes in `demo/hunika-demo.webm`, three minutes at most. The script is in [`demo/README.md`](demo/README.md).
 
