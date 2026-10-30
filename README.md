@@ -77,6 +77,10 @@ Kinyarwanda review: `python scripts/rw_review.py export` writes `docs/review/kin
 | `docs/` | Problem, methodology, data, declaration, phase 2 |
 | `demo/` | Demo video, three minutes at most |
 
+## AI use
+
+We used Claude, an AI assistant made by Anthropic, to help translate the app's text from English to Kinyarwanda, and for code review and debugging.
+
 ## Team
 
 - Shima Byiringiro Serein
