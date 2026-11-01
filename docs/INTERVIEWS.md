@@ -1,5 +1,7 @@
 # Interviews
 
+Not done: we could not do the interviews. The log below is empty.
+
 Target: 8 to 10 conversations with farmers, cooperative managers and farmer promoters in the seven Eastern districts, by Wednesday 29 October 2026. Each interview fills one block below. `docs/PROBLEM.md` summarises them.
 
 Rules:

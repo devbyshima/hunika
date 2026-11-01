@@ -75,7 +75,7 @@ Kinyarwanda review: `python scripts/rw_review.py export` writes `docs/review/kin
 | `tests/` | Pipeline tests and the decision cases shared with the phone |
 | `web/` | Vite, React, TypeScript, Tailwind, Leaflet, installable PWA. The fonts are Space Grotesk and Inter (both SIL Open Font License), self-hosted in `web/public/fonts/` with `LICENSES.md` |
 | `docs/` | Problem, methodology, data, declaration, phase 2 |
-| `demo/` | Demo video, three minutes at most |
+| `demo/` | Demo video link and script |
 
 ## AI use
 
@@ -86,6 +86,6 @@ We used Claude, an AI assistant made by Anthropic, to help translate the app's t
 - Shima Byiringiro Serein
 - Ishimwe Ngabo Alain
 
-The demo video is not recorded yet. It goes in `demo/hunika-demo.webm`, three minutes at most. The script is in [`demo/README.md`](demo/README.md).
+Demo video: [Hunika on YouTube](https://www.youtube.com/watch?v=UFtekibGQqM). The script is in [`demo/README.md`](demo/README.md).
 
 Originality: [`docs/DECLARATION.md`](docs/DECLARATION.md). Intellectual property in the submission passes to NISR.
